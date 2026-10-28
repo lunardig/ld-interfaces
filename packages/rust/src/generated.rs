@@ -1812,6 +1812,7 @@ pub struct JobView {
     pub completed_work: Uint,
     pub job_id: Id,
     pub machine_id: Id,
+    pub priority: Int,
     pub process: Id,
     pub rate: Rational,
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]

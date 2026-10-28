@@ -744,6 +744,7 @@ export interface JobView {
   process: Id;
   machine_id: Id;
   status: JobStatus;
+  priority: Int;
   reason?: Reason;
   completed_work: Uint;
   required_work: Uint;

@@ -30,6 +30,7 @@
         "process": "electrolyze-water",
         "machine_id": "electrolyzer-1",
         "status": "STARVED",
+        "priority": "10",
         "reason": {
           "code": "STARVED_INPUT",
           "port": "water"

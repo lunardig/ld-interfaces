@@ -2278,6 +2278,9 @@
         "status": {
           "$ref": "#/$defs/JobStatus"
         },
+        "priority": {
+          "$ref": "#/$defs/Int"
+        },
         "reason": {
           "$ref": "#/$defs/Reason"
         },
@@ -2296,6 +2299,7 @@
         "process",
         "machine_id",
         "status",
+        "priority",
         "completed_work",
         "required_work",
         "rate"

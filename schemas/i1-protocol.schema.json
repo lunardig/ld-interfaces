@@ -953,6 +953,10 @@
         "status": {
           "$ref": "i3-state.schema.json#/$defs/JobStatus"
         },
+        "priority": {
+          "description": "Scheduling priority; higher runs first when jobs compete for power or lanes.",
+          "$ref": "common.schema.json#/$defs/Int"
+        },
         "reason": {
           "$ref": "#/$defs/Reason"
         },
@@ -971,6 +975,7 @@
         "process",
         "machine_id",
         "status",
+        "priority",
         "completed_work",
         "required_work",
         "rate"
