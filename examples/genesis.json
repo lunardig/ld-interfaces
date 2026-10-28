@@ -1,0 +1,20 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "example-world",
+  "claim_id": "claim-0001",
+  "catalog_hash": "e61a6a970091371630b10d0477a4978ba9d641bac6d045188aa2c15ac3f3b8b1",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "lot-water-1",
+      "location": "tank-1",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "500000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

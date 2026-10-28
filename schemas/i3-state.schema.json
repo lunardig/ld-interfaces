@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i3-state.schema.json",
+  "title": "I-3 State and snapshot format, v0 (LD-PEC-002 §4). Owner: W1. Unstable until M1.",
+  "$defs": {
+    "Genesis": {
+      "type": "object",
+      "properties": {
+        "schema": { "const": "ld.genesis.v0" },
+        "world_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "claim_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "catalog_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "start_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "deposits": { "type": "array", "items": { "$ref": "#/$defs/Deposit" } },
+        "starting_lots": { "type": "array", "items": { "$ref": "#/$defs/Lot" } },
+        "environment": {
+          "description": "Environment function ids active on this claim.",
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/Id" }
+        }
+      },
+      "required": ["schema", "world_id", "claim_id", "catalog_hash", "start_us", "deposits", "starting_lots", "environment"],
+      "additionalProperties": false
+    },
+
+    "Deposit": {
+      "type": "object",
+      "properties": {
+        "deposit_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "remaining": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "extracted": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" }
+      },
+      "required": ["deposit_id", "remaining", "extracted"],
+      "additionalProperties": false
+    },
+    "LotState": {
+      "type": "string",
+      "enum": ["AVAILABLE", "RESERVED", "WIP", "IN_TRANSIT"]
+    },
+    "Lot": {
+      "type": "object",
+      "properties": {
+        "lot_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "location": { "$ref": "common.schema.json#/$defs/Id" },
+        "state": { "$ref": "#/$defs/LotState" },
+        "composition": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "products": {
+          "description": "Discrete products in this lot: product id to count.",
+          "type": "object",
+          "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/Uint" }
+        }
+      },
+      "required": ["lot_id", "location", "state", "composition", "products"],
+      "additionalProperties": false
+    },
+    "Reservation": {
+      "type": "object",
+      "properties": {
+        "job_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "species": { "$ref": "common.schema.json#/$defs/Id" },
+        "amount": { "$ref": "common.schema.json#/$defs/Uint" }
+      },
+      "required": ["job_id", "species", "amount"],
+      "additionalProperties": false
+    },
+    "BufferInstance": {
+      "type": "object",
+      "properties": {
+        "buffer_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "template": { "$ref": "common.schema.json#/$defs/Id" },
+        "location": { "$ref": "common.schema.json#/$defs/Id" },
+        "lot_ids": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Id" } },
+        "reservations": { "type": "array", "items": { "$ref": "#/$defs/Reservation" } }
+      },
+      "required": ["buffer_id", "template", "location", "lot_ids", "reservations"],
+      "additionalProperties": false
+    },
+    "MachineMode": {
+      "type": "string",
+      "enum": ["IDLE", "STARTING", "RUNNING", "STARVED", "BLOCKED", "MAINTENANCE", "FAILED"]
+    },
+    "MachineInstance": {
+      "type": "object",
+      "properties": {
+        "machine_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "blueprint": { "$ref": "common.schema.json#/$defs/Id" },
+        "location": { "$ref": "common.schema.json#/$defs/Id" },
+        "mode": { "$ref": "#/$defs/MachineMode" },
+        "wear_accumulator": { "$ref": "common.schema.json#/$defs/Uint" },
+        "rate_setpoint": { "$ref": "common.schema.json#/$defs/Rational" },
+        "assigned_job_ids": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Id" } }
+      },
+      "required": ["machine_id", "blueprint", "location", "mode", "wear_accumulator", "rate_setpoint", "assigned_job_ids"],
+      "additionalProperties": false
+    },
+    "ConnectionInstance": {
+      "type": "object",
+      "properties": {
+        "connection_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "from_port": { "$ref": "common.schema.json#/$defs/Id" },
+        "to_port": { "$ref": "common.schema.json#/$defs/Id" },
+        "throughput": { "$ref": "common.schema.json#/$defs/Rational", "description": "Quantity units per microsecond." },
+        "delay_us": { "$ref": "common.schema.json#/$defs/PositiveInt" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["connection_id", "from_port", "to_port", "throughput", "delay_us", "active"],
+      "additionalProperties": false
+    },
+    "EnergyStoreInstance": {
+      "type": "object",
+      "properties": {
+        "store_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "unit": { "$ref": "common.schema.json#/$defs/Id" },
+        "charge": { "$ref": "common.schema.json#/$defs/Uint" },
+        "capacity": { "$ref": "common.schema.json#/$defs/Uint" },
+        "max_charge_rate": { "$ref": "common.schema.json#/$defs/Rational" },
+        "max_discharge_rate": { "$ref": "common.schema.json#/$defs/Rational" }
+      },
+      "required": ["store_id", "unit", "charge", "capacity", "max_charge_rate", "max_discharge_rate"],
+      "additionalProperties": false
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": ["QUEUED", "RUNNING", "STARVED", "BLOCKED", "PAUSED", "COMPLETED", "CANCELLED", "FAILED"]
+    },
+    "JobInstance": {
+      "type": "object",
+      "properties": {
+        "job_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "process": { "$ref": "common.schema.json#/$defs/Id" },
+        "process_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "machine_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "status": { "$ref": "#/$defs/JobStatus" },
+        "priority": { "$ref": "common.schema.json#/$defs/Int" },
+        "target_extent": { "$ref": "common.schema.json#/$defs/Uint" },
+        "completed_extent": { "$ref": "common.schema.json#/$defs/Uint" },
+        "required_work": { "$ref": "common.schema.json#/$defs/Uint" },
+        "completed_work": { "$ref": "common.schema.json#/$defs/Uint" },
+        "current_stage": { "$ref": "common.schema.json#/$defs/Id" },
+        "held_lot_ids": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Id" } },
+        "created_at_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "last_advanced_us": { "$ref": "common.schema.json#/$defs/TimeUs" }
+      },
+      "required": ["job_id", "process", "process_hash", "machine_id", "status", "priority", "target_extent", "completed_extent", "required_work", "completed_work", "current_stage", "held_lot_ids", "created_at_us", "last_advanced_us"],
+      "additionalProperties": false
+    },
+    "InTransit": {
+      "type": "object",
+      "properties": {
+        "shipment_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "connection_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "lot_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "depart_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "arrive_us": { "$ref": "common.schema.json#/$defs/TimeUs" }
+      },
+      "required": ["shipment_id", "connection_id", "lot_id", "depart_us", "arrive_us"],
+      "additionalProperties": false
+    },
+    "SinkRecord": {
+      "type": "object",
+      "properties": {
+        "sink_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "kind": { "type": "string", "enum": ["RECOVERABLE", "TERMINAL", "HEAT"] },
+        "totals": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "energy": { "$ref": "common.schema.json#/$defs/Uint", "description": "Cumulative energy for HEAT sinks, in the bus energy unit." }
+      },
+      "required": ["sink_id", "kind", "totals", "energy"],
+      "additionalProperties": false
+    },
+    "PendingEvent": {
+      "type": "object",
+      "properties": {
+        "event_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "time_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "kind": { "$ref": "common.schema.json#/$defs/Id" },
+        "subject": { "$ref": "common.schema.json#/$defs/Id" }
+      },
+      "required": ["event_id", "time_us", "kind", "subject"],
+      "additionalProperties": false
+    },
+    "Residual": {
+      "type": "object",
+      "properties": {
+        "owner": { "$ref": "common.schema.json#/$defs/Id" },
+        "accumulator": { "$ref": "common.schema.json#/$defs/Id" },
+        "value": { "$ref": "common.schema.json#/$defs/Rational" }
+      },
+      "required": ["owner", "accumulator", "value"],
+      "additionalProperties": false
+    },
+
+    "PhysicalState": {
+      "description": "Canonical state; hashed in domain ld.pec.physical-state.v1. Every array is sorted by its first id field.",
+      "type": "object",
+      "properties": {
+        "schema": { "const": "ld.physical-state.v0" },
+        "claim_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "time_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "catalog_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "deposits": { "type": "array", "items": { "$ref": "#/$defs/Deposit" } },
+        "lots": { "type": "array", "items": { "$ref": "#/$defs/Lot" } },
+        "buffers": { "type": "array", "items": { "$ref": "#/$defs/BufferInstance" } },
+        "machines": { "type": "array", "items": { "$ref": "#/$defs/MachineInstance" } },
+        "connections": { "type": "array", "items": { "$ref": "#/$defs/ConnectionInstance" } },
+        "energy_stores": { "type": "array", "items": { "$ref": "#/$defs/EnergyStoreInstance" } },
+        "jobs": { "type": "array", "items": { "$ref": "#/$defs/JobInstance" } },
+        "in_transit": { "type": "array", "items": { "$ref": "#/$defs/InTransit" } },
+        "sinks": { "type": "array", "items": { "$ref": "#/$defs/SinkRecord" } },
+        "pending_events": { "type": "array", "items": { "$ref": "#/$defs/PendingEvent" } },
+        "residuals": { "type": "array", "items": { "$ref": "#/$defs/Residual" } },
+        "id_counters": {
+          "type": "object",
+          "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/Uint" }
+        }
+      },
+      "required": ["schema", "claim_id", "time_us", "catalog_hash", "deposits", "lots", "buffers", "machines", "connections", "energy_stores", "jobs", "in_transit", "sinks", "pending_events", "residuals", "id_counters"],
+      "additionalProperties": false
+    },
+    "ClaimEnvelope": {
+      "type": "object",
+      "properties": {
+        "state_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "history_head": { "$ref": "common.schema.json#/$defs/Hash" },
+        "world_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "claim_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "genesis_hash": { "$ref": "common.schema.json#/$defs/Hash" }
+      },
+      "required": ["state_hash", "history_head", "world_id", "claim_id", "genesis_hash"],
+      "additionalProperties": false
+    },
+    "HistoryRecord": {
+      "description": "Hashed in domain ld.pec.history.v1 (LD-PEC-001 §9.1).",
+      "type": "object",
+      "properties": {
+        "prev_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "time_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "inputs_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "transition_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "resulting_state_hash": { "$ref": "common.schema.json#/$defs/Hash" }
+      },
+      "required": ["prev_hash", "time_us", "inputs_hash", "transition_hash", "resulting_state_hash"],
+      "additionalProperties": false
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "schema": { "const": "ld.snapshot.v0" },
+        "state": { "$ref": "#/$defs/PhysicalState" },
+        "envelope": { "$ref": "#/$defs/ClaimEnvelope" },
+        "catalog_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "engine_version": { "type": "string", "minLength": 1 },
+        "snapshot_hash": { "$ref": "common.schema.json#/$defs/Hash", "description": "Domain ld.snapshot.v0, over this object without snapshot_hash." }
+      },
+      "required": ["schema", "state", "envelope", "catalog_hash", "engine_version", "snapshot_hash"],
+      "additionalProperties": false
+    }
+  }
+}

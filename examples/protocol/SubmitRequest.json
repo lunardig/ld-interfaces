@@ -1,0 +1,19 @@
+{
+  "id": "2",
+  "method": "submit",
+  "params": {
+    "command": {
+      "command_id": "cmd-0001",
+      "effective_us": "0",
+      "seq": "1",
+      "op": "CREATE_JOB",
+      "args": {
+        "job_id": "job-0001",
+        "process": "electrolyze-water",
+        "machine_id": "electrolyzer-1",
+        "target_extent": "100000",
+        "priority": "10"
+      }
+    }
+  }
+}

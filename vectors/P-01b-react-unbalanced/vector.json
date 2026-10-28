@@ -1,0 +1,13 @@
+{
+  "id": "P-01b",
+  "title": "REACT with too much hydrogen is rejected at element balance",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74",
+    "LD-PEC-003 \u00a78 check 5",
+    "LD-PEC-003 \u00a711 P-01"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

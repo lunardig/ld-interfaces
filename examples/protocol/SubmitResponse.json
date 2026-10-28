@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "method": "submit",
+  "result": {
+    "command_id": "cmd-0001",
+    "status": "ACCEPTED"
+  }
+}

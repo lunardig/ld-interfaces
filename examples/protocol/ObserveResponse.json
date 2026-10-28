@@ -1,0 +1,72 @@
+{
+  "id": "4",
+  "method": "observe",
+  "result": {
+    "time_us": "86400000000",
+    "state_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "environment": {},
+    "machines": [
+      {
+        "machine_id": "electrolyzer-1",
+        "blueprint": "electrolyzer",
+        "mode": "STARVED",
+        "capacity_factor": {
+          "n": "1",
+          "d": "1"
+        },
+        "wear_accumulator": "100",
+        "assigned_job_ids": [
+          "job-0001"
+        ],
+        "rate": {
+          "n": "0",
+          "d": "1"
+        }
+      }
+    ],
+    "jobs": [
+      {
+        "job_id": "job-0001",
+        "process": "electrolyze-water",
+        "machine_id": "electrolyzer-1",
+        "status": "STARVED",
+        "reason": {
+          "code": "STARVED_INPUT",
+          "port": "water"
+        },
+        "completed_work": "100000",
+        "required_work": "250000",
+        "rate": {
+          "n": "0",
+          "d": "1"
+        }
+      }
+    ],
+    "buffers": [
+      {
+        "buffer_id": "tank-1",
+        "contents": {
+          "h2o-l": "0"
+        },
+        "capacity": {
+          "amount": "1000000",
+          "unit": "mmol"
+        },
+        "reserved": {}
+      }
+    ],
+    "energy": {
+      "unit": "j",
+      "supply": {
+        "n": "0",
+        "d": "1"
+      },
+      "demand": {
+        "n": "0",
+        "d": "1"
+      },
+      "stores": []
+    },
+    "connections": []
+  }
+}

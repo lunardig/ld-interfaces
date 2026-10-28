@@ -1,0 +1,12 @@
+{
+  "id": "6",
+  "method": "error",
+  "error": {
+    "code": "REJECTED_TIME",
+    "message": "t_us precedes current state time",
+    "detail": {
+      "code": "time-rewind",
+      "message": "requested 0, state at 86400000000"
+    }
+  }
+}

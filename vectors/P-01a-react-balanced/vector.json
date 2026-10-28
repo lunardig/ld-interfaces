@@ -1,0 +1,13 @@
+{
+  "id": "P-01a",
+  "title": "REACT 2 H2O -> 2 H2 + O2 is admitted",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74",
+    "LD-PEC-003 \u00a78 check 5",
+    "LD-PEC-003 \u00a711 P-01"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

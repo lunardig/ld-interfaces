@@ -1,0 +1,1181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i2-catalog.schema.json",
+  "title": "I-2 Catalog schema, v0 (LD-PEC-002 \u00a73, LD-PEC-003 pset_version 0)",
+  "$defs": {
+    "Element": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][a-z]{0,2}$"
+        },
+        "molar_mass": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "g/mol"
+        }
+      },
+      "required": [
+        "element_id",
+        "symbol",
+        "molar_mass"
+      ],
+      "additionalProperties": false
+    },
+    "Dimension": {
+      "type": "string",
+      "enum": [
+        "amount",
+        "mass",
+        "energy",
+        "power",
+        "time",
+        "count",
+        "work"
+      ]
+    },
+    "Unit": {
+      "type": "object",
+      "properties": {
+        "unit_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "dimension": {
+          "$ref": "#/$defs/Dimension"
+        },
+        "scale": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Exact factor to the dimension's reference unit (mol, kg, J, W, s, 1, wu)."
+        }
+      },
+      "required": [
+        "unit_id",
+        "dimension",
+        "scale"
+      ],
+      "additionalProperties": false
+    },
+    "Phase": {
+      "type": "string",
+      "enum": [
+        "solid",
+        "liquid",
+        "gas"
+      ]
+    },
+    "Substance": {
+      "type": "object",
+      "properties": {
+        "substance_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "formula": {
+          "description": "Element id to atom count per formula unit.",
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/PositiveInt"
+          },
+          "minProperties": 1
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "quantity_unit": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "latent_to": {
+          "description": "Target phase species to energy per quantity unit, in joules.",
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/Rational"
+          }
+        }
+      },
+      "required": [
+        "substance_id",
+        "formula",
+        "phase",
+        "quantity_unit"
+      ],
+      "additionalProperties": false
+    },
+    "Expression": {
+      "description": "LD-PEC-003 \u00a77 expression tree, tagged by \"kind\".",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ExprRef"
+        },
+        {
+          "$ref": "#/$defs/ExprConst"
+        },
+        {
+          "$ref": "#/$defs/ExprOp"
+        }
+      ]
+    },
+    "ExprRef": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "ref"
+        },
+        "name": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "ExprConst": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "const"
+        },
+        "value": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "ExprOp": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "op"
+        },
+        "op": {
+          "type": "string",
+          "enum": [
+            "add",
+            "sub",
+            "mul",
+            "floordiv",
+            "min",
+            "max",
+            "clamp",
+            "lookup"
+          ]
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Expression"
+          },
+          "minItems": 1
+        },
+        "table": {
+          "description": "Required for lookup: piecewise-linear breakpoints over an integer domain.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Breakpoint"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "Breakpoint": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "$ref": "common.schema.json#/$defs/Int"
+        },
+        "y": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    },
+    "Instruction": {
+      "description": "One primitive of pset_version 0 (LD-PEC-003 \u00a710), tagged by \"op\". DISASSEMBLE and SELECT arrive in a later pset_version.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/OpReact"
+        },
+        {
+          "$ref": "#/$defs/OpPartition"
+        },
+        {
+          "$ref": "#/$defs/OpCombine"
+        },
+        {
+          "$ref": "#/$defs/OpPhase"
+        },
+        {
+          "$ref": "#/$defs/OpAssemble"
+        },
+        {
+          "$ref": "#/$defs/OpLoss"
+        },
+        {
+          "$ref": "#/$defs/OpWork"
+        },
+        {
+          "$ref": "#/$defs/OpDwell"
+        },
+        {
+          "$ref": "#/$defs/OpEnergy"
+        },
+        {
+          "$ref": "#/$defs/OpRequire"
+        },
+        {
+          "$ref": "#/$defs/OpWear"
+        }
+      ]
+    },
+    "OpReact": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "REACT"
+        },
+        "vector": {
+          "description": "Species to signed integer coefficient; negative consumes, positive produces.",
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/Int"
+          },
+          "minProperties": 2
+        },
+        "extent": {
+          "$ref": "#/$defs/Expression"
+        }
+      },
+      "required": [
+        "op",
+        "vector",
+        "extent"
+      ],
+      "additionalProperties": false
+    },
+    "OpPartition": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "PARTITION"
+        },
+        "input": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/PartitionOutput"
+          }
+        },
+        "residue": {
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Receives the exact remainder of every floored share."
+        }
+      },
+      "required": [
+        "op",
+        "input",
+        "outputs",
+        "residue"
+      ],
+      "additionalProperties": false
+    },
+    "PartitionOutput": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "fractions": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/Rational"
+          }
+        }
+      },
+      "required": [
+        "stream",
+        "fractions"
+      ],
+      "additionalProperties": false
+    },
+    "OpCombine": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "COMBINE"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "minItems": 2
+        },
+        "output": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "op",
+        "inputs",
+        "output"
+      ],
+      "additionalProperties": false
+    },
+    "OpPhase": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "PHASE"
+        },
+        "from": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Expression"
+        }
+      },
+      "required": [
+        "op",
+        "from",
+        "to",
+        "quantity"
+      ],
+      "additionalProperties": false
+    },
+    "OpAssemble": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "ASSEMBLE"
+        },
+        "product": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "count": {
+          "$ref": "#/$defs/Expression"
+        },
+        "components": {
+          "description": "Component product id to count per unit produced.",
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/PositiveInt"
+          }
+        },
+        "materials": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts",
+          "description": "Per unit produced."
+        },
+        "scrap": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts",
+          "description": "Per unit produced; goes to scrap_stream."
+        },
+        "scrap_stream": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "op",
+        "product",
+        "count",
+        "materials",
+        "scrap",
+        "scrap_stream"
+      ],
+      "additionalProperties": false
+    },
+    "OpLoss": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "LOSS"
+        },
+        "species": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Expression"
+        },
+        "sink": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "sink_kind": {
+          "type": "string",
+          "enum": [
+            "RECOVERABLE",
+            "TERMINAL"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "species",
+        "quantity",
+        "sink",
+        "sink_kind"
+      ],
+      "additionalProperties": false
+    },
+    "OpWork": {
+      "type": "object",
+      "description": "Required work quanta = a * extent + b.",
+      "properties": {
+        "op": {
+          "const": "WORK"
+        },
+        "a": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "b": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "op",
+        "a",
+        "b"
+      ],
+      "additionalProperties": false
+    },
+    "OpDwell": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "DWELL"
+        },
+        "duration_us": {
+          "$ref": "#/$defs/Expression"
+        }
+      },
+      "required": [
+        "op",
+        "duration_us"
+      ],
+      "additionalProperties": false
+    },
+    "OpEnergy": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "ENERGY"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "PER_WORK",
+            "PER_TIME",
+            "STARTUP"
+          ]
+        },
+        "dir": {
+          "type": "string",
+          "enum": [
+            "DRAW",
+            "PRODUCE"
+          ]
+        },
+        "amount": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "unit": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "heat_sink": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "op",
+        "mode",
+        "dir",
+        "amount",
+        "unit",
+        "heat_sink"
+      ],
+      "additionalProperties": false
+    },
+    "OpRequire": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "REQUIRE"
+        },
+        "predicate": {
+          "$ref": "#/$defs/Predicate"
+        }
+      },
+      "required": [
+        "op",
+        "predicate"
+      ],
+      "additionalProperties": false
+    },
+    "Predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "capability"
+            },
+            "capability": {
+              "$ref": "common.schema.json#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "capability"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "tool"
+            },
+            "tool": {
+              "$ref": "common.schema.json#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "tool"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "environment"
+            },
+            "function_id": {
+              "$ref": "common.schema.json#/$defs/Id"
+            },
+            "min": {
+              "$ref": "common.schema.json#/$defs/Rational"
+            },
+            "max": {
+              "$ref": "common.schema.json#/$defs/Rational"
+            }
+          },
+          "required": [
+            "kind",
+            "function_id",
+            "min",
+            "max"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OpWear": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "WEAR"
+        },
+        "per": {
+          "type": "string",
+          "enum": [
+            "WORK",
+            "TIME"
+          ]
+        },
+        "amount": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "op",
+        "per",
+        "amount"
+      ],
+      "additionalProperties": false
+    },
+    "ProcessPort": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "accepts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "port",
+        "accepts"
+      ],
+      "additionalProperties": false
+    },
+    "Stage": {
+      "type": "object",
+      "properties": {
+        "stage_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "ops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Instruction"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "stage_id",
+        "ops"
+      ],
+      "additionalProperties": false
+    },
+    "Edge": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "common.schema.json#/$defs/PortRef"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/PortRef"
+        },
+        "species": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false
+    },
+    "FailureDisposition": {
+      "type": "string",
+      "enum": [
+        "RETAIN",
+        "SCRAP_TO_RESIDUE",
+        "RELEASE"
+      ]
+    },
+    "Process": {
+      "type": "object",
+      "properties": {
+        "process_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "pset_version": {
+          "const": "0"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "BATCH",
+            "FLOW"
+          ]
+        },
+        "extent": {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "$ref": "common.schema.json#/$defs/Id"
+            },
+            "min": {
+              "$ref": "common.schema.json#/$defs/Uint"
+            },
+            "max": {
+              "$ref": "common.schema.json#/$defs/Uint"
+            }
+          },
+          "required": [
+            "unit",
+            "min",
+            "max"
+          ],
+          "additionalProperties": false
+        },
+        "ports": {
+          "type": "object",
+          "properties": {
+            "in": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ProcessPort"
+              }
+            },
+            "out": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ProcessPort"
+              }
+            }
+          },
+          "required": [
+            "in",
+            "out"
+          ],
+          "additionalProperties": false
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Stage"
+          },
+          "minItems": 1
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Edge"
+          }
+        },
+        "failure_disposition": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/FailureDisposition"
+          }
+        },
+        "restart_thresholds": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "restart_at": {
+                "$ref": "common.schema.json#/$defs/Uint"
+              },
+              "unit": {
+                "$ref": "common.schema.json#/$defs/Id"
+              }
+            },
+            "required": [
+              "restart_at",
+              "unit"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "constants": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/Rational"
+          }
+        }
+      },
+      "required": [
+        "process_id",
+        "pset_version",
+        "mode",
+        "extent",
+        "ports",
+        "stages",
+        "edges",
+        "failure_disposition",
+        "restart_thresholds",
+        "constants"
+      ],
+      "additionalProperties": false
+    },
+    "MachinePort": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "MATERIAL",
+            "ELECTRICAL",
+            "THERMAL",
+            "CONTROL"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "IN",
+            "OUT"
+          ]
+        }
+      },
+      "required": [
+        "port",
+        "type",
+        "direction"
+      ],
+      "additionalProperties": false
+    },
+    "ConditionStep": {
+      "type": "object",
+      "properties": {
+        "wear_at": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "capacity_factor": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "wear_at",
+        "capacity_factor"
+      ],
+      "additionalProperties": false
+    },
+    "MachineBlueprint": {
+      "type": "object",
+      "properties": {
+        "blueprint_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        },
+        "processes": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        },
+        "rated_work": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Work quanta per microsecond."
+        },
+        "lanes": {
+          "$ref": "common.schema.json#/$defs/PositiveInt"
+        },
+        "min_stable_rate": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "idle_power": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "$ref": "common.schema.json#/$defs/Rational"
+            },
+            "unit": {
+              "$ref": "common.schema.json#/$defs/Id"
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MachinePort"
+          }
+        },
+        "condition_table": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionStep"
+          },
+          "minItems": 1
+        },
+        "embodied": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts"
+        }
+      },
+      "required": [
+        "blueprint_id",
+        "capabilities",
+        "processes",
+        "rated_work",
+        "lanes",
+        "min_stable_rate",
+        "idle_power",
+        "ports",
+        "condition_table",
+        "embodied"
+      ],
+      "additionalProperties": false
+    },
+    "ProductBlueprint": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "embodied": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts"
+        },
+        "installs_as": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "MACHINE",
+                "BUFFER"
+              ]
+            },
+            "template": {
+              "$ref": "common.schema.json#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "template"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "product_id",
+        "embodied"
+      ],
+      "additionalProperties": false
+    },
+    "BufferTemplate": {
+      "type": "object",
+      "properties": {
+        "template_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "accepts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "minItems": 1
+        },
+        "capacity": {
+          "$ref": "common.schema.json#/$defs/Quantity"
+        }
+      },
+      "required": [
+        "template_id",
+        "accepts",
+        "capacity"
+      ],
+      "additionalProperties": false
+    },
+    "EnvironmentFunction": {
+      "type": "object",
+      "properties": {
+        "function_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "unit": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "period_us": {
+          "$ref": "common.schema.json#/$defs/PositiveInt"
+        },
+        "segments": {
+          "description": "Piecewise-constant values; start_us ascending, first is \"0\".",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "start_us": {
+                "$ref": "common.schema.json#/$defs/Uint"
+              },
+              "value": {
+                "$ref": "common.schema.json#/$defs/Rational"
+              }
+            },
+            "required": [
+              "start_us",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "function_id",
+        "unit",
+        "period_us",
+        "segments"
+      ],
+      "additionalProperties": false
+    },
+    "EntryKind": {
+      "type": "string",
+      "enum": [
+        "element",
+        "unit",
+        "substance",
+        "process",
+        "machine",
+        "product",
+        "buffer",
+        "environment"
+      ]
+    },
+    "CatalogManifest": {
+      "description": "Binds a catalog. Its own hash, in domain ld.catalog.v0, is the catalog_hash.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "ld.catalog.v0"
+        },
+        "catalog_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "pset_version": {
+          "const": "0"
+        },
+        "entries": {
+          "description": "Sorted by (kind, id).",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "$ref": "#/$defs/EntryKind"
+              },
+              "id": {
+                "$ref": "common.schema.json#/$defs/Id"
+              },
+              "hash": {
+                "$ref": "common.schema.json#/$defs/Hash"
+              }
+            },
+            "required": [
+              "kind",
+              "id",
+              "hash"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "catalog_id",
+        "pset_version",
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "CatalogBundle": {
+      "description": "Transport form of a whole catalog: the manifest plus every entry inline. Used by I-1 create and restore.",
+      "type": "object",
+      "properties": {
+        "manifest": {
+          "$ref": "#/$defs/CatalogManifest"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Element"
+          }
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "substances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Substance"
+          }
+        },
+        "processes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Process"
+          }
+        },
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MachineBlueprint"
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProductBlueprint"
+          }
+        },
+        "buffers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BufferTemplate"
+          }
+        },
+        "environment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EnvironmentFunction"
+          }
+        }
+      },
+      "required": [
+        "manifest",
+        "elements",
+        "units",
+        "substances",
+        "processes",
+        "machines",
+        "products",
+        "buffers",
+        "environment"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

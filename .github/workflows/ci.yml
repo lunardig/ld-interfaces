@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  schemas:
+    name: Schemas, examples and vectors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tools/check.py
+
+  codegen:
+    name: Generated code is current and compiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo-typify
+        id: typify
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-typify
+          key: cargo-typify-0.8.0-${{ runner.os }}
+      - if: steps.typify.outputs.cache-hit != 'true'
+        run: cargo install cargo-typify --version 0.8.0 --locked
+      - run: ./tools/codegen.sh
+      - name: Fail if generated files differ from the commit
+        run: git diff --exit-code -- bundle packages
+      - run: cargo test --manifest-path packages/rust/Cargo.toml
+      - run: npx tsc --noEmit
+        working-directory: packages/ts

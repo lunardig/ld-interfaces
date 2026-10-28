@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i4-vectors.schema.json",
+  "title": "I-4 Conformance vector format, v0 (LD-PEC-002 §7). Owners: W2 with W5.",
+  "$defs": {
+    "VectorManifest": {
+      "description": "vector.json at the root of each vector directory.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Spec vector id, e.g. V-05 (LD-PEC-001 §11) or P-01 (LD-PEC-003 §11), with an optional letter suffix.",
+          "type": "string",
+          "pattern": "^(V|P)-[0-9]{2}[a-z]?$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "kind": {
+          "description": "EXECUTION vectors replay commands; ADMISSION vectors check a catalog against LD-PEC-003 §8.",
+          "type": "string",
+          "enum": ["EXECUTION", "ADMISSION"]
+        },
+        "spec_refs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "pset_version": { "const": "0" },
+        "numeric_profile": { "const": "provisional-u64-i128" },
+        "status": {
+          "description": "DRAFT until expected outputs are produced by one implementation and confirmed by the other.",
+          "type": "string",
+          "enum": ["DRAFT", "CONFIRMED"]
+        }
+      },
+      "required": ["id", "title", "kind", "spec_refs", "pset_version", "numeric_profile", "status"],
+      "additionalProperties": false
+    },
+    "ScriptStep": {
+      "description": "One line of script.jsonl, tagged by \"step\".",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "AdvanceStep",
+          "properties": {
+            "step": { "const": "advance_to" },
+            "t_us": { "$ref": "common.schema.json#/$defs/TimeUs" }
+          },
+          "required": ["step", "t_us"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SnapshotStep",
+          "properties": {
+            "step": { "const": "snapshot" },
+            "name": { "$ref": "common.schema.json#/$defs/Id" }
+          },
+          "required": ["step", "name"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RestoreStep",
+          "properties": {
+            "step": { "const": "restore" },
+            "name": { "$ref": "common.schema.json#/$defs/Id" }
+          },
+          "required": ["step", "name"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ExpectedHashes": {
+      "description": "expected/hashes.json: state hash and history head after each script step, by step index.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": { "$ref": "common.schema.json#/$defs/Uint" },
+          "state_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+          "history_head": { "$ref": "common.schema.json#/$defs/Hash" }
+        },
+        "required": ["step", "state_hash", "history_head"],
+        "additionalProperties": false
+      }
+    },
+    "AdmissionCheck": {
+      "description": "LD-PEC-003 §8 automated checks, in order.",
+      "type": "string",
+      "enum": ["SCHEMA", "MACRO_EXPANSION", "VERSION", "GRAPH", "ELEMENT_BALANCE", "ENERGY_BALANCE", "NUMERIC_BOUNDS", "REFERENCE_RUN"]
+    },
+    "ExpectedAdmission": {
+      "description": "expected/admission.json for ADMISSION vectors.",
+      "type": "object",
+      "properties": {
+        "verdict": { "type": "string", "enum": ["ACCEPTED", "REJECTED"] },
+        "failed_check": { "$ref": "#/$defs/AdmissionCheck" },
+        "subject": { "$ref": "common.schema.json#/$defs/Id", "description": "The catalog entry that failed." },
+        "detail": { "type": "string" }
+      },
+      "required": ["verdict"],
+      "additionalProperties": false
+    }
+  }
+}

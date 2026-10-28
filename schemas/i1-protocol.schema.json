@@ -1,0 +1,1998 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i1-protocol.schema.json",
+  "title": "I-1 SDK message protocol, v0 (LD-PEC-002 \u00a75). Owner: W2.",
+  "$defs": {
+    "CmdInstallArgs": {
+      "type": "object",
+      "properties": {
+        "lot_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "product": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "location": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "as_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "lot_id",
+        "product",
+        "location",
+        "as_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdInstall": {
+      "description": "Install one product from an inventory lot as a machine or buffer.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "INSTALL"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdInstallArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdRemoveArgs": {
+      "type": "object",
+      "properties": {
+        "target_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "target_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdRemove": {
+      "description": "Decommission a machine, buffer or connection back into inventory.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "REMOVE"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdRemoveArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdConnectArgs": {
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "from_port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "to_port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "connection_id",
+        "from_port",
+        "to_port"
+      ],
+      "additionalProperties": false
+    },
+    "CmdConnect": {
+      "description": "Create a connection between two ports.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "CONNECT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdConnectArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdDisconnectArgs": {
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "connection_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdDisconnect": {
+      "description": "Remove a connection with no material in transit.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "DISCONNECT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdDisconnectArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCreateJobArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "process": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "machine_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "target_extent": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "priority": {
+          "$ref": "common.schema.json#/$defs/Int"
+        }
+      },
+      "required": [
+        "job_id",
+        "process",
+        "machine_id",
+        "target_extent",
+        "priority"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCreateJob": {
+      "description": "Create a job for a process on a machine.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "CREATE_JOB"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdCreateJobArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdSetPriorityArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "priority": {
+          "$ref": "common.schema.json#/$defs/Int"
+        }
+      },
+      "required": [
+        "job_id",
+        "priority"
+      ],
+      "additionalProperties": false
+    },
+    "CmdSetPriority": {
+      "description": "Change a job's priority.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "SET_PRIORITY"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdSetPriorityArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdStartArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdStart": {
+      "description": "Make a queued job eligible to run.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "START"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdStartArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdPauseArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdPause": {
+      "description": "Pause a job, subject to process constraints.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "PAUSE"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdPauseArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdResumeArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdResume": {
+      "description": "Resume a paused job.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "RESUME"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdResumeArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCancelArgs": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCancel": {
+      "description": "Cancel a job; work in progress follows its failure disposition.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "CANCEL"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdCancelArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdTransferLocalArgs": {
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "species": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "amount": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        }
+      },
+      "required": [
+        "connection_id",
+        "species",
+        "amount"
+      ],
+      "additionalProperties": false
+    },
+    "CmdTransferLocal": {
+      "description": "Move material between buffers over a connection.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "TRANSFER_LOCAL"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdTransferLocalArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdSetOperatingPolicyArgs": {
+      "type": "object",
+      "properties": {
+        "machine_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "rate_setpoint": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "machine_id",
+        "rate_setpoint"
+      ],
+      "additionalProperties": false
+    },
+    "CmdSetOperatingPolicy": {
+      "description": "Set a machine's rate setpoint within blueprint limits.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "SET_OPERATING_POLICY"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdSetOperatingPolicyArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdScheduleMaintenanceArgs": {
+      "type": "object",
+      "properties": {
+        "machine_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "process": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "machine_id",
+        "process"
+      ],
+      "additionalProperties": false
+    },
+    "CmdScheduleMaintenance": {
+      "description": "Run a maintenance process on a machine.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "SCHEDULE_MAINTENANCE"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdScheduleMaintenanceArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCheckpointArgs": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "CmdCheckpoint": {
+      "description": "Record a history commitment without physical change.",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "CHECKPOINT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdCheckpointArgs"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "Command": {
+      "description": "A controller command, tagged by \"op\" (LD-PEC-002 \u00a75.3).",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CmdInstall"
+        },
+        {
+          "$ref": "#/$defs/CmdRemove"
+        },
+        {
+          "$ref": "#/$defs/CmdConnect"
+        },
+        {
+          "$ref": "#/$defs/CmdDisconnect"
+        },
+        {
+          "$ref": "#/$defs/CmdCreateJob"
+        },
+        {
+          "$ref": "#/$defs/CmdSetPriority"
+        },
+        {
+          "$ref": "#/$defs/CmdStart"
+        },
+        {
+          "$ref": "#/$defs/CmdPause"
+        },
+        {
+          "$ref": "#/$defs/CmdResume"
+        },
+        {
+          "$ref": "#/$defs/CmdCancel"
+        },
+        {
+          "$ref": "#/$defs/CmdTransferLocal"
+        },
+        {
+          "$ref": "#/$defs/CmdSetOperatingPolicy"
+        },
+        {
+          "$ref": "#/$defs/CmdScheduleMaintenance"
+        },
+        {
+          "$ref": "#/$defs/CmdCheckpoint"
+        }
+      ]
+    },
+    "AdmissionStatus": {
+      "type": "string",
+      "enum": [
+        "ACCEPTED",
+        "REJECTED_AUTH",
+        "REJECTED_SCHEMA",
+        "REJECTED_TIME",
+        "REJECTED_STATE",
+        "REJECTED_CAPACITY",
+        "REJECTED_EXTERNAL"
+      ]
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "Admission": {
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "status": {
+          "$ref": "#/$defs/AdmissionStatus"
+        },
+        "detail": {
+          "$ref": "#/$defs/ErrorDetail"
+        }
+      },
+      "required": [
+        "command_id",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "EngineError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "REJECTED_SCHEMA",
+            "REJECTED_TIME",
+            "REJECTED_STATE",
+            "ENGINE_FAULT",
+            "NOT_INITIALIZED"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "detail": {
+          "$ref": "#/$defs/ErrorDetail"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonStarvedInput": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "STARVED_INPUT"
+        },
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "code",
+        "port"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonStarvedPower": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "STARVED_POWER"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonStarvedRequire": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "STARVED_REQUIRE"
+        },
+        "predicate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "predicate"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonBlockedOutput": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "BLOCKED_OUTPUT"
+        },
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "code",
+        "port"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonDwelling": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "DWELLING"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonBelowRestartThreshold": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "BELOW_RESTART_THRESHOLD"
+        },
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "code",
+        "port"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonMaintenance": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "MAINTENANCE"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonFailed": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "FAILED"
+        },
+        "event_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "code",
+        "event_id"
+      ],
+      "additionalProperties": false
+    },
+    "Reason": {
+      "description": "Deterministic explanation of why a job is not running, tagged by \"code\".",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ReasonStarvedInput"
+        },
+        {
+          "$ref": "#/$defs/ReasonStarvedPower"
+        },
+        {
+          "$ref": "#/$defs/ReasonStarvedRequire"
+        },
+        {
+          "$ref": "#/$defs/ReasonBlockedOutput"
+        },
+        {
+          "$ref": "#/$defs/ReasonDwelling"
+        },
+        {
+          "$ref": "#/$defs/ReasonBelowRestartThreshold"
+        },
+        {
+          "$ref": "#/$defs/ReasonMaintenance"
+        },
+        {
+          "$ref": "#/$defs/ReasonFailed"
+        }
+      ]
+    },
+    "MachineView": {
+      "type": "object",
+      "properties": {
+        "machine_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "blueprint": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "mode": {
+          "$ref": "i3-state.schema.json#/$defs/MachineMode"
+        },
+        "capacity_factor": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "wear_accumulator": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "assigned_job_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        },
+        "rate": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "machine_id",
+        "blueprint",
+        "mode",
+        "capacity_factor",
+        "wear_accumulator",
+        "assigned_job_ids",
+        "rate"
+      ],
+      "additionalProperties": false
+    },
+    "JobView": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "process": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "machine_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "status": {
+          "$ref": "i3-state.schema.json#/$defs/JobStatus"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "completed_work": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "required_work": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "rate": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "job_id",
+        "process",
+        "machine_id",
+        "status",
+        "completed_work",
+        "required_work",
+        "rate"
+      ],
+      "additionalProperties": false
+    },
+    "BufferView": {
+      "type": "object",
+      "properties": {
+        "buffer_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "contents": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts"
+        },
+        "capacity": {
+          "$ref": "common.schema.json#/$defs/Quantity"
+        },
+        "reserved": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts"
+        }
+      },
+      "required": [
+        "buffer_id",
+        "contents",
+        "capacity",
+        "reserved"
+      ],
+      "additionalProperties": false
+    },
+    "EnergyStoreView": {
+      "type": "object",
+      "properties": {
+        "store_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "charge": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "capacity": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "unit": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "store_id",
+        "charge",
+        "capacity",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "EnergyView": {
+      "description": "Bus power in the unit given, per microsecond.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "supply": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "demand": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "stores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EnergyStoreView"
+          }
+        }
+      },
+      "required": [
+        "unit",
+        "supply",
+        "demand",
+        "stores"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectionView": {
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "from_port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "to_port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "throughput": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        },
+        "in_transit_lot_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        }
+      },
+      "required": [
+        "connection_id",
+        "from_port",
+        "to_port",
+        "throughput",
+        "in_transit_lot_ids"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimView": {
+      "description": "Read-only view derived solely from state (LD-PEC-002 \u00a75.4).",
+      "type": "object",
+      "properties": {
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "state_hash": {
+          "$ref": "common.schema.json#/$defs/Hash"
+        },
+        "environment": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/Rational"
+          }
+        },
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MachineView"
+          }
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/JobView"
+          }
+        },
+        "buffers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BufferView"
+          }
+        },
+        "energy": {
+          "$ref": "#/$defs/EnergyView"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConnectionView"
+          }
+        }
+      },
+      "required": [
+        "time_us",
+        "state_hash",
+        "environment",
+        "machines",
+        "jobs",
+        "buffers",
+        "energy",
+        "connections"
+      ],
+      "additionalProperties": false
+    },
+    "EventJobStatus": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "JOB_STATUS"
+        },
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "status": {
+          "$ref": "i3-state.schema.json#/$defs/JobStatus"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "job_id",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "EventStageCompleted": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "STAGE_COMPLETED"
+        },
+        "job_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "stage_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "job_id",
+        "stage_id"
+      ],
+      "additionalProperties": false
+    },
+    "EventArrival": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "ARRIVAL"
+        },
+        "connection_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "lot_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "connection_id",
+        "lot_id"
+      ],
+      "additionalProperties": false
+    },
+    "EventThreshold": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "THRESHOLD"
+        },
+        "subject_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "threshold": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "subject_id",
+        "threshold"
+      ],
+      "additionalProperties": false
+    },
+    "EventEnvironment": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "ENVIRONMENT"
+        },
+        "function_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "value": {
+          "$ref": "common.schema.json#/$defs/Rational"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "function_id",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "EventCommand": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "COMMAND"
+        },
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "status": {
+          "$ref": "#/$defs/AdmissionStatus"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "command_id",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "Event": {
+      "description": "Append-only event log entry, tagged by \"kind\".",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EventJobStatus"
+        },
+        {
+          "$ref": "#/$defs/EventStageCompleted"
+        },
+        {
+          "$ref": "#/$defs/EventArrival"
+        },
+        {
+          "$ref": "#/$defs/EventThreshold"
+        },
+        {
+          "$ref": "#/$defs/EventEnvironment"
+        },
+        {
+          "$ref": "#/$defs/EventCommand"
+        }
+      ]
+    },
+    "EventPage": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Event"
+          }
+        },
+        "next_cursor": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        }
+      },
+      "required": [
+        "events",
+        "next_cursor"
+      ],
+      "additionalProperties": false
+    },
+    "AdvanceReport": {
+      "type": "object",
+      "properties": {
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "events_appended": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "history_records": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        }
+      },
+      "required": [
+        "time_us",
+        "events_appended",
+        "history_records"
+      ],
+      "additionalProperties": false
+    },
+    "HashResult": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "$ref": "common.schema.json#/$defs/Hash"
+        }
+      },
+      "required": [
+        "hash"
+      ],
+      "additionalProperties": false
+    },
+    "NextEventTime": {
+      "description": "t_us is absent when no event is scheduled.",
+      "type": "object",
+      "properties": {
+        "t_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "CreateParams": {
+      "type": "object",
+      "properties": {
+        "genesis": {
+          "$ref": "i3-state.schema.json#/$defs/Genesis"
+        },
+        "catalog": {
+          "$ref": "i2-catalog.schema.json#/$defs/CatalogBundle"
+        }
+      },
+      "required": [
+        "genesis",
+        "catalog"
+      ],
+      "additionalProperties": false
+    },
+    "CreateRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "create"
+        },
+        "params": {
+          "$ref": "#/$defs/CreateParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "CreateResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "create"
+        },
+        "result": {
+          "$ref": "#/$defs/HashResult"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "RestoreParams": {
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "$ref": "i3-state.schema.json#/$defs/Snapshot"
+        },
+        "catalog": {
+          "$ref": "i2-catalog.schema.json#/$defs/CatalogBundle"
+        }
+      },
+      "required": [
+        "snapshot",
+        "catalog"
+      ],
+      "additionalProperties": false
+    },
+    "RestoreRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "restore"
+        },
+        "params": {
+          "$ref": "#/$defs/RestoreParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "RestoreResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "restore"
+        },
+        "result": {
+          "$ref": "#/$defs/HashResult"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "SubmitParams": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/Command"
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    },
+    "SubmitRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "submit"
+        },
+        "params": {
+          "$ref": "#/$defs/SubmitParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "SubmitResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "submit"
+        },
+        "result": {
+          "$ref": "#/$defs/Admission"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "AdvanceToParams": {
+      "type": "object",
+      "properties": {
+        "t_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        }
+      },
+      "required": [
+        "t_us"
+      ],
+      "additionalProperties": false
+    },
+    "AdvanceToRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "advance_to"
+        },
+        "params": {
+          "$ref": "#/$defs/AdvanceToParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "AdvanceToResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "advance_to"
+        },
+        "result": {
+          "$ref": "#/$defs/AdvanceReport"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "NextEventTimeParams": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "NextEventTimeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "next_event_time"
+        },
+        "params": {
+          "$ref": "#/$defs/NextEventTimeParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "NextEventTimeResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "next_event_time"
+        },
+        "result": {
+          "$ref": "#/$defs/NextEventTime"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "ObserveParams": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "ObserveRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "observe"
+        },
+        "params": {
+          "$ref": "#/$defs/ObserveParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "ObserveResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "observe"
+        },
+        "result": {
+          "$ref": "#/$defs/ClaimView"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "EventsSinceParams": {
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "limit": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        }
+      },
+      "required": [
+        "cursor",
+        "limit"
+      ],
+      "additionalProperties": false
+    },
+    "EventsSinceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "events_since"
+        },
+        "params": {
+          "$ref": "#/$defs/EventsSinceParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "EventsSinceResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "events_since"
+        },
+        "result": {
+          "$ref": "#/$defs/EventPage"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "SnapshotParams": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "SnapshotRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "snapshot"
+        },
+        "params": {
+          "$ref": "#/$defs/SnapshotParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "SnapshotResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "snapshot"
+        },
+        "result": {
+          "$ref": "i3-state.schema.json#/$defs/Snapshot"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "StateHashParams": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "StateHashRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "state_hash"
+        },
+        "params": {
+          "$ref": "#/$defs/StateHashParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "StateHashResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "state_hash"
+        },
+        "result": {
+          "$ref": "#/$defs/HashResult"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "HistoryHeadParams": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "HistoryHeadRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "history_head"
+        },
+        "params": {
+          "$ref": "#/$defs/HistoryHeadParams"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "HistoryHeadResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "history_head"
+        },
+        "result": {
+          "$ref": "#/$defs/HashResult"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "method": {
+          "const": "error"
+        },
+        "error": {
+          "$ref": "#/$defs/EngineError"
+        }
+      },
+      "required": [
+        "id",
+        "method",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "Request": {
+      "description": "Any I-1 request, tagged by \"method\".",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateRequest"
+        },
+        {
+          "$ref": "#/$defs/RestoreRequest"
+        },
+        {
+          "$ref": "#/$defs/SubmitRequest"
+        },
+        {
+          "$ref": "#/$defs/AdvanceToRequest"
+        },
+        {
+          "$ref": "#/$defs/NextEventTimeRequest"
+        },
+        {
+          "$ref": "#/$defs/ObserveRequest"
+        },
+        {
+          "$ref": "#/$defs/EventsSinceRequest"
+        },
+        {
+          "$ref": "#/$defs/SnapshotRequest"
+        },
+        {
+          "$ref": "#/$defs/StateHashRequest"
+        },
+        {
+          "$ref": "#/$defs/HistoryHeadRequest"
+        }
+      ]
+    },
+    "Response": {
+      "description": "Any I-1 response, tagged by \"method\"; failures use method \"error\".",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateResponse"
+        },
+        {
+          "$ref": "#/$defs/RestoreResponse"
+        },
+        {
+          "$ref": "#/$defs/SubmitResponse"
+        },
+        {
+          "$ref": "#/$defs/AdvanceToResponse"
+        },
+        {
+          "$ref": "#/$defs/NextEventTimeResponse"
+        },
+        {
+          "$ref": "#/$defs/ObserveResponse"
+        },
+        {
+          "$ref": "#/$defs/EventsSinceResponse"
+        },
+        {
+          "$ref": "#/$defs/SnapshotResponse"
+        },
+        {
+          "$ref": "#/$defs/StateHashResponse"
+        },
+        {
+          "$ref": "#/$defs/HistoryHeadResponse"
+        },
+        {
+          "$ref": "#/$defs/ErrorResponse"
+        }
+      ]
+    }
+  }
+}

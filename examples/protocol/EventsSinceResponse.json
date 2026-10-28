@@ -1,0 +1,27 @@
+{
+  "id": "5",
+  "method": "events_since",
+  "result": {
+    "next_cursor": "2",
+    "events": [
+      {
+        "seq": "0",
+        "time_us": "0",
+        "kind": "COMMAND",
+        "command_id": "cmd-0001",
+        "status": "ACCEPTED"
+      },
+      {
+        "seq": "1",
+        "time_us": "350000000",
+        "kind": "JOB_STATUS",
+        "job_id": "job-0001",
+        "status": "STARVED",
+        "reason": {
+          "code": "STARVED_INPUT",
+          "port": "water"
+        }
+      }
+    ]
+  }
+}

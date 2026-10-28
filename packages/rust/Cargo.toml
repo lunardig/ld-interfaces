@@ -1,0 +1,12 @@
+[package]
+name = "ld-interfaces-types"
+version = "0.1.0"
+edition = "2021"
+description = "Rust types for the Lunar Dig interfaces (LD-PEC-002), generated from ld-interfaces JSON Schema."
+license = "UNLICENSED"
+publish = false
+
+[dependencies]
+regress = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

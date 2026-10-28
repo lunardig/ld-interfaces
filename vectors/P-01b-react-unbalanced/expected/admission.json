@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ELEMENT_BALANCE",
+  "subject": "electrolyze-water",
+  "detail": "hydrogen: 4 consumed, 6 produced per reaction unit"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "method": "advance_to",
+  "result": {
+    "time_us": "86400000000",
+    "events_appended": "17",
+    "history_records": "4"
+  }
+}
