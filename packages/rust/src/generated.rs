@@ -256,7 +256,7 @@ pub struct ClaimView {
     pub buffers: ::std::vec::Vec<BufferView>,
     pub connections: ::std::vec::Vec<ConnectionView>,
     pub energy: EnergyView,
-    pub environment: ::std::collections::HashMap<Id, Rational>,
+    pub environment: ::std::collections::BTreeMap<Id, Rational>,
     pub jobs: ::std::vec::Vec<JobView>,
     pub machines: ::std::vec::Vec<MachineView>,
     pub state_hash: Hash,
@@ -1379,7 +1379,7 @@ pub enum Instruction {
     React {
         extent: Expression,
         #[doc = "Species to signed integer coefficient; negative consumes, positive produces."]
-        vector: ::std::collections::HashMap<Id, Int>,
+        vector: ::std::collections::BTreeMap<Id, Int>,
     },
     #[doc = "OpPartition"]
     #[serde(rename = "PARTITION")]
@@ -1407,9 +1407,9 @@ pub enum Instruction {
         #[doc = "Component product id to count per unit produced."]
         #[serde(
             default,
-            skip_serializing_if = ":: std :: collections :: HashMap::is_empty"
+            skip_serializing_if = ":: std :: collections :: BTreeMap::is_empty"
         )]
-        components: ::std::collections::HashMap<Id, PositiveInt>,
+        components: ::std::collections::BTreeMap<Id, PositiveInt>,
         count: Expression,
         materials: SpeciesAmounts,
         product: Id,
@@ -1845,7 +1845,7 @@ pub struct Lot {
     pub location: Id,
     pub lot_id: Id,
     #[doc = "Discrete products in this lot: product id to count."]
-    pub products: ::std::collections::HashMap<Id, Uint>,
+    pub products: ::std::collections::BTreeMap<Id, Uint>,
     pub state: LotState,
 }
 #[doc = "`LotState`"]
@@ -2162,7 +2162,7 @@ pub struct ObserveParams {}
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct PartitionOutput {
-    pub fractions: ::std::collections::HashMap<Id, Rational>,
+    pub fractions: ::std::collections::BTreeMap<Id, Rational>,
     pub stream: Id,
 }
 #[doc = "`PendingEvent`"]
@@ -2239,7 +2239,7 @@ pub struct PhysicalState {
     pub connections: ::std::vec::Vec<ConnectionInstance>,
     pub deposits: ::std::vec::Vec<Deposit>,
     pub energy_stores: ::std::vec::Vec<EnergyStoreInstance>,
-    pub id_counters: ::std::collections::HashMap<Id, Uint>,
+    pub id_counters: ::std::collections::BTreeMap<Id, Uint>,
     pub in_transit: ::std::vec::Vec<InTransit>,
     pub jobs: ::std::vec::Vec<JobInstance>,
     pub lots: ::std::vec::Vec<Lot>,
@@ -2377,15 +2377,15 @@ pub enum Predicate {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct Process {
-    pub constants: ::std::collections::HashMap<Id, Rational>,
+    pub constants: ::std::collections::BTreeMap<Id, Rational>,
     pub edges: ::std::vec::Vec<Edge>,
     pub extent: ProcessExtent,
-    pub failure_disposition: ::std::collections::HashMap<Id, FailureDisposition>,
+    pub failure_disposition: ::std::collections::BTreeMap<Id, FailureDisposition>,
     pub mode: ProcessMode,
     pub ports: ProcessPorts,
     pub process_id: Id,
     pub pset_version: ::serde_json::Value,
-    pub restart_thresholds: ::std::collections::HashMap<Id, ProcessRestartThresholdsValue>,
+    pub restart_thresholds: ::std::collections::BTreeMap<Id, ProcessRestartThresholdsValue>,
     pub stages: ::std::vec::Vec<Stage>,
 }
 #[doc = "`ProcessExtent`"]
@@ -2821,20 +2821,20 @@ pub struct SnapshotParams {}
 #[doc = "Map from substance id to quantity in that substance's catalog unit."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(transparent)]
-pub struct SpeciesAmounts(pub ::std::collections::HashMap<Id, Uint>);
+pub struct SpeciesAmounts(pub ::std::collections::BTreeMap<Id, Uint>);
 impl ::std::ops::Deref for SpeciesAmounts {
-    type Target = ::std::collections::HashMap<Id, Uint>;
-    fn deref(&self) -> &::std::collections::HashMap<Id, Uint> {
+    type Target = ::std::collections::BTreeMap<Id, Uint>;
+    fn deref(&self) -> &::std::collections::BTreeMap<Id, Uint> {
         &self.0
     }
 }
-impl ::std::convert::From<SpeciesAmounts> for ::std::collections::HashMap<Id, Uint> {
+impl ::std::convert::From<SpeciesAmounts> for ::std::collections::BTreeMap<Id, Uint> {
     fn from(value: SpeciesAmounts) -> Self {
         value.0
     }
 }
-impl ::std::convert::From<::std::collections::HashMap<Id, Uint>> for SpeciesAmounts {
-    fn from(value: ::std::collections::HashMap<Id, Uint>) -> Self {
+impl ::std::convert::From<::std::collections::BTreeMap<Id, Uint>> for SpeciesAmounts {
+    fn from(value: ::std::collections::BTreeMap<Id, Uint>) -> Self {
         Self(value)
     }
 }
@@ -2860,13 +2860,13 @@ pub struct SubmitParams {
 #[serde(deny_unknown_fields)]
 pub struct Substance {
     #[doc = "Element id to atom count per formula unit."]
-    pub formula: ::std::collections::HashMap<Id, PositiveInt>,
+    pub formula: ::std::collections::BTreeMap<Id, PositiveInt>,
     #[doc = "Target phase species to energy per quantity unit, in joules."]
     #[serde(
         default,
-        skip_serializing_if = ":: std :: collections :: HashMap::is_empty"
+        skip_serializing_if = ":: std :: collections :: BTreeMap::is_empty"
     )]
-    pub latent_to: ::std::collections::HashMap<Id, Rational>,
+    pub latent_to: ::std::collections::BTreeMap<Id, Rational>,
     pub phase: Phase,
     pub quantity_unit: Id,
     pub substance_id: Id,
