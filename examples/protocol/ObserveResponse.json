@@ -67,6 +67,17 @@
       },
       "stores": []
     },
-    "connections": []
+    "connections": [],
+    "lots": [
+      {
+        "lot_id": "lot-0007",
+        "location": "inventory",
+        "state": "AVAILABLE",
+        "composition": {},
+        "products": {
+          "tank-kit": "1"
+        }
+      }
+    ]
   }
 }

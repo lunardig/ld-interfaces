@@ -367,6 +367,13 @@
           "items": {
             "$ref": "#/$defs/ConnectionView"
           }
+        },
+        "lots": {
+          "description": "Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Lot"
+          }
         }
       },
       "required": [
@@ -377,7 +384,8 @@
         "jobs",
         "buffers",
         "energy",
-        "connections"
+        "connections",
+        "lots"
       ],
       "additionalProperties": false
     },

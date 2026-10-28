@@ -156,6 +156,11 @@ export type Reason =
   | ReasonMaintenance
   | ReasonFailed;
 /**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "LotState".
+ */
+export type LotState = "AVAILABLE" | "RESERVED" | "WIP" | "IN_TRANSIT";
+/**
  * A controller command, tagged by "op" (LD-PEC-002 §5.3).
  *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -176,11 +181,6 @@ export type Command =
   | CmdSetOperatingPolicy
   | CmdScheduleMaintenance
   | CmdCheckpoint;
-/**
- * This interface was referenced by `LdInterfaces`'s JSON-Schema
- * via the `definition` "LotState".
- */
-export type LotState = "AVAILABLE" | "RESERVED" | "WIP" | "IN_TRANSIT";
 /**
  * Append-only event log entry, tagged by "kind".
  *
@@ -717,6 +717,10 @@ export interface ClaimView {
   buffers: BufferView[];
   energy: EnergyView;
   connections: ConnectionView[];
+  /**
+   * Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals.
+   */
+  lots: Lot[];
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -806,6 +810,22 @@ export interface ConnectionView {
   to_port: Id;
   throughput: Rational;
   in_transit_lot_ids: Id[];
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Lot".
+ */
+export interface Lot {
+  lot_id: Id;
+  location: Id;
+  state: LotState;
+  composition: SpeciesAmounts;
+  /**
+   * Discrete products in this lot: product id to count.
+   */
+  products: {
+    [k: string]: Uint;
+  };
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1062,22 +1082,6 @@ export interface Deposit {
   deposit_id: Id;
   remaining: SpeciesAmounts;
   extracted: SpeciesAmounts;
-}
-/**
- * This interface was referenced by `LdInterfaces`'s JSON-Schema
- * via the `definition` "Lot".
- */
-export interface Lot {
-  lot_id: Id;
-  location: Id;
-  state: LotState;
-  composition: SpeciesAmounts;
-  /**
-   * Discrete products in this lot: product id to count.
-   */
-  products: {
-    [k: string]: Uint;
-  };
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

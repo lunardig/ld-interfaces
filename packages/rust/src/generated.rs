@@ -258,6 +258,8 @@ pub struct ClaimView {
     pub energy: EnergyView,
     pub environment: ::std::collections::BTreeMap<Id, Rational>,
     pub jobs: ::std::vec::Vec<JobView>,
+    #[doc = "Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals."]
+    pub lots: ::std::vec::Vec<Lot>,
     pub machines: ::std::vec::Vec<MachineView>,
     pub state_hash: Hash,
     pub time_us: TimeUs,

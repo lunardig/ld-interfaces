@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i1-protocol.schema.json",
-  "title": "I-1 SDK message protocol, v0 (LD-PEC-002 \u00a75). Owner: W2.",
+  "title": "I-1 SDK message protocol, v0 (LD-PEC-002 §5). Owner: W2.",
   "$defs": {
     "CmdInstallArgs": {
       "type": "object",
@@ -635,7 +635,7 @@
       "additionalProperties": false
     },
     "Command": {
-      "description": "A controller command, tagged by \"op\" (LD-PEC-002 \u00a75.3).",
+      "description": "A controller command, tagged by \"op\" (LD-PEC-002 §5.3).",
       "oneOf": [
         {
           "$ref": "#/$defs/CmdInstall"
@@ -1085,7 +1085,7 @@
       "additionalProperties": false
     },
     "ClaimView": {
-      "description": "Read-only view derived solely from state (LD-PEC-002 \u00a75.4).",
+      "description": "Read-only view derived solely from state (LD-PEC-002 §5.4).",
       "type": "object",
       "properties": {
         "time_us": {
@@ -1129,6 +1129,13 @@
           "items": {
             "$ref": "#/$defs/ConnectionView"
           }
+        },
+        "lots": {
+          "description": "Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals.",
+          "type": "array",
+          "items": {
+            "$ref": "i3-state.schema.json#/$defs/Lot"
+          }
         }
       },
       "required": [
@@ -1139,7 +1146,8 @@
         "jobs",
         "buffers",
         "energy",
-        "connections"
+        "connections",
+        "lots"
       ],
       "additionalProperties": false
     },
