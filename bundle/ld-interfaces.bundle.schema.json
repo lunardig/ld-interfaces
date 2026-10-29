@@ -2263,6 +2263,9 @@
           "type": "boolean",
           "description": "True once START is admitted. Only started jobs are dispatched."
         },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
         "priority": {
           "$ref": "#/$defs/Int"
         },

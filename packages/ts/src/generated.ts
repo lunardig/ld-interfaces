@@ -1252,6 +1252,7 @@ export interface JobInstance {
    * True once START is admitted. Only started jobs are dispatched.
    */
   started: boolean;
+  reason?: Reason;
   priority: Int;
   target_extent: Uint;
   completed_extent: Uint;

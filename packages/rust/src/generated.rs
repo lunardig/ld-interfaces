@@ -1846,6 +1846,8 @@ pub struct JobInstance {
     pub priority: Int,
     pub process: Id,
     pub process_hash: Hash,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub reason: ::std::option::Option<Reason>,
     pub required_work: Uint,
     #[doc = "True once START is admitted. Only started jobs are dispatched."]
     pub started: bool,

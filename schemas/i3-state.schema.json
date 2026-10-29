@@ -137,6 +137,7 @@
         "machine_id": { "$ref": "common.schema.json#/$defs/Id" },
         "status": { "$ref": "#/$defs/JobStatus" },
         "started": { "type": "boolean", "description": "True once START is admitted. Only started jobs are dispatched." },
+        "reason": { "$ref": "i1-protocol.schema.json#/$defs/Reason", "description": "Why a started job is not running, kept so a restored engine continues exactly (V-09)." },
         "priority": { "$ref": "common.schema.json#/$defs/Int" },
         "target_extent": { "$ref": "common.schema.json#/$defs/Uint" },
         "completed_extent": { "$ref": "common.schema.json#/$defs/Uint" },
