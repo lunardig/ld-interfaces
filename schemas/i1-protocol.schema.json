@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lunardig/ld-interfaces/schemas/v0/i1-protocol.schema.json",
-  "title": "I-1 SDK message protocol, v0 (LD-PEC-002 §5). Owner: W2.",
+  "title": "I-1 SDK message protocol, v0 (LD-PEC-002 \u00a75). Owner: W2.",
   "$defs": {
     "CmdInstallArgs": {
       "type": "object",
@@ -104,16 +104,23 @@
           "$ref": "common.schema.json#/$defs/Id"
         },
         "from_port": {
-          "$ref": "common.schema.json#/$defs/Id"
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Source port: <machine_id>.<port> for a machine port, <buffer_id>.io for a buffer."
         },
         "to_port": {
-          "$ref": "common.schema.json#/$defs/Id"
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Destination port, in the same form as from_port."
+        },
+        "template": {
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "ConnectionTemplate id from the catalog."
         }
       },
       "required": [
         "connection_id",
         "from_port",
-        "to_port"
+        "to_port",
+        "template"
       ],
       "additionalProperties": false
     },
@@ -635,7 +642,7 @@
       "additionalProperties": false
     },
     "Command": {
-      "description": "A controller command, tagged by \"op\" (LD-PEC-002 §5.3).",
+      "description": "A controller command, tagged by \"op\" (LD-PEC-002 \u00a75.3).",
       "oneOf": [
         {
           "$ref": "#/$defs/CmdInstall"
@@ -789,7 +796,8 @@
           "const": "STARVED_REQUIRE"
         },
         "predicate": {
-          "type": "string"
+          "$ref": "i2-catalog.schema.json#/$defs/Predicate",
+          "description": "The REQUIRE predicate that failed, exactly as the process declares it (Q-09)."
         }
       },
       "required": [
@@ -924,7 +932,8 @@
           }
         },
         "rate": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Current work rate, in work quanta per microsecond."
         }
       },
       "required": [
@@ -967,7 +976,8 @@
           "$ref": "common.schema.json#/$defs/Uint"
         },
         "rate": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Current work rate, in work quanta per microsecond."
         }
       },
       "required": [
@@ -1035,13 +1045,16 @@
       "type": "object",
       "properties": {
         "unit": {
-          "$ref": "common.schema.json#/$defs/Id"
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Energy unit of supply and demand."
         },
         "supply": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Power available on the bus, in energy unit per microsecond (J/\u00b5s = MW when unit is j)."
         },
         "demand": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Power allocated to consumers, in energy unit per microsecond."
         },
         "stores": {
           "type": "array",
@@ -1071,7 +1084,8 @@
           "$ref": "common.schema.json#/$defs/Id"
         },
         "throughput": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Maximum transfer rate, in the connection template's quantity unit per microsecond."
         },
         "in_transit_lot_ids": {
           "type": "array",
@@ -1090,7 +1104,7 @@
       "additionalProperties": false
     },
     "ClaimView": {
-      "description": "Read-only view derived solely from state (LD-PEC-002 §5.4).",
+      "description": "Read-only view derived solely from state (LD-PEC-002 \u00a75.4).",
       "type": "object",
       "properties": {
         "time_us": {

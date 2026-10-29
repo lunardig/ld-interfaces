@@ -190,7 +190,7 @@ pub struct BufferInstance {
     pub reservations: ::std::vec::Vec<Reservation>,
     pub template: Id,
 }
-#[doc = "`BufferTemplate`"]
+#[doc = "Storage template. Every buffer instance has exactly one bidirectional MATERIAL port, named io and addressed as <buffer_id>.io in connections (LD-PEC-002 §3, Q-08)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct BufferTemplate {
@@ -212,6 +212,7 @@ pub struct BufferView {
 #[serde(deny_unknown_fields)]
 pub struct CatalogBundle {
     pub buffers: ::std::vec::Vec<BufferTemplate>,
+    pub connections: ::std::vec::Vec<ConnectionTemplate>,
     pub elements: ::std::vec::Vec<Element>,
     pub environment: ::std::vec::Vec<EnvironmentFunction>,
     pub machines: ::std::vec::Vec<MachineBlueprint>,
@@ -332,6 +333,7 @@ impl<'de> ::serde::Deserialize<'de> for CmdCheckpointArgsLabel {
 pub struct CmdConnectArgs {
     pub connection_id: Id,
     pub from_port: Id,
+    pub template: Id,
     pub to_port: Id,
 }
 #[doc = "`CmdCreateJobArgs`"]
@@ -542,10 +544,124 @@ pub struct ConditionStep {
 pub struct ConnectionInstance {
     pub active: bool,
     pub connection_id: Id,
-    pub delay_us: PositiveInt,
+    pub delay_us: Uint,
     pub from_port: Id,
+    pub kind: ConnectionInstanceKind,
+    pub template: Id,
     pub throughput: Rational,
     pub to_port: Id,
+}
+#[doc = "`ConnectionInstanceKind`"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum ConnectionInstanceKind {
+    #[serde(rename = "FEED")]
+    Feed,
+    #[serde(rename = "CONVEYOR")]
+    Conveyor,
+}
+impl ::std::fmt::Display for ConnectionInstanceKind {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::Feed => f.write_str("FEED"),
+            Self::Conveyor => f.write_str("CONVEYOR"),
+        }
+    }
+}
+impl ::std::str::FromStr for ConnectionInstanceKind {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "FEED" => Ok(Self::Feed),
+            "CONVEYOR" => Ok(Self::Conveyor),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for ConnectionInstanceKind {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for ConnectionInstanceKind {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "How a connection behaves (LD-PEC-002 §3). FEED couples a machine material port to a buffer's io port; the transfer is part of the machine's own operation, so it has no transit delay. CONVEYOR links two buffers; material moves only as TRANSFER_LOCAL shipments, which take time at the throughput and then the transit delay."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct ConnectionTemplate {
+    pub delay_us: Uint,
+    pub kind: ConnectionTemplateKind,
+    pub template_id: Id,
+    pub throughput: Rational,
+    pub unit: Id,
+}
+#[doc = "`ConnectionTemplateKind`"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum ConnectionTemplateKind {
+    #[serde(rename = "FEED")]
+    Feed,
+    #[serde(rename = "CONVEYOR")]
+    Conveyor,
+}
+impl ::std::fmt::Display for ConnectionTemplateKind {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::Feed => f.write_str("FEED"),
+            Self::Conveyor => f.write_str("CONVEYOR"),
+        }
+    }
+}
+impl ::std::str::FromStr for ConnectionTemplateKind {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "FEED" => Ok(Self::Feed),
+            "CONVEYOR" => Ok(Self::Conveyor),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for ConnectionTemplateKind {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for ConnectionTemplateKind {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
 }
 #[doc = "`ConnectionView`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -841,6 +957,8 @@ pub enum EntryKind {
     Product,
     #[serde(rename = "buffer")]
     Buffer,
+    #[serde(rename = "connection")]
+    Connection,
     #[serde(rename = "environment")]
     Environment,
 }
@@ -854,6 +972,7 @@ impl ::std::fmt::Display for EntryKind {
             Self::Machine => f.write_str("machine"),
             Self::Product => f.write_str("product"),
             Self::Buffer => f.write_str("buffer"),
+            Self::Connection => f.write_str("connection"),
             Self::Environment => f.write_str("environment"),
         }
     }
@@ -869,6 +988,7 @@ impl ::std::str::FromStr for EntryKind {
             "machine" => Ok(Self::Machine),
             "product" => Ok(Self::Product),
             "buffer" => Ok(Self::Buffer),
+            "connection" => Ok(Self::Connection),
             "environment" => Ok(Self::Environment),
             _ => Err("invalid value".into()),
         }
@@ -1727,6 +1847,8 @@ pub struct JobInstance {
     pub process: Id,
     pub process_hash: Hash,
     pub required_work: Uint,
+    #[doc = "True once START is admitted. Only started jobs are dispatched."]
+    pub started: bool,
     pub status: JobStatus,
     pub target_extent: Uint,
 }
@@ -1925,7 +2047,7 @@ pub struct MachineBlueprint {
     pub processes: ::std::vec::Vec<Id>,
     pub rated_work: Rational,
 }
-#[doc = "`MachineBlueprintIdlePower`"]
+#[doc = "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct MachineBlueprintIdlePower {
@@ -2242,6 +2364,8 @@ pub struct PhysicalState {
     pub connections: ::std::vec::Vec<ConnectionInstance>,
     pub deposits: ::std::vec::Vec<Deposit>,
     pub energy_stores: ::std::vec::Vec<EnergyStoreInstance>,
+    #[doc = "Environment functions in effect on this claim, copied from genesis; sorted."]
+    pub environment: ::std::vec::Vec<Id>,
     pub id_counters: ::std::collections::BTreeMap<Id, Uint>,
     pub in_transit: ::std::vec::Vec<InTransit>,
     pub jobs: ::std::vec::Vec<JobInstance>,
@@ -2564,7 +2688,7 @@ pub enum Reason {
     StarvedPower,
     #[doc = "ReasonStarvedRequire"]
     #[serde(rename = "STARVED_REQUIRE")]
-    StarvedRequire { predicate: ::std::string::String },
+    StarvedRequire { predicate: Predicate },
     #[doc = "ReasonBlockedOutput"]
     #[serde(rename = "BLOCKED_OUTPUT")]
     BlockedOutput { port: Id },
@@ -2617,13 +2741,65 @@ pub enum Request {
     #[serde(rename = "history_head")]
     HistoryHead { id: Uint, params: HistoryHeadParams },
 }
-#[doc = "`Reservation`"]
+#[doc = "Quantity of a buffer held for one holder, a job or a shipment. STOCK holds material in the buffer for the holder to draw; SPACE holds free capacity for material the holder will deliver."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct Reservation {
     pub amount: Uint,
     pub job_id: Id,
+    pub kind: ReservationKind,
     pub species: Id,
+}
+#[doc = "`ReservationKind`"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum ReservationKind {
+    #[serde(rename = "STOCK")]
+    Stock,
+    #[serde(rename = "SPACE")]
+    Space,
+}
+impl ::std::fmt::Display for ReservationKind {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::Stock => f.write_str("STOCK"),
+            Self::Space => f.write_str("SPACE"),
+        }
+    }
+}
+impl ::std::str::FromStr for ReservationKind {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "STOCK" => Ok(Self::Stock),
+            "SPACE" => Ok(Self::Space),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for ReservationKind {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for ReservationKind {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
 }
 #[doc = "`Residual`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]

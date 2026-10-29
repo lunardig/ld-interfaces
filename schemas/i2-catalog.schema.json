@@ -892,13 +892,14 @@
         },
         "rated_work": {
           "$ref": "common.schema.json#/$defs/Rational",
-          "description": "Work quanta per microsecond."
+          "description": "Rated work rate, in work quanta per microsecond (LD-PEC-002 \u00a72, rates)."
         },
         "lanes": {
           "$ref": "common.schema.json#/$defs/PositiveInt"
         },
         "min_stable_rate": {
-          "$ref": "common.schema.json#/$defs/Rational"
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Lowest nonzero work rate the machine can sustain, in work quanta per microsecond. A job allocated less runs at zero."
         },
         "idle_power": {
           "type": "object",
@@ -914,7 +915,8 @@
             "amount",
             "unit"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."
         },
         "ports": {
           "type": "array",
@@ -1005,6 +1007,43 @@
         "accepts",
         "capacity"
       ],
+      "additionalProperties": false,
+      "description": "Storage template. Every buffer instance has exactly one bidirectional MATERIAL port, named io and addressed as <buffer_id>.io in connections (LD-PEC-002 \u00a73, Q-08)."
+    },
+    "ConnectionTemplate": {
+      "description": "How a connection behaves (LD-PEC-002 \u00a73). FEED couples a machine material port to a buffer's io port; the transfer is part of the machine's own operation, so it has no transit delay. CONVEYOR links two buffers; material moves only as TRANSFER_LOCAL shipments, which take time at the throughput and then the transit delay.",
+      "type": "object",
+      "properties": {
+        "template_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "FEED",
+            "CONVEYOR"
+          ]
+        },
+        "throughput": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Maximum transfer rate, in quantity of unit per microsecond."
+        },
+        "unit": {
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Quantity unit of throughput; species amounts convert to it by catalog unit scales."
+        },
+        "delay_us": {
+          "$ref": "common.schema.json#/$defs/Uint",
+          "description": "Transit delay in microseconds. Must be 0 for FEED and at least 1 for CONVEYOR (LD-PEC-001 \u00a73.5)."
+        }
+      },
+      "required": [
+        "template_id",
+        "kind",
+        "throughput",
+        "unit",
+        "delay_us"
+      ],
       "additionalProperties": false
     },
     "EnvironmentFunction": {
@@ -1059,6 +1098,7 @@
         "machine",
         "product",
         "buffer",
+        "connection",
         "environment"
       ]
     },
@@ -1157,6 +1197,12 @@
             "$ref": "#/$defs/BufferTemplate"
           }
         },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConnectionTemplate"
+          }
+        },
         "environment": {
           "type": "array",
           "items": {
@@ -1173,6 +1219,7 @@
         "machines",
         "products",
         "buffers",
+        "connections",
         "environment"
       ],
       "additionalProperties": false

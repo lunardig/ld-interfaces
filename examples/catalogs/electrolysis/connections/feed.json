@@ -1,0 +1,7 @@
+{
+  "template_id": "feed",
+  "kind": "FEED",
+  "throughput": {"n": "1", "d": "1000"},
+  "unit": "mmol",
+  "delay_us": "0"
+}

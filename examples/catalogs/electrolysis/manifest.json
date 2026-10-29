@@ -9,6 +9,11 @@
       "hash": "d85f149b42a6c352c7552afb92df8da3709d14cc727442d9d5dcdc1202b35f1f"
     },
     {
+      "kind": "connection",
+      "id": "feed",
+      "hash": "de390662bd4557f076697f5fcf3edbe91d40bd5c237e3ed9b3c6bb7f34fd0834"
+    },
+    {
       "kind": "element",
       "id": "h",
       "hash": "88a7ad999caa2d53b4298f0e58c9649a0de69ecf84262bd42172cec053210f09"

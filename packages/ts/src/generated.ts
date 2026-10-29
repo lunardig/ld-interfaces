@@ -66,7 +66,8 @@ export type PositiveInt = string;
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "EntryKind".
  */
-export type EntryKind = "element" | "unit" | "substance" | "process" | "machine" | "product" | "buffer" | "environment";
+export type EntryKind =
+  "element" | "unit" | "substance" | "process" | "machine" | "product" | "buffer" | "connection" | "environment";
 /**
  * SHA-256 digest, lowercase hex (LD-PEC-001 §2.4).
  *
@@ -312,15 +313,20 @@ export interface BufferInstance {
   reservations: Reservation[];
 }
 /**
+ * Quantity of a buffer held for one holder, a job or a shipment. STOCK holds material in the buffer for the holder to draw; SPACE holds free capacity for material the holder will deliver.
+ *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "Reservation".
  */
 export interface Reservation {
   job_id: Id;
+  kind: "STOCK" | "SPACE";
   species: Id;
   amount: Uint;
 }
 /**
+ * Storage template. Every buffer instance has exactly one bidirectional MATERIAL port, named io and addressed as <buffer_id>.io in connections (LD-PEC-002 §3, Q-08).
+ *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "BufferTemplate".
  */
@@ -376,6 +382,7 @@ export interface CatalogBundle {
   machines: MachineBlueprint[];
   products: ProductBlueprint[];
   buffers: BufferTemplate[];
+  connections: ConnectionTemplate[];
   environment: EnvironmentFunction[];
 }
 /**
@@ -625,6 +632,9 @@ export interface MachineBlueprint {
   rated_work: Rational;
   lanes: PositiveInt;
   min_stable_rate: Rational;
+  /**
+   * Power drawn while installed and not running, in the power unit named by unit (per second, as W).
+   */
   idle_power: {
     amount: Rational;
     unit: Id;
@@ -664,6 +674,19 @@ export interface ProductBlueprint {
     kind: "MACHINE" | "BUFFER";
     template: Id;
   };
+}
+/**
+ * How a connection behaves (LD-PEC-002 §3). FEED couples a machine material port to a buffer's io port; the transfer is part of the machine's own operation, so it has no transit delay. CONVEYOR links two buffers; material moves only as TRANSFER_LOCAL shipments, which take time at the throughput and then the transit delay.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "ConnectionTemplate".
+ */
+export interface ConnectionTemplate {
+  template_id: Id;
+  kind: "FEED" | "CONVEYOR";
+  throughput: Rational;
+  unit: Id;
+  delay_us: Uint;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -759,7 +782,7 @@ export interface ReasonStarvedPower {
 }
 export interface ReasonStarvedRequire {
   code: "STARVED_REQUIRE";
-  predicate: string;
+  predicate: Predicate;
 }
 export interface ReasonBlockedOutput {
   code: "BLOCKED_OUTPUT";
@@ -850,6 +873,7 @@ export interface CmdConnectArgs {
   connection_id: Id;
   from_port: Id;
   to_port: Id;
+  template: Id;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1044,10 +1068,12 @@ export interface CmdCheckpoint {
  */
 export interface ConnectionInstance {
   connection_id: Id;
+  template: Id;
+  kind: "FEED" | "CONVEYOR";
   from_port: Id;
   to_port: Id;
   throughput: Rational;
-  delay_us: PositiveInt;
+  delay_us: Uint;
   active: boolean;
 }
 /**
@@ -1222,6 +1248,10 @@ export interface JobInstance {
   process_hash: Hash;
   machine_id: Id;
   status: JobStatus;
+  /**
+   * True once START is admitted. Only started jobs are dispatched.
+   */
+  started: boolean;
   priority: Int;
   target_extent: Uint;
   completed_extent: Uint;
@@ -1285,6 +1315,10 @@ export interface PhysicalState {
   claim_id: Id;
   time_us: TimeUs;
   catalog_hash: Hash;
+  /**
+   * Environment functions in effect on this claim, copied from genesis; sorted.
+   */
+  environment: Id[];
   deposits: Deposit[];
   lots: Lot[];
   buffers: BufferInstance[];

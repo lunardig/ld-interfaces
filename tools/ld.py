@@ -27,6 +27,7 @@ CATALOG_KINDS = {
     "machine": ("machines", "blueprint_id", "machines"),
     "product": ("products", "product_id", "products"),
     "buffer": ("buffers", "template_id", "buffers"),
+    "connection": ("connections", "template_id", "connections"),
     "environment": ("environment", "function_id", "environment"),
 }
 DEF_FOR_KIND = {
@@ -37,6 +38,7 @@ DEF_FOR_KIND = {
     "machine": "i2-catalog.schema.json#/$defs/MachineBlueprint",
     "product": "i2-catalog.schema.json#/$defs/ProductBlueprint",
     "buffer": "i2-catalog.schema.json#/$defs/BufferTemplate",
+    "connection": "i2-catalog.schema.json#/$defs/ConnectionTemplate",
     "environment": "i2-catalog.schema.json#/$defs/EnvironmentFunction",
 }
 

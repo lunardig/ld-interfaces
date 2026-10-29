@@ -153,7 +153,8 @@
         "accepts",
         "capacity"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "Storage template. Every buffer instance has exactly one bidirectional MATERIAL port, named io and addressed as <buffer_id>.io in connections (LD-PEC-002 \u00a73, Q-08)."
     },
     "BufferView": {
       "type": "object",
@@ -228,6 +229,12 @@
             "$ref": "#/$defs/BufferTemplate"
           }
         },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConnectionTemplate"
+          }
+        },
         "environment": {
           "type": "array",
           "items": {
@@ -244,6 +251,7 @@
         "machines",
         "products",
         "buffers",
+        "connections",
         "environment"
       ],
       "additionalProperties": false
@@ -425,12 +433,16 @@
         },
         "to_port": {
           "$ref": "#/$defs/Id"
+        },
+        "template": {
+          "$ref": "#/$defs/Id"
         }
       },
       "required": [
         "connection_id",
         "from_port",
-        "to_port"
+        "to_port",
+        "template"
       ],
       "additionalProperties": false
     },
@@ -1047,6 +1059,16 @@
         "connection_id": {
           "$ref": "#/$defs/Id"
         },
+        "template": {
+          "$ref": "#/$defs/Id"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "FEED",
+            "CONVEYOR"
+          ]
+        },
         "from_port": {
           "$ref": "#/$defs/Id"
         },
@@ -1057,7 +1079,7 @@
           "$ref": "#/$defs/Rational"
         },
         "delay_us": {
-          "$ref": "#/$defs/PositiveInt"
+          "$ref": "#/$defs/Uint"
         },
         "active": {
           "type": "boolean"
@@ -1065,11 +1087,46 @@
       },
       "required": [
         "connection_id",
+        "template",
+        "kind",
         "from_port",
         "to_port",
         "throughput",
         "delay_us",
         "active"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectionTemplate": {
+      "description": "How a connection behaves (LD-PEC-002 \u00a73). FEED couples a machine material port to a buffer's io port; the transfer is part of the machine's own operation, so it has no transit delay. CONVEYOR links two buffers; material moves only as TRANSFER_LOCAL shipments, which take time at the throughput and then the transit delay.",
+      "type": "object",
+      "properties": {
+        "template_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "FEED",
+            "CONVEYOR"
+          ]
+        },
+        "throughput": {
+          "$ref": "#/$defs/Rational"
+        },
+        "unit": {
+          "$ref": "#/$defs/Id"
+        },
+        "delay_us": {
+          "$ref": "#/$defs/Uint"
+        }
+      },
+      "required": [
+        "template_id",
+        "kind",
+        "throughput",
+        "unit",
+        "delay_us"
       ],
       "additionalProperties": false
     },
@@ -1315,6 +1372,7 @@
         "machine",
         "product",
         "buffer",
+        "connection",
         "environment"
       ]
     },
@@ -2201,6 +2259,10 @@
         "status": {
           "$ref": "#/$defs/JobStatus"
         },
+        "started": {
+          "type": "boolean",
+          "description": "True once START is admitted. Only started jobs are dispatched."
+        },
         "priority": {
           "$ref": "#/$defs/Int"
         },
@@ -2238,6 +2300,7 @@
         "process_hash",
         "machine_id",
         "status",
+        "started",
         "priority",
         "target_extent",
         "completed_extent",
@@ -2391,7 +2454,8 @@
             "amount",
             "unit"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."
         },
         "ports": {
           "type": "array",
@@ -2637,6 +2701,13 @@
         "catalog_hash": {
           "$ref": "#/$defs/Hash"
         },
+        "environment": {
+          "description": "Environment functions in effect on this claim, copied from genesis; sorted.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
         "deposits": {
           "type": "array",
           "items": {
@@ -2718,6 +2789,7 @@
         "claim_id",
         "time_us",
         "catalog_hash",
+        "environment",
         "deposits",
         "lots",
         "buffers",
@@ -3060,7 +3132,7 @@
               "const": "STARVED_REQUIRE"
             },
             "predicate": {
-              "type": "string"
+              "$ref": "#/$defs/Predicate"
             }
           },
           "required": [
@@ -3364,10 +3436,18 @@
       ]
     },
     "Reservation": {
+      "description": "Quantity of a buffer held for one holder, a job or a shipment. STOCK holds material in the buffer for the holder to draw; SPACE holds free capacity for material the holder will deliver.",
       "type": "object",
       "properties": {
         "job_id": {
           "$ref": "#/$defs/Id"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "STOCK",
+            "SPACE"
+          ]
         },
         "species": {
           "$ref": "#/$defs/Id"
@@ -3378,6 +3458,7 @@
       },
       "required": [
         "job_id",
+        "kind",
         "species",
         "amount"
       ],
