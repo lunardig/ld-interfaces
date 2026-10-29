@@ -1,0 +1,27 @@
+[
+  {
+    "step": "0",
+    "state_hash": "cd02334b682e6b62c12bb9805987fba8eb93bc5250130714900bb6a8c8239f79",
+    "history_head": "153f6e3d852ff85f614f6984208a0218913b321a3e9ac784b88b7f012a436035"
+  },
+  {
+    "step": "1",
+    "state_hash": "116f8c69931d722b6adc5bc153c2952cdc5ea9452ea2c80cfac01e8dcd412b4b",
+    "history_head": "153f6e3d852ff85f614f6984208a0218913b321a3e9ac784b88b7f012a436035"
+  },
+  {
+    "step": "2",
+    "state_hash": "79b746d8d900ab6b4799d2929d86804a65097274985034b27ae7dd9467801e0e",
+    "history_head": "cbdfb26b667d1d0d3700c50afb4d740cb426cb599e4a0e075726599af4fb959c"
+  },
+  {
+    "step": "3",
+    "state_hash": "de29ae4b23803e2fd84b2935384d110e8cb77de760b9d992766da24d9a33b7c7",
+    "history_head": "9e15d7f3f1f1dc42eddce8d7e80595dc3f2bcfec58e55b7def97b1a9717b5dd8"
+  },
+  {
+    "step": "4",
+    "state_hash": "6e05ac8d5e4916d6e5301ef2f90b11e2ccc68c2690264a7dc795e296ab1bda74",
+    "history_head": "9e15d7f3f1f1dc42eddce8d7e80595dc3f2bcfec58e55b7def97b1a9717b5dd8"
+  }
+]

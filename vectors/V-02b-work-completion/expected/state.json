@@ -1,0 +1,146 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "a789a5afd97c61af88fb1b65d9bc4ac1658291745643bc132296e2c3966c9771",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-h2",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-1.water"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "11"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "120",
+      "completed_work": "120",
+      "created_at_us": "0",
+      "current_stage": "split.done",
+      "held_lot_ids": [],
+      "job_id": "job-batch",
+      "last_advanced_us": "80",
+      "machine_id": "splitter-1",
+      "priority": "0",
+      "process": "split-batch",
+      "process_hash": "ac844b1cb28263d4a4e7f9f334832354fe6553dd8b726ced5418b2f948041e06",
+      "required_work": "120",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "120"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "240"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "120"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1",
+        "n": "2"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "100"
+}

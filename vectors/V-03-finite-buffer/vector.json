@@ -1,0 +1,12 @@
+{
+  "id": "V-03",
+  "title": "A buffer filling at the net rate blocks its source when full and never overfills",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-03",
+    "LD-PEC-004 \u00a75"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

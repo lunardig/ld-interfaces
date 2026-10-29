@@ -1,0 +1,12 @@
+{
+  "id": "V-02a",
+  "title": "Batch job of 120 wu at 2 wu/us completes after 60 us",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-02",
+    "LD-PEC-004 \u00a75"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -113,6 +113,15 @@ def check_vector(d: Path, reg) -> None:
             validate("i4-vectors.schema.json#/$defs/ScriptStep", line, f"{d}/script.jsonl", reg)
         for line in ld.load_jsonl(d / "commands.jsonl"):
             validate("i1-protocol.schema.json#/$defs/Command", line, f"{d}/commands.jsonl", reg)
+        validate("i3-state.schema.json#/$defs/Genesis", ld.load_json(d / "genesis.json"), f"{d}/genesis.json", reg)
+        exp = d / "expected"
+        if exp.is_dir():
+            validate("i4-vectors.schema.json#/$defs/ExpectedHashes", ld.load_json(exp / "hashes.json"), f"{d}/expected/hashes.json", reg)
+            validate("i3-state.schema.json#/$defs/PhysicalState", ld.load_json(exp / "state.json"), f"{d}/expected/state.json", reg)
+            for line in ld.load_jsonl(exp / "admissions.jsonl"):
+                validate("i1-protocol.schema.json#/$defs/Admission", line, f"{d}/expected/admissions.jsonl", reg)
+            for line in ld.load_jsonl(exp / "events.jsonl"):
+                validate("i1-protocol.schema.json#/$defs/Event", line, f"{d}/expected/events.jsonl", reg)
 
 
 def main() -> int:

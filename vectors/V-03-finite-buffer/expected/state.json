@@ -1,0 +1,297 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "buffer",
+      "location": "pad-a",
+      "lot_ids": [
+        "buffer.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "2",
+          "job_id": "job-make",
+          "kind": "SPACE",
+          "species": "h2o-l"
+        },
+        {
+          "amount": "98",
+          "job_id": "job-use",
+          "kind": "STOCK",
+          "species": "h2o-l"
+        }
+      ],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "h2-feed",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-feed.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "2",
+          "job_id": "job-make",
+          "kind": "STOCK",
+          "species": "h2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "h2-sink",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-sink.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "98",
+          "job_id": "job-use",
+          "kind": "SPACE",
+          "species": "h2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-feed",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-feed.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "1",
+          "job_id": "job-make",
+          "kind": "STOCK",
+          "species": "o2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-sink",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-sink.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "49",
+          "job_id": "job-use",
+          "kind": "SPACE",
+          "species": "o2-g"
+        }
+      ],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "60bf502e68095a19b3d2339d0c60934999dc8e34dbc30dd4a5bfefd94b526e99",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-1",
+      "delay_us": "0",
+      "from_port": "h2-feed.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.h2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-2",
+      "delay_us": "0",
+      "from_port": "o2-feed.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.o2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-3",
+      "delay_us": "0",
+      "from_port": "joiner-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "buffer.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-4",
+      "delay_us": "0",
+      "from_port": "buffer.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-1.water"
+    },
+    {
+      "active": true,
+      "connection_id": "c-5",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-sink.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-6",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-sink.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "17"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "139",
+      "completed_work": "139",
+      "created_at_us": "0",
+      "current_stage": "join",
+      "held_lot_ids": [],
+      "job_id": "job-make",
+      "last_advanced_us": "17940000000",
+      "machine_id": "joiner-1",
+      "priority": "1",
+      "process": "join-flow",
+      "process_hash": "f951b85abe9ec9e9d453277d13487519b090e7bcd91261eb6c6e61c2efd736cf",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "100",
+      "completed_work": "100",
+      "created_at_us": "0",
+      "current_stage": "split",
+      "held_lot_ids": [],
+      "job_id": "job-use",
+      "last_advanced_us": "18000000000",
+      "machine_id": "splitter-1",
+      "priority": "0",
+      "process": "split-flow",
+      "process_hash": "915d76007e7bd831eb592a0170d1684390003322f03f75092fcb1cefa11f10f3",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2o-l": "98"
+      },
+      "location": "buffer",
+      "lot_id": "buffer.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2-g": "999722"
+      },
+      "location": "h2-feed",
+      "lot_id": "h2-feed.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2-g": "200"
+      },
+      "location": "h2-sink",
+      "lot_id": "h2-sink.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "999861"
+      },
+      "location": "o2-feed",
+      "lot_id": "o2-feed.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "100"
+      },
+      "location": "o2-sink",
+      "lot_id": "o2-sink.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-make"
+      ],
+      "blueprint": "joiner",
+      "location": "pad-a",
+      "machine_id": "joiner-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "120000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-use"
+      ],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "180000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "18000000000"
+}

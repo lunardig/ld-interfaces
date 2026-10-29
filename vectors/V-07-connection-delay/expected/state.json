@@ -1,0 +1,75 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "tank-a",
+      "location": "pad-a",
+      "lot_ids": [
+        "tank-a.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "tank-b",
+      "location": "pad-a",
+      "lot_ids": [
+        "tank-b.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "e4fe262eb8ecb795de29177e9d44b435d85ce6e6e4a11acfc44fcae5cc946e82",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-belt",
+      "delay_us": "2000000",
+      "from_port": "tank-a.io",
+      "kind": "CONVEYOR",
+      "template": "belt",
+      "throughput": {
+        "d": "1000",
+        "n": "1"
+      },
+      "to_port": "tank-b.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "5",
+    "lot": "2",
+    "shipment": "2"
+  },
+  "in_transit": [],
+  "jobs": [],
+  "lots": [
+    {
+      "composition": {
+        "h2o-l": "3500"
+      },
+      "location": "tank-a",
+      "lot_id": "tank-a.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "1500"
+      },
+      "location": "tank-b",
+      "lot_id": "tank-b.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "10000000"
+}

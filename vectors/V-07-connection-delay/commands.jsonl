@@ -1,0 +1,5 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "tank-a"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "tank-b"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "CONNECT", "args": {"connection_id": "c-belt", "template": "belt", "from_port": "tank-a.io", "to_port": "tank-b.io"}}
+{"command_id": "cmd-0004", "effective_us": "1000000", "seq": "4", "op": "TRANSFER_LOCAL", "args": {"connection_id": "c-belt", "species": "h2o-l", "amount": "1000"}}
+{"command_id": "cmd-0005", "effective_us": "1000000", "seq": "5", "op": "TRANSFER_LOCAL", "args": {"connection_id": "c-belt", "species": "h2o-l", "amount": "500"}}

@@ -1,0 +1,12 @@
+{
+  "id": "V-04c",
+  "title": "At equal priority and time the smaller job id wins, whatever the creation order",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-04",
+    "LD-PEC-001 \u00a75.1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

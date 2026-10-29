@@ -1,0 +1,12 @@
+{
+  "id": "V-09",
+  "title": "Restoring a mid-batch snapshot and advancing matches the uninterrupted run",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-09",
+    "LD-PEC-004 \u00a78"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

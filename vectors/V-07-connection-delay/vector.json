@@ -1,0 +1,12 @@
+{
+  "id": "V-07",
+  "title": "A shipment is in transit for its loading time plus the 2 s delay, counted once",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-07",
+    "LD-PEC-004 \u00a77"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "V-05a",
+  "title": "One advance of 1 000 000 us",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-05",
+    "LD-PEC-001 \u00a76.1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,17 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0006","kind":"COMMAND","seq":"5","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0007","kind":"COMMAND","seq":"6","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0008","kind":"COMMAND","seq":"7","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0009","kind":"COMMAND","seq":"8","status":"ACCEPTED","time_us":"1"}
+{"job_id":"job-first","kind":"JOB_STATUS","seq":"9","status":"RUNNING","time_us":"2"}
+{"command_id":"cmd-0010","kind":"COMMAND","seq":"10","status":"ACCEPTED","time_us":"2"}
+{"command_id":"cmd-0011","kind":"COMMAND","seq":"11","status":"ACCEPTED","time_us":"2"}
+{"job_id":"job-first","kind":"STAGE_COMPLETED","seq":"12","stage_id":"split","time_us":"10002"}
+{"job_id":"job-first","kind":"JOB_STATUS","seq":"13","status":"COMPLETED","time_us":"10002"}
+{"job_id":"job-second","kind":"JOB_STATUS","seq":"14","status":"RUNNING","time_us":"10002"}
+{"job_id":"job-second","kind":"STAGE_COMPLETED","seq":"15","stage_id":"split","time_us":"20002"}
+{"job_id":"job-second","kind":"JOB_STATUS","seq":"16","status":"COMPLETED","time_us":"20002"}

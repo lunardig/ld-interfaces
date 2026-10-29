@@ -1,0 +1,12 @@
+{
+  "id": "V-10",
+  "title": "Arrival, environment change, release and a command at one timestamp run in phase order",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-10",
+    "LD-PEC-001 \u00a76.2"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,7 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"1000000"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"1000000"}
+{"connection_id":"c-belt","kind":"ARRIVAL","lot_id":"lot-1","seq":"5","time_us":"4000000"}
+{"connection_id":"c-belt","kind":"ARRIVAL","lot_id":"lot-2","seq":"6","time_us":"4500000"}

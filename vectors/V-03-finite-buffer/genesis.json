@@ -1,0 +1,50 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "60bf502e68095a19b3d2339d0c60934999dc8e34dbc30dd4a5bfefd94b526e99",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "joiner-kit": "1",
+        "splitter-kit": "1",
+        "tank-kit": "4",
+        "hopper-kit": "1"
+      }
+    },
+    {
+      "lot_id": "h2-src",
+      "location": "h2-feed",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "1000000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "o2-src",
+      "location": "o2-feed",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "1000000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "w0",
+      "location": "buffer",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "20"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

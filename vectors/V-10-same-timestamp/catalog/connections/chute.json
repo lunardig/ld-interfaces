@@ -1,0 +1,10 @@
+{
+  "template_id": "chute",
+  "kind": "CONVEYOR",
+  "throughput": {
+    "n": "1",
+    "d": "1"
+  },
+  "unit": "mmol",
+  "delay_us": "50"
+}

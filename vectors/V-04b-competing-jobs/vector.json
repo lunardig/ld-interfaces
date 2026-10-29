@@ -1,0 +1,12 @@
+{
+  "id": "V-04b",
+  "title": "At equal priority the earlier-created job wins",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-04",
+    "LD-PEC-001 \u00a75.1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

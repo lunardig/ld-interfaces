@@ -1,0 +1,188 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "99142858",
+          "job_id": "job-flow",
+          "kind": "SPACE",
+          "species": "h2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "49571429",
+          "job_id": "job-flow",
+          "kind": "SPACE",
+          "species": "o2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "99142858",
+          "job_id": "job-flow",
+          "kind": "STOCK",
+          "species": "h2o-l"
+        }
+      ],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "14f5db91bb0d4274cf2d4b8fadbe398a0531c27132fa9eda71b9d51a0584faf4",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-h2",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-1.water"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "9"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "428571",
+      "completed_work": "428571",
+      "created_at_us": "0",
+      "current_stage": "split",
+      "held_lot_ids": [],
+      "job_id": "job-flow",
+      "last_advanced_us": "1000000",
+      "machine_id": "splitter-1",
+      "priority": "0",
+      "process": "split-flow",
+      "process_hash": "15fb4fcc45230a17e5ad753d71cab6f915222e52de12d8d29365f7a7399af438",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "857142"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "428571"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "99142858"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-flow"
+      ],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "7",
+        "n": "3"
+      },
+      "wear_accumulator": "142857"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "work",
+      "owner": "job-flow",
+      "value": {
+        "d": "7",
+        "n": "3"
+      }
+    },
+    {
+      "accumulator": "wear",
+      "owner": "splitter-1",
+      "value": {
+        "d": "7",
+        "n": "1"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "1000000"
+}
