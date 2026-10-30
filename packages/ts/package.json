@@ -2,7 +2,7 @@
   "name": "@lunardig/ld-interfaces",
   "version": "0.1.0",
   "description": "TypeScript types for the Lunar Dig interfaces (LD-PEC-002), generated from ld-interfaces JSON Schema.",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "private": true,
   "type": "module",
   "types": "src/index.ts",

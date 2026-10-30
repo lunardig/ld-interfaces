@@ -50,4 +50,4 @@ LD-PEC-001 (physical contract), LD-PEC-002 (this interface set) and LD-PEC-003 (
 
 ## License
 
-None yet. Which repositories become public, and under what terms, is open question Q-07 in LD-PEC-002.
+Apache License 2.0 (LICENSE, NOTICE), as drafted for review. When the repository becomes public is still open question Q-07 in LD-PEC-002.
