@@ -2392,7 +2392,7 @@ pub struct PhysicalState {
     pub sinks: ::std::vec::Vec<SinkRecord>,
     pub time_us: TimeUs,
 }
-#[doc = "A port or stage endpoint inside a process: \"port:<id>\" or \"stage:<id>\"."]
+#[doc = "A port or stage endpoint inside a process: \"port:<id>\", \"stage:<id>\" (the stage's pool), or \"stage:<id>.<stream>\" (a named stream the stage makes, LD-PEC-005 §3.2)."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[serde(transparent)]
 pub struct PortRef(::std::string::String);
