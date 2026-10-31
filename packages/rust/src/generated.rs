@@ -1431,15 +1431,17 @@ pub struct HashResult {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, Default)]
 #[serde(deny_unknown_fields)]
 pub struct HistoryHeadParams {}
-#[doc = "Hashed in domain ld.pec.history.v1 (LD-PEC-001 §9.1)."]
+#[doc = "Hashed in domain ld.pec.history.v1 (LD-PEC-001 §9.1, LD-PEC-004 §8). The history root is H(ld.pec.history.v1, {genesis_hash, world, claim})."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct HistoryRecord {
+    pub claim: Id,
     pub inputs_hash: Hash,
     pub prev_hash: Hash,
     pub resulting_state_hash: Hash,
-    pub time_us: TimeUs,
+    pub timestamp: TimeUs,
     pub transition_hash: Hash,
+    pub world: Id,
 }
 #[doc = "Stable identifier, unique within its scope and never reused."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
