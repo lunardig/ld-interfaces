@@ -998,6 +998,10 @@
         "buffer_id": {
           "$ref": "common.schema.json#/$defs/Id"
         },
+        "template": {
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "The catalog buffer template the buffer was installed as."
+        },
         "contents": {
           "$ref": "common.schema.json#/$defs/SpeciesAmounts"
         },

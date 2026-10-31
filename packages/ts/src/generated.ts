@@ -354,6 +354,7 @@ export interface Quantity {
  */
 export interface BufferView {
   buffer_id: Id;
+  template?: Id;
   contents: SpeciesAmounts;
   capacity: Quantity;
   reserved: SpeciesAmounts;

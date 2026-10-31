@@ -206,6 +206,8 @@ pub struct BufferView {
     pub capacity: Quantity,
     pub contents: SpeciesAmounts,
     pub reserved: SpeciesAmounts,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub template: ::std::option::Option<Id>,
 }
 #[doc = "Transport form of a whole catalog: the manifest plus every entry inline. Used by I-1 create and restore."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
