@@ -1,0 +1,12 @@
+{
+  "id": "V-18",
+  "title": "Setup work runs first, drawing startup energy on top of the per-work draw; units flow only after it",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a75 WORK, ENERGY STARTUP",
+    "LD-PEC-005 \u00a73.8"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

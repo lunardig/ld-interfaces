@@ -1,0 +1,14 @@
+{
+  "id": "V-17",
+  "title": "A two-stage sorter: PARTITION floors every share per unit and the residue takes the rest; COMBINE merges streams",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74 PARTITION, COMBINE",
+    "LD-PEC-003 \u00a76",
+    "LD-PEC-005 \u00a73.2",
+    "LD-PEC-005 \u00a73.7"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

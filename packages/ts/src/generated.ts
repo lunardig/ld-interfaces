@@ -120,7 +120,7 @@ export type Predicate =
       max: Rational;
     };
 /**
- * A port or stage endpoint inside a process: "port:<id>" or "stage:<id>".
+ * A port or stage endpoint inside a process: "port:<id>", "stage:<id>" (the stage's pool), or "stage:<id>.<stream>" (a named stream the stage makes, LD-PEC-005 §3.2).
  *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "PortRef".

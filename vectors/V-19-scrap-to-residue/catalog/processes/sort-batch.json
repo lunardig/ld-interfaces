@@ -1,0 +1,178 @@
+{
+  "process_id": "sort-batch",
+  "pset_version": "0",
+  "mode": "BATCH",
+  "extent": {
+    "unit": "kg-reg",
+    "min": "0",
+    "max": "1000000000000"
+  },
+  "ports": {
+    "in": [
+      {
+        "port": "feed",
+        "accepts": [
+          "regolith"
+        ]
+      }
+    ],
+    "out": [
+      {
+        "port": "ice",
+        "accepts": [
+          "h2o-s",
+          "sio2-s"
+        ]
+      },
+      {
+        "port": "ilmenite",
+        "accepts": [
+          "fetio3-s",
+          "sio2-s"
+        ]
+      },
+      {
+        "port": "tailings",
+        "accepts": [
+          "h2o-s",
+          "fetio3-s",
+          "sio2-s",
+          "regolith"
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "crush",
+      "ops": [
+        {
+          "op": "REACT",
+          "vector": {
+            "regolith": "-1",
+            "h2o-s": "2775",
+            "fetio3-s": "659",
+            "sio2-s": "14148"
+          },
+          "extent": {
+            "kind": "ref",
+            "name": "extent"
+          }
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "1",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        },
+        {
+          "op": "WEAR",
+          "per": "WORK",
+          "amount": {
+            "n": "1",
+            "d": "1"
+          }
+        }
+      ]
+    },
+    {
+      "stage_id": "sort",
+      "ops": [
+        {
+          "op": "PARTITION",
+          "input": "sort",
+          "residue": "coarse",
+          "outputs": [
+            {
+              "stream": "ice-rich",
+              "fractions": {
+                "h2o-s": {
+                  "n": "9",
+                  "d": "10"
+                },
+                "sio2-s": {
+                  "n": "1",
+                  "d": "20"
+                }
+              }
+            },
+            {
+              "stream": "concentrate",
+              "fractions": {
+                "fetio3-s": {
+                  "n": "4",
+                  "d": "5"
+                },
+                "sio2-s": {
+                  "n": "1",
+                  "d": "20"
+                }
+              }
+            },
+            {
+              "stream": "fines",
+              "fractions": {
+                "sio2-s": {
+                  "n": "1",
+                  "d": "10"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "op": "COMBINE",
+          "inputs": [
+            "fines",
+            "coarse"
+          ],
+          "output": "waste"
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "1",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "port:feed",
+      "to": "stage:crush"
+    },
+    {
+      "from": "stage:crush",
+      "to": "stage:sort"
+    },
+    {
+      "from": "stage:sort.ice-rich",
+      "to": "port:ice"
+    },
+    {
+      "from": "stage:sort.concentrate",
+      "to": "port:ilmenite"
+    },
+    {
+      "from": "stage:sort.waste",
+      "to": "port:tailings"
+    }
+  ],
+  "failure_disposition": {
+    "crush": "SCRAP_TO_RESIDUE",
+    "sort": "RETAIN"
+  },
+  "restart_thresholds": {},
+  "constants": {}
+}

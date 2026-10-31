@@ -2836,7 +2836,7 @@
       "additionalProperties": false
     },
     "PortRef": {
-      "description": "A port or stage endpoint inside a process: \"port:<id>\" or \"stage:<id>\".",
+      "description": "A port or stage endpoint inside a process: \"port:<id>\", \"stage:<id>\" (the stage's pool), or \"stage:<id>.<stream>\" (a named stream the stage makes, LD-PEC-005 \u00a73.2).",
       "type": "string",
       "pattern": "^(port|stage):[a-z0-9][a-z0-9._-]{0,63}$"
     },

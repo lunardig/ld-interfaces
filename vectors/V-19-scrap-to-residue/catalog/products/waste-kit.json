@@ -1,0 +1,8 @@
+{
+  "product_id": "waste-kit",
+  "embodied": {},
+  "installs_as": {
+    "kind": "BUFFER",
+    "template": "waste"
+  }
+}

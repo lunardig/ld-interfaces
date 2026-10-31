@@ -1,0 +1,13 @@
+{
+  "template_id": "waste",
+  "accepts": [
+    "regolith",
+    "h2o-s",
+    "fetio3-s",
+    "sio2-s"
+  ],
+  "capacity": {
+    "amount": "1000000000",
+    "unit": "kg-reg"
+  }
+}

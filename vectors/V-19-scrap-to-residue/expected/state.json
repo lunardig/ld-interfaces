@@ -1,0 +1,179 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "ice-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "ilmenite-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "tailings",
+      "location": "pad-a",
+      "lot_ids": [
+        "tailings.stock"
+      ],
+      "reservations": [],
+      "template": "waste"
+    }
+  ],
+  "catalog_hash": "880749024f688c049031bfd8c790f86f8da92dbaa863ae38aadeaf29d3109cf6",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-feed",
+      "delay_us": "0",
+      "from_port": "hopper-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "sorter-1.feed"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ice",
+      "delay_us": "0",
+      "from_port": "sorter-1.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "ice-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ilm",
+      "delay_us": "0",
+      "from_port": "sorter-1.ilmenite",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "ilmenite-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-tail",
+      "delay_us": "0",
+      "from_port": "sorter-1.tailings",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "tailings.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "11"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "0",
+      "completed_work": "50",
+      "created_at_us": "0",
+      "current_stage": "sort",
+      "held_lot_ids": [],
+      "job_id": "job-batch",
+      "last_advanced_us": "50000000",
+      "machine_id": "sorter-1",
+      "priority": "0",
+      "process": "sort-batch",
+      "process_hash": "1bb52ef64adf6af807dc6ede2542b2444c750cae31e1d474b6aac70202761e5d",
+      "reason": {
+        "code": "FAILED",
+        "event_id": "wear-limit.sorter-1"
+      },
+      "required_work": "80",
+      "started": true,
+      "status": "FAILED",
+      "target_extent": "40"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "regolith": "60"
+      },
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "ice-bin",
+      "lot_id": "ice-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "ilmenite-bin",
+      "lot_id": "ilmenite-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "regolith": "40"
+      },
+      "location": "tailings",
+      "lot_id": "tailings.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "sorter",
+      "location": "pad-a",
+      "machine_id": "sorter-1",
+      "mode": "FAILED",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "50"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "60000000"
+}
