@@ -1,0 +1,42 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "ee19a8add6459149f84dadf699df3c9ac7636709adab01a36c85f3c144ab04c5",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "solar-kit": "1",
+        "reactor-kit": "1",
+        "bin-kit": "6"
+      }
+    },
+    {
+      "lot_id": "ilm",
+      "location": "ilmenite-bin",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "300000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "h2",
+      "location": "h2-bin",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "300000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": [
+    "irradiance"
+  ]
+}

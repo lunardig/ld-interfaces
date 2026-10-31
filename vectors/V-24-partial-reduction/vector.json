@@ -1,0 +1,12 @@
+{
+  "id": "V-24",
+  "title": "Reduction with partial conversion and magnetic separation conserves every element; unreacted ilmenite returns",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.3",
+    "LD-PEC-005 \u00a73.7"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "V-25",
+  "title": "Beneficiation as a PARTITION sorter: recovered fractions to bins, the rest to tailings, all conserved",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}
