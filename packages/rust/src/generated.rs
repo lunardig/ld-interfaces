@@ -1517,6 +1517,12 @@ pub enum Instruction {
     #[doc = "OpPartition"]
     #[serde(rename = "PARTITION")]
     Partition {
+        #[doc = "Material this PARTITION draws itself, per unit of extent, from the input port named by `input`: species to a whole-multiple extent expression. Lets a stage that only splits material, such as a screen, say how much one unit is (LD-PEC-005 §3.8). Absent: `input` names the stage's pool or a stream."]
+        #[serde(
+            default,
+            skip_serializing_if = ":: std :: collections :: BTreeMap::is_empty"
+        )]
+        draw: ::std::collections::BTreeMap<Id, Expression>,
         input: Id,
         outputs: ::std::vec::Vec<PartitionOutput>,
         residue: Id,
