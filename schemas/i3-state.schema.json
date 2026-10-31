@@ -49,6 +49,10 @@
           "type": "object",
           "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
           "additionalProperties": { "$ref": "common.schema.json#/$defs/Uint" }
+        },
+        "wear": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Wear carried by a removed machine's kit (LD-PEC-004 A1-1): the machine's exact wear when removed. Present only on a lot holding one installable product unit; such a lot is never merged."
         }
       },
       "required": ["lot_id", "location", "state", "composition", "products"],
