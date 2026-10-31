@@ -1974,6 +1974,8 @@ pub struct Lot {
     #[doc = "Discrete products in this lot: product id to count."]
     pub products: ::std::collections::BTreeMap<Id, Uint>,
     pub state: LotState,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub wear: ::std::option::Option<Rational>,
 }
 #[doc = "`LotState`"]
 #[derive(

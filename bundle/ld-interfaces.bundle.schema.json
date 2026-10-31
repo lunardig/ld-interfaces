@@ -2396,6 +2396,9 @@
           "additionalProperties": {
             "$ref": "#/$defs/Uint"
           }
+        },
+        "wear": {
+          "$ref": "#/$defs/Rational"
         }
       },
       "required": [

@@ -850,6 +850,7 @@ export interface Lot {
   products: {
     [k: string]: Uint;
   };
+  wear?: Rational;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
