@@ -1278,6 +1278,7 @@
     },
     "EnergyStoreInstance": {
       "type": "object",
+      "description": "An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge).",
       "properties": {
         "store_id": {
           "$ref": "#/$defs/Id"
@@ -1319,6 +1320,9 @@
         },
         "capacity": {
           "$ref": "#/$defs/Uint"
+        },
+        "rate": {
+          "$ref": "#/$defs/Rational"
         },
         "unit": {
           "$ref": "#/$defs/Id"
@@ -2433,6 +2437,9 @@
         },
         "wear": {
           "$ref": "#/$defs/Rational"
+        },
+        "charge": {
+          "$ref": "#/$defs/Rational"
         }
       },
       "required": [
@@ -2495,7 +2502,78 @@
             "unit"
           ],
           "additionalProperties": false,
-          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."
+          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W). Served after jobs; unmet idle draw only marks the machine unpowered (LD-PEC-005 \u00a78.3)."
+        },
+        "idle_heat_sink": {
+          "$ref": "#/$defs/Id"
+        },
+        "energy_store": {
+          "type": "object",
+          "description": "Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 \u00a78.2).",
+          "properties": {
+            "capacity": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "max_charge": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "max_discharge": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "charge_efficiency": {
+              "$ref": "#/$defs/Rational"
+            },
+            "heat_sink": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "capacity",
+            "max_charge",
+            "max_discharge",
+            "charge_efficiency",
+            "heat_sink"
+          ],
+          "additionalProperties": false
         },
         "ports": {
           "type": "array",
@@ -2635,6 +2713,10 @@
         },
         "rate": {
           "$ref": "#/$defs/Rational"
+        },
+        "unpowered": {
+          "type": "boolean",
+          "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 \u00a78.3)."
         }
       },
       "required": [

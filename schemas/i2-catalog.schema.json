@@ -926,7 +926,80 @@
             "unit"
           ],
           "additionalProperties": false,
-          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."
+          "description": "Power drawn while installed and not running, in the power unit named by unit (per second, as W). Served after jobs; unmet idle draw only marks the machine unpowered (LD-PEC-005 §8.3)."
+        },
+        "idle_heat_sink": {
+          "$ref": "common.schema.json#/$defs/Id",
+          "description": "Heat sink that idle draw goes to. Default: waste-heat."
+        },
+        "energy_store": {
+          "type": "object",
+          "description": "Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 §8.2).",
+          "properties": {
+            "capacity": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "common.schema.json#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "common.schema.json#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "max_charge": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "common.schema.json#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "common.schema.json#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "max_discharge": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "common.schema.json#/$defs/Rational"
+                },
+                "unit": {
+                  "$ref": "common.schema.json#/$defs/Id"
+                }
+              },
+              "required": [
+                "amount",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "charge_efficiency": {
+              "$ref": "common.schema.json#/$defs/Rational",
+              "description": "Fraction of the power taken in that is stored, in (0, 1]. The rest goes to heat_sink."
+            },
+            "heat_sink": {
+              "$ref": "common.schema.json#/$defs/Id"
+            }
+          },
+          "required": [
+            "capacity",
+            "max_charge",
+            "max_discharge",
+            "charge_efficiency",
+            "heat_sink"
+          ],
+          "additionalProperties": false
         },
         "ports": {
           "type": "array",

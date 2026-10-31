@@ -1,0 +1,725 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "hopper-2",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-2.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "ice-bin-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-bin-1.stock"
+      ],
+      "reservations": [],
+      "template": "ice-bin"
+    },
+    {
+      "buffer_id": "ilmenite-bin-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-bin-1.stock"
+      ],
+      "reservations": [],
+      "template": "ilmenite-bin"
+    },
+    {
+      "buffer_id": "iron-bin-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "iron-bin-1.stock"
+      ],
+      "reservations": [],
+      "template": "iron-bin"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "rutile-bin-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "rutile-bin-1.stock"
+      ],
+      "reservations": [],
+      "template": "rutile-bin"
+    },
+    {
+      "buffer_id": "scrap-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "scrap-bin.stock"
+      ],
+      "reservations": [],
+      "template": "iron-bin"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "337dd292ea1a8a4856b1215c15f71ae4d21b002c18e2b5b38b04dabbc624ae0c",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-dig",
+      "delay_us": "0",
+      "from_port": "icy-crater.face",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "excavator-1.face"
+    },
+    {
+      "active": true,
+      "connection_id": "c-fab",
+      "delay_us": "0",
+      "from_port": "iron-bin-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "fabricator-1.iron"
+    },
+    {
+      "active": true,
+      "connection_id": "c-feed",
+      "delay_us": "0",
+      "from_port": "hopper-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "beneficiator-1.feed"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h2",
+      "delay_us": "0",
+      "from_port": "electrolyzer-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-hop",
+      "delay_us": "0",
+      "from_port": "excavator-1.out",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "hopper-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ice",
+      "delay_us": "0",
+      "from_port": "beneficiator-1.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ice-bin-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ilm",
+      "delay_us": "0",
+      "from_port": "beneficiator-1.ilmenite",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ilmenite-bin-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-melt",
+      "delay_us": "0",
+      "from_port": "ice-bin-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "melter-1.ice"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2",
+      "delay_us": "0",
+      "from_port": "electrolyzer-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-r-fe",
+      "delay_us": "0",
+      "from_port": "reactor-1.iron",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "iron-bin-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-r-h2",
+      "delay_us": "0",
+      "from_port": "h2-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "reactor-1.h2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-r-ilm",
+      "delay_us": "0",
+      "from_port": "ilmenite-bin-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "reactor-1.ilmenite"
+    },
+    {
+      "active": true,
+      "connection_id": "c-r-ti",
+      "delay_us": "0",
+      "from_port": "reactor-1.rutile",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "rutile-bin-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-r-w",
+      "delay_us": "0",
+      "from_port": "reactor-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "water-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-scrap",
+      "delay_us": "0",
+      "from_port": "fabricator-1.scrap",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "scrap-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-split",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "electrolyzer-1.water"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "melter-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "water-tank.io"
+    }
+  ],
+  "deposits": [
+    {
+      "deposit_id": "icy-crater",
+      "extracted": {
+        "regolith-bank": "4000"
+      },
+      "remaining": {
+        "regolith-bank": "999996000"
+      }
+    }
+  ],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "54"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "40",
+      "completed_work": "40",
+      "created_at_us": "0",
+      "current_stage": "excavate.done",
+      "held_lot_ids": [],
+      "job_id": "job-dig",
+      "last_advanced_us": "2400000000",
+      "machine_id": "excavator-1",
+      "priority": "10",
+      "process": "excavate",
+      "process_hash": "d72d2e89bcd4e638b0ce7e6841960f4315014a36b9d6699918ed82e538e3f1c8",
+      "required_work": "40",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "40"
+    },
+    {
+      "completed_extent": "1",
+      "completed_work": "1",
+      "created_at_us": "0",
+      "current_stage": "fabricate.done",
+      "held_lot_ids": [],
+      "job_id": "job-fab",
+      "last_advanced_us": "4766050000",
+      "machine_id": "fabricator-1",
+      "priority": "5",
+      "process": "fabricate-hopper",
+      "process_hash": "7aeea51c8aa9131c5294e697221bbeba568c2ec46b1b6a65992a6460e2c1175b",
+      "required_work": "1",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "1"
+    },
+    {
+      "completed_extent": "9990000",
+      "completed_work": "9990000",
+      "created_at_us": "0",
+      "current_stage": "melt-ice",
+      "held_lot_ids": [],
+      "job_id": "job-melt",
+      "last_advanced_us": "5059000000",
+      "machine_id": "melter-1",
+      "priority": "10",
+      "process": "melt-ice",
+      "process_hash": "76aac967f4bb3accbf00e13ef4a743195c2de7a64d5602b59dc9368404f476e3",
+      "reason": {
+        "code": "STARVED_INPUT",
+        "port": "ice"
+      },
+      "required_work": "100000000",
+      "started": true,
+      "status": "STARVED",
+      "target_extent": "100000000"
+    },
+    {
+      "completed_extent": "475000",
+      "completed_work": "475000",
+      "created_at_us": "0",
+      "current_stage": "reduce-ilmenite.done",
+      "held_lot_ids": [],
+      "job_id": "job-reduce-1",
+      "last_advanced_us": "1164887500",
+      "machine_id": "reactor-1",
+      "priority": "5",
+      "process": "reduce-ilmenite",
+      "process_hash": "965c09241b4ea75a9b76cca32bb67a0b445918506b45b5bbc765d4add0482f2c",
+      "required_work": "475000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "475000"
+    },
+    {
+      "completed_extent": "475000",
+      "completed_work": "475000",
+      "created_at_us": "0",
+      "current_stage": "reduce-ilmenite.done",
+      "held_lot_ids": [],
+      "job_id": "job-reduce-2",
+      "last_advanced_us": "2165275000",
+      "machine_id": "reactor-1",
+      "priority": "5",
+      "process": "reduce-ilmenite",
+      "process_hash": "965c09241b4ea75a9b76cca32bb67a0b445918506b45b5bbc765d4add0482f2c",
+      "required_work": "475000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "475000"
+    },
+    {
+      "completed_extent": "475000",
+      "completed_work": "475000",
+      "created_at_us": "0",
+      "current_stage": "reduce-ilmenite.done",
+      "held_lot_ids": [],
+      "job_id": "job-reduce-3",
+      "last_advanced_us": "3165662500",
+      "machine_id": "reactor-1",
+      "priority": "5",
+      "process": "reduce-ilmenite",
+      "process_hash": "965c09241b4ea75a9b76cca32bb67a0b445918506b45b5bbc765d4add0482f2c",
+      "required_work": "475000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "475000"
+    },
+    {
+      "completed_extent": "475000",
+      "completed_work": "475000",
+      "created_at_us": "0",
+      "current_stage": "reduce-ilmenite.done",
+      "held_lot_ids": [],
+      "job_id": "job-reduce-4",
+      "last_advanced_us": "4166050000",
+      "machine_id": "reactor-1",
+      "priority": "5",
+      "process": "reduce-ilmenite",
+      "process_hash": "965c09241b4ea75a9b76cca32bb67a0b445918506b45b5bbc765d4add0482f2c",
+      "required_work": "475000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "475000"
+    },
+    {
+      "completed_extent": "3600",
+      "completed_work": "3600",
+      "created_at_us": "0",
+      "current_stage": "beneficiate.done",
+      "held_lot_ids": [],
+      "job_id": "job-sort",
+      "last_advanced_us": "4559500000",
+      "machine_id": "beneficiator-1",
+      "priority": "10",
+      "process": "beneficiate",
+      "process_hash": "191d6eb5b243bd173aa77a98c84a74143853f1e8a8828dfd1b0af9bb78e95c9a",
+      "required_work": "3600",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "3600"
+    },
+    {
+      "completed_extent": "1000000",
+      "completed_work": "1000000",
+      "created_at_us": "0",
+      "current_stage": "electrolyze-water.done",
+      "held_lot_ids": [],
+      "job_id": "job-split",
+      "last_advanced_us": "1066500000",
+      "machine_id": "electrolyzer-1",
+      "priority": "10",
+      "process": "electrolyze-water",
+      "process_hash": "ab9e66ade698d1ad404b05806cb075f7b619316658a6a630aaa07f1b2febb8c7",
+      "required_work": "1000000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "1000000"
+    },
+    {
+      "completed_extent": "18001",
+      "completed_work": "18001",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "18001000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "100000"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "regolith": "360"
+      },
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "hopper-2",
+      "lot_id": "hopper-2.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "ice-bin-1",
+      "lot_id": "ice-bin-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "472400"
+      },
+      "location": "ilmenite-bin-1",
+      "lot_id": "ilmenite-bin-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "iron-bin-1",
+      "lot_id": "iron-bin-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "1000000"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "tio2-s": "1900000"
+      },
+      "location": "rutile-bin-1",
+      "lot_id": "rutile-bin-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fe-s": "100000"
+      },
+      "location": "scrap-bin",
+      "lot_id": "scrap-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "9890000"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "beneficiator",
+      "location": "pad-a",
+      "machine_id": "beneficiator-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "500000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "electrolyzer",
+      "location": "pad-a",
+      "machine_id": "electrolyzer-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "excavator",
+      "location": "pad-a",
+      "machine_id": "excavator-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "60000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "fabricator",
+      "location": "pad-a",
+      "machine_id": "fabricator-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "600000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "melter",
+      "location": "pad-a",
+      "machine_id": "melter-1",
+      "mode": "STARVED",
+      "rate_setpoint": {
+        "d": "500",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "reactor",
+      "location": "pad-a",
+      "machine_id": "reactor-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "wear",
+      "owner": "excavator-1",
+      "value": {
+        "d": "25",
+        "n": "1"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "0",
+      "kind": "TERMINAL",
+      "sink_id": "dust",
+      "totals": {
+        "regolith": "40"
+      }
+    },
+    {
+      "energy": "0",
+      "kind": "RECOVERABLE",
+      "sink_id": "tailings",
+      "totals": {
+        "sio2-s": "50932800"
+      }
+    },
+    {
+      "energy": "822920000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "18001000000"
+}

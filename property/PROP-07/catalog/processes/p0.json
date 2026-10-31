@@ -1,0 +1,132 @@
+{
+  "process_id": "p0",
+  "pset_version": "0",
+  "mode": "FLOW",
+  "extent": {
+    "unit": "rxn-mmol",
+    "min": "0",
+    "max": "1000000000000"
+  },
+  "ports": {
+    "in": [
+      {
+        "port": "in-0",
+        "accepts": [
+          "h2o-l"
+        ]
+      }
+    ],
+    "out": [
+      {
+        "port": "out",
+        "accepts": [
+          "h2o-l",
+          "h2-g",
+          "o2-g",
+          "fetio3-s",
+          "fe-s",
+          "tio2-s"
+        ]
+      },
+      {
+        "port": "rest",
+        "accepts": [
+          "h2o-l",
+          "h2-g",
+          "o2-g",
+          "fetio3-s",
+          "fe-s",
+          "tio2-s"
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "s",
+      "ops": [
+        {
+          "op": "REACT",
+          "vector": {
+            "h2o-l": "-4",
+            "h2-g": "4",
+            "o2-g": "2"
+          },
+          "extent": {
+            "kind": "ref",
+            "name": "extent"
+          }
+        },
+        {
+          "op": "PARTITION",
+          "input": "pool",
+          "residue": "rest",
+          "outputs": [
+            {
+              "stream": "cut",
+              "fractions": {
+                "h2-g": {
+                  "n": "0",
+                  "d": "1"
+                },
+                "o2-g": {
+                  "n": "0",
+                  "d": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "3",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "DRAW",
+          "amount": {
+            "n": "4",
+            "d": "1"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
+        },
+        {
+          "op": "WEAR",
+          "per": "WORK",
+          "amount": {
+            "n": "1",
+            "d": "1000"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "port:in-0",
+      "to": "stage:s"
+    },
+    {
+      "from": "stage:s.cut",
+      "to": "port:out"
+    },
+    {
+      "from": "stage:s.rest",
+      "to": "port:rest"
+    }
+  ],
+  "failure_disposition": {
+    "s": "RETAIN"
+  },
+  "restart_thresholds": {},
+  "constants": {}
+}

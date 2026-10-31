@@ -1,0 +1,92 @@
+{
+  "process_id": "assemble",
+  "pset_version": "0",
+  "mode": "BATCH",
+  "extent": {
+    "unit": "count",
+    "min": "1",
+    "max": "100"
+  },
+  "ports": {
+    "in": [
+      {
+        "port": "in-0",
+        "accepts": [
+          "fe-s"
+        ]
+      }
+    ],
+    "out": [
+      {
+        "port": "out",
+        "accepts": [
+          "h2o-l",
+          "h2-g",
+          "o2-g",
+          "fetio3-s",
+          "fe-s",
+          "tio2-s"
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "s",
+      "ops": [
+        {
+          "op": "ASSEMBLE",
+          "product": "widget",
+          "count": {
+            "kind": "ref",
+            "name": "extent"
+          },
+          "materials": {
+            "fe-s": "111"
+          },
+          "scrap": {
+            "fe-s": "11"
+          },
+          "scrap_stream": "offcuts"
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "1",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "DRAW",
+          "amount": {
+            "n": "44",
+            "d": "1"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "port:in-0",
+      "to": "stage:s"
+    },
+    {
+      "from": "stage:s.offcuts",
+      "to": "port:out"
+    }
+  ],
+  "failure_disposition": {
+    "s": "RETAIN"
+  },
+  "restart_thresholds": {},
+  "constants": {}
+}

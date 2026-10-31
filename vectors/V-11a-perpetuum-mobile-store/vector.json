@@ -1,0 +1,12 @@
+{
+  "id": "V-11a",
+  "title": "An energy store with charge efficiency above 1 is rejected",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-11",
+    "LD-PEC-005 \u00a78.2"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,19 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "batt-0", "product": "battery-kit", "location": "pad", "as_id": "battery-0"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "m-p0-kit", "location": "pad-a", "as_id": "m0"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-0"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "CONNECT", "args": {"connection_id": "c-bin-0", "template": "pipe", "from_port": "bin-0.io", "to_port": "m0.in-0"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-1"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "CONNECT", "args": {"connection_id": "c-bin-1", "template": "pipe", "from_port": "bin-1.io", "to_port": "m0.in-1"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-2"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "CONNECT", "args": {"connection_id": "c-bin-2", "template": "pipe", "from_port": "m0.out", "to_port": "bin-2.io"}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "CREATE_JOB", "args": {"job_id": "j0-0", "process": "p0", "machine_id": "m0", "target_extent": "49692", "priority": "0"}}
+{"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "START", "args": {"job_id": "j0-0"}}
+{"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "INSTALL", "args": {"lot_id": "kits", "product": "m-assemble-kit", "location": "pad-a", "as_id": "m1"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-3"}}
+{"command_id": "cmd-0013", "effective_us": "0", "seq": "13", "op": "CONNECT", "args": {"connection_id": "c-bin-3", "template": "pipe", "from_port": "bin-3.io", "to_port": "m1.in-0"}}
+{"command_id": "cmd-0014", "effective_us": "0", "seq": "14", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-4"}}
+{"command_id": "cmd-0015", "effective_us": "0", "seq": "15", "op": "CONNECT", "args": {"connection_id": "c-bin-4", "template": "pipe", "from_port": "m1.out", "to_port": "bin-4.io"}}
+{"command_id": "cmd-0016", "effective_us": "0", "seq": "16", "op": "CREATE_JOB", "args": {"job_id": "j1-0", "process": "assemble", "machine_id": "m1", "target_extent": "3", "priority": "3"}}
+{"command_id": "cmd-0017", "effective_us": "0", "seq": "17", "op": "START", "args": {"job_id": "j1-0"}}
+{"command_id": "cmd-0018", "effective_us": "327758439", "seq": "18", "op": "RESUME", "args": {"job_id": "j0-0"}}
+{"command_id": "cmd-0019", "effective_us": "846206969", "seq": "19", "op": "PAUSE", "args": {"job_id": "j0-0"}}

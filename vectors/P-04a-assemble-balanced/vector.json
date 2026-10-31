@@ -1,0 +1,13 @@
+{
+  "id": "P-04a",
+  "title": "ASSEMBLE whose materials equal embodied plus scrap is accepted",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74 ASSEMBLE",
+    "LD-PEC-003 \u00a711 P-04",
+    "LD-PEC-005 \u00a78.1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

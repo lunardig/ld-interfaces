@@ -1,0 +1,10 @@
+{
+  "template_id": "pipe",
+  "kind": "FEED",
+  "throughput": {
+    "n": "1",
+    "d": "1"
+  },
+  "unit": "pmol",
+  "delay_us": "0"
+}

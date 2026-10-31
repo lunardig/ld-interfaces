@@ -839,7 +839,7 @@ impl<'de> ::serde::Deserialize<'de> for ElementSymbol {
             })
     }
 }
-#[doc = "`EnergyStoreInstance`"]
+#[doc = "An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct EnergyStoreInstance {
@@ -856,6 +856,8 @@ pub struct EnergyStoreInstance {
 pub struct EnergyStoreView {
     pub capacity: Uint,
     pub charge: Uint,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub rate: ::std::option::Option<Rational>,
     pub store_id: Id,
     pub unit: Id,
 }
@@ -1985,6 +1987,8 @@ impl ::std::convert::From<::serde_json::Value> for LdInterfaces {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct Lot {
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub charge: ::std::option::Option<Rational>,
     pub composition: SpeciesAmounts,
     pub location: Id,
     pub lot_id: Id,
@@ -2061,6 +2065,10 @@ pub struct MachineBlueprint {
     pub capabilities: ::std::vec::Vec<Id>,
     pub condition_table: ::std::vec::Vec<ConditionStep>,
     pub embodied: SpeciesAmounts,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub energy_store: ::std::option::Option<MachineBlueprintEnergyStore>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub idle_heat_sink: ::std::option::Option<Id>,
     pub idle_power: MachineBlueprintIdlePower,
     pub lanes: PositiveInt,
     pub min_stable_rate: Rational,
@@ -2068,7 +2076,38 @@ pub struct MachineBlueprint {
     pub processes: ::std::vec::Vec<Id>,
     pub rated_work: Rational,
 }
-#[doc = "Power drawn while installed and not running, in the power unit named by unit (per second, as W)."]
+#[doc = "Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 §8.2)."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct MachineBlueprintEnergyStore {
+    pub capacity: MachineBlueprintEnergyStoreCapacity,
+    pub charge_efficiency: Rational,
+    pub heat_sink: Id,
+    pub max_charge: MachineBlueprintEnergyStoreMaxCharge,
+    pub max_discharge: MachineBlueprintEnergyStoreMaxDischarge,
+}
+#[doc = "`MachineBlueprintEnergyStoreCapacity`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct MachineBlueprintEnergyStoreCapacity {
+    pub amount: Rational,
+    pub unit: Id,
+}
+#[doc = "`MachineBlueprintEnergyStoreMaxCharge`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct MachineBlueprintEnergyStoreMaxCharge {
+    pub amount: Rational,
+    pub unit: Id,
+}
+#[doc = "`MachineBlueprintEnergyStoreMaxDischarge`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct MachineBlueprintEnergyStoreMaxDischarge {
+    pub amount: Rational,
+    pub unit: Id,
+}
+#[doc = "Power drawn while installed and not running, in the power unit named by unit (per second, as W). Served after jobs; unmet idle draw only marks the machine unpowered (LD-PEC-005 §8.3)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct MachineBlueprintIdlePower {
@@ -2287,6 +2326,9 @@ pub struct MachineView {
     pub machine_id: Id,
     pub mode: MachineMode,
     pub rate: Rational,
+    #[doc = "Present and true when the machine's idle draw is not being met (LD-PEC-005 §8.3)."]
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub unpowered: ::std::option::Option<bool>,
     pub wear_accumulator: Uint,
 }
 #[doc = "t_us is absent when no event is scheduled."]

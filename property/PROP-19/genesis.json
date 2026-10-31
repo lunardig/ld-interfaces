@@ -1,0 +1,103 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "7840f8c7cc381fe9e16290e1e95518347585bf1ad1427ae88c45b0a4ddda100c",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "11",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1",
+        "m-p2-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "54863",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "batt-1",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "286899",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "740623"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-2",
+      "location": "bin-2",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "546442"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-3",
+      "location": "bin-3",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "504519"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-4",
+      "location": "bin-4",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "865642"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-7",
+      "location": "bin-7",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "96977"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-8",
+      "location": "bin-8",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "28139"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

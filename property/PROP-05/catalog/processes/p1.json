@@ -1,0 +1,148 @@
+{
+  "process_id": "p1",
+  "pset_version": "0",
+  "mode": "FLOW",
+  "extent": {
+    "unit": "rxn-mmol",
+    "min": "0",
+    "max": "1000000000000"
+  },
+  "ports": {
+    "in": [
+      {
+        "port": "in-0",
+        "accepts": [
+          "fetio3-s"
+        ]
+      },
+      {
+        "port": "in-1",
+        "accepts": [
+          "h2-g"
+        ]
+      }
+    ],
+    "out": [
+      {
+        "port": "out",
+        "accepts": [
+          "h2o-l",
+          "h2-g",
+          "o2-g",
+          "fetio3-s",
+          "fe-s",
+          "tio2-s"
+        ]
+      },
+      {
+        "port": "rest",
+        "accepts": [
+          "h2o-l",
+          "h2-g",
+          "o2-g",
+          "fetio3-s",
+          "fe-s",
+          "tio2-s"
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "s",
+      "ops": [
+        {
+          "op": "REACT",
+          "vector": {
+            "fetio3-s": "-4",
+            "h2-g": "-4",
+            "fe-s": "4",
+            "tio2-s": "4",
+            "h2o-l": "4"
+          },
+          "extent": {
+            "kind": "ref",
+            "name": "extent"
+          }
+        },
+        {
+          "op": "PARTITION",
+          "input": "pool",
+          "residue": "rest",
+          "outputs": [
+            {
+              "stream": "cut",
+              "fractions": {
+                "fe-s": {
+                  "n": "0",
+                  "d": "1"
+                },
+                "h2o-l": {
+                  "n": "0",
+                  "d": "1"
+                },
+                "tio2-s": {
+                  "n": "0",
+                  "d": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "1",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "DRAW",
+          "amount": {
+            "n": "20",
+            "d": "1"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
+        },
+        {
+          "op": "WEAR",
+          "per": "WORK",
+          "amount": {
+            "n": "1",
+            "d": "1000"
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "port:in-0",
+      "to": "stage:s"
+    },
+    {
+      "from": "port:in-1",
+      "to": "stage:s"
+    },
+    {
+      "from": "stage:s.cut",
+      "to": "port:out"
+    },
+    {
+      "from": "stage:s.rest",
+      "to": "port:rest"
+    }
+  ],
+  "failure_disposition": {
+    "s": "RETAIN"
+  },
+  "restart_thresholds": {},
+  "constants": {}
+}

@@ -1,0 +1,15 @@
+{
+  "template_id": "bin",
+  "accepts": [
+    "h2o-l",
+    "h2-g",
+    "o2-g",
+    "fetio3-s",
+    "fe-s",
+    "tio2-s"
+  ],
+  "capacity": {
+    "amount": "10000000000",
+    "unit": "mmol"
+  }
+}

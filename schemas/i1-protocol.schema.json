@@ -934,6 +934,10 @@
         "rate": {
           "$ref": "common.schema.json#/$defs/Rational",
           "description": "Current work rate, in work quanta per microsecond."
+        },
+        "unpowered": {
+          "type": "boolean",
+          "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 §8.3)."
         }
       },
       "required": [
@@ -1031,6 +1035,10 @@
         },
         "capacity": {
           "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "rate": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Net charging rate in unit per microsecond: positive while charging (after efficiency), negative while discharging."
         },
         "unit": {
           "$ref": "common.schema.json#/$defs/Id"

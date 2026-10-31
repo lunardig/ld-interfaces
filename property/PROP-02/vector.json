@@ -1,0 +1,11 @@
+{
+  "id": "PROP-02",
+  "title": "Random world for the M2 exit property tests",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-005 \u00a78.5"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

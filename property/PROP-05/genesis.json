@@ -1,0 +1,104 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "234f43de04de0dfe3e83383e4d7ec7da9c6559c6416aa3877a74c8ede6bf03ea",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "13",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1",
+        "m-p2-kit": "1",
+        "m-assemble-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "211967",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "batt-1",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "9473",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "576737"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-3",
+      "location": "bin-3",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "475818"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-4",
+      "location": "bin-4",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "49996"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-7",
+      "location": "bin-7",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "538391"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-8",
+      "location": "bin-8",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "373027"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-11",
+      "location": "bin-11",
+      "state": "AVAILABLE",
+      "composition": {
+        "fe-s": "455008"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

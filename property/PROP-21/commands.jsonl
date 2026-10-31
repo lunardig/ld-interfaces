@@ -1,0 +1,17 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "batt-0", "product": "battery-kit", "location": "pad", "as_id": "battery-0"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "m-p0-kit", "location": "pad-a", "as_id": "m0"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-0"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "CONNECT", "args": {"connection_id": "c-bin-0", "template": "pipe", "from_port": "bin-0.io", "to_port": "m0.in-0"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-1"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "CONNECT", "args": {"connection_id": "c-bin-1", "template": "pipe", "from_port": "bin-1.io", "to_port": "m0.in-1"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-2"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "CONNECT", "args": {"connection_id": "c-bin-2", "template": "pipe", "from_port": "bin-2.io", "to_port": "m0.in-2"}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-3"}}
+{"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "CONNECT", "args": {"connection_id": "c-bin-3", "template": "pipe", "from_port": "m0.out", "to_port": "bin-3.io"}}
+{"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "CREATE_JOB", "args": {"job_id": "j0-0", "process": "p0", "machine_id": "m0", "target_extent": "2775", "priority": "3"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "START", "args": {"job_id": "j0-0"}}
+{"command_id": "cmd-0013", "effective_us": "0", "seq": "13", "op": "CREATE_JOB", "args": {"job_id": "j0-1", "process": "p0", "machine_id": "m0", "target_extent": "48411", "priority": "3"}}
+{"command_id": "cmd-0014", "effective_us": "0", "seq": "14", "op": "START", "args": {"job_id": "j0-1"}}
+{"command_id": "cmd-0015", "effective_us": "0", "seq": "15", "op": "CREATE_JOB", "args": {"job_id": "j0-2", "process": "p0", "machine_id": "m0", "target_extent": "40363", "priority": "3"}}
+{"command_id": "cmd-0016", "effective_us": "0", "seq": "16", "op": "START", "args": {"job_id": "j0-2"}}
+{"command_id": "cmd-0017", "effective_us": "152009442", "seq": "17", "op": "RESUME", "args": {"job_id": "j0-0"}}

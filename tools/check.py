@@ -78,14 +78,21 @@ def find_def(name: str) -> str | None:
 
 
 def react_balance_failures(cat: Path) -> list[str]:
-    """Return process ids whose REACT vectors do not balance every element, or whose
-    PHASE joins species of different formulas."""
+    """Return process ids whose REACT vectors do not balance every element, whose PHASE
+    joins species of different formulas, or whose ASSEMBLE materials are not embodied
+    plus scrap (LD-PEC-005 §8.1)."""
     entries = ld.read_catalog_entries(cat)
     formulas = {s["substance_id"]: s["formula"] for s in entries["substance"]}
+    embodied = {p["product_id"]: p["embodied"] for p in entries.get("product", [])}
     bad = []
     for proc in entries["process"]:
         for stage in proc["stages"]:
             for op in stage["ops"]:
+                if op["op"] == "ASSEMBLE":
+                    emb = embodied.get(op["product"], {})
+                    for sp in set(op["materials"]) | set(op["scrap"]) | set(emb):
+                        if int(op["materials"].get(sp, 0)) != int(emb.get(sp, 0)) + int(op["scrap"].get(sp, 0)):
+                            bad.append(proc["process_id"])
                 if op["op"] == "PHASE" and formulas[op["from"]] != formulas[op["to"]]:
                     bad.append(proc["process_id"])
                 if op["op"] != "REACT":

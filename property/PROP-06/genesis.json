@@ -1,0 +1,100 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "42e781cbc4ad7cd484820967d1ea5a4443197909d5c444a4fd0f953c071d2fe3",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "12",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1",
+        "m-p2-kit": "1",
+        "m-assemble-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "47023",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "525452"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-1",
+      "location": "bin-1",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "923829"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-4",
+      "location": "bin-4",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "399256"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-5",
+      "location": "bin-5",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "508242"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-7",
+      "location": "bin-7",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "875516"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-8",
+      "location": "bin-8",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "908583"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-10",
+      "location": "bin-10",
+      "state": "AVAILABLE",
+      "composition": {
+        "fe-s": "585838"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

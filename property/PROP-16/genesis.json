@@ -1,0 +1,102 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "980036b28db160af093d918cccf478f68a07119e6cb825f9315b395f33f4faf4",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "8",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "220349",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "batt-1",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "45058",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "365674"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-1",
+      "location": "bin-1",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "519303"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-2",
+      "location": "bin-2",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "444676"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-4",
+      "location": "bin-4",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "297536"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-5",
+      "location": "bin-5",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "88666"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-6",
+      "location": "bin-6",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "874013"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

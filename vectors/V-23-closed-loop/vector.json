@@ -1,0 +1,13 @@
+{
+  "id": "V-23",
+  "title": "The alpha loop: a hopper fabricated from iron reduced from the claim's own ilmenite is installed",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-005 \u00a78.4",
+    "LD-PEC-005 \u00a78.5",
+    "Alpha MVP \u00a73"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}
