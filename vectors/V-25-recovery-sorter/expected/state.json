@@ -1,0 +1,219 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "ice-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "ilmenite-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "tailings-pile",
+      "location": "pad-a",
+      "lot_ids": [
+        "tailings-pile.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    }
+  ],
+  "catalog_hash": "a1480ba0c1303c6a99adb68e381a4655cc1f3cafc606d0cffade7a139bb9717e",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-f",
+      "delay_us": "0",
+      "from_port": "hopper-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "sorter-1.feed"
+    },
+    {
+      "active": true,
+      "connection_id": "c-i",
+      "delay_us": "0",
+      "from_port": "sorter-1.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ice-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-m",
+      "delay_us": "0",
+      "from_port": "sorter-1.ilmenite",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ilmenite-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-t",
+      "delay_us": "0",
+      "from_port": "sorter-1.tailings",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "tailings-pile.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "14"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "1000",
+      "completed_work": "1000",
+      "created_at_us": "0",
+      "current_stage": "beneficiate.done",
+      "held_lot_ids": [],
+      "job_id": "job-sort",
+      "last_advanced_us": "1455730000",
+      "machine_id": "sorter-1",
+      "priority": "0",
+      "process": "beneficiate",
+      "process_hash": "3d38acb708988f3bd20a4a5f47dc23d6cbbb110ea3ad6de8487ff6d4ceb6a9ce",
+      "required_work": "1000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "1000"
+    },
+    {
+      "completed_extent": "2000",
+      "completed_work": "2000",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "2000000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {},
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-s": "2497500"
+      },
+      "location": "ice-bin",
+      "lot_id": "ice-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "527200"
+      },
+      "location": "ilmenite-bin",
+      "lot_id": "ilmenite-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "131800",
+        "h2o-s": "277500",
+        "sio2-s": "14148000"
+      },
+      "location": "tailings-pile",
+      "lot_id": "tailings-pile.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "sorter",
+      "location": "pad-a",
+      "machine_id": "sorter-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "20000000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "2000000000"
+}

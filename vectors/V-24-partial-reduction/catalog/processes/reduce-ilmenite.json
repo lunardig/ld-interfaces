@@ -1,0 +1,203 @@
+{
+  "process_id": "reduce-ilmenite",
+  "pset_version": "0",
+  "mode": "BATCH",
+  "extent": {
+    "unit": "rxn-mmol",
+    "min": "1",
+    "max": "1000000000"
+  },
+  "ports": {
+    "in": [
+      {
+        "port": "ilmenite",
+        "accepts": [
+          "fetio3-s"
+        ]
+      },
+      {
+        "port": "h2",
+        "accepts": [
+          "h2-g"
+        ]
+      }
+    ],
+    "out": [
+      {
+        "port": "iron",
+        "accepts": [
+          "fe-s"
+        ]
+      },
+      {
+        "port": "rutile",
+        "accepts": [
+          "tio2-s",
+          "fe-s"
+        ]
+      },
+      {
+        "port": "water",
+        "accepts": [
+          "h2o-l"
+        ]
+      },
+      {
+        "port": "unreacted",
+        "accepts": [
+          "fetio3-s"
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "charge",
+      "ops": [
+        {
+          "op": "PARTITION",
+          "input": "ilmenite",
+          "draw": {
+            "fetio3-s": {
+              "kind": "op",
+              "op": "mul",
+              "args": [
+                {
+                  "kind": "const",
+                  "value": {
+                    "n": "2",
+                    "d": "1"
+                  }
+                },
+                {
+                  "kind": "ref",
+                  "name": "extent"
+                }
+              ]
+            }
+          },
+          "residue": "unreacted",
+          "outputs": [
+            {
+              "stream": "reacting",
+              "fractions": {
+                "fetio3-s": {
+                  "n": "1",
+                  "d": "2"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "reduce",
+      "ops": [
+        {
+          "op": "REACT",
+          "vector": {
+            "fetio3-s": "-1",
+            "h2-g": "-1",
+            "fe-s": "1",
+            "tio2-s": "1",
+            "h2o-l": "1"
+          },
+          "extent": {
+            "kind": "ref",
+            "name": "extent"
+          }
+        },
+        {
+          "op": "PARTITION",
+          "input": "pool",
+          "residue": "nonmagnetic",
+          "outputs": [
+            {
+              "stream": "magnetic",
+              "fractions": {
+                "fe-s": {
+                  "n": "19",
+                  "d": "20"
+                }
+              }
+            },
+            {
+              "stream": "steam",
+              "fractions": {
+                "h2o-l": {
+                  "n": "1",
+                  "d": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "op": "WORK",
+          "a": {
+            "n": "1",
+            "d": "1"
+          },
+          "b": {
+            "n": "0",
+            "d": "1"
+          }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "DRAW",
+          "amount": {
+            "n": "500",
+            "d": "1"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
+        },
+        {
+          "op": "DWELL",
+          "duration_us": {
+            "kind": "const",
+            "value": {
+              "n": "600000000",
+              "d": "1"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "stage:charge.reacting",
+      "to": "stage:reduce"
+    },
+    {
+      "from": "stage:charge.unreacted",
+      "to": "port:unreacted"
+    },
+    {
+      "from": "port:h2",
+      "to": "stage:reduce"
+    },
+    {
+      "from": "stage:reduce.magnetic",
+      "to": "port:iron"
+    },
+    {
+      "from": "stage:reduce.steam",
+      "to": "port:water"
+    },
+    {
+      "from": "stage:reduce.nonmagnetic",
+      "to": "port:rutile"
+    }
+  ],
+  "failure_disposition": {
+    "charge": "RETAIN",
+    "reduce": "RETAIN"
+  },
+  "restart_thresholds": {},
+  "constants": {}
+}

@@ -1,0 +1,282 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "ilmenite-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "iron-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "iron-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "return-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "return-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "rutile-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "rutile-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "water-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    }
+  ],
+  "catalog_hash": "ee19a8add6459149f84dadf699df3c9ac7636709adab01a36c85f3c144ab04c5",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-fe",
+      "delay_us": "0",
+      "from_port": "reactor-1.iron",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "iron-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h",
+      "delay_us": "0",
+      "from_port": "h2-bin.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "reactor-1.h2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-i",
+      "delay_us": "0",
+      "from_port": "ilmenite-bin.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "reactor-1.ilmenite"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ti",
+      "delay_us": "0",
+      "from_port": "reactor-1.rutile",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "rutile-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-u",
+      "delay_us": "0",
+      "from_port": "reactor-1.unreacted",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "return-bin.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-w",
+      "delay_us": "0",
+      "from_port": "reactor-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "water-bin.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "18"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "100000",
+      "completed_work": "100000",
+      "created_at_us": "0",
+      "current_stage": "reduce.done",
+      "held_lot_ids": [],
+      "job_id": "job-reduce",
+      "last_advanced_us": "600000000",
+      "machine_id": "reactor-1",
+      "priority": "0",
+      "process": "reduce-ilmenite",
+      "process_hash": "e36c2302c0f6c278e07f2fdcb95665364b877b3445abeb57538d9c2fc4c6b47d",
+      "required_work": "100000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "100000"
+    },
+    {
+      "completed_extent": "900",
+      "completed_work": "900",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "900000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "200000"
+      },
+      "location": "h2-bin",
+      "lot_id": "h2-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "100000"
+      },
+      "location": "ilmenite-bin",
+      "lot_id": "ilmenite-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fe-s": "95000"
+      },
+      "location": "iron-bin",
+      "lot_id": "iron-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "100000"
+      },
+      "location": "return-bin",
+      "lot_id": "return-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fe-s": "5000",
+        "tio2-s": "100000"
+      },
+      "location": "rutile-bin",
+      "lot_id": "rutile-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "100000"
+      },
+      "location": "water-bin",
+      "lot_id": "water-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "reactor",
+      "location": "pad-a",
+      "machine_id": "reactor-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "2000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "50000000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "900000000"
+}
