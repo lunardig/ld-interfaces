@@ -1,6 +1,6 @@
 {
   "id": "P-02",
-  "title": "PARTITION of 7 into thirds gives 2, 2 and 3, per unit, over 1 000 units",
+  "title": "PARTITION of 7 into thirds over 1 000 units: cumulative floors give 2 333 and 2 333, the residue 2 334",
   "kind": "EXECUTION",
   "spec_refs": [
     "LD-PEC-003 \u00a711 P-02",

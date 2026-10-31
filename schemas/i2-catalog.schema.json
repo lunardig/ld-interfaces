@@ -304,7 +304,7 @@
             "$ref": "common.schema.json#/$defs/Id"
           },
           "additionalProperties": {
-            "$ref": "common.schema.json#/$defs/Expression"
+            "$ref": "#/$defs/Expression"
           }
         }
       },

@@ -1,6 +1,6 @@
 {
   "id": "V-17",
-  "title": "A two-stage sorter: PARTITION floors every share per unit and the residue takes the rest; COMBINE merges streams",
+  "title": "A two-stage sorter: PARTITION shares are cumulative floors, the residue takes the rest at completion; COMBINE merges streams",
   "kind": "EXECUTION",
   "spec_refs": [
     "LD-PEC-003 \u00a74 PARTITION, COMBINE",

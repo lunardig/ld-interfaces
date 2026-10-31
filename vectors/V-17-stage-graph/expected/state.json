@@ -129,8 +129,8 @@
     },
     {
       "composition": {
-        "h2o-s": "2497000",
-        "sio2-s": "707000"
+        "h2o-s": "2497500",
+        "sio2-s": "707400"
       },
       "location": "ice-bin",
       "lot_id": "ice-bin.stock",
@@ -139,8 +139,8 @@
     },
     {
       "composition": {
-        "fetio3-s": "527000",
-        "sio2-s": "707000"
+        "fetio3-s": "527200",
+        "sio2-s": "707400"
       },
       "location": "ilmenite-bin",
       "lot_id": "ilmenite-bin.stock",
@@ -149,9 +149,9 @@
     },
     {
       "composition": {
-        "fetio3-s": "132000",
-        "h2o-s": "278000",
-        "sio2-s": "12734000"
+        "fetio3-s": "131800",
+        "h2o-s": "277500",
+        "sio2-s": "12733200"
       },
       "location": "tailings",
       "lot_id": "tailings.stock",

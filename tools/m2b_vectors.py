@@ -30,7 +30,8 @@ def sorter() -> dict:
 
     The sort keeps 9/10 of the ice and 4/5 of the ilmenite, each with some silicate
     carried along; 1/10 of the silicate is fines. Fines and the residue combine into
-    tailings. Every share is floored per kilogram (LD-PEC-005 §3.7)."""
+    tailings. Shares are floored cumulatively over the job, and the residue's
+    destination takes what they held back when the job completes (LD-PEC-005 §3.7)."""
     return {
         "process_id": "sort-regolith", "pset_version": "0", "mode": "FLOW",
         "extent": {"unit": "kg-reg", "min": "0", "max": "1000000000000"},
@@ -72,7 +73,7 @@ def v17() -> list[Vector]:
                                                                    ("ilmenite", "MATERIAL", "OUT"), ("tailings", "MATERIAL", "OUT")])]
     e["buffers"] = [bin_("hopper", ["regolith"], 100_000, "kg-reg"), bin_("bin", ["h2o-s", "fetio3-s", "sio2-s"], 10**12, "mmol")]
     e["products"] = [kit("sorter-kit", "MACHINE", "sorter"), kit("hopper-kit", "BUFFER", "hopper"), kit("bin-kit", "BUFFER", "bin")]
-    v = Vector("V-17", "stage-graph", "A two-stage sorter: PARTITION floors every share per unit and the residue takes the rest; COMBINE merges streams",
+    v = Vector("V-17", "stage-graph", "A two-stage sorter: PARTITION shares are cumulative floors, the residue takes the rest at completion; COMBINE merges streams",
                ["LD-PEC-003 §4 PARTITION, COMBINE", "LD-PEC-003 §6", "LD-PEC-005 §3.2", "LD-PEC-005 §3.7"], e,
                [lot("kits", "inventory", products={"sorter-kit": "1", "hopper-kit": "1", "bin-kit": "3"}), lot("dug", "hopper-1", {"regolith": "1000"})])
     for k, a in [("sorter-kit", "sorter-1"), ("hopper-kit", "hopper-1"), ("bin-kit", "ice-bin"), ("bin-kit", "ilmenite-bin"), ("bin-kit", "tailings")]:
@@ -87,7 +88,8 @@ def v17() -> list[Vector]:
 
 
 def p02() -> list[Vector]:
-    """LD-PEC-003 P-02: 7 units into thirds gives 2, 2 and 3 (the third is the residue)."""
+    """LD-PEC-003 P-02, cumulative (LD-PEC-005 §3.7): 7 per unit into thirds over 1 000 units
+    gives 2 333, 2 333 and 2 334 (the third is the residue)."""
     e = base()
     e["processes"] = [{
         "process_id": "melt-and-share", "pset_version": "0", "mode": "FLOW",
@@ -111,7 +113,7 @@ def p02() -> list[Vector]:
     e["buffers"] = [bin_("tank", ["h2o-s", "h2o-l"], 10**9, "mmol")]
     e["products"] = [kit("sharer-kit", "MACHINE", "sharer"), kit("solar-kit", "MACHINE", "solar-array"), kit("tank-kit", "BUFFER", "tank")]
     e["environment"] = [IRRADIANCE]
-    v = Vector("P-02", "partition-thirds", "PARTITION of 7 into thirds gives 2, 2 and 3, per unit, over 1 000 units",
+    v = Vector("P-02", "partition-thirds", "PARTITION of 7 into thirds over 1 000 units: cumulative floors give 2 333 and 2 333, the residue 2 334",
                ["LD-PEC-003 §11 P-02", "LD-PEC-005 §3.7"], e,
                [lot("kits", "inventory", products={"sharer-kit": "1", "solar-kit": "1", "tank-kit": "4"}), lot("ice", "ice-tank", {"h2o-s": "7000"})],
                environment=["irradiance"])
@@ -194,8 +196,70 @@ def v19() -> list[Vector]:
     return [v]
 
 
+def screen_entries() -> dict[str, list[dict]]:
+    """A screen: a stage that only splits. Its PARTITION draws 1 kg of regolith per unit
+    from the feed and sends 3/10 to fines; the coarse residue takes the rest (§3.8)."""
+    e = base()
+    e["processes"] = [{
+        "process_id": "screen", "pset_version": "0", "mode": "FLOW",
+        "extent": {"unit": "kg-reg", "min": "0", "max": "1000000000000"},
+        "ports": {"in": [{"port": "feed", "accepts": ["regolith"]}],
+                  "out": [{"port": "fines", "accepts": ["regolith"]}, {"port": "coarse", "accepts": ["regolith"]}]},
+        "stages": [{"stage_id": "screen", "ops": [
+            {"op": "PARTITION", "input": "feed", "draw": {"regolith": EXTENT}, "residue": "oversize",
+             "outputs": [{"stream": "undersize", "fractions": {"regolith": R(3, 10)}}]},
+            {"op": "WORK", "a": R(1), "b": R(0)},
+        ]}],
+        "edges": [{"from": "stage:screen.undersize", "to": "port:fines"}, {"from": "stage:screen.oversize", "to": "port:coarse"}],
+        "failure_disposition": {"screen": "RETAIN"}, "restart_thresholds": {}, "constants": {},
+    }]
+    e["machines"] = [machine("screen", ["screen"], R(1, S), [("feed", "MATERIAL", "IN"), ("fines", "MATERIAL", "OUT"), ("coarse", "MATERIAL", "OUT")])]
+    e["buffers"] = [bin_("hopper", ["regolith"], 100_000, "kg-reg")]
+    e["products"] = [kit("screen-kit", "MACHINE", "screen"), kit("hopper-kit", "BUFFER", "hopper")]
+    return e
+
+
+def screen_setup(v: Vector) -> None:
+    for k, a in [("screen-kit", "screen-1"), ("hopper-kit", "hopper-1"), ("hopper-kit", "fines-bin"), ("hopper-kit", "coarse-bin")]:
+        v.install(0, k, a)
+    for c, f, t in [("c-feed", "hopper-1.io", "screen-1.feed"), ("c-fines", "screen-1.fines", "fines-bin.io"), ("c-coarse", "screen-1.coarse", "coarse-bin.io")]:
+        v.feed(0, c, f, t)
+    v.job(0, "job-screen", "screen", "screen-1", 100)
+
+
+def screen_lots() -> list[dict]:
+    return [lot("kits", "inventory", products={"screen-kit": "1", "hopper-kit": "3"}), lot("dug", "hopper-1", {"regolith": "1000"})]
+
+
+def v20() -> list[Vector]:
+    """A bare screen runs to completion: 30 and 70 kg of 100. Midway, after 5 kg, the
+    fines bin holds 1 kg, coarse 3 kg and the machine 1 kg, held back by the floors; the
+    held lot survives a snapshot and restore."""
+    v = Vector("V-20", "bare-screen", "A stage that only splits: PARTITION draws its own material per unit; cumulative floors hold back under one quantum each until completion",
+               ["LD-PEC-003 §4 PARTITION", "LD-PEC-005 §3.7", "LD-PEC-005 §3.8"], screen_entries(), screen_lots())
+    screen_setup(v)
+    v.advance(5 * S)
+    v.snapshot("mid")
+    v.advance(50 * S)
+    v.restore("mid")
+    v.advance(200 * S)
+    return [v]
+
+
+def v21() -> list[Vector]:
+    """Cancelled after 5 kg: what the floors held back goes to the residue's bin, so the
+    fines bin keeps 1 kg and the coarse bin gets 4 kg."""
+    v = Vector("V-21", "cancel-releases-holdup", "A cancelled FLOW job sends the material its cumulative floors held back to the residue's destination",
+               ["LD-PEC-005 §3.7"], screen_entries(), screen_lots())
+    screen_setup(v)
+    v.cmd(5_500_000, "CANCEL", job_id="job-screen")
+    v.advance(5 * S)
+    v.advance(20 * S)
+    return [v]
+
+
 def main() -> int:
-    for v in p02() + v17() + v18() + v19():
+    for v in p02() + v17() + v18() + v19() + v20() + v21():
         v.save()
     return 0
 
