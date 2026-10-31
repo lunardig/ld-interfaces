@@ -45,43 +45,33 @@
     },
     {
       "kind": "machine",
-      "id": "m-assemble",
-      "hash": "f7ad8674718d7568fb871ff8c5435c2810f5204d04cc0274a768c734c1630ffc"
-    },
-    {
-      "kind": "machine",
       "id": "m-p0",
-      "hash": "9a6c50b3b885c63ed5b6eedb9b76de6cb50422c76ea7fbf2de5e0ad6de859c28"
+      "hash": "1d51d80cee6bf11e51964ed80b5a84be33bf1170165d17308823c9656e72fd37"
     },
     {
       "kind": "machine",
       "id": "m-p1",
-      "hash": "3f53808faad61097c535701423cd135dac87581b1838397e512e9057fe810b66"
+      "hash": "798b4c62f5dbaa2e67b4fe6e4b65a7b16c053f0f35dbb73410c8c7e11bc1c203"
     },
     {
       "kind": "machine",
       "id": "m-p2",
-      "hash": "d2992eb7a98a59f17ccc374ace6e1b74bab6ef75d7c40a1282a47b8ddcc07bc4"
-    },
-    {
-      "kind": "process",
-      "id": "assemble",
-      "hash": "3f3df8ca87904cbfa2896bcbd4c77e8edfcba8a42b3986368546f69e3ecaf798"
+      "hash": "b174d0ed47815b134d8bfc44f22ea21b776ab7be0ee3128465a679bc09a7ee74"
     },
     {
       "kind": "process",
       "id": "p0",
-      "hash": "d1453b6e942fd1c43864a4a97745ccde76798cfc5cd8fd46c7bf897a5630f93f"
+      "hash": "0cdfef8e1f8720664470b2b10684e4da066e8a7568697cad8914708e0ab41c1b"
     },
     {
       "kind": "process",
       "id": "p1",
-      "hash": "498061fa579f72fbbd5241c642f55395c30a07d362fd9de1b87cb63715178cb1"
+      "hash": "bece8e06600c4ffa29c0bc71357bcc73628e34c790e242fa3ebfd278c702386d"
     },
     {
       "kind": "process",
       "id": "p2",
-      "hash": "2fb996ee8b5332a95d55df4dcd84e245076dfeaf16bea9a90593b3795de3be75"
+      "hash": "e3390f47a65ba04ba1b7727dbcbadfb0df7f57e79c198568de85c0175a4d22f0"
     },
     {
       "kind": "product",
@@ -92,11 +82,6 @@
       "kind": "product",
       "id": "bin-kit",
       "hash": "d25ad7db20cfc792ddefe03b4a112895799511f2d7faa98179f0ba33a5a07121"
-    },
-    {
-      "kind": "product",
-      "id": "m-assemble-kit",
-      "hash": "65b9c7d5bcc085d65655f68b9338b4cbb82273cf014072cea8c4731e15f273cf"
     },
     {
       "kind": "product",
@@ -121,52 +106,52 @@
     {
       "kind": "substance",
       "id": "fe-s",
-      "hash": "3b5ee482368dc87e06570be63a9fc413ccabbd0dc544adf5472460125edecace"
+      "hash": "afc98b561f363127d937688ec6c2fb602322d1fa32486ad2881bfc43d5086d36"
     },
     {
       "kind": "substance",
       "id": "fetio3-s",
-      "hash": "27ce4fa19676d3cf5e8829eca6ec89cb002d825560dee896563eee3e465ae732"
+      "hash": "f1822151af1defb23211de2d981493097f3cd5294080550294f9f9522920b279"
     },
     {
       "kind": "substance",
       "id": "h2-g",
-      "hash": "9715cb6cc08df0f3f7b2aef23c79d90b606fade447c11bf4889b366fb90c9a64"
+      "hash": "5ac8c0f07f6892a74a14d092d3342ea93e2c50dfdaa5ef7e358bbfefc5bcfd61"
     },
     {
       "kind": "substance",
       "id": "h2o-l",
-      "hash": "03247ca81b8b84046f3b9c58445f0cf929a10884ca0e0f022b2abd51923ada2f"
+      "hash": "de29320ae902943f92f6582f5567cb529b4e8f1af3c993d007110883ac30b48d"
     },
     {
       "kind": "substance",
       "id": "h2o-s",
-      "hash": "90037ac116557adff010298e175fd843b72bd8215eda8d6e2cfb099a09a32c68"
+      "hash": "3d43f12c20c75f3b3632e871436305a23ac2e5151916f15b610c3b10695e6e4d"
     },
     {
       "kind": "substance",
       "id": "o2-g",
-      "hash": "8060dd5fa32e3c478ed3eebb2ec5cbf1ac840c0855671e4dc2cd99cf0a145e2d"
+      "hash": "0b4adb4f34dd9a207ae19322948c01ba018d244d95b446fd44dc38d52130f94e"
     },
     {
       "kind": "substance",
       "id": "regolith",
-      "hash": "3d0aeff1f725247ffa4c8e425aae888627f60e9dc70b782fbfbfddb1a7ada0b6"
+      "hash": "06b9ca7e1b9a6e1a48e0b0a2b6a61ae6cfb644a22a8584110f825d47f06f4019"
     },
     {
       "kind": "substance",
       "id": "regolith-bank",
-      "hash": "68c3438f9788d2875fda63cb96baa17ed8d4ce9234ef173e675a163ea8fe8df4"
+      "hash": "14298a96d32eaae1d0c02c7aa686d32a2edeb9fc6013ba141461d2fbe3e1184c"
     },
     {
       "kind": "substance",
       "id": "sio2-s",
-      "hash": "16210090094160b19c3a34d25cf3b06549d1d8438c8f852afa692e0dd75f91ca"
+      "hash": "04b310ebbd7b2882bce0fe16b76177fde28267308da8afb60be22ab9568804f6"
     },
     {
       "kind": "substance",
       "id": "tio2-s",
-      "hash": "1d7fd824cd71ee54e6881d3c944ec0506b7e8ea0fd46445fa0f8b7f5f3df533a"
+      "hash": "052ebe6dcafe2cb130e0be9346eda516584ba2f30f063a01af80ef9c10ef3c75"
     },
     {
       "kind": "unit",

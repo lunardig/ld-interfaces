@@ -156,42 +156,42 @@
     {
       "kind": "substance",
       "id": "fetio3-s",
-      "hash": "27ce4fa19676d3cf5e8829eca6ec89cb002d825560dee896563eee3e465ae732"
+      "hash": "f1822151af1defb23211de2d981493097f3cd5294080550294f9f9522920b279"
     },
     {
       "kind": "substance",
       "id": "h2-g",
-      "hash": "9715cb6cc08df0f3f7b2aef23c79d90b606fade447c11bf4889b366fb90c9a64"
+      "hash": "5ac8c0f07f6892a74a14d092d3342ea93e2c50dfdaa5ef7e358bbfefc5bcfd61"
     },
     {
       "kind": "substance",
       "id": "h2o-l",
-      "hash": "03247ca81b8b84046f3b9c58445f0cf929a10884ca0e0f022b2abd51923ada2f"
+      "hash": "de29320ae902943f92f6582f5567cb529b4e8f1af3c993d007110883ac30b48d"
     },
     {
       "kind": "substance",
       "id": "h2o-s",
-      "hash": "90037ac116557adff010298e175fd843b72bd8215eda8d6e2cfb099a09a32c68"
+      "hash": "3d43f12c20c75f3b3632e871436305a23ac2e5151916f15b610c3b10695e6e4d"
     },
     {
       "kind": "substance",
       "id": "o2-g",
-      "hash": "8060dd5fa32e3c478ed3eebb2ec5cbf1ac840c0855671e4dc2cd99cf0a145e2d"
+      "hash": "0b4adb4f34dd9a207ae19322948c01ba018d244d95b446fd44dc38d52130f94e"
     },
     {
       "kind": "substance",
       "id": "regolith",
-      "hash": "3d0aeff1f725247ffa4c8e425aae888627f60e9dc70b782fbfbfddb1a7ada0b6"
+      "hash": "06b9ca7e1b9a6e1a48e0b0a2b6a61ae6cfb644a22a8584110f825d47f06f4019"
     },
     {
       "kind": "substance",
       "id": "regolith-bank",
-      "hash": "68c3438f9788d2875fda63cb96baa17ed8d4ce9234ef173e675a163ea8fe8df4"
+      "hash": "14298a96d32eaae1d0c02c7aa686d32a2edeb9fc6013ba141461d2fbe3e1184c"
     },
     {
       "kind": "substance",
       "id": "sio2-s",
-      "hash": "16210090094160b19c3a34d25cf3b06549d1d8438c8f852afa692e0dd75f91ca"
+      "hash": "04b310ebbd7b2882bce0fe16b76177fde28267308da8afb60be22ab9568804f6"
     },
     {
       "kind": "unit",

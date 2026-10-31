@@ -41,27 +41,27 @@
     {
       "kind": "machine",
       "id": "battery",
-      "hash": "06bfadea515e5a7aca8f05843190ffc93d223a98cbb0d7d10bf85771203e3182"
+      "hash": "2daed0e151cf909ab0520bff77829c88f0b0ef17cfd231013c8b88eed938dcf1"
     },
     {
       "kind": "machine",
       "id": "m-p0",
-      "hash": "b6d1776fe3c74f7134c77776841472037281e533005fdcbb7d57d74e3d5ad4f1"
+      "hash": "7335797216db0ccfe852af2838ad4d78f4686a2222a36d911f686d0d7d260dbf"
     },
     {
       "kind": "machine",
       "id": "m-p1",
-      "hash": "5013c02a300f817774605a46eeab41e12a00d0d569ad19ad15d7710b510ad9a2"
+      "hash": "06208a798797a66934b345555568d9a6f891f698e58d39d95bce35d226279a88"
     },
     {
       "kind": "process",
       "id": "p0",
-      "hash": "012fb02e94368d2643cccbeb74172c86b62dc720b17eb609ed9794bb179ae64d"
+      "hash": "90235315d5e10f7e098e8004dd97846f6d93efcc353e6162b87f60aa2dd19fb0"
     },
     {
       "kind": "process",
       "id": "p1",
-      "hash": "c7d2e68f4a58087bcb39e7d4208ccbe35594b52403464f4a11d190c1c96d1152"
+      "hash": "321dedf822452c4b9262953a4ed6c73f9acdb246b097cdec544e74af825f9ae3"
     },
     {
       "kind": "product",
@@ -91,52 +91,52 @@
     {
       "kind": "substance",
       "id": "fe-s",
-      "hash": "3b5ee482368dc87e06570be63a9fc413ccabbd0dc544adf5472460125edecace"
+      "hash": "afc98b561f363127d937688ec6c2fb602322d1fa32486ad2881bfc43d5086d36"
     },
     {
       "kind": "substance",
       "id": "fetio3-s",
-      "hash": "27ce4fa19676d3cf5e8829eca6ec89cb002d825560dee896563eee3e465ae732"
+      "hash": "f1822151af1defb23211de2d981493097f3cd5294080550294f9f9522920b279"
     },
     {
       "kind": "substance",
       "id": "h2-g",
-      "hash": "9715cb6cc08df0f3f7b2aef23c79d90b606fade447c11bf4889b366fb90c9a64"
+      "hash": "5ac8c0f07f6892a74a14d092d3342ea93e2c50dfdaa5ef7e358bbfefc5bcfd61"
     },
     {
       "kind": "substance",
       "id": "h2o-l",
-      "hash": "03247ca81b8b84046f3b9c58445f0cf929a10884ca0e0f022b2abd51923ada2f"
+      "hash": "de29320ae902943f92f6582f5567cb529b4e8f1af3c993d007110883ac30b48d"
     },
     {
       "kind": "substance",
       "id": "h2o-s",
-      "hash": "90037ac116557adff010298e175fd843b72bd8215eda8d6e2cfb099a09a32c68"
+      "hash": "3d43f12c20c75f3b3632e871436305a23ac2e5151916f15b610c3b10695e6e4d"
     },
     {
       "kind": "substance",
       "id": "o2-g",
-      "hash": "8060dd5fa32e3c478ed3eebb2ec5cbf1ac840c0855671e4dc2cd99cf0a145e2d"
+      "hash": "0b4adb4f34dd9a207ae19322948c01ba018d244d95b446fd44dc38d52130f94e"
     },
     {
       "kind": "substance",
       "id": "regolith",
-      "hash": "3d0aeff1f725247ffa4c8e425aae888627f60e9dc70b782fbfbfddb1a7ada0b6"
+      "hash": "06b9ca7e1b9a6e1a48e0b0a2b6a61ae6cfb644a22a8584110f825d47f06f4019"
     },
     {
       "kind": "substance",
       "id": "regolith-bank",
-      "hash": "68c3438f9788d2875fda63cb96baa17ed8d4ce9234ef173e675a163ea8fe8df4"
+      "hash": "14298a96d32eaae1d0c02c7aa686d32a2edeb9fc6013ba141461d2fbe3e1184c"
     },
     {
       "kind": "substance",
       "id": "sio2-s",
-      "hash": "16210090094160b19c3a34d25cf3b06549d1d8438c8f852afa692e0dd75f91ca"
+      "hash": "04b310ebbd7b2882bce0fe16b76177fde28267308da8afb60be22ab9568804f6"
     },
     {
       "kind": "substance",
       "id": "tio2-s",
-      "hash": "1d7fd824cd71ee54e6881d3c944ec0506b7e8ea0fd46445fa0f8b7f5f3df533a"
+      "hash": "052ebe6dcafe2cb130e0be9346eda516584ba2f30f063a01af80ef9c10ef3c75"
     },
     {
       "kind": "unit",

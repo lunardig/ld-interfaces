@@ -1,12 +1,12 @@
 {
-  "blueprint_id": "m-assemble",
+  "blueprint_id": "solar-array",
   "capabilities": [],
   "processes": [
-    "assemble"
+    "generate-solar"
   ],
   "rated_work": {
     "n": "1",
-    "d": "50000"
+    "d": "1000000"
   },
   "lanes": "1",
   "min_stable_rate": {
@@ -22,19 +22,9 @@
   },
   "ports": [
     {
-      "port": "in-0",
-      "type": "MATERIAL",
-      "direction": "IN"
-    },
-    {
-      "port": "out",
-      "type": "MATERIAL",
-      "direction": "OUT"
-    },
-    {
       "port": "power",
       "type": "ELECTRICAL",
-      "direction": "IN"
+      "direction": "OUT"
     }
   ],
   "condition_table": [

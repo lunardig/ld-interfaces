@@ -98,6 +98,14 @@
           "additionalProperties": {
             "$ref": "common.schema.json#/$defs/Rational"
           }
+        },
+        "enthalpy": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Energy content per quantity unit, in joules, relative to the reference state: the standard enthalpy of formation for chemical species; for nuclear fuel, the recoverable fission energy. A REACT or PHASE whose species all declare it absorbs or releases the difference (LD-PEC-006 §3.2.1)."
+        },
+        "gibbs": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Gibbs energy of formation per quantity unit, in joules. When every species of a process's reactions declares it, electrical output may not exceed the Gibbs energy released (LD-PEC-006 §3.2.1)."
         }
       },
       "required": [
@@ -725,6 +733,14 @@
             "BATCH",
             "FLOW"
           ]
+        },
+        "dispatch": {
+          "type": "string",
+          "enum": [
+            "MUST_RUN",
+            "FOLLOW_LOAD"
+          ],
+          "description": "For a process that produces power: MUST_RUN (the default) runs as fast as it can and surplus is curtailed; FOLLOW_LOAD runs only as fast as the bus needs, after stores (LD-PEC-006 §3.2.2)."
         },
         "extent": {
           "type": "object",

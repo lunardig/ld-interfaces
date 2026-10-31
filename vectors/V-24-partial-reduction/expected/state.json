@@ -55,7 +55,7 @@
       "template": "bin"
     }
   ],
-  "catalog_hash": "ee19a8add6459149f84dadf699df3c9ac7636709adab01a36c85f3c144ab04c5",
+  "catalog_hash": "69e05f765a6a484bc98cf1f978d37e02f660305ab533987874f2e953339a364e",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -272,7 +272,7 @@
   "schema": "ld.physical-state.v0",
   "sinks": [
     {
-      "energy": "50000000",
+      "energy": "49323000",
       "kind": "HEAT",
       "sink_id": "waste-heat",
       "totals": {}

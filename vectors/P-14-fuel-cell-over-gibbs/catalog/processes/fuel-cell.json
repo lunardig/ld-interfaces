@@ -1,53 +1,52 @@
 {
-  "process_id": "assemble",
+  "process_id": "fuel-cell",
   "pset_version": "0",
-  "mode": "BATCH",
+  "mode": "FLOW",
+  "dispatch": "FOLLOW_LOAD",
   "extent": {
-    "unit": "count",
-    "min": "1",
-    "max": "100"
+    "unit": "rxn-mmol",
+    "min": "0",
+    "max": "1000000000000"
   },
   "ports": {
     "in": [
       {
-        "port": "in-0",
+        "port": "h2",
         "accepts": [
-          "fe-s"
+          "h2-g"
+        ]
+      },
+      {
+        "port": "o2",
+        "accepts": [
+          "o2-g"
         ]
       }
     ],
     "out": [
       {
-        "port": "out",
+        "port": "water",
         "accepts": [
-          "h2o-l",
-          "h2-g",
-          "o2-g",
-          "fetio3-s",
-          "fe-s",
-          "tio2-s"
+          "h2o-l"
         ]
       }
     ]
   },
   "stages": [
     {
-      "stage_id": "s",
+      "stage_id": "cell",
       "ops": [
         {
-          "op": "ASSEMBLE",
-          "product": "widget",
-          "count": {
+          "op": "REACT",
+          "vector": {
+            "h2-g": "-2",
+            "o2-g": "-1",
+            "h2o-l": "2"
+          },
+          "extent": {
             "kind": "ref",
             "name": "extent"
-          },
-          "materials": {
-            "fe-s": "126"
-          },
-          "scrap": {
-            "fe-s": "26"
-          },
-          "scrap_stream": "offcuts"
+          }
         },
         {
           "op": "WORK",
@@ -63,9 +62,9 @@
         {
           "op": "ENERGY",
           "mode": "PER_WORK",
-          "dir": "DRAW",
+          "dir": "PRODUCE",
           "amount": {
-            "n": "17",
+            "n": "500",
             "d": "1"
           },
           "unit": "j",
@@ -76,16 +75,20 @@
   ],
   "edges": [
     {
-      "from": "port:in-0",
-      "to": "stage:s"
+      "from": "port:h2",
+      "to": "stage:cell"
     },
     {
-      "from": "stage:s.offcuts",
-      "to": "port:out"
+      "from": "port:o2",
+      "to": "stage:cell"
+    },
+    {
+      "from": "stage:cell",
+      "to": "port:water"
     }
   ],
   "failure_disposition": {
-    "s": "RETAIN"
+    "cell": "RETAIN"
   },
   "restart_thresholds": {},
   "constants": {}

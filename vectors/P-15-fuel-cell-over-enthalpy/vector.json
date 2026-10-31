@@ -1,0 +1,12 @@
+{
+  "id": "P-15",
+  "title": "A fuel cell selling more energy than its reaction releases is rejected",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.2.1",
+    "LD-PEC-003 P-13"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

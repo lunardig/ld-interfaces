@@ -1,0 +1,13 @@
+{
+  "id": "V-26",
+  "title": "A load-following fuel cell carries the night after the battery; it burns only what the load needs",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.2.1",
+    "LD-PEC-006 \u00a73.2.2",
+    "LD-PEC-006 \u00a73.2.4"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

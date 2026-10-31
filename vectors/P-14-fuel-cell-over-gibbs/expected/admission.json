@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ENERGY_BALANCE",
+  "subject": "fuel-cell",
+  "detail": "produces more electrical energy than its reactions' Gibbs energy allows"
+}

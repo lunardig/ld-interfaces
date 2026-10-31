@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ENERGY_BALANCE",
+  "subject": "fuel-cell",
+  "detail": "produces or absorbs more energy than it draws or its reactions release"
+}

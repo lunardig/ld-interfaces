@@ -1,0 +1,54 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "61b6a2a509b34fac31e67d68c43cfcc9fb8ea4f918f5941f6fbb83f0ca249069",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "solar-kit": "1",
+        "melter-kit": "1",
+        "battery-kit": "1",
+        "tank-kit": "2",
+        "cell-kit": "1",
+        "gas-kit": "2"
+      }
+    },
+    {
+      "lot_id": "ice",
+      "location": "ice-tank",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-s": "1000000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "h2",
+      "location": "h2-store",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "10000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "o2",
+      "location": "o2-store",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "5000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": [
+    "irradiance"
+  ]
+}

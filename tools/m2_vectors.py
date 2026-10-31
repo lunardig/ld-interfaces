@@ -49,7 +49,41 @@ def units() -> list[dict]:
     ]
 
 
+# Standard enthalpies and Gibbs energies of formation at 298 K, in J per mmol (= kJ/mol),
+# from standard tables; ilmenite's is provisional (LD-PEC-006 Q-13). Regolith's energy is
+# the sum of its constituents', so beneficiation neither absorbs nor releases energy.
+H = {"h2o-l": (-28583, 100), "h2o-s": (-29184, 100), "h2-g": (0, 1), "o2-g": (0, 1), "fetio3-s": (-123660, 100), "sio2-s": (-91070, 100),
+     "fe-s": (0, 1), "tio2-s": (-94400, 100)}
+G = {"h2o-l": (-23713, 100), "h2-g": (0, 1), "o2-g": (0, 1), "fe-s": (0, 1), "tio2-s": (-88880, 100), "sio2-s": (-85630, 100)}
+
+
+def regolith_enthalpy() -> dict:
+    from fractions import Fraction as F
+    h = F(*H["h2o-s"]) * ICE + F(*H["fetio3-s"]) * ILMENITE + F(*H["sio2-s"]) * SILICATE
+    return R(h.numerator, h.denominator)
+
+
+def with_energy(subs: list[dict]) -> list[dict]:
+    """Adds enthalpy and Gibbs energy (LD-PEC-006 §3.2.1) to the substances that have them."""
+    out = []
+    for x in subs:
+        x = dict(x)
+        sid = x["substance_id"]
+        if sid in H:
+            x["enthalpy"] = R(*H[sid])
+        if sid in G:
+            x["gibbs"] = R(*G[sid])
+        if sid in ("regolith", "regolith-bank"):
+            x["enthalpy"] = regolith_enthalpy()
+        out.append(x)
+    return out
+
+
 def substances() -> list[dict]:
+    return with_energy(substances_plain())
+
+
+def substances_plain() -> list[dict]:
     return [
         {"substance_id": "regolith-bank", "formula": REGOLITH_FORMULA, "phase": "solid", "quantity_unit": "kg-reg"},
         {"substance_id": "regolith", "formula": REGOLITH_FORMULA, "phase": "solid", "quantity_unit": "kg-reg"},

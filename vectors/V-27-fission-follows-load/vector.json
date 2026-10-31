@@ -1,0 +1,13 @@
+{
+  "id": "V-27",
+  "title": "A fission reactor follows load down to its minimum; surplus at the minimum is waste heat; fuel energy is conserved",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.2.1",
+    "LD-PEC-006 \u00a73.2.2",
+    "LD-PEC-006 \u00a73.2.3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

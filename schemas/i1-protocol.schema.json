@@ -979,6 +979,10 @@
         "required_work": {
           "$ref": "common.schema.json#/$defs/Uint"
         },
+        "energy_held": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Energy drawn (or, if negative, produced) for work whose units have not completed yet, in the bus unit. It settles into heat and chemical energy when the units complete (LD-PEC-006 §3.2.1)."
+        },
         "rate": {
           "$ref": "common.schema.json#/$defs/Rational",
           "description": "Current work rate, in work quanta per microsecond."

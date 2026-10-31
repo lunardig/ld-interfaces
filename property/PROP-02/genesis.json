@@ -2,7 +2,7 @@
   "schema": "ld.genesis.v0",
   "world_id": "vector-world",
   "claim_id": "claim-v",
-  "catalog_hash": "911f35dd066704c007f847511499bb24bd9e239987c6eda7b8285e02bbac8a6a",
+  "catalog_hash": "c8baff8f9877df1684c9ac62f7382bb1cccb0b115ce84f0750dfd729c256b8f4",
   "start_us": "0",
   "deposits": [],
   "starting_lots": [
@@ -25,7 +25,7 @@
         "battery-kit": "1"
       },
       "charge": {
-        "n": "18835",
+        "n": "222095",
         "d": "1"
       }
     },
@@ -38,7 +38,7 @@
         "battery-kit": "1"
       },
       "charge": {
-        "n": "14390",
+        "n": "275646",
         "d": "1"
       }
     },
@@ -47,7 +47,7 @@
       "location": "bin-0",
       "state": "AVAILABLE",
       "composition": {
-        "h2-g": "382696"
+        "h2-g": "173478"
       },
       "products": {}
     },
@@ -56,7 +56,7 @@
       "location": "bin-1",
       "state": "AVAILABLE",
       "composition": {
-        "o2-g": "488476"
+        "o2-g": "588737"
       },
       "products": {}
     }

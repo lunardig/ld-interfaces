@@ -1,0 +1,11 @@
+{
+  "template_id": "gas-store",
+  "accepts": [
+    "h2-g",
+    "o2-g"
+  ],
+  "capacity": {
+    "amount": "5000000000",
+    "unit": "mmol"
+  }
+}

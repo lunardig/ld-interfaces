@@ -2,6 +2,7 @@
   "process_id": "p1",
   "pset_version": "0",
   "mode": "FLOW",
+  "dispatch": "FOLLOW_LOAD",
   "extent": {
     "unit": "rxn-mmol",
     "min": "0",
@@ -82,15 +83,15 @@
               "fractions": {
                 "fe-s": {
                   "n": "1",
-                  "d": "10"
+                  "d": "3"
                 },
                 "h2o-l": {
-                  "n": "1",
-                  "d": "10"
-                },
-                "tio2-s": {
                   "n": "0",
                   "d": "1"
+                },
+                "tio2-s": {
+                  "n": "2",
+                  "d": "3"
                 }
               }
             }
@@ -125,6 +126,17 @@
             "n": "1",
             "d": "1000"
           }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "PRODUCE",
+          "amount": {
+            "n": "175067",
+            "d": "400"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
         }
       ]
     }

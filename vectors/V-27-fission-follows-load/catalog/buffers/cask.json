@@ -1,0 +1,11 @@
+{
+  "template_id": "cask",
+  "accepts": [
+    "fuel-fresh",
+    "fuel-spent"
+  ],
+  "capacity": {
+    "amount": "1000000",
+    "unit": "mmol"
+  }
+}

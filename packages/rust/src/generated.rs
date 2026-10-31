@@ -1955,6 +1955,8 @@ impl ::std::convert::TryFrom<::std::string::String> for JobStatus {
 #[serde(deny_unknown_fields)]
 pub struct JobView {
     pub completed_work: Uint,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub energy_held: ::std::option::Option<Rational>,
     pub job_id: Id,
     pub machine_id: Id,
     pub priority: Int,
@@ -2570,6 +2572,9 @@ pub enum Predicate {
 #[serde(deny_unknown_fields)]
 pub struct Process {
     pub constants: ::std::collections::BTreeMap<Id, Rational>,
+    #[doc = "For a process that produces power: MUST_RUN (the default) runs as fast as it can and surplus is curtailed; FOLLOW_LOAD runs only as fast as the bus needs, after stores (LD-PEC-006 §3.2.2)."]
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub dispatch: ::std::option::Option<ProcessDispatch>,
     pub edges: ::std::vec::Vec<Edge>,
     pub extent: ProcessExtent,
     pub failure_disposition: ::std::collections::BTreeMap<Id, FailureDisposition>,
@@ -2579,6 +2584,57 @@ pub struct Process {
     pub pset_version: ::serde_json::Value,
     pub restart_thresholds: ::std::collections::BTreeMap<Id, ProcessRestartThresholdsValue>,
     pub stages: ::std::vec::Vec<Stage>,
+}
+#[doc = "For a process that produces power: MUST_RUN (the default) runs as fast as it can and surplus is curtailed; FOLLOW_LOAD runs only as fast as the bus needs, after stores (LD-PEC-006 §3.2.2)."]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum ProcessDispatch {
+    #[serde(rename = "MUST_RUN")]
+    MustRun,
+    #[serde(rename = "FOLLOW_LOAD")]
+    FollowLoad,
+}
+impl ::std::fmt::Display for ProcessDispatch {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::MustRun => f.write_str("MUST_RUN"),
+            Self::FollowLoad => f.write_str("FOLLOW_LOAD"),
+        }
+    }
+}
+impl ::std::str::FromStr for ProcessDispatch {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "MUST_RUN" => Ok(Self::MustRun),
+            "FOLLOW_LOAD" => Ok(Self::FollowLoad),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for ProcessDispatch {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for ProcessDispatch {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
 }
 #[doc = "`ProcessExtent`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -3103,8 +3159,12 @@ pub struct SubmitParams {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct Substance {
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub enthalpy: ::std::option::Option<Rational>,
     #[doc = "Element id to atom count per formula unit."]
     pub formula: ::std::collections::BTreeMap<Id, PositiveInt>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub gibbs: ::std::option::Option<Rational>,
     #[doc = "Target phase species to energy per quantity unit, in joules."]
     #[serde(
         default,

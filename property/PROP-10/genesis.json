@@ -2,7 +2,7 @@
   "schema": "ld.genesis.v0",
   "world_id": "vector-world",
   "claim_id": "claim-v",
-  "catalog_hash": "249a087c55cd10571c715851e8bf88bd9cffd641ff88f8820c754ac1752452cf",
+  "catalog_hash": "9f23acdf520d74a92e6142524321499138f4103dd0bde7999f80f56eb5adb36b",
   "start_us": "0",
   "deposits": [],
   "starting_lots": [

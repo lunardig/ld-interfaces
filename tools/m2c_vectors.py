@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from m1_vectors import H, R, S, Vector, kit, lot, machine  # noqa: E402
 from m2_vectors import (EXTENT, DepositVector, admission, bin_, chain_entries, deposit, elements, energy, proc,  # noqa: E402
-                        substances, units)
+                        substances, units, with_energy)
 
 # ---------------------------------------------------------------- shared entries
 
@@ -25,10 +25,10 @@ HOPPER_IRON, HOPPER_SCRAP = 1_800_000, 100_000  # mmol of iron per hopper (LD-PE
 
 
 def m2c_substances() -> list[dict]:
-    return substances() + [
+    return substances() + with_energy([
         {"substance_id": IRON, "formula": {"fe": "1"}, "phase": "solid", "quantity_unit": "mmol"},
         {"substance_id": RUTILE, "formula": {"ti": "1", "o": "2"}, "phase": "solid", "quantity_unit": "mmol"},
-    ]
+    ])
 
 
 def battery_machine(capacity_j: int = 100_000, charge_w: int = 5000, discharge_w: int = 5000, eff=(9, 10)) -> dict:

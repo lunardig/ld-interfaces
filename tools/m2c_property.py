@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ld  # noqa: E402
 from m1_vectors import R, S, Vector, kit, lot, machine  # noqa: E402
 from m2_vectors import EXTENT, bin_, elements  # noqa: E402
+import m2_vectors as m2  # noqa: E402
 from m2c_vectors import IRON, RUTILE, battery_machine, m2c_substances, m2c_units  # noqa: E402
 
 PROPERTY = ld.ROOT / "property"
@@ -58,10 +59,20 @@ def process(rng: random.Random, pid: str) -> tuple[dict, list[str], list[str]]:
     ins = sorted(sp for sp, c in vec.items() if c < 0)
     outs = sorted(sp for sp, c in vec.items() if c > 0)
     mode = rng.choice(["FLOW", "BATCH"])
+    # Draw at least what the reaction absorbs (LD-PEC-006 §3.2.1). A reaction that
+    # releases energy may sell up to half of it to the bus, following load.
+    from fractions import Fraction
+    dh = sum(Fraction(*m2.H[sp]) * c for sp, c in vec.items())
+    a = rng.randint(1, 3)
+    draw = max(0, -(-dh // a)) + rng.randint(1, 20)
     ops = [{"op": "REACT", "vector": {sp: str(c) for sp, c in vec.items()}, "extent": EXTENT},
-           {"op": "WORK", "a": R(rng.randint(1, 3)), "b": R(0)},
-           {"op": "ENERGY", "mode": "PER_WORK", "dir": "DRAW", "amount": R(rng.randint(1, 20)), "unit": "j", "heat_sink": "waste-heat"},
+           {"op": "WORK", "a": R(a), "b": R(0)},
+           {"op": "ENERGY", "mode": "PER_WORK", "dir": "DRAW", "amount": R(int(draw)), "unit": "j", "heat_sink": "waste-heat"},
            {"op": "WEAR", "per": "WORK", "amount": R(1, 1000)}]
+    producer = dh < 0 and mode == "FLOW" and rng.random() < 0.6
+    if producer:
+        sell = (-dh) / 2 / a + draw
+        ops.append({"op": "ENERGY", "mode": "PER_WORK", "dir": "PRODUCE", "amount": R(sell.numerator, sell.denominator), "unit": "j", "heat_sink": "waste-heat"})
     edges = [{"from": f"port:in-{i}", "to": "stage:s"} for i in range(len(ins))]
     out_ports = [{"port": "out", "accepts": ALL}]
     if rng.random() < 0.7:
@@ -73,7 +84,7 @@ def process(rng: random.Random, pid: str) -> tuple[dict, list[str], list[str]]:
         edges += [{"from": "stage:s.cut", "to": "port:out"}, {"from": "stage:s.rest", "to": "port:rest"}]
     else:
         edges.append({"from": "stage:s", "to": "port:out"})
-    return ({"process_id": pid, "pset_version": "0", "mode": mode, "extent": {"unit": "rxn-mmol", "min": "0", "max": "1000000000000"},
+    return ({"process_id": pid, "pset_version": "0", "mode": mode, **({"dispatch": "FOLLOW_LOAD"} if producer else {}), "extent": {"unit": "rxn-mmol", "min": "0", "max": "1000000000000"},
              "ports": {"in": [{"port": f"in-{i}", "accepts": [sp]} for i, sp in enumerate(ins)], "out": out_ports},
              "stages": [{"stage_id": "s", "ops": ops}], "edges": edges,
              "failure_disposition": {"s": "RETAIN"}, "restart_thresholds": {}, "constants": {}}, ins, [p["port"] for p in out_ports])

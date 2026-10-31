@@ -443,6 +443,8 @@ export interface Substance {
   latent_to?: {
     [k: string]: Rational;
   };
+  enthalpy?: Rational;
+  gibbs?: Rational;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -452,6 +454,10 @@ export interface Process {
   process_id: Id;
   pset_version: "0";
   mode: "BATCH" | "FLOW";
+  /**
+   * For a process that produces power: MUST_RUN (the default) runs as fast as it can and surplus is curtailed; FOLLOW_LOAD runs only as fast as the bus needs, after stores (LD-PEC-006 §3.2.2).
+   */
+  dispatch?: "MUST_RUN" | "FOLLOW_LOAD";
   extent: {
     unit: Id;
     min: Uint;
@@ -810,6 +816,7 @@ export interface JobView {
   reason?: Reason;
   completed_work: Uint;
   required_work: Uint;
+  energy_held?: Rational;
   rate: Rational;
 }
 export interface ReasonStarvedInput {

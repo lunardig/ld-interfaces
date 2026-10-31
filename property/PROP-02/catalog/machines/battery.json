@@ -38,21 +38,21 @@
   "energy_store": {
     "capacity": {
       "amount": {
-        "n": "316897",
+        "n": "68834",
         "d": "1"
       },
       "unit": "j"
     },
     "max_charge": {
       "amount": {
-        "n": "3147",
+        "n": "324",
         "d": "1"
       },
       "unit": "w"
     },
     "max_discharge": {
       "amount": {
-        "n": "17931",
+        "n": "12028",
         "d": "1"
       },
       "unit": "w"

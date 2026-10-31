@@ -2,6 +2,7 @@
   "process_id": "p0",
   "pset_version": "0",
   "mode": "FLOW",
+  "dispatch": "FOLLOW_LOAD",
   "extent": {
     "unit": "rxn-mmol",
     "min": "0",
@@ -72,8 +73,8 @@
               "stream": "cut",
               "fractions": {
                 "h2o-l": {
-                  "n": "0",
-                  "d": "1"
+                  "n": "1",
+                  "d": "3"
                 }
               }
             }
@@ -108,6 +109,17 @@
             "n": "1",
             "d": "1000"
           }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "PRODUCE",
+          "amount": {
+            "n": "31583",
+            "d": "300"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
         }
       ]
     }

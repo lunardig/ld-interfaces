@@ -2402,6 +2402,9 @@
         "required_work": {
           "$ref": "#/$defs/Uint"
         },
+        "energy_held": {
+          "$ref": "#/$defs/Rational"
+        },
         "rate": {
           "$ref": "#/$defs/Rational"
         }
@@ -3020,6 +3023,14 @@
             "BATCH",
             "FLOW"
           ]
+        },
+        "dispatch": {
+          "type": "string",
+          "enum": [
+            "MUST_RUN",
+            "FOLLOW_LOAD"
+          ],
+          "description": "For a process that produces power: MUST_RUN (the default) runs as fast as it can and surplus is curtailed; FOLLOW_LOAD runs only as fast as the bus needs, after stores (LD-PEC-006 \u00a73.2.2)."
         },
         "extent": {
           "type": "object",
@@ -4070,6 +4081,12 @@
           "additionalProperties": {
             "$ref": "#/$defs/Rational"
           }
+        },
+        "enthalpy": {
+          "$ref": "#/$defs/Rational"
+        },
+        "gibbs": {
+          "$ref": "#/$defs/Rational"
         }
       },
       "required": [

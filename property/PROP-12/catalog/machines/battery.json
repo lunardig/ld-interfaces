@@ -38,28 +38,28 @@
   "energy_store": {
     "capacity": {
       "amount": {
-        "n": "272198",
+        "n": "397102",
         "d": "1"
       },
       "unit": "j"
     },
     "max_charge": {
       "amount": {
-        "n": "3735",
+        "n": "4269",
         "d": "1"
       },
       "unit": "w"
     },
     "max_discharge": {
       "amount": {
-        "n": "3787",
+        "n": "7415",
         "d": "1"
       },
       "unit": "w"
     },
     "charge_efficiency": {
       "n": "1",
-      "d": "1"
+      "d": "2"
     },
     "heat_sink": "battery-heat"
   }

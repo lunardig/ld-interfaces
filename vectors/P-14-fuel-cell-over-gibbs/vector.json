@@ -1,0 +1,11 @@
+{
+  "id": "P-14",
+  "title": "A fuel cell selling more electricity than the Gibbs energy released is rejected, though within the enthalpy",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-006 \u00a73.2.1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

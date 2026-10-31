@@ -9,9 +9,7 @@
 {"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "CONNECT", "args": {"connection_id": "c-bin-2", "template": "pipe", "from_port": "m0.out", "to_port": "bin-2.io"}}
 {"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "INSTALL", "args": {"lot_id": "kits", "product": "bin-kit", "location": "pad-a", "as_id": "bin-3"}}
 {"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "CONNECT", "args": {"connection_id": "c-bin-3", "template": "pipe", "from_port": "m0.rest", "to_port": "bin-3.io"}}
-{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "CREATE_JOB", "args": {"job_id": "j0-0", "process": "p0", "machine_id": "m0", "target_extent": "24905", "priority": "3"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "CREATE_JOB", "args": {"job_id": "j0-0", "process": "p0", "machine_id": "m0", "target_extent": "15475", "priority": "1"}}
 {"command_id": "cmd-0013", "effective_us": "0", "seq": "13", "op": "START", "args": {"job_id": "j0-0"}}
-{"command_id": "cmd-0014", "effective_us": "0", "seq": "14", "op": "CREATE_JOB", "args": {"job_id": "j0-1", "process": "p0", "machine_id": "m0", "target_extent": "34456", "priority": "1"}}
-{"command_id": "cmd-0015", "effective_us": "0", "seq": "15", "op": "START", "args": {"job_id": "j0-1"}}
-{"command_id": "cmd-0016", "effective_us": "23815116", "seq": "16", "op": "RESUME", "args": {"job_id": "j0-0"}}
-{"command_id": "cmd-0017", "effective_us": "67455062", "seq": "17", "op": "PAUSE", "args": {"job_id": "j0-0"}}
+{"command_id": "cmd-0014", "effective_us": "23718955", "seq": "14", "op": "RESUME", "args": {"job_id": "j0-0"}}
+{"command_id": "cmd-0015", "effective_us": "167347248", "seq": "15", "op": "PAUSE", "args": {"job_id": "j0-0"}}

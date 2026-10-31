@@ -2,6 +2,7 @@
   "process_id": "p0",
   "pset_version": "0",
   "mode": "FLOW",
+  "dispatch": "FOLLOW_LOAD",
   "extent": {
     "unit": "rxn-mmol",
     "min": "0",
@@ -39,17 +40,6 @@
           "fe-s",
           "tio2-s"
         ]
-      },
-      {
-        "port": "rest",
-        "accepts": [
-          "h2o-l",
-          "h2-g",
-          "o2-g",
-          "fetio3-s",
-          "fe-s",
-          "tio2-s"
-        ]
       }
     ]
   },
@@ -71,30 +61,6 @@
             "kind": "ref",
             "name": "extent"
           }
-        },
-        {
-          "op": "PARTITION",
-          "input": "pool",
-          "residue": "rest",
-          "outputs": [
-            {
-              "stream": "cut",
-              "fractions": {
-                "fe-s": {
-                  "n": "3",
-                  "d": "11"
-                },
-                "h2o-l": {
-                  "n": "8",
-                  "d": "11"
-                },
-                "tio2-s": {
-                  "n": "0",
-                  "d": "1"
-                }
-              }
-            }
-          ]
         },
         {
           "op": "WORK",
@@ -125,6 +91,17 @@
             "n": "1",
             "d": "1000"
           }
+        },
+        {
+          "op": "ENERGY",
+          "mode": "PER_WORK",
+          "dir": "PRODUCE",
+          "amount": {
+            "n": "177221",
+            "d": "400"
+          },
+          "unit": "j",
+          "heat_sink": "waste-heat"
         }
       ]
     }
@@ -143,12 +120,8 @@
       "to": "stage:s"
     },
     {
-      "from": "stage:s.cut",
+      "from": "stage:s",
       "to": "port:out"
-    },
-    {
-      "from": "stage:s.rest",
-      "to": "port:rest"
     }
   ],
   "failure_disposition": {

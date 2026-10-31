@@ -91,7 +91,7 @@
       "template": "tank"
     }
   ],
-  "catalog_hash": "337dd292ea1a8a4856b1215c15f71ae4d21b002c18e2b5b38b04dabbc624ae0c",
+  "catalog_hash": "c7b17ffe76c5397dd281dd49250ea2f1880db271e8b1d5795cf182356e90013f",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -715,7 +715,7 @@
       }
     },
     {
-      "energy": "822920000",
+      "energy": "178357100",
       "kind": "HEAT",
       "sink_id": "waste-heat",
       "totals": {}

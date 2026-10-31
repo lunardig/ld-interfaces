@@ -2,7 +2,7 @@
   "schema": "ld.genesis.v0",
   "world_id": "vector-world",
   "claim_id": "claim-v",
-  "catalog_hash": "42e781cbc4ad7cd484820967d1ea5a4443197909d5c444a4fd0f953c071d2fe3",
+  "catalog_hash": "c6edd28335e63a91d896cbb90117d447c7c989b6b834076396f2415ed220502d",
   "start_us": "0",
   "deposits": [],
   "starting_lots": [
@@ -12,11 +12,10 @@
       "state": "AVAILABLE",
       "composition": {},
       "products": {
-        "bin-kit": "12",
+        "bin-kit": "11",
         "m-p0-kit": "1",
         "m-p1-kit": "1",
-        "m-p2-kit": "1",
-        "m-assemble-kit": "1"
+        "m-p2-kit": "1"
       }
     },
     {
@@ -83,15 +82,6 @@
       "state": "AVAILABLE",
       "composition": {
         "o2-g": "908583"
-      },
-      "products": {}
-    },
-    {
-      "lot_id": "fill-bin-10",
-      "location": "bin-10",
-      "state": "AVAILABLE",
-      "composition": {
-        "fe-s": "585838"
       },
       "products": {}
     }
