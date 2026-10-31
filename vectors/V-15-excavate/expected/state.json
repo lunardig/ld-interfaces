@@ -1,0 +1,183 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "99",
+          "job_id": "job-dig",
+          "kind": "SPACE",
+          "species": "regolith"
+        }
+      ],
+      "template": "hopper"
+    }
+  ],
+  "catalog_hash": "3a75b911344385536ef05412c475aac99bfcf0a21a68a05f0a85a946ba0bbfa3",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-face",
+      "delay_us": "0",
+      "from_port": "crater.face",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "digger-1.face"
+    },
+    {
+      "active": true,
+      "connection_id": "c-out",
+      "delay_us": "0",
+      "from_port": "digger-1.out",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "hopper-1.io"
+    }
+  ],
+  "deposits": [
+    {
+      "deposit_id": "crater",
+      "extracted": {
+        "regolith-bank": "3000"
+      },
+      "remaining": {
+        "regolith-bank": "997000"
+      },
+      "reservations": [
+        {
+          "amount": "100",
+          "job_id": "job-dig",
+          "kind": "STOCK",
+          "species": "regolith-bank"
+        }
+      ]
+    }
+  ],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "9"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "30",
+      "completed_work": "30",
+      "created_at_us": "0",
+      "current_stage": "excavate",
+      "held_lot_ids": [],
+      "job_id": "job-dig",
+      "last_advanced_us": "1800000000",
+      "machine_id": "digger-1",
+      "priority": "10",
+      "process": "excavate",
+      "process_hash": "d72d2e89bcd4e638b0ce7e6841960f4315014a36b9d6699918ed82e538e3f1c8",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "1800",
+      "completed_work": "1800",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "1800000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "regolith": "2970"
+      },
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-dig"
+      ],
+      "blueprint": "excavator",
+      "location": "pad-a",
+      "machine_id": "digger-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "60000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "wear",
+      "owner": "digger-1",
+      "value": {
+        "d": "100",
+        "n": "3"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "0",
+      "kind": "TERMINAL",
+      "sink_id": "dust",
+      "totals": {
+        "regolith": "30"
+      }
+    },
+    {
+      "energy": "1500000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "1800000000"
+}

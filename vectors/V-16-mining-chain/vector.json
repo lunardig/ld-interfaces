@@ -1,0 +1,12 @@
+{
+  "id": "V-16",
+  "title": "Dig, beneficiate, melt and split: elements are conserved across deposits, lots and sinks",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-005 \u00a73",
+    "LD-PEC-001 \u00a77.3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

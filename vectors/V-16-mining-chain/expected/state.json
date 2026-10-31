@@ -1,0 +1,471 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "ice-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-1.stock"
+      ],
+      "reservations": [],
+      "template": "ice-bin"
+    },
+    {
+      "buffer_id": "ilmenite-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-1.stock"
+      ],
+      "reservations": [],
+      "template": "ilmenite-bin"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "19ba777ed4968de0aacae00cc17e8f00729ed1e5d3c0cba0b97ccdb15e2496d5",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-0",
+      "delay_us": "0",
+      "from_port": "crater.face",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "digger-1.face"
+    },
+    {
+      "active": true,
+      "connection_id": "c-1",
+      "delay_us": "0",
+      "from_port": "digger-1.out",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "hopper-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-2",
+      "delay_us": "0",
+      "from_port": "hopper-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "sorter-1.feed"
+    },
+    {
+      "active": true,
+      "connection_id": "c-3",
+      "delay_us": "0",
+      "from_port": "sorter-1.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ice-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-4",
+      "delay_us": "0",
+      "from_port": "sorter-1.ilmenite",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "ilmenite-1.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-5",
+      "delay_us": "0",
+      "from_port": "ice-1.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "melter-1.ice"
+    },
+    {
+      "active": true,
+      "connection_id": "c-6",
+      "delay_us": "0",
+      "from_port": "melter-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "water-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-7",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "splitter-1.water"
+    },
+    {
+      "active": true,
+      "connection_id": "c-8",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-9",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "o2-tank.io"
+    }
+  ],
+  "deposits": [
+    {
+      "deposit_id": "crater",
+      "extracted": {
+        "regolith-bank": "6100"
+      },
+      "remaining": {
+        "regolith-bank": "993900"
+      }
+    }
+  ],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "31"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "61",
+      "completed_work": "61",
+      "created_at_us": "0",
+      "current_stage": "excavate",
+      "held_lot_ids": [],
+      "job_id": "job-dig",
+      "last_advanced_us": "3660000000",
+      "machine_id": "digger-1",
+      "priority": "10",
+      "process": "excavate",
+      "process_hash": "d72d2e89bcd4e638b0ce7e6841960f4315014a36b9d6699918ed82e538e3f1c8",
+      "reason": {
+        "code": "BLOCKED_OUTPUT",
+        "port": "out"
+      },
+      "required_work": "1000000000",
+      "started": true,
+      "status": "BLOCKED",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "2000000",
+      "completed_work": "2000000",
+      "created_at_us": "0",
+      "current_stage": "melt-ice",
+      "held_lot_ids": [],
+      "job_id": "job-melt",
+      "last_advanced_us": "1064000000",
+      "machine_id": "melter-1",
+      "priority": "10",
+      "process": "melt-ice",
+      "process_hash": "76aac967f4bb3accbf00e13ef4a743195c2de7a64d5602b59dc9368404f476e3",
+      "reason": {
+        "code": "BLOCKED_OUTPUT",
+        "port": "water"
+      },
+      "required_work": "1000000000",
+      "started": true,
+      "status": "BLOCKED",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "1081",
+      "completed_work": "1081",
+      "created_at_us": "0",
+      "current_stage": "beneficiate",
+      "held_lot_ids": [],
+      "job_id": "job-sort",
+      "last_advanced_us": "1064387500",
+      "machine_id": "sorter-1",
+      "priority": "10",
+      "process": "beneficiate",
+      "process_hash": "191d6eb5b243bd173aa77a98c84a74143853f1e8a8828dfd1b0af9bb78e95c9a",
+      "reason": {
+        "code": "BLOCKED_OUTPUT",
+        "port": "ice"
+      },
+      "required_work": "1000000000",
+      "started": true,
+      "status": "BLOCKED",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "500000",
+      "completed_work": "500000",
+      "created_at_us": "0",
+      "current_stage": "electrolyze-water",
+      "held_lot_ids": [],
+      "job_id": "job-split",
+      "last_advanced_us": "566500000",
+      "machine_id": "splitter-1",
+      "priority": "10",
+      "process": "electrolyze-water",
+      "process_hash": "ab9e66ade698d1ad404b05806cb075f7b619316658a6a630aaa07f1b2febb8c7",
+      "reason": {
+        "code": "BLOCKED_OUTPUT",
+        "port": "h2"
+      },
+      "required_work": "1000000000",
+      "started": true,
+      "status": "BLOCKED",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "7200",
+      "completed_work": "7200",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "7200000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "1000000"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "regolith": "4958"
+      },
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-s": "999775"
+      },
+      "location": "ice-1",
+      "lot_id": "ice-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fetio3-s": "712379"
+      },
+      "location": "ilmenite-1",
+      "lot_id": "ilmenite-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "500000"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "1000000"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "excavator",
+      "location": "pad-a",
+      "machine_id": "digger-1",
+      "mode": "BLOCKED",
+      "rate_setpoint": {
+        "d": "60000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "melter",
+      "location": "pad-a",
+      "machine_id": "melter-1",
+      "mode": "BLOCKED",
+      "rate_setpoint": {
+        "d": "500",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "beneficiator",
+      "location": "pad-a",
+      "machine_id": "sorter-1",
+      "mode": "BLOCKED",
+      "rate_setpoint": {
+        "d": "500000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "electrolyzer",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "BLOCKED",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "wear",
+      "owner": "digger-1",
+      "value": {
+        "d": "1000",
+        "n": "61"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "0",
+      "kind": "TERMINAL",
+      "sink_id": "dust",
+      "totals": {
+        "regolith": "61"
+      }
+    },
+    {
+      "energy": "0",
+      "kind": "RECOVERABLE",
+      "sink_id": "tailings",
+      "totals": {
+        "sio2-s": "15293988"
+      }
+    },
+    {
+      "energy": "326670000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "7200000000"
+}

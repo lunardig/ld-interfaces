@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ELEMENT_BALANCE",
+  "subject": "melt-to-hydrogen",
+  "detail": "PHASE h2o-s -> h2-g: formulas differ"
+}

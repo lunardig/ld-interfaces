@@ -1,0 +1,12 @@
+{
+  "id": "P-03a",
+  "title": "PHASE ice to water that draws more than the latent heat is accepted",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74 PHASE",
+    "LD-PEC-005 \u00a73.6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

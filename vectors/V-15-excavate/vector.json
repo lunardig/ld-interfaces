@@ -1,0 +1,13 @@
+{
+  "id": "V-15",
+  "title": "Excavating moves regolith from a deposit to a hopper; one percent is lost as dust",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-005 \u00a73.3",
+    "LD-PEC-005 \u00a73.5",
+    "LD-PEC-003 \u00a711 P-05"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}
