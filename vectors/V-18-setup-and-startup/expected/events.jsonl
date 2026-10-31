@@ -1,0 +1,15 @@
+{"function_id":"irradiance","kind":"ENVIRONMENT","seq":"0","time_us":"0","value":{"d":"1","n":"1361"}}
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"5","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0006","kind":"COMMAND","seq":"6","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0007","kind":"COMMAND","seq":"7","status":"ACCEPTED","time_us":"0"}
+{"job_id":"job-sun","kind":"JOB_STATUS","seq":"8","status":"RUNNING","time_us":"0"}
+{"command_id":"cmd-0008","kind":"COMMAND","seq":"9","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0009","kind":"COMMAND","seq":"10","status":"ACCEPTED","time_us":"0"}
+{"job_id":"job-melt","kind":"JOB_STATUS","seq":"11","status":"RUNNING","time_us":"0"}
+{"command_id":"cmd-0010","kind":"COMMAND","seq":"12","status":"ACCEPTED","time_us":"0"}
+{"job_id":"job-melt","kind":"STAGE_COMPLETED","seq":"13","stage_id":"melt","time_us":"30000000"}
+{"job_id":"job-melt","kind":"JOB_STATUS","seq":"14","status":"COMPLETED","time_us":"30000000"}

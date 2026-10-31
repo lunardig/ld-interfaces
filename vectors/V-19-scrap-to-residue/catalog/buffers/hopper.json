@@ -1,0 +1,10 @@
+{
+  "template_id": "hopper",
+  "accepts": [
+    "regolith"
+  ],
+  "capacity": {
+    "amount": "100000",
+    "unit": "kg-reg"
+  }
+}

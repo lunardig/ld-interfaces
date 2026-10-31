@@ -1,0 +1,8 @@
+{
+  "product_id": "sorter-kit",
+  "embodied": {},
+  "installs_as": {
+    "kind": "MACHINE",
+    "template": "sorter"
+  }
+}

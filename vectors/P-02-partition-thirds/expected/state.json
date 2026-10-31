@@ -1,0 +1,217 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "ice-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "tank-a",
+      "location": "pad-a",
+      "lot_ids": [
+        "tank-a.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "tank-b",
+      "location": "pad-a",
+      "lot_ids": [
+        "tank-b.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "tank-c",
+      "location": "pad-a",
+      "lot_ids": [
+        "tank-c.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "ad86132d89ee5516ffff6a0afa4cdd04b6768f702d9897c0fc0e5a6af2661499",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-a",
+      "delay_us": "0",
+      "from_port": "sharer-1.a",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "tank-a.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-b",
+      "delay_us": "0",
+      "from_port": "sharer-1.b",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "tank-b.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-c",
+      "delay_us": "0",
+      "from_port": "sharer-1.c",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "tank-c.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ice",
+      "delay_us": "0",
+      "from_port": "ice-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "sharer-1.ice"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "14"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "1000",
+      "completed_work": "1000",
+      "created_at_us": "0",
+      "current_stage": "share.done",
+      "held_lot_ids": [],
+      "job_id": "job-share",
+      "last_advanced_us": "1000000",
+      "machine_id": "sharer-1",
+      "priority": "10",
+      "process": "melt-and-share",
+      "process_hash": "6f7eddf23685a8d3139a15239701fec94bc601a3ce36bc5e9f012ecb401cea6a",
+      "required_work": "1000",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "1000"
+    },
+    {
+      "completed_extent": "10",
+      "completed_work": "10",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "10000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "34509acaab798a9148a2cac794815268b10caaab0180333fc60fb0904b83a889",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {},
+      "location": "ice-tank",
+      "lot_id": "ice-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "2000"
+      },
+      "location": "tank-a",
+      "lot_id": "tank-a.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "2000"
+      },
+      "location": "tank-b",
+      "lot_id": "tank-b.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "3000"
+      },
+      "location": "tank-c",
+      "lot_id": "tank-c.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "sharer",
+      "location": "pad-a",
+      "machine_id": "sharer-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "50000",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "10000000"
+}

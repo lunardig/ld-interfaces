@@ -1,0 +1,12 @@
+{
+  "id": "V-19",
+  "title": "A failed batch with SCRAP_TO_RESIDUE sends its work in progress to the residue destination",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a76 failure disposition",
+    "LD-PEC-005 \u00a72 M2b"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

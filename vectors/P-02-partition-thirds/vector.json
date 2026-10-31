@@ -1,0 +1,12 @@
+{
+  "id": "P-02",
+  "title": "PARTITION of 7 into thirds gives 2, 2 and 3, per unit, over 1 000 units",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a711 P-02",
+    "LD-PEC-005 \u00a73.7"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}
