@@ -105,7 +105,7 @@
           "mode": "PER_WORK",
           "dir": "DRAW",
           "amount": {
-            "n": "14",
+            "n": "10",
             "d": "1"
           },
           "unit": "j",

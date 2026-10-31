@@ -37,7 +37,7 @@
       "template": "bin"
     }
   ],
-  "catalog_hash": "6e3010aad225008809d295428cb7def703e4aae295cc3ec69e22cf1aba7a1718",
+  "catalog_hash": "5edb442a45786217dd4921d1ad9561dd73f46fffd852230c9b662bb787ecef5c",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -110,11 +110,11 @@
       "current_stage": "beneficiate.done",
       "held_lot_ids": [],
       "job_id": "job-sort",
-      "last_advanced_us": "1455730000",
+      "last_advanced_us": "1544875000",
       "machine_id": "sorter-1",
       "priority": "0",
       "process": "beneficiate",
-      "process_hash": "3d38acb708988f3bd20a4a5f47dc23d6cbbb110ea3ad6de8487ff6d4ceb6a9ce",
+      "process_hash": "58a0a931bbaa247104e2d8828acaf7a16e019c279463d82dbea7cc1e7d1feb4b",
       "required_work": "1000",
       "started": true,
       "status": "COMPLETED",
@@ -148,7 +148,7 @@
     },
     {
       "composition": {
-        "h2o-s": "2497500"
+        "h2o-s": "1803750"
       },
       "location": "ice-bin",
       "lot_id": "ice-bin.stock",
@@ -157,7 +157,7 @@
     },
     {
       "composition": {
-        "fetio3-s": "527200"
+        "fetio3-s": "329500"
       },
       "location": "ilmenite-bin",
       "lot_id": "ilmenite-bin.stock",
@@ -166,8 +166,8 @@
     },
     {
       "composition": {
-        "fetio3-s": "131800",
-        "h2o-s": "277500",
+        "fetio3-s": "329500",
+        "h2o-s": "971250",
         "sio2-s": "14148000"
       },
       "location": "tailings-pile",

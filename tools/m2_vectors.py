@@ -49,12 +49,15 @@ def units() -> list[dict]:
     ]
 
 
-# Standard enthalpies and Gibbs energies of formation at 298 K, in J per mmol (= kJ/mol),
-# from standard tables; ilmenite's is provisional (LD-PEC-006 Q-13). Regolith's energy is
-# the sum of its constituents', so beneficiation neither absorbs nor releases energy.
-H = {"h2o-l": (-28583, 100), "h2o-s": (-29184, 100), "h2-g": (0, 1), "o2-g": (0, 1), "fetio3-s": (-123660, 100), "sio2-s": (-91070, 100),
-     "fe-s": (0, 1), "tio2-s": (-94400, 100)}
-G = {"h2o-l": (-23713, 100), "h2-g": (0, 1), "o2-g": (0, 1), "fe-s": (0, 1), "tio2-s": (-88880, 100), "sio2-s": (-85630, 100)}
+# Standard enthalpies and Gibbs energies of formation at 298.15 K, in J per mmol (= kJ/mol),
+# one dataset per species (Q-13c, LD-PEC-006 §2.4): ilmenite, rutile and quartz from Robie &
+# Hemingway (1995, USGS Bulletin 2131); liquid water from CODATA/NIST-JANAF; ice at 298 K
+# (metastable) from Argonne ATcT. Regolith's energy is the sum of its constituents', so
+# beneficiation neither absorbs nor releases energy.
+H = {"h2o-l": (-285830, 1000), "h2o-s": (-292713, 1000), "h2-g": (0, 1), "o2-g": (0, 1), "fetio3-s": (-12320, 10), "sio2-s": (-9107, 10),
+     "fe-s": (0, 1), "tio2-s": (-9440, 10)}
+G = {"h2o-l": (-237141, 1000), "h2-g": (0, 1), "o2-g": (0, 1), "fe-s": (0, 1), "tio2-s": (-8888, 10), "sio2-s": (-8563, 10),
+     "fetio3-s": (-11555, 10)}
 
 
 def regolith_enthalpy() -> dict:

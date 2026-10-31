@@ -55,7 +55,7 @@
       "template": "bin"
     }
   ],
-  "catalog_hash": "69e05f765a6a484bc98cf1f978d37e02f660305ab533987874f2e953339a364e",
+  "catalog_hash": "db2e564b774bfad6a6bdc4ddbb55a8e645226dd87b9f0ad632d2c0f48860aced",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -158,7 +158,7 @@
       "machine_id": "reactor-1",
       "priority": "0",
       "process": "reduce-ilmenite",
-      "process_hash": "e36c2302c0f6c278e07f2fdcb95665364b877b3445abeb57538d9c2fc4c6b47d",
+      "process_hash": "71434baae83ec61b51e4f058d5355584e65b0b98f41152f7c7a71ce80db2549e",
       "required_work": "100000",
       "started": true,
       "status": "COMPLETED",
@@ -203,7 +203,7 @@
     },
     {
       "composition": {
-        "fe-s": "95000"
+        "fe-s": "85000"
       },
       "location": "iron-bin",
       "lot_id": "iron-bin.stock",
@@ -221,7 +221,7 @@
     },
     {
       "composition": {
-        "fe-s": "5000",
+        "fe-s": "15000",
         "tio2-s": "100000"
       },
       "location": "rutile-bin",
@@ -272,7 +272,7 @@
   "schema": "ld.physical-state.v0",
   "sinks": [
     {
-      "energy": "49323000",
+      "energy": "49783000",
       "kind": "HEAT",
       "sink_id": "waste-heat",
       "totals": {}

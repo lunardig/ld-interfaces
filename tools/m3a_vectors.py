@@ -14,10 +14,10 @@ from m1_vectors import R, S, Vector, kit, lot, machine  # noqa: E402
 from m2_vectors import EXTENT, ICE, ILMENITE, IRRADIANCE, SILICATE, bin_, elements, energy, solar, units  # noqa: E402
 from m2c_vectors import IRON, RUTILE, m2c_substances  # noqa: E402
 
-# Provisional recoveries and conversion (LD-PEC-006 Q-06b): the sorter keeps 9/10 of the
-# ice and 4/5 of the ilmenite; the reactor reacts half the ilmenite it is fed; the
-# magnetic stage recovers 19/20 of the iron.
-ICE_RECOVERY, ILMENITE_RECOVERY, CONVERSION, IRON_RECOVERY = R(9, 10), R(4, 5), R(1, 2), R(19, 20)
+# Recoveries and conversion after domain review (LD-PEC-006 §2.4, Q-06b): the sorter keeps
+# 65 % of the ice and 50 % of the ilmenite; the reactor reacts half the ilmenite it is fed
+# per pass; the magnetic stage recovers 85 % of the iron.
+ICE_RECOVERY, ILMENITE_RECOVERY, CONVERSION, IRON_RECOVERY = R(13, 20), R(1, 2), R(1, 2), R(17, 20)
 
 
 def alpha_beneficiate() -> dict:
@@ -48,7 +48,7 @@ def alpha_reduce() -> dict:
     """Ilmenite reduction with partial conversion and magnetic separation (LD-PEC-006
     §3.3). Per unit (one mole of reaction, in mmol): 2 mmol of ilmenite are fed and half
     react; the unreacted half leaves by its own port, to go back to the ilmenite bin.
-    The magnetic stage sends 19/20 of the iron to the iron port; the rest leaves with
+    The magnetic stage sends 85 % of the iron to the iron port; the rest leaves with
     the rutile. 250 J per mmol of ilmenite fed; a 10-minute batch dwell."""
     feed = {"kind": "op", "op": "mul", "args": [{"kind": "const", "value": R(2)}, EXTENT]}
     return {
@@ -79,8 +79,8 @@ def alpha_reduce() -> dict:
 
 
 def v24() -> list[Vector]:
-    """A 100 mol reduction batch: 200 mol of ilmenite fed, half reacted. 95 mol of iron
-    reach the iron bin; 5 mol leave with 100 mol of rutile; 100 mol of ilmenite come
+    """A 100 mol reduction batch: 200 mol of ilmenite fed, half reacted. 85 mol of iron
+    reach the iron bin; 15 mol leave with 100 mol of rutile; 100 mol of ilmenite come
     back unreacted; 100 mol of water."""
     e = {"elements": elements(), "units": units(), "substances": m2c_substances(), "processes": [alpha_reduce(), solar()],
          "machines": [machine("reactor", ["reduce-ilmenite"], R(1, 2000), [("ilmenite", "MATERIAL", "IN"), ("h2", "MATERIAL", "IN"), ("iron", "MATERIAL", "OUT"),
@@ -109,7 +109,7 @@ def v24() -> list[Vector]:
 
 
 def v25() -> list[Vector]:
-    """The PARTITION sorter: 1 000 kg of regolith. 9/10 of the ice and 4/5 of the
+    """The PARTITION sorter: 1 000 kg of regolith. 65 % of the ice and 50 % of the
     ilmenite are recovered; everything else, silicate included, is on the tailings pile."""
     e = {"elements": elements(), "units": units(), "substances": m2c_substances(), "processes": [alpha_beneficiate(), solar()],
          "machines": [machine("sorter", ["beneficiate"], R(1, S), [("feed", "MATERIAL", "IN"), ("ice", "MATERIAL", "OUT"), ("ilmenite", "MATERIAL", "OUT"),

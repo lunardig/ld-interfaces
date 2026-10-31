@@ -1,27 +1,27 @@
 [
   {
     "step": "0",
-    "state_hash": "a01ed093f89b151536d8a7cb168d78d0a94bd881dada18403cc23813d9623224",
-    "history_head": "ad9ec60fb535ba614d5ef303e4b39dfcff09f4c3538d610dda5587d6e9d8d1b7"
+    "state_hash": "be8f0b40d7eba732fc393101f9d6aa7cc0cedc1932d6a6ac3158b4c6caafb236",
+    "history_head": "0a0654cb691e84083a3d4251de47f1dae85cc6a501de4d9fc55ad41c93cc32a9"
   },
   {
     "step": "1",
-    "state_hash": "1a5cd734d60dd1baaa8a4fda536a70e109c200b63e69a5921389836ad1241377",
-    "history_head": "ad9ec60fb535ba614d5ef303e4b39dfcff09f4c3538d610dda5587d6e9d8d1b7"
+    "state_hash": "0f5a9371c0927840f441c39739b38be95cb694e21b3a738de6be94c62bf99241",
+    "history_head": "0a0654cb691e84083a3d4251de47f1dae85cc6a501de4d9fc55ad41c93cc32a9"
   },
   {
     "step": "2",
-    "state_hash": "4be82c054c9e32e44be093c55484de86a1ef7d6fed7c5c67eb070ee556fead19",
-    "history_head": "ad9ec60fb535ba614d5ef303e4b39dfcff09f4c3538d610dda5587d6e9d8d1b7"
+    "state_hash": "db7cb05bec8a06cedd78d4cf78702794279f43bbc3956d841d550a8008cf24ac",
+    "history_head": "0a0654cb691e84083a3d4251de47f1dae85cc6a501de4d9fc55ad41c93cc32a9"
   },
   {
     "step": "3",
-    "state_hash": "cea5cf0da6b68de823278204036995eec5fb71062e770286f0229c7256dca729",
-    "history_head": "e2e1f655a8571241a15ca29f829e8ee33694cb05b0025b6c55aff07ce94ab8a3"
+    "state_hash": "db7a60368975a2a572da7bad6fbcf51e9f6e09425db1d3a0b6802f64519b90b0",
+    "history_head": "9220ae8545a1d45091a657d755fedcdf721127c56c38fa7a326975d145aac5c4"
   },
   {
     "step": "4",
-    "state_hash": "15e8bb19309bbb3c849c04c281e356e11d2346d40fff9df3d270a0bad8fe1c18",
-    "history_head": "e2e1f655a8571241a15ca29f829e8ee33694cb05b0025b6c55aff07ce94ab8a3"
+    "state_hash": "229dda684c78670aa5fcbe54b110ea4777ed88d3d9fc8b1160e14040d7634bde",
+    "history_head": "9220ae8545a1d45091a657d755fedcdf721127c56c38fa7a326975d145aac5c4"
   }
 ]

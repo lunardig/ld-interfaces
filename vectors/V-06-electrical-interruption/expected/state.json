@@ -33,7 +33,7 @@
       "template": "tank"
     }
   ],
-  "catalog_hash": "e00d2557f18c46cfb4e3273302ba7bb269d003294e286ac687b3dac35d8f9319",
+  "catalog_hash": "7bcbce2f6f7ed28a4fb3deb3ad9e2c1001c559a33073e04e671b4c3e1a8f602a",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -194,6 +194,14 @@
         "d": "9",
         "n": "2"
       }
+    },
+    {
+      "accumulator": "energy",
+      "owner": "waste-heat",
+      "value": {
+        "d": "2",
+        "n": "1"
+      }
     }
   ],
   "schema": "ld.physical-state.v0",
@@ -205,7 +213,7 @@
       "totals": {}
     },
     {
-      "energy": "154225",
+      "energy": "86567",
       "kind": "HEAT",
       "sink_id": "waste-heat",
       "totals": {}

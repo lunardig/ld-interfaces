@@ -70,7 +70,7 @@
           "mode": "PER_WORK",
           "dir": "DRAW",
           "amount": {
-            "n": "10",
+            "n": "6",
             "d": "1"
           },
           "unit": "j",
