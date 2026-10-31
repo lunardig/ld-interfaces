@@ -1892,13 +1892,19 @@
       "additionalProperties": false
     },
     "HistoryRecord": {
-      "description": "Hashed in domain ld.pec.history.v1 (LD-PEC-001 \u00a79.1).",
+      "description": "Hashed in domain ld.pec.history.v1 (LD-PEC-001 \u00a79.1, LD-PEC-004 \u00a78). The history root is H(ld.pec.history.v1, {genesis_hash, world, claim}).",
       "type": "object",
       "properties": {
         "prev_hash": {
           "$ref": "#/$defs/Hash"
         },
-        "time_us": {
+        "world": {
+          "$ref": "#/$defs/Id"
+        },
+        "claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "timestamp": {
           "$ref": "#/$defs/TimeUs"
         },
         "inputs_hash": {
@@ -1913,7 +1919,9 @@
       },
       "required": [
         "prev_hash",
-        "time_us",
+        "world",
+        "claim",
+        "timestamp",
         "inputs_hash",
         "transition_hash",
         "resulting_state_hash"

@@ -1273,14 +1273,16 @@ export interface HashResult {
  */
 export interface HistoryHeadParams {}
 /**
- * Hashed in domain ld.pec.history.v1 (LD-PEC-001 §9.1).
+ * Hashed in domain ld.pec.history.v1 (LD-PEC-001 §9.1, LD-PEC-004 §8). The history root is H(ld.pec.history.v1, {genesis_hash, world, claim}).
  *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "HistoryRecord".
  */
 export interface HistoryRecord {
   prev_hash: Hash;
-  time_us: TimeUs;
+  world: Id;
+  claim: Id;
+  timestamp: TimeUs;
   inputs_hash: Hash;
   transition_hash: Hash;
   resulting_state_hash: Hash;
