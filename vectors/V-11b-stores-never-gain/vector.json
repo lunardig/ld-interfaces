@@ -1,0 +1,12 @@
+{
+  "id": "V-11b",
+  "title": "Two charged batteries and no generation: they drain into a load and never charge each other",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-11",
+    "LD-PEC-005 \u00a78.2"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "1d076163d5a304f63c3ea5df3726189547396e6fecd57b22648ccd54852b7ce5",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "12",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1",
+        "m-p2-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "144434",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "203110"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-1",
+      "location": "bin-1",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "784834"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-2",
+      "location": "bin-2",
+      "state": "AVAILABLE",
+      "composition": {
+        "o2-g": "634231"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-5",
+      "location": "bin-5",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "180020"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-6",
+      "location": "bin-6",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "349203"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-9",
+      "location": "bin-9",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "352389"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-10",
+      "location": "bin-10",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "11237"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

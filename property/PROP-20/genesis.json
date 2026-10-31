@@ -1,0 +1,94 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "8efc17d335b8b7567acfebf77580b3fb9a54f4f693f1bdfd778be3299c942468",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "bin-kit": "11",
+        "m-p0-kit": "1",
+        "m-p1-kit": "1",
+        "m-p2-kit": "1"
+      }
+    },
+    {
+      "lot_id": "batt-0",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "82172",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "batt-1",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "battery-kit": "1"
+      },
+      "charge": {
+        "n": "86336",
+        "d": "1"
+      }
+    },
+    {
+      "lot_id": "fill-bin-0",
+      "location": "bin-0",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "426486"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-3",
+      "location": "bin-3",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "123000"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-4",
+      "location": "bin-4",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "951853"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-7",
+      "location": "bin-7",
+      "state": "AVAILABLE",
+      "composition": {
+        "fetio3-s": "121409"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "fill-bin-8",
+      "location": "bin-8",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2-g": "823021"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

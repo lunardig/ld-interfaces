@@ -1,0 +1,8 @@
+{
+  "product_id": "m-p0-kit",
+  "embodied": {},
+  "installs_as": {
+    "kind": "MACHINE",
+    "template": "m-p0"
+  }
+}

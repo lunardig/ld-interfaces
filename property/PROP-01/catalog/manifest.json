@@ -1,0 +1,172 @@
+{
+  "schema": "ld.catalog.v0",
+  "catalog_id": "vector-prop",
+  "pset_version": "0",
+  "entries": [
+    {
+      "kind": "buffer",
+      "id": "bin",
+      "hash": "7f27b02671136d13e53137fbff3c4e7c3dfc73990195210c3b24425db4293381"
+    },
+    {
+      "kind": "connection",
+      "id": "pipe",
+      "hash": "72b1039d6e7946e55ac5993f4202331c57f064594bfd2fc6919e2f2931c9b344"
+    },
+    {
+      "kind": "element",
+      "id": "fe",
+      "hash": "2615afa84e274ad9574b9c1aa35bb7bd0fc6f5bba9eff63c328d60bb406f993b"
+    },
+    {
+      "kind": "element",
+      "id": "h",
+      "hash": "88a7ad999caa2d53b4298f0e58c9649a0de69ecf84262bd42172cec053210f09"
+    },
+    {
+      "kind": "element",
+      "id": "o",
+      "hash": "e8eb01d27733e7190dd28cf9025633868bc93dad49ee6e99201cbf36965f24d2"
+    },
+    {
+      "kind": "element",
+      "id": "si",
+      "hash": "55a06a2fbd46bdeb69ffa991e30e40d8a10a3964fb35359c30d2a32a03f3dd5a"
+    },
+    {
+      "kind": "element",
+      "id": "ti",
+      "hash": "61c140e20fbb438183f779cbd7cc77841fc5f4820f50c270cd89e543daa5e62a"
+    },
+    {
+      "kind": "machine",
+      "id": "battery",
+      "hash": "94c934fe55dfbfd93d32b881b9bd0bc77e4ad35b518f452087b4e82e3a329083"
+    },
+    {
+      "kind": "machine",
+      "id": "m-p0",
+      "hash": "350a12d4ad39ba83251c28b723d880a1c0ce85c83fc6a174a24a70dac9829702"
+    },
+    {
+      "kind": "process",
+      "id": "p0",
+      "hash": "db456fc858434888f061a4dbdd0f70e22704f35b6cbae7513dcec25d8fc1c9d8"
+    },
+    {
+      "kind": "product",
+      "id": "battery-kit",
+      "hash": "1023619c0590de4e4f0bb25fc3d44bf998f665a1993edb523631fa0b7c216524"
+    },
+    {
+      "kind": "product",
+      "id": "bin-kit",
+      "hash": "d25ad7db20cfc792ddefe03b4a112895799511f2d7faa98179f0ba33a5a07121"
+    },
+    {
+      "kind": "product",
+      "id": "m-p0-kit",
+      "hash": "e08f493adfd16739f88e29177181194e29f075c3b951f32e8d6b91a4b887cf74"
+    },
+    {
+      "kind": "product",
+      "id": "widget",
+      "hash": "1cfc8e8586480520a869f4fae37bdb7af2c0d339a30c3f2acc53d8b622ddbbe5"
+    },
+    {
+      "kind": "substance",
+      "id": "fe-s",
+      "hash": "3b5ee482368dc87e06570be63a9fc413ccabbd0dc544adf5472460125edecace"
+    },
+    {
+      "kind": "substance",
+      "id": "fetio3-s",
+      "hash": "27ce4fa19676d3cf5e8829eca6ec89cb002d825560dee896563eee3e465ae732"
+    },
+    {
+      "kind": "substance",
+      "id": "h2-g",
+      "hash": "9715cb6cc08df0f3f7b2aef23c79d90b606fade447c11bf4889b366fb90c9a64"
+    },
+    {
+      "kind": "substance",
+      "id": "h2o-l",
+      "hash": "03247ca81b8b84046f3b9c58445f0cf929a10884ca0e0f022b2abd51923ada2f"
+    },
+    {
+      "kind": "substance",
+      "id": "h2o-s",
+      "hash": "90037ac116557adff010298e175fd843b72bd8215eda8d6e2cfb099a09a32c68"
+    },
+    {
+      "kind": "substance",
+      "id": "o2-g",
+      "hash": "8060dd5fa32e3c478ed3eebb2ec5cbf1ac840c0855671e4dc2cd99cf0a145e2d"
+    },
+    {
+      "kind": "substance",
+      "id": "regolith",
+      "hash": "3d0aeff1f725247ffa4c8e425aae888627f60e9dc70b782fbfbfddb1a7ada0b6"
+    },
+    {
+      "kind": "substance",
+      "id": "regolith-bank",
+      "hash": "68c3438f9788d2875fda63cb96baa17ed8d4ce9234ef173e675a163ea8fe8df4"
+    },
+    {
+      "kind": "substance",
+      "id": "sio2-s",
+      "hash": "16210090094160b19c3a34d25cf3b06549d1d8438c8f852afa692e0dd75f91ca"
+    },
+    {
+      "kind": "substance",
+      "id": "tio2-s",
+      "hash": "1d7fd824cd71ee54e6881d3c944ec0506b7e8ea0fd46445fa0f8b7f5f3df533a"
+    },
+    {
+      "kind": "unit",
+      "id": "count",
+      "hash": "327b4ed5240661dac2256c69952acab888e9f80147e0cf258c7ba9ad4593f1ba"
+    },
+    {
+      "kind": "unit",
+      "id": "j",
+      "hash": "93a96cf3830bfe856239ac85d0081861e5e84c0926f69abfbdfdecddde453eda"
+    },
+    {
+      "kind": "unit",
+      "id": "kg-reg",
+      "hash": "7d4798b14897105366a7f70bd9d67dbb17d01f978dd2b613970c1092749ada35"
+    },
+    {
+      "kind": "unit",
+      "id": "mmol",
+      "hash": "84de9ada851402ee9e0c3661ba67440f3344252e678be4f8758eee96e46da91d"
+    },
+    {
+      "kind": "unit",
+      "id": "rxn-mmol",
+      "hash": "4e6def10483605f5a4f1befdcf561bfb680321debb7dbc20e9df06db1c197c5c"
+    },
+    {
+      "kind": "unit",
+      "id": "s",
+      "hash": "be7d5ca3600299d3edc2bbedc1c3eed4b1b97206c41608781f43f16ce64447e1"
+    },
+    {
+      "kind": "unit",
+      "id": "w",
+      "hash": "1994936379b54d484b03d941155b1f877c8b3bcb23d325dba3cb333b5eb9a0d3"
+    },
+    {
+      "kind": "unit",
+      "id": "w-m2",
+      "hash": "0e7f896fa353a870b1a7122477410d5d0c4224cdb15c95f433455a5f8809b12b"
+    },
+    {
+      "kind": "unit",
+      "id": "wu",
+      "hash": "efea4af8af165dbfed770c2abeb79bf1cfe1b6f3922af05d640d18378a821c22"
+    }
+  ]
+}

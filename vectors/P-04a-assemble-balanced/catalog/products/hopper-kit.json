@@ -1,0 +1,10 @@
+{
+  "product_id": "hopper-kit",
+  "embodied": {
+    "fe-s": "1800000"
+  },
+  "installs_as": {
+    "kind": "BUFFER",
+    "template": "hopper"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "V-22",
+  "title": "Idle draw is served after jobs; at night it drains the battery, then the machine shows as unpowered",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-005 \u00a78.2",
+    "LD-PEC-005 \u00a78.3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

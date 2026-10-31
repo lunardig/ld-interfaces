@@ -1,0 +1,146 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "1157b3c610207cdfc5f74653326896834ee5d06f8e82d3eff335f4e588408b67",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-h",
+      "delay_us": "0",
+      "from_port": "electrolyzer-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o",
+      "delay_us": "0",
+      "from_port": "electrolyzer-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-w",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1"
+      },
+      "to_port": "electrolyzer-1.water"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "9"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "2",
+      "completed_work": "2",
+      "created_at_us": "0",
+      "current_stage": "electrolyze-water.done",
+      "held_lot_ids": [],
+      "job_id": "job-split",
+      "last_advanced_us": "2000000",
+      "machine_id": "electrolyzer-1",
+      "priority": "0",
+      "process": "electrolyze-water",
+      "process_hash": "4e9b3b450c747e62fb45986b3c940ecd85daef8ab2672f8adaebbd34a67150f0",
+      "required_work": "2",
+      "started": true,
+      "status": "COMPLETED",
+      "target_extent": "2"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "4"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "2"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "electrolyzer",
+      "location": "pad-a",
+      "machine_id": "electrolyzer-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "10000000"
+}

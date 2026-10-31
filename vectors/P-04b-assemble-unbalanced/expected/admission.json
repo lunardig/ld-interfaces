@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ELEMENT_BALANCE",
+  "subject": "fabricate-from-nothing",
+  "detail": "fe-s in (1800000) must equal embodied (1800000) plus scrap (100000)"
+}

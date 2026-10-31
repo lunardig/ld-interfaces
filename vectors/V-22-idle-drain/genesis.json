@@ -1,0 +1,25 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "06d090036428b85b63e5f67e81d4a6b38e1edc303d56fe4fe377d35f9de19d88",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "solar-kit": "1",
+        "melter-kit": "1",
+        "battery-kit": "1",
+        "tank-kit": "2"
+      }
+    }
+  ],
+  "environment": [
+    "irradiance"
+  ]
+}

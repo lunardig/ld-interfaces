@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ENERGY_BALANCE",
+  "subject": "perpetual-battery",
+  "detail": "charge_efficiency must be in (0, 1]"
+}

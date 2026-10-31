@@ -1,0 +1,12 @@
+{
+  "id": "V-06",
+  "title": "A job on battery power stops exactly when the store empties and resumes when generation returns",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-001 \u00a711 V-06",
+    "LD-PEC-005 \u00a78.2"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

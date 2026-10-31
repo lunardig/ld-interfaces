@@ -58,6 +58,10 @@
         "wear": {
           "$ref": "common.schema.json#/$defs/Rational",
           "description": "Wear carried by a removed machine's kit (LD-PEC-004 A1-1): the machine's exact wear when removed. Present only on a lot holding one installable product unit; such a lot is never merged."
+        },
+        "charge": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Charge carried by a removed energy store's kit, exactly, in the catalog's bus energy unit (LD-PEC-005 §8.2). Present only on a lot holding one installable product unit."
         }
       },
       "required": ["lot_id", "location", "state", "composition", "products"],
@@ -122,6 +126,7 @@
     },
     "EnergyStoreInstance": {
       "type": "object",
+      "description": "An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge).",
       "properties": {
         "store_id": { "$ref": "common.schema.json#/$defs/Id" },
         "unit": { "$ref": "common.schema.json#/$defs/Id" },

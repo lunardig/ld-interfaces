@@ -1,0 +1,82 @@
+{
+  "schema": "ld.catalog.v0",
+  "catalog_id": "vector-v-01",
+  "pset_version": "0",
+  "entries": [
+    {
+      "kind": "buffer",
+      "id": "tank",
+      "hash": "b09dd7d64e37c1f7b234aa60472931ea2f39f77080ad2bff7afecc7e38418deb"
+    },
+    {
+      "kind": "connection",
+      "id": "pipe",
+      "hash": "ff895828d6f5dcb611ce121a33294f25177f17d523f4001ae55be0a1c0caad21"
+    },
+    {
+      "kind": "element",
+      "id": "h",
+      "hash": "88a7ad999caa2d53b4298f0e58c9649a0de69ecf84262bd42172cec053210f09"
+    },
+    {
+      "kind": "element",
+      "id": "o",
+      "hash": "e8eb01d27733e7190dd28cf9025633868bc93dad49ee6e99201cbf36965f24d2"
+    },
+    {
+      "kind": "machine",
+      "id": "electrolyzer",
+      "hash": "e66f7aea1fdf12580ebef66c002d8a2e54eceb01af86be2b6eb639b49275b7a0"
+    },
+    {
+      "kind": "process",
+      "id": "electrolyze-water",
+      "hash": "4e9b3b450c747e62fb45986b3c940ecd85daef8ab2672f8adaebbd34a67150f0"
+    },
+    {
+      "kind": "product",
+      "id": "electrolyzer-kit",
+      "hash": "7690d6c1da6820c398bfbf997c517cd56de82c31839fb641a0a2a5610afd5a6e"
+    },
+    {
+      "kind": "product",
+      "id": "tank-kit",
+      "hash": "bb8b2bb61347eaf0578ecba1bd6e6df6e6404f0aa57606ffdef66a5d8a73055b"
+    },
+    {
+      "kind": "substance",
+      "id": "h2-g",
+      "hash": "a02d830e67c4cfa9cf0032da6d6938a5117526a920f074f70a1242084e906abc"
+    },
+    {
+      "kind": "substance",
+      "id": "h2o-l",
+      "hash": "7048523a361830b347512c3622006703957e10feeef965cd7063d7c8a0f74fdc"
+    },
+    {
+      "kind": "substance",
+      "id": "o2-g",
+      "hash": "c8fdf941c695525c18e766fd254244e4a937f2c51e8103f4efb0dda394decf34"
+    },
+    {
+      "kind": "unit",
+      "id": "j",
+      "hash": "93a96cf3830bfe856239ac85d0081861e5e84c0926f69abfbdfdecddde453eda"
+    },
+    {
+      "kind": "unit",
+      "id": "pmol",
+      "hash": "7ee364d44246a899fd31142888d21f204776ec0cb1a93fccaa49539ab6980205"
+    },
+    {
+      "kind": "unit",
+      "id": "w",
+      "hash": "1994936379b54d484b03d941155b1f877c8b3bcb23d325dba3cb333b5eb9a0d3"
+    },
+    {
+      "kind": "unit",
+      "id": "wu",
+      "hash": "efea4af8af165dbfed770c2abeb79bf1cfe1b6f3922af05d640d18378a821c22"
+    }
+  ]
+}

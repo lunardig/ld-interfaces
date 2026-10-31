@@ -640,11 +640,31 @@ export interface MachineBlueprint {
   lanes: PositiveInt;
   min_stable_rate: Rational;
   /**
-   * Power drawn while installed and not running, in the power unit named by unit (per second, as W).
+   * Power drawn while installed and not running, in the power unit named by unit (per second, as W). Served after jobs; unmet idle draw only marks the machine unpowered (LD-PEC-005 §8.3).
    */
   idle_power: {
     amount: Rational;
     unit: Id;
+  };
+  idle_heat_sink?: Id;
+  /**
+   * Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 §8.2).
+   */
+  energy_store?: {
+    capacity: {
+      amount: Rational;
+      unit: Id;
+    };
+    max_charge: {
+      amount: Rational;
+      unit: Id;
+    };
+    max_discharge: {
+      amount: Rational;
+      unit: Id;
+    };
+    charge_efficiency: Rational;
+    heat_sink: Id;
   };
   ports: MachinePort[];
   /**
@@ -772,6 +792,10 @@ export interface MachineView {
   wear_accumulator: Uint;
   assigned_job_ids: Id[];
   rate: Rational;
+  /**
+   * Present and true when the machine's idle draw is not being met (LD-PEC-005 §8.3).
+   */
+  unpowered?: boolean;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -837,6 +861,7 @@ export interface EnergyStoreView {
   store_id: Id;
   charge: Uint;
   capacity: Uint;
+  rate?: Rational;
   unit: Id;
 }
 /**
@@ -866,6 +891,7 @@ export interface Lot {
     [k: string]: Uint;
   };
   wear?: Rational;
+  charge?: Rational;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1141,6 +1167,8 @@ export interface Genesis {
   environment: Id[];
 }
 /**
+ * An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge).
+ *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "EnergyStoreInstance".
  */
