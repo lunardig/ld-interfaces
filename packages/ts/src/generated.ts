@@ -541,6 +541,12 @@ export interface OpPartition {
    */
   outputs: [PartitionOutput, ...PartitionOutput[]];
   residue: Id;
+  /**
+   * Material this PARTITION draws itself, per unit of extent, from the input port named by `input`: species to a whole-multiple extent expression. Lets a stage that only splits material, such as a screen, say how much one unit is (LD-PEC-005 §3.8). Absent: `input` names the stage's pool or a stream.
+   */
+  draw?: {
+    [k: string]: Expression;
+  };
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

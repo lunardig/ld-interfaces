@@ -295,7 +295,17 @@
         },
         "residue": {
           "$ref": "common.schema.json#/$defs/Id",
-          "description": "Receives the exact remainder of every floored share."
+          "description": "Receives what the floored shares leave. Shares are floored cumulatively over the job, and the residue receives the exact remainder when the job completes (LD-PEC-005 §3.7)."
+        },
+        "draw": {
+          "type": "object",
+          "description": "Material this PARTITION draws itself, per unit of extent, from the input port named by `input`: species to a whole-multiple extent expression. Lets a stage that only splits material, such as a screen, say how much one unit is (LD-PEC-005 §3.8). Absent: `input` names the stage's pool or a stream.",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/Expression"
+          }
         }
       },
       "required": [

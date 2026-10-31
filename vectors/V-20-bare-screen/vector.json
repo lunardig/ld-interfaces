@@ -1,0 +1,13 @@
+{
+  "id": "V-20",
+  "title": "A stage that only splits: PARTITION draws its own material per unit; cumulative floors hold back under one quantum each until completion",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74 PARTITION",
+    "LD-PEC-005 \u00a73.7",
+    "LD-PEC-005 \u00a73.8"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

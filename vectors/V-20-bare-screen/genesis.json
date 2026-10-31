@@ -1,0 +1,30 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "55b5b04c6430e1a8ef2f76cb3398ae24b0b585ecf87cf733bc4f61656cda0532",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "screen-kit": "1",
+        "hopper-kit": "3"
+      }
+    },
+    {
+      "lot_id": "dug",
+      "location": "hopper-1",
+      "state": "AVAILABLE",
+      "composition": {
+        "regolith": "1000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

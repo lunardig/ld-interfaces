@@ -148,7 +148,7 @@
     },
     {
       "composition": {
-        "h2o-l": "2000"
+        "h2o-l": "2333"
       },
       "location": "tank-a",
       "lot_id": "tank-a.stock",
@@ -157,7 +157,7 @@
     },
     {
       "composition": {
-        "h2o-l": "2000"
+        "h2o-l": "2333"
       },
       "location": "tank-b",
       "lot_id": "tank-b.stock",
@@ -166,7 +166,7 @@
     },
     {
       "composition": {
-        "h2o-l": "3000"
+        "h2o-l": "2334"
       },
       "location": "tank-c",
       "lot_id": "tank-c.stock",
