@@ -744,6 +744,14 @@ export interface ClaimView {
    * Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals.
    */
   lots: Lot[];
+  /**
+   * Deposits on the claim, with what remains and what has been extracted. Each has a face port, <deposit_id>.face, that a FEED can draw from (LD-PEC-005 §3.3).
+   */
+  deposits?: Deposit[];
+  /**
+   * Material and heat sinks: cumulative losses, tailings and waste heat.
+   */
+  sinks?: SinkRecord[];
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -851,6 +859,29 @@ export interface Lot {
     [k: string]: Uint;
   };
   wear?: Rational;
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Deposit".
+ */
+export interface Deposit {
+  deposit_id: Id;
+  remaining: SpeciesAmounts;
+  extracted: SpeciesAmounts;
+  /**
+   * STOCK held for running jobs that feed from this deposit's face port (LD-PEC-005 §3.3). Omitted when empty.
+   */
+  reservations?: Reservation[];
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "SinkRecord".
+ */
+export interface SinkRecord {
+  sink_id: Id;
+  kind: "RECOVERABLE" | "TERMINAL" | "HEAT";
+  totals: SpeciesAmounts;
+  energy: Uint;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1104,15 +1135,6 @@ export interface Genesis {
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
- * via the `definition` "Deposit".
- */
-export interface Deposit {
-  deposit_id: Id;
-  remaining: SpeciesAmounts;
-  extracted: SpeciesAmounts;
-}
-/**
- * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "EnergyStoreInstance".
  */
 export interface EnergyStoreInstance {
@@ -1335,16 +1357,6 @@ export interface PhysicalState {
   id_counters: {
     [k: string]: Uint;
   };
-}
-/**
- * This interface was referenced by `LdInterfaces`'s JSON-Schema
- * via the `definition` "SinkRecord".
- */
-export interface SinkRecord {
-  sink_id: Id;
-  kind: "RECOVERABLE" | "TERMINAL" | "HEAT";
-  totals: SpeciesAmounts;
-  energy: Uint;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

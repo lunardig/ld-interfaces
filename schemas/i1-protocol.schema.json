@@ -1155,6 +1155,20 @@
           "items": {
             "$ref": "i3-state.schema.json#/$defs/Lot"
           }
+        },
+        "deposits": {
+          "description": "Deposits on the claim, with what remains and what has been extracted. Each has a face port, <deposit_id>.face, that a FEED can draw from (LD-PEC-005 §3.3).",
+          "type": "array",
+          "items": {
+            "$ref": "i3-state.schema.json#/$defs/Deposit"
+          }
+        },
+        "sinks": {
+          "description": "Material and heat sinks: cumulative losses, tailings and waste heat.",
+          "type": "array",
+          "items": {
+            "$ref": "i3-state.schema.json#/$defs/SinkRecord"
+          }
         }
       },
       "required": [
