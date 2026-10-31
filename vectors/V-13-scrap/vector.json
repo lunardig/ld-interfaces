@@ -1,0 +1,11 @@
+{
+  "id": "V-13",
+  "title": "A machine worn to zero capacity comes back as scrap, which INSTALL refuses",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A1-1"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

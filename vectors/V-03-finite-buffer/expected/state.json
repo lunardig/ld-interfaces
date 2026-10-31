@@ -14,7 +14,7 @@
           "species": "h2o-l"
         },
         {
-          "amount": "98",
+          "amount": "2",
           "job_id": "job-use",
           "kind": "STOCK",
           "species": "h2o-l"
@@ -46,7 +46,7 @@
       ],
       "reservations": [
         {
-          "amount": "98",
+          "amount": "2",
           "job_id": "job-use",
           "kind": "SPACE",
           "species": "h2-g"
@@ -78,7 +78,7 @@
       ],
       "reservations": [
         {
-          "amount": "49",
+          "amount": "1",
           "job_id": "job-use",
           "kind": "SPACE",
           "species": "o2-g"

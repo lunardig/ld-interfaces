@@ -1,0 +1,113 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "1ec3588c2cbb9e7e5096905bb5b7ecefb30fe071aef1708a12084b5d12efabe8",
+  "claim_id": "claim-v",
+  "connections": [],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "13",
+    "lot": "1"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "200000",
+      "completed_work": "200000",
+      "created_at_us": "0",
+      "current_stage": "split",
+      "held_lot_ids": [],
+      "job_id": "job-run",
+      "last_advanced_us": "300000000",
+      "machine_id": "splitter-1",
+      "priority": "0",
+      "process": "split-flow",
+      "process_hash": "55ebf9e4340bbe60b357ac37a15681e066a035578a0d4a8e66d4e5539c701591",
+      "reason": {
+        "code": "FAILED",
+        "event_id": "wear-limit.splitter-1"
+      },
+      "required_work": "1000000000",
+      "started": true,
+      "status": "FAILED",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "400000"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "inventory",
+      "lot_id": "lot-1",
+      "products": {
+        "splitter-kit": "1"
+      },
+      "state": "AVAILABLE",
+      "wear": {
+        "d": "1",
+        "n": "200"
+      }
+    },
+    {
+      "composition": {
+        "o2-g": "200000"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "9600000"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "401000000"
+}

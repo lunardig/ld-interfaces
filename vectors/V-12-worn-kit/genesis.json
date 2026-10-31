@@ -1,0 +1,30 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "6f9fc37788dd8108709f9a6c0685e0bac064bcba35428af902befefae8a86dfc",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "splitter-kit": "1",
+        "tank-kit": "3"
+      }
+    },
+    {
+      "lot_id": "water-1",
+      "location": "water-tank",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "100000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

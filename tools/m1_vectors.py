@@ -106,12 +106,12 @@ def combine_process(pid: str) -> dict:
     }
 
 
-def machine(bid: str, processes: list[str], rated: dict, ports: list[tuple[str, str, str]], lanes: int = 1) -> dict:
+def machine(bid: str, processes: list[str], rated: dict, ports: list[tuple[str, str, str]], lanes: int = 1, condition=None) -> dict:
     return {
         "blueprint_id": bid, "capabilities": [], "processes": processes, "rated_work": rated, "lanes": str(lanes),
         "min_stable_rate": R(1, 10**12), "idle_power": {"amount": R(0), "unit": "w"},
         "ports": [{"port": p, "type": t, "direction": d} for p, t, d in ports],
-        "condition_table": [{"wear_at": "0", "capacity_factor": R(1)}], "embodied": {},
+        "condition_table": condition or [{"wear_at": "0", "capacity_factor": R(1)}], "embodied": {},
     }
 
 
@@ -385,8 +385,76 @@ def v10() -> list[Vector]:
     return [v]
 
 
+# ---------------------------------------------------------------- LD-PEC-004 amendment 1
+WEARING = [{"wear_at": "0", "capacity_factor": R(1)}, {"wear_at": "100", "capacity_factor": R(1, 2)}, {"wear_at": "200", "capacity_factor": R(0)}]
+
+
+def wearing_entries() -> dict[str, list[dict]]:
+    e = base_entries()
+    e["processes"] = [split_process("split-flow", "FLOW", [{"op": "WEAR", "per": "WORK", "amount": R(1, 1000)}])]
+    e["machines"] = [machine("splitter", ["split-flow"], R(1, 1000), SPLITTER_PORTS, condition=WEARING)]
+    e["buffers"] = [tank("tank", 10**9)]
+    e["products"] = [kit("splitter-kit", "MACHINE", "splitter"), kit("tank-kit", "BUFFER", "tank")]
+    return e
+
+
+def unplug(v: Vector, t: int, machine_id: str = "splitter-1") -> None:
+    for cid in ("c-water", "c-h2", "c-o2"):
+        v.cmd(t, "DISCONNECT", connection_id=cid)
+    v.cmd(t, "REMOVE", target_id=machine_id)
+
+
+def v12() -> list[Vector]:
+    v = Vector("V-12", "worn-kit", "A removed machine's kit carries its wear, and reinstalling resumes it",
+               ["LD-PEC-004 A1-1"], wearing_entries(),
+               [lot("kits", "inventory", products={"splitter-kit": "1", "tank-kit": "3"}), lot("water-1", "water-tank", {"h2o-l": "100000"})])
+    splitter_plant(v, 0, "split-flow")
+    v.job(0, "job-run", "split-flow", "splitter-1", 5000)  # 5 000 work at 1/1000 wear per work: wear 5
+    v.advance(10 * S)
+    unplug(v, 10 * S)
+    v.cmd(10 * S, "INSTALL", lot_id="lot-1", product="splitter-kit", location="pad-a", as_id="splitter-2")
+    v.advance(11 * S)
+    return [v]
+
+
+def v13() -> list[Vector]:
+    v = Vector("V-13", "scrap", "A machine worn to zero capacity comes back as scrap, which INSTALL refuses",
+               ["LD-PEC-004 A1-1"], wearing_entries(),
+               [lot("kits", "inventory", products={"splitter-kit": "1", "tank-kit": "3"}), lot("water-1", "water-tank", {"h2o-l": "10000000"})])
+    splitter_plant(v, 0, "split-flow")
+    # Wear 100 after 100 s at full rate, then 100 more at half rate: fails at 300 s.
+    v.job(0, "job-run", "split-flow", "splitter-1", 10**9)
+    v.advance(400 * S)
+    unplug(v, 400 * S)
+    v.cmd(400 * S, "INSTALL", lot_id="lot-1", product="splitter-kit", location="pad-a", as_id="splitter-2")
+    v.advance(401 * S)
+    return [v]
+
+
+def v14() -> list[Vector]:
+    e = base_entries()
+    e["processes"] = [split_process("split-flow", "FLOW")]
+    e["machines"] = [machine("splitter", ["split-flow"], R(1, 1000), SPLITTER_PORTS)]
+    e["buffers"] = [tank("tank", 10**9)]
+    e["products"] = [kit("splitter-kit", "MACHINE", "splitter"), kit("tank-kit", "BUFFER", "tank")]
+    # Each splitter needs 120 000 mmol of water per horizon; the tank holds 1 000 000.
+    v = Vector("V-14", "shared-buffer", "Two flow jobs fed from one buffer both run, each reserving one horizon of need",
+               ["LD-PEC-004 A1-2", "LD-PEC-004 §4.2"], e,
+               [lot("kits", "inventory", products={"splitter-kit": "2", "tank-kit": "3"}), lot("water-1", "water-tank", {"h2o-l": "1000000"})])
+    splitter_plant(v, 0, "split-flow")
+    v.install(0, "splitter-kit", "splitter-2")
+    v.feed(0, "c-water-2", "water-tank.io", "splitter-2.water")
+    v.feed(0, "c-h2-2", "splitter-2.h2", "h2-tank.io")
+    v.feed(0, "c-o2-2", "splitter-2.o2", "o2-tank.io")
+    v.job(0, "job-first", "split-flow", "splitter-1", 10**9, priority=5)
+    v.job(0, "job-second", "split-flow", "splitter-2", 10**9, priority=1)
+    v.advance(30 * S)
+    v.advance(90 * S)
+    return [v]
+
+
 def main() -> int:
-    vectors = v02() + v03() + v04() + v05() + v07() + v09() + v10()
+    vectors = v02() + v03() + v04() + v05() + v07() + v09() + v10() + v12() + v13() + v14()
     for v in vectors:
         v.save()
     return 0
