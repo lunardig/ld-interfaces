@@ -1,0 +1,11 @@
+{
+  "id": "P-03b",
+  "title": "PHASE between species with different formulas is rejected",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a74 PHASE"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "19ba777ed4968de0aacae00cc17e8f00729ed1e5d3c0cba0b97ccdb15e2496d5",
+  "start_us": "0",
+  "deposits": [
+    {
+      "deposit_id": "crater",
+      "remaining": {
+        "regolith-bank": "1000000"
+      },
+      "extracted": {}
+    }
+  ],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "excavator-kit": "1",
+        "beneficiator-kit": "1",
+        "melter-kit": "1",
+        "electrolyzer-kit": "1",
+        "solar-array-kit": "1",
+        "hopper-kit": "1",
+        "ice-bin-kit": "1",
+        "ilmenite-bin-kit": "1",
+        "tank-kit": "3"
+      }
+    }
+  ],
+  "environment": [
+    "irradiance"
+  ]
+}

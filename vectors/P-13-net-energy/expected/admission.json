@@ -1,0 +1,6 @@
+{
+  "verdict": "REJECTED",
+  "failed_check": "ENERGY_BALANCE",
+  "subject": "melt-on-the-cheap",
+  "detail": "absorbs 6.01 J per unit of latent heat but draws 5 J"
+}

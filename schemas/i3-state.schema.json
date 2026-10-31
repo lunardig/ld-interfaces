@@ -28,7 +28,12 @@
       "properties": {
         "deposit_id": { "$ref": "common.schema.json#/$defs/Id" },
         "remaining": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
-        "extracted": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" }
+        "extracted": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "reservations": {
+          "description": "STOCK held for running jobs that feed from this deposit's face port (LD-PEC-005 §3.3). Omitted when empty.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/Reservation" }
+        }
       },
       "required": ["deposit_id", "remaining", "extracted"],
       "additionalProperties": false

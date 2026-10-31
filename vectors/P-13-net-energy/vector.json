@@ -1,0 +1,13 @@
+{
+  "id": "P-13",
+  "title": "PHASE that absorbs more latent heat than the process draws, with no external source, is rejected",
+  "kind": "ADMISSION",
+  "spec_refs": [
+    "LD-PEC-003 \u00a75",
+    "LD-PEC-003 \u00a711 P-13",
+    "LD-PEC-005 \u00a73.6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

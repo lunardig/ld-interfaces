@@ -78,13 +78,16 @@ def find_def(name: str) -> str | None:
 
 
 def react_balance_failures(cat: Path) -> list[str]:
-    """Return process ids whose REACT vectors do not balance every element."""
+    """Return process ids whose REACT vectors do not balance every element, or whose
+    PHASE joins species of different formulas."""
     entries = ld.read_catalog_entries(cat)
     formulas = {s["substance_id"]: s["formula"] for s in entries["substance"]}
     bad = []
     for proc in entries["process"]:
         for stage in proc["stages"]:
             for op in stage["ops"]:
+                if op["op"] == "PHASE" and formulas[op["from"]] != formulas[op["to"]]:
+                    bad.append(proc["process_id"])
                 if op["op"] != "REACT":
                     continue
                 totals: dict[str, Fraction] = {}

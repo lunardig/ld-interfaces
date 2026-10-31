@@ -206,6 +206,8 @@ pub struct BufferView {
     pub capacity: Quantity,
     pub contents: SpeciesAmounts,
     pub reserved: SpeciesAmounts,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub template: ::std::option::Option<Id>,
 }
 #[doc = "Transport form of a whole catalog: the manifest plus every entry inline. Used by I-1 create and restore."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -256,12 +258,18 @@ pub struct ClaimEnvelope {
 pub struct ClaimView {
     pub buffers: ::std::vec::Vec<BufferView>,
     pub connections: ::std::vec::Vec<ConnectionView>,
+    #[doc = "Deposits on the claim, with what remains and what has been extracted. Each has a face port, <deposit_id>.face, that a FEED can draw from (LD-PEC-005 §3.3)."]
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub deposits: ::std::vec::Vec<Deposit>,
     pub energy: EnergyView,
     pub environment: ::std::collections::BTreeMap<Id, Rational>,
     pub jobs: ::std::vec::Vec<JobView>,
     #[doc = "Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals."]
     pub lots: ::std::vec::Vec<Lot>,
     pub machines: ::std::vec::Vec<MachineView>,
+    #[doc = "Material and heat sinks: cumulative losses, tailings and waste heat."]
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub sinks: ::std::vec::Vec<SinkRecord>,
     pub state_hash: Hash,
     pub time_us: TimeUs,
 }
@@ -687,6 +695,9 @@ pub struct Deposit {
     pub deposit_id: Id,
     pub extracted: SpeciesAmounts,
     pub remaining: SpeciesAmounts,
+    #[doc = "STOCK held for running jobs that feed from this deposit's face port (LD-PEC-005 §3.3). Omitted when empty."]
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub reservations: ::std::vec::Vec<Reservation>,
 }
 #[doc = "`Dimension`"]
 #[derive(
