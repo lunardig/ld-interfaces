@@ -121,7 +121,8 @@ def world(seed: int) -> PropertyWorld:
             m["idle_power"] = {"amount": R(rng.randint(1, 500)), "unit": "w"}
         machines.append(m)
         kits[f"m-{p['process_id']}-kit"] = 1
-    machines.append(battery_machine(capacity_j=rng.randint(50_000, 500_000), charge_w=rng.randint(100, 5000),
+    capacity = rng.randint(50_000, 500_000)
+    machines.append(battery_machine(capacity_j=capacity, charge_w=rng.randint(100, 5000),
                                     discharge_w=rng.randint(100, 20_000), eff=(rng.randint(5, 10), 10)))
     entries = {"elements": elements(), "units": m2c_units(), "substances": m2c_substances(), "processes": procs, "machines": machines,
                "products": [kit(f"{m['blueprint_id']}-kit", "MACHINE", m["blueprint_id"]) for m in machines if m["blueprint_id"] != "battery"]
@@ -133,7 +134,7 @@ def world(seed: int) -> PropertyWorld:
     v = PropertyWorld(seed, "Random world for the M2 exit property tests", ["LD-PEC-005 §8.5"], entries, lots)
     n_batt = rng.randint(1, 2)
     for b in range(n_batt):
-        lots.append(dict(lot(f"batt-{b}", "inventory", products={"battery-kit": "1"}), charge=R(rng.randint(1, 400_000))))
+        lots.append(dict(lot(f"batt-{b}", "inventory", products={"battery-kit": "1"}), charge=R(rng.randint(1, capacity))))
         v.cmd(0, "INSTALL", lot_id=f"batt-{b}", product="battery-kit", location="pad", as_id=f"battery-{b}")
     nb = 0
     for k, (p, ins, outs) in enumerate(plants):
