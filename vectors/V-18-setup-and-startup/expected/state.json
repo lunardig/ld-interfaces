@@ -60,23 +60,6 @@
   "in_transit": [],
   "jobs": [
     {
-      "completed_extent": "50000",
-      "completed_work": "60000",
-      "created_at_us": "0",
-      "current_stage": "melt.done",
-      "held_lot_ids": [],
-      "job_id": "job-melt",
-      "last_advanced_us": "30000000",
-      "machine_id": "melter-1",
-      "priority": "10",
-      "process": "melt-ice",
-      "process_hash": "17f5d339f59834f114c760244080ee618ecc252b95adbf4c5fde064a0fd2184c",
-      "required_work": "60000",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "50000"
-    },
-    {
       "completed_extent": "60",
       "completed_work": "60",
       "created_at_us": "0",

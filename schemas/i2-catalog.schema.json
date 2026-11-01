@@ -948,6 +948,34 @@
           "$ref": "common.schema.json#/$defs/Id",
           "description": "Heat sink that idle draw goes to. Default: waste-heat."
         },
+        "core": {
+          "type": "object",
+          "description": "Material the machine carries inside it, such as a reactor's fuel (LD-PEC-004 A2-3). INSTALL also installs a buffer of the given template as <machine>-core, linked to each listed port by a connection of the given template (<machine>-core-<port>): from the core for an input port, to it for an output. The core and its links cannot be connected, disconnected or removed on their own; REMOVE of the machine puts the core's contents in the kit lot.",
+          "properties": {
+            "buffer": {
+              "$ref": "common.schema.json#/$defs/Id",
+              "description": "Buffer template of the core: what it accepts and holds."
+            },
+            "connection": {
+              "$ref": "common.schema.json#/$defs/Id",
+              "description": "FEED connection template linking the core to its ports."
+            },
+            "ports": {
+              "type": "array",
+              "description": "Material ports of this blueprint linked to the core.",
+              "items": {
+                "$ref": "common.schema.json#/$defs/Id"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "buffer",
+            "connection",
+            "ports"
+          ],
+          "additionalProperties": false
+        },
         "energy_store": {
           "type": "object",
           "description": "Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 §8.2).",

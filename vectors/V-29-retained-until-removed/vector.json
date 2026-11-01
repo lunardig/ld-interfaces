@@ -1,0 +1,12 @@
+{
+  "id": "V-29",
+  "title": "A failed batch keeps its material until its machine is removed; REMOVE moves it to the hold",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A2-1",
+    "LD-PEC-003 \u00a76 failure disposition"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "V-30",
+  "title": "A reactor carries its fuel in a core that travels with its kit",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A2-3",
+    "LD-PEC-006 \u00a73.7"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

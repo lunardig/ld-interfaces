@@ -104,42 +104,7 @@
     "shipment": "1"
   },
   "in_transit": [],
-  "jobs": [
-    {
-      "completed_extent": "100",
-      "completed_work": "100",
-      "created_at_us": "0",
-      "current_stage": "split.done",
-      "held_lot_ids": [],
-      "job_id": "job-batch",
-      "last_advanced_us": "100",
-      "machine_id": "splitter-1",
-      "priority": "0",
-      "process": "split-batch",
-      "process_hash": "ac844b1cb28263d4a4e7f9f334832354fe6553dd8b726ced5418b2f948041e06",
-      "required_work": "100",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "100"
-    },
-    {
-      "completed_extent": "10",
-      "completed_work": "10",
-      "created_at_us": "100",
-      "current_stage": "split.done",
-      "held_lot_ids": [],
-      "job_id": "job-next",
-      "last_advanced_us": "110",
-      "machine_id": "splitter-1",
-      "priority": "0",
-      "process": "split-flow",
-      "process_hash": "915d76007e7bd831eb592a0170d1684390003322f03f75092fcb1cefa11f10f3",
-      "required_work": "10",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "10"
-    }
-  ],
+  "jobs": [],
   "lots": [
     {
       "composition": {

@@ -1,0 +1,21 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","status":"ACCEPTED"}
+{"command_id":"cmd-0004","status":"ACCEPTED"}
+{"command_id":"cmd-0005","status":"ACCEPTED"}
+{"command_id":"cmd-0006","status":"ACCEPTED"}
+{"command_id":"cmd-0007","status":"ACCEPTED"}
+{"command_id":"cmd-0008","detail":{"code":"core-port","message":"reactor-1.fuel belongs to a machine's core and takes no connections"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0009","detail":{"code":"core-part","message":"reactor-1-core is reactor-1's core; remove reactor-1 instead"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0010","detail":{"code":"core-port","message":"reactor-1-core-fuel links reactor-1 to its core"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0011","status":"ACCEPTED"}
+{"command_id":"cmd-0012","status":"ACCEPTED"}
+{"command_id":"cmd-0013","status":"ACCEPTED"}
+{"command_id":"cmd-0014","status":"ACCEPTED"}
+{"command_id":"cmd-0015","status":"ACCEPTED"}
+{"command_id":"cmd-0016","status":"ACCEPTED"}
+{"command_id":"cmd-0017","status":"ACCEPTED"}
+{"command_id":"cmd-0018","status":"ACCEPTED"}
+{"command_id":"cmd-0019","status":"ACCEPTED"}
+{"command_id":"cmd-0020","status":"ACCEPTED"}
+{"command_id":"cmd-0021","status":"ACCEPTED"}

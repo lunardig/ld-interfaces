@@ -1,0 +1,112 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "hopper-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "hopper-1.stock"
+      ],
+      "reservations": [],
+      "template": "hopper"
+    },
+    {
+      "buffer_id": "ice-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "ilmenite-bin",
+      "location": "pad-a",
+      "lot_ids": [
+        "ilmenite-bin.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    },
+    {
+      "buffer_id": "tailings",
+      "location": "pad-a",
+      "lot_ids": [
+        "tailings.stock"
+      ],
+      "reservations": [],
+      "template": "bin"
+    }
+  ],
+  "catalog_hash": "a536274e6cdb783cce530ab455936c63e187088252c717778620e2342487614f",
+  "claim_id": "claim-v",
+  "connections": [],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "16",
+    "lot": "2"
+  },
+  "in_transit": [],
+  "jobs": [],
+  "lots": [
+    {
+      "composition": {
+        "regolith": "60"
+      },
+      "location": "hopper-1",
+      "lot_id": "hopper-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "ice-bin",
+      "lot_id": "ice-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "ilmenite-bin",
+      "lot_id": "ilmenite-bin.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "regolith": "40"
+      },
+      "location": "inventory",
+      "lot_id": "lot-1",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "inventory",
+      "lot_id": "lot-2",
+      "products": {
+        "sorter-kit": "1"
+      },
+      "state": "AVAILABLE",
+      "wear": {
+        "d": "1",
+        "n": "50"
+      }
+    },
+    {
+      "composition": {},
+      "location": "tailings",
+      "lot_id": "tailings.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "61000000"
+}

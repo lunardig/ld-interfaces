@@ -78,25 +78,7 @@
     "command-seq": "9"
   },
   "in_transit": [],
-  "jobs": [
-    {
-      "completed_extent": "100",
-      "completed_work": "100",
-      "created_at_us": "0",
-      "current_stage": "screen.done",
-      "held_lot_ids": [],
-      "job_id": "job-screen",
-      "last_advanced_us": "100000000",
-      "machine_id": "screen-1",
-      "priority": "0",
-      "process": "screen",
-      "process_hash": "82216615327d46185fbaf8ea8c5acd74c1b211b6965cf0bed41df8d22b3f2ab2",
-      "required_work": "100",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "100"
-    }
-  ],
+  "jobs": [],
   "lots": [
     {
       "composition": {

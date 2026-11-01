@@ -1,0 +1,278 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "ice-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "30000",
+          "job_id": "job-melt",
+          "kind": "STOCK",
+          "species": "h2o-s"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "reactor-2-core",
+      "location": "pad-a",
+      "lot_ids": [
+        "reactor-2-core.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "3",
+          "job_id": "job-fission-2",
+          "kind": "SPACE",
+          "species": "fuel-spent"
+        },
+        {
+          "amount": "3",
+          "job_id": "job-fission-2",
+          "kind": "STOCK",
+          "species": "fuel-fresh"
+        }
+      ],
+      "template": "reactor-core"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "30000",
+          "job_id": "job-melt",
+          "kind": "SPACE",
+          "species": "h2o-l"
+        }
+      ],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "ddac55e5eb0ca072bfa0ebe6d25db4434fcd1ef0443500b027e1cdef5a3df576",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-ice",
+      "delay_us": "0",
+      "from_port": "ice-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "melter-1.ice"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "melter-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "100",
+        "n": "1"
+      },
+      "to_port": "water-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "reactor-2-core-fuel",
+      "delay_us": "0",
+      "from_port": "reactor-2-core.io",
+      "kind": "FEED",
+      "template": "core-link",
+      "throughput": {
+        "d": "1",
+        "n": "1"
+      },
+      "to_port": "reactor-2.fuel"
+    },
+    {
+      "active": true,
+      "connection_id": "reactor-2-core-spent",
+      "delay_us": "0",
+      "from_port": "reactor-2.spent",
+      "kind": "FEED",
+      "template": "core-link",
+      "throughput": {
+        "d": "1",
+        "n": "1"
+      },
+      "to_port": "reactor-2-core.io"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [
+    "irradiance"
+  ],
+  "id_counters": {
+    "command-seq": "21",
+    "lot": "1"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "0",
+      "completed_work": "0",
+      "created_at_us": "150000000",
+      "current_stage": "core",
+      "held_lot_ids": [],
+      "job_id": "job-fission-2",
+      "last_advanced_us": "200000000",
+      "machine_id": "reactor-2",
+      "priority": "50",
+      "process": "fission",
+      "process_hash": "728a69d379fc609fec09ef909b3bdc21a4fa5c7659f1cc37543f705d0d91c270",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    },
+    {
+      "completed_extent": "100000",
+      "completed_work": "100000",
+      "created_at_us": "0",
+      "current_stage": "melt-ice",
+      "held_lot_ids": [],
+      "job_id": "job-melt",
+      "last_advanced_us": "200000000",
+      "machine_id": "melter-1",
+      "priority": "10",
+      "process": "melt-ice",
+      "process_hash": "b6d746d0cbf4af1956416bb4220bbe33ca1c412dc6ef42900eb907b2ebedc5b8",
+      "required_work": "100000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "100000000"
+    },
+    {
+      "completed_extent": "100",
+      "completed_work": "100",
+      "created_at_us": "0",
+      "current_stage": "generate",
+      "held_lot_ids": [],
+      "job_id": "job-sun",
+      "last_advanced_us": "100000000",
+      "machine_id": "solar-1",
+      "priority": "100",
+      "process": "generate-solar",
+      "process_hash": "1a5e37995ce447ef139864cabe852acd23f9af258b1a15e4ed8d261b9c40296f",
+      "required_work": "1000000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2o-s": "900000"
+      },
+      "location": "ice-tank",
+      "lot_id": "ice-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "fuel-fresh": "999",
+        "fuel-spent": "1"
+      },
+      "location": "reactor-2-core",
+      "lot_id": "reactor-2-core.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "100000"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-melt"
+      ],
+      "blueprint": "melter",
+      "location": "pad-a",
+      "machine_id": "melter-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "2000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-fission-2"
+      ],
+      "blueprint": "reactor",
+      "location": "pad-a",
+      "machine_id": "reactor-2",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "25000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-sun"
+      ],
+      "blueprint": "solar-array",
+      "location": "pad-a",
+      "machine_id": "solar-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "work",
+      "owner": "job-fission-2",
+      "value": {
+        "d": "5",
+        "n": "4"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "750000",
+      "kind": "HEAT",
+      "sink_id": "reactor-heat",
+      "totals": {}
+    },
+    {
+      "energy": "311700",
+      "kind": "HEAT",
+      "sink_id": "waste-heat",
+      "totals": {}
+    }
+  ],
+  "time_us": "200000000"
+}

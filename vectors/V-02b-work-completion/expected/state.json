@@ -78,25 +78,7 @@
     "command-seq": "11"
   },
   "in_transit": [],
-  "jobs": [
-    {
-      "completed_extent": "120",
-      "completed_work": "120",
-      "created_at_us": "0",
-      "current_stage": "split.done",
-      "held_lot_ids": [],
-      "job_id": "job-batch",
-      "last_advanced_us": "80",
-      "machine_id": "splitter-1",
-      "priority": "0",
-      "process": "split-batch",
-      "process_hash": "ac844b1cb28263d4a4e7f9f334832354fe6553dd8b726ced5418b2f948041e06",
-      "required_work": "120",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "120"
-    }
-  ],
+  "jobs": [],
   "lots": [
     {
       "composition": {

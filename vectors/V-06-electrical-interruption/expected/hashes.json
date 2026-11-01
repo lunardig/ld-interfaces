@@ -7,41 +7,41 @@
   {
     "step": "1",
     "state_hash": "2b290f7eb45786a88852b884528d692d03b6f937c151bd21fa68bb0b7792a510",
-    "history_head": "a23fdfc52d7d137e3b6ce6349ca4956a02adb6ff4ffbf352c5533b89d804a6fd"
+    "history_head": "e8dd02702aa3957833b8f9983c562a300f24ff4ff1b3d45027c516f3865b22c6"
   },
   {
     "step": "2",
     "state_hash": "088ab866ca49e6cce01170d394fd61b1dc4546d987857647d02343329a59b9a7",
-    "history_head": "a23fdfc52d7d137e3b6ce6349ca4956a02adb6ff4ffbf352c5533b89d804a6fd"
+    "history_head": "e8dd02702aa3957833b8f9983c562a300f24ff4ff1b3d45027c516f3865b22c6"
   },
   {
     "step": "3",
     "state_hash": "088ab866ca49e6cce01170d394fd61b1dc4546d987857647d02343329a59b9a7",
-    "history_head": "a23fdfc52d7d137e3b6ce6349ca4956a02adb6ff4ffbf352c5533b89d804a6fd"
+    "history_head": "e8dd02702aa3957833b8f9983c562a300f24ff4ff1b3d45027c516f3865b22c6"
   },
   {
     "step": "4",
     "state_hash": "03bea837d24002ecb705808bd303371ed753ad83917d9d668cc14876c0a33405",
-    "history_head": "2db37e6b693ea45fa4963745104ba5ea8fb8012b449cae3e632da4b4f6b2262e"
+    "history_head": "b951e4e3d6e1e474e36cecdaceb2639f4463b078253b22a5b39843d650e11e8d"
   },
   {
     "step": "5",
     "state_hash": "088ab866ca49e6cce01170d394fd61b1dc4546d987857647d02343329a59b9a7",
-    "history_head": "a23fdfc52d7d137e3b6ce6349ca4956a02adb6ff4ffbf352c5533b89d804a6fd"
+    "history_head": "e8dd02702aa3957833b8f9983c562a300f24ff4ff1b3d45027c516f3865b22c6"
   },
   {
     "step": "6",
     "state_hash": "03bea837d24002ecb705808bd303371ed753ad83917d9d668cc14876c0a33405",
-    "history_head": "2db37e6b693ea45fa4963745104ba5ea8fb8012b449cae3e632da4b4f6b2262e"
+    "history_head": "b951e4e3d6e1e474e36cecdaceb2639f4463b078253b22a5b39843d650e11e8d"
   },
   {
     "step": "7",
     "state_hash": "8f8be3dbc2d3375dfe07c69cdfab72a0f7b9437a0d762122810f7d96a29351ce",
-    "history_head": "e083b9c0762d4033c0a9abac6125f376743cce205bfd8e1000a9c0609e17f945"
+    "history_head": "ddb56db3404265626c10a78fe2708c888971c97f5bf870455d40d90e7a52dcc9"
   },
   {
     "step": "8",
     "state_hash": "727961706c66fbb8e6b9cf32ebe9c8d6ae8e541e3b305467974532d08c044db2",
-    "history_head": "e083b9c0762d4033c0a9abac6125f376743cce205bfd8e1000a9c0609e17f945"
+    "history_head": "ddb56db3404265626c10a78fe2708c888971c97f5bf870455d40d90e7a52dcc9"
   }
 ]

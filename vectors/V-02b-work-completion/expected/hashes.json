@@ -11,12 +11,12 @@
   },
   {
     "step": "2",
-    "state_hash": "0f5ae3e6b64a73b5c79e2c8522f5c1317c12fce5d98b29faa07674b0e9af7e08",
-    "history_head": "e772c1882760e2b7a0400bf9f92edded653bc5522b3557055eb180c642c24e65"
+    "state_hash": "06871b543eaced293aed3b214616bbe5ba0bace7f16a44da2d64ea5990a0d4bb",
+    "history_head": "3bcefa78ed4b3b0fbce2e8d50c92ea56279d75f6b5a20eabe5d6a77841921e49"
   },
   {
     "step": "3",
-    "state_hash": "ee0be1797246c97e6187d9b2c710a656248f3ec7b02523e3a98ce73a33bef24f",
-    "history_head": "e772c1882760e2b7a0400bf9f92edded653bc5522b3557055eb180c642c24e65"
+    "state_hash": "8d459c8552d85c2660ad0c80b95beef338fd4b9f37702daff649700cf349ec85",
+    "history_head": "3bcefa78ed4b3b0fbce2e8d50c92ea56279d75f6b5a20eabe5d6a77841921e49"
   }
 ]

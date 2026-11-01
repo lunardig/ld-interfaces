@@ -62,6 +62,10 @@
         "charge": {
           "$ref": "common.schema.json#/$defs/Rational",
           "description": "Charge carried by a removed energy store's kit, exactly, in the catalog's bus energy unit (LD-PEC-005 §8.2). Present only on a lot holding one installable product unit."
+        },
+        "core": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts",
+          "description": "Core contents carried by a machine kit whose blueprint declares a core (LD-PEC-004 A2-3), such as a reactor's fuel: INSTALL puts them in the new <machine>-core buffer. Present only on a lot holding one installable product unit; omitted when empty. Counts as material in every conservation check."
         }
       },
       "required": ["lot_id", "location", "state", "composition", "products"],
@@ -265,9 +269,9 @@
         "timestamp": { "$ref": "common.schema.json#/$defs/TimeUs" },
         "inputs_hash": { "$ref": "common.schema.json#/$defs/Hash", "description": "A command record hashes {commands: [{command, admission}]}; an event-time record hashes {commands: [], environment: [{function_id, value}]} (LD-PEC-004 §8)." },
         "transition_hash": { "$ref": "common.schema.json#/$defs/Hash" },
-        "resulting_state_hash": { "$ref": "common.schema.json#/$defs/Hash" }
+        "resulting_state_hash": { "$ref": "common.schema.json#/$defs/Hash", "description": "Present on command records only (LD-PEC-004 A2-2). Event-time records commit their events through transition_hash; a verifier re-executes between command records." }
       },
-      "required": ["prev_hash", "world", "claim", "timestamp", "inputs_hash", "transition_hash", "resulting_state_hash"],
+      "required": ["prev_hash", "world", "claim", "timestamp", "inputs_hash", "transition_hash"],
       "additionalProperties": false
     },
     "Snapshot": {

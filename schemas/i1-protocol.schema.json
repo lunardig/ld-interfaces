@@ -938,6 +938,10 @@
         "unpowered": {
           "type": "boolean",
           "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 §8.3)."
+        },
+        "core": {
+          "$ref": "common.schema.json#/$defs/SpeciesAmounts",
+          "description": "Contents of the machine's core buffer (<machine>-core), when its blueprint declares one (LD-PEC-004 A2-3). The same material appears in that buffer's view; this is a convenience."
         }
       },
       "required": [

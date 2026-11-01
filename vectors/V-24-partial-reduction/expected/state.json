@@ -148,23 +148,6 @@
   "in_transit": [],
   "jobs": [
     {
-      "completed_extent": "100000",
-      "completed_work": "100000",
-      "created_at_us": "0",
-      "current_stage": "reduce.done",
-      "held_lot_ids": [],
-      "job_id": "job-reduce",
-      "last_advanced_us": "600000000",
-      "machine_id": "reactor-1",
-      "priority": "0",
-      "process": "reduce-ilmenite",
-      "process_hash": "71434baae83ec61b51e4f058d5355584e65b0b98f41152f7c7a71ce80db2549e",
-      "required_work": "100000",
-      "started": true,
-      "status": "COMPLETED",
-      "target_extent": "100000"
-    },
-    {
       "completed_extent": "900",
       "completed_work": "900",
       "created_at_us": "0",

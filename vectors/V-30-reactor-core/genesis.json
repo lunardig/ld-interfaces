@@ -1,0 +1,45 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "ddac55e5eb0ca072bfa0ebe6d25db4434fcd1ef0443500b027e1cdef5a3df576",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "solar-kit": "1",
+        "melter-kit": "1",
+        "tank-kit": "2"
+      }
+    },
+    {
+      "lot_id": "reactor",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "reactor-kit": "1"
+      },
+      "core": {
+        "fuel-fresh": "1000"
+      }
+    },
+    {
+      "lot_id": "ice",
+      "location": "ice-tank",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-s": "1000000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": [
+    "irradiance"
+  ]
+}

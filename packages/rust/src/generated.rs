@@ -1438,12 +1438,13 @@ pub struct HistoryRecord {
     pub claim: Id,
     pub inputs_hash: Hash,
     pub prev_hash: Hash,
-    pub resulting_state_hash: Hash,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub resulting_state_hash: ::std::option::Option<Hash>,
     pub timestamp: TimeUs,
     pub transition_hash: Hash,
     pub world: Id,
 }
-#[doc = "Stable identifier, unique within its scope and never reused."]
+#[doc = "Stable identifier, unique within its scope. A job id may be reused once the job has left the physical state (LD-PEC-004 A2-1); other ids are never reused."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[serde(transparent)]
 pub struct Id(::std::string::String);
@@ -1994,6 +1995,8 @@ pub struct Lot {
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]
     pub charge: ::std::option::Option<Rational>,
     pub composition: SpeciesAmounts,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub core: ::std::option::Option<SpeciesAmounts>,
     pub location: Id,
     pub lot_id: Id,
     #[doc = "Discrete products in this lot: product id to count."]
@@ -2068,6 +2071,8 @@ pub struct MachineBlueprint {
     pub blueprint_id: Id,
     pub capabilities: ::std::vec::Vec<Id>,
     pub condition_table: ::std::vec::Vec<ConditionStep>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub core: ::std::option::Option<MachineBlueprintCore>,
     pub embodied: SpeciesAmounts,
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]
     pub energy_store: ::std::option::Option<MachineBlueprintEnergyStore>,
@@ -2079,6 +2084,15 @@ pub struct MachineBlueprint {
     pub ports: ::std::vec::Vec<MachinePort>,
     pub processes: ::std::vec::Vec<Id>,
     pub rated_work: Rational,
+}
+#[doc = "Material the machine carries inside it, such as a reactor's fuel (LD-PEC-004 A2-3). INSTALL also installs a buffer of the given template as <machine>-core, linked to each listed port by a connection of the given template (<machine>-core-<port>): from the core for an input port, to it for an output. The core and its links cannot be connected, disconnected or removed on their own; REMOVE of the machine puts the core's contents in the kit lot."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct MachineBlueprintCore {
+    pub buffer: Id,
+    pub connection: Id,
+    #[doc = "Material ports of this blueprint linked to the core."]
+    pub ports: ::std::vec::Vec<Id>,
 }
 #[doc = "Makes the machine an energy store on the claim bus, such as a battery (LD-PEC-005 §8.2)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -2327,6 +2341,8 @@ pub struct MachineView {
     pub assigned_job_ids: ::std::vec::Vec<Id>,
     pub blueprint: Id,
     pub capacity_factor: Rational,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub core: ::std::option::Option<SpeciesAmounts>,
     pub machine_id: Id,
     pub mode: MachineMode,
     pub rate: Rational,

@@ -1923,13 +1923,12 @@
         "claim",
         "timestamp",
         "inputs_hash",
-        "transition_hash",
-        "resulting_state_hash"
+        "transition_hash"
       ],
       "additionalProperties": false
     },
     "Id": {
-      "description": "Stable identifier, unique within its scope and never reused.",
+      "description": "Stable identifier, unique within its scope. A job id may be reused once the job has left the physical state (LD-PEC-004 A2-1); other ids are never reused.",
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"
     },
@@ -2451,6 +2450,9 @@
         },
         "charge": {
           "$ref": "#/$defs/Rational"
+        },
+        "core": {
+          "$ref": "#/$defs/SpeciesAmounts"
         }
       },
       "required": [
@@ -2517,6 +2519,32 @@
         },
         "idle_heat_sink": {
           "$ref": "#/$defs/Id"
+        },
+        "core": {
+          "type": "object",
+          "description": "Material the machine carries inside it, such as a reactor's fuel (LD-PEC-004 A2-3). INSTALL also installs a buffer of the given template as <machine>-core, linked to each listed port by a connection of the given template (<machine>-core-<port>): from the core for an input port, to it for an output. The core and its links cannot be connected, disconnected or removed on their own; REMOVE of the machine puts the core's contents in the kit lot.",
+          "properties": {
+            "buffer": {
+              "$ref": "#/$defs/Id"
+            },
+            "connection": {
+              "$ref": "#/$defs/Id"
+            },
+            "ports": {
+              "type": "array",
+              "description": "Material ports of this blueprint linked to the core.",
+              "items": {
+                "$ref": "#/$defs/Id"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "buffer",
+            "connection",
+            "ports"
+          ],
+          "additionalProperties": false
         },
         "energy_store": {
           "type": "object",
@@ -2728,6 +2756,9 @@
         "unpowered": {
           "type": "boolean",
           "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 \u00a78.3)."
+        },
+        "core": {
+          "$ref": "#/$defs/SpeciesAmounts"
         }
       },
       "required": [

@@ -2,16 +2,16 @@
   {
     "step": "0",
     "state_hash": "560a7b331fe0f23f806c42d3a1482ac54521974c454f751cdd40d0ec96c2c007",
-    "history_head": "10df3de3c3158e83e882e995011b615ef101942ae9326a677d22b824798289b8"
+    "history_head": "4466a618294651088dd404237623c4f63e3b0b68a2ced2aa0932f9d70fb31c48"
   },
   {
     "step": "1",
     "state_hash": "307b97c803d123688c010cf8b1c1b92b8374be87d8f9f92af222e2d0f6880425",
-    "history_head": "f4cec1d7214b5f63eac4eda734c21a704766d4b0a316faffa5a9348aa1475436"
+    "history_head": "b58101fa56d1f1639b284bba63b7611b566dcaf45d67fc8a74164acda4b9cd33"
   },
   {
     "step": "2",
     "state_hash": "3961864296b7e6d178c976bd328c159e7e008b21837252553629d051510daed7",
-    "history_head": "2db30041f5f667b0666f470575f74cd794b32c483af76586874564c330526217"
+    "history_head": "f6fd8e8ac69e920afb21f20d16f7d7d753e12fd0dd2da053fadf7109353f691e"
   }
 ]

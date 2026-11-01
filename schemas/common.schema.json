@@ -34,7 +34,7 @@
       "additionalProperties": false
     },
     "Id": {
-      "description": "Stable identifier, unique within its scope and never reused.",
+      "description": "Stable identifier, unique within its scope. A job id may be reused once the job has left the physical state (LD-PEC-004 A2-1); other ids are never reused.",
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"
     },
