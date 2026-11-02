@@ -1,0 +1,12 @@
+{
+  "id": "V-37",
+  "title": "Fractional levels scale with the buffer; an input stop level keeps a heel",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A4-1",
+    "LD-PEC-004 A4-2"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

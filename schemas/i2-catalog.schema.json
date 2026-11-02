@@ -840,14 +840,23 @@
               },
               "unit": {
                 "$ref": "common.schema.json#/$defs/Id"
+              },
+              "stop_at": {
+                "$ref": "common.schema.json#/$defs/Uint",
+                "description": "Stop level, in unit (LD-PEC-004 A4-1)."
+              },
+              "restart_fraction": {
+                "$ref": "common.schema.json#/$defs/Rational",
+                "description": "Restart level as a fraction of the connected buffer's capacity, in [0, 1]."
+              },
+              "stop_fraction": {
+                "$ref": "common.schema.json#/$defs/Rational",
+                "description": "Stop level as a fraction of the connected buffer's capacity, in [0, 1)."
               }
             },
-            "required": [
-              "restart_at",
-              "unit"
-            ],
             "additionalProperties": false
-          }
+          },
+          "description": "Level switches per port (LD-PEC-004 A4). An input's level is its buffer's available stock of the port's species; an output's is its buffer's headroom (free space). A stopped job restarts only once the level reaches the restart level; a running FLOW job stops when it would take the level past the stop level. Give levels either as amounts (restart_at, stop_at, in unit) or as fractions of the connected buffer's capacity (restart_fraction, stop_fraction), not both. The stop level is below the restart level."
         },
         "constants": {
           "type": "object",

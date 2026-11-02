@@ -2610,6 +2610,7 @@ pub struct Process {
     pub ports: ProcessPorts,
     pub process_id: Id,
     pub pset_version: ::serde_json::Value,
+    #[doc = "Level switches per port (LD-PEC-004 A4). An input's level is its buffer's available stock of the port's species; an output's is its buffer's headroom (free space). A stopped job restarts only once the level reaches the restart level; a running FLOW job stops when it would take the level past the stop level. Give levels either as amounts (restart_at, stop_at, in unit) or as fractions of the connected buffer's capacity (restart_fraction, stop_fraction), not both. The stop level is below the restart level."]
     pub restart_thresholds: ::std::collections::BTreeMap<Id, ProcessRestartThresholdsValue>,
     pub stages: ::std::vec::Vec<Stage>,
 }
@@ -2739,11 +2740,19 @@ pub struct ProcessPorts {
     pub out: ::std::vec::Vec<ProcessPort>,
 }
 #[doc = "`ProcessRestartThresholdsValue`"]
-#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, Default)]
 #[serde(deny_unknown_fields)]
 pub struct ProcessRestartThresholdsValue {
-    pub restart_at: Uint,
-    pub unit: Id,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub restart_at: ::std::option::Option<Uint>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub restart_fraction: ::std::option::Option<Rational>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub stop_at: ::std::option::Option<Uint>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub stop_fraction: ::std::option::Option<Rational>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub unit: ::std::option::Option<Id>,
 }
 #[doc = "`ProductBlueprint`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -2857,6 +2866,9 @@ pub enum Reason {
     #[doc = "ReasonFeedUnsettled"]
     #[serde(rename = "FEED_UNSETTLED")]
     FeedUnsettled { ports: ::std::vec::Vec<Id> },
+    #[doc = "ReasonStopLevel"]
+    #[serde(rename = "STOP_LEVEL")]
+    StopLevel { port: Id },
 }
 #[doc = "Any I-1 request, tagged by \"method\"."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]

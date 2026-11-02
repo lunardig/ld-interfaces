@@ -910,6 +910,9 @@
         },
         {
           "$ref": "#/$defs/ReasonFeedUnsettled"
+        },
+        {
+          "$ref": "#/$defs/ReasonStopLevel"
         }
       ]
     },
@@ -2100,6 +2103,23 @@
       "required": [
         "code",
         "ports"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonStopLevel": {
+      "type": "object",
+      "description": "A FLOW job stopped at a port's stop level (LD-PEC-004 A4-1): an input's stock fell to it, or an output's free space did. It restarts at the port's restart level.",
+      "properties": {
+        "code": {
+          "const": "STOP_LEVEL"
+        },
+        "port": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "code",
+        "port"
       ],
       "additionalProperties": false
     }

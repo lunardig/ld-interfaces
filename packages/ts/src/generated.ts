@@ -157,7 +157,8 @@ export type Reason =
   | ReasonMaintenance
   | ReasonFailed
   | ReasonFed
-  | ReasonFeedUnsettled;
+  | ReasonFeedUnsettled
+  | ReasonStopLevel;
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "LotState".
@@ -477,11 +478,17 @@ export interface Process {
   failure_disposition: {
     [k: string]: FailureDisposition | undefined;
   };
+  /**
+   * Level switches per port (LD-PEC-004 A4). An input's level is its buffer's available stock of the port's species; an output's is its buffer's headroom (free space). A stopped job restarts only once the level reaches the restart level; a running FLOW job stops when it would take the level past the stop level. Give levels either as amounts (restart_at, stop_at, in unit) or as fractions of the connected buffer's capacity (restart_fraction, stop_fraction), not both. The stop level is below the restart level.
+   */
   restart_thresholds: {
     [k: string]:
       | {
-          restart_at: Uint;
-          unit: Id;
+          restart_at?: Uint;
+          unit?: Id;
+          stop_at?: Uint;
+          restart_fraction?: Rational;
+          stop_fraction?: Rational;
         }
       | undefined;
   };
@@ -896,6 +903,10 @@ export interface ReasonFeedUnsettled {
    * @minItems 1
    */
   ports: [Id, ...Id[]];
+}
+export interface ReasonStopLevel {
+  code: "STOP_LEVEL";
+  port: Id;
 }
 /**
  * Bus power in the unit given, per microsecond.
