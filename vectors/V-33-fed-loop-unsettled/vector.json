@@ -1,0 +1,11 @@
+{
+  "id": "V-33",
+  "title": "A loop whose rates do not settle falls back to cycling and says so",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A3-3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "vector-world",
+  "claim_id": "claim-v",
+  "catalog_hash": "7580aa3908411f0a92a46f1498e54f63e0be4947b0f5eb44c58db9e0dec8649a",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "splitter-kit": "2",
+        "joiner-kit": "1",
+        "tank-kit": "7"
+      }
+    },
+    {
+      "lot_id": "feed-1",
+      "location": "feed-tank",
+      "state": "AVAILABLE",
+      "composition": {
+        "h2o-l": "1000000"
+      },
+      "products": {}
+    }
+  ],
+  "environment": []
+}

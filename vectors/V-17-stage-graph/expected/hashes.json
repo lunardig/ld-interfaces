@@ -1,12 +1,12 @@
 [
   {
     "step": "0",
-    "state_hash": "93b3b8e20782b34c07851c90a6a92d198d3585532bf5151315d69e122ed08551",
-    "history_head": "d4def7ad72558ba94bb6c112a80b7cc8dc96d08c1ec0f5799b6f1e249280bf29"
+    "state_hash": "5ff892305cd14acec0e26ef250e3c33ed346493e67c111757d60177f826551b8",
+    "history_head": "ba3898e3155344d5ad464b7ac1824f7394a86d7622d75274ba71430185784bfa"
   },
   {
     "step": "1",
     "state_hash": "7fc23b19b5b80db703c38fea58bb84338af19f11a01ed4d1786720841de96c9b",
-    "history_head": "1a3e4e0e3728d74d7ebe1f18aee0a26aa05eb8aeafe75f58ee7ad14b621589f4"
+    "history_head": "6572e385d933799aa3e0eef13933b6589053d7d7ca7bd4652c2470273748202b"
   }
 ]

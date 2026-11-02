@@ -112,6 +112,10 @@
       "priority": "0",
       "process": "split-flow",
       "process_hash": "15fb4fcc45230a17e5ad753d71cab6f915222e52de12d8d29365f7a7399af438",
+      "rate": {
+        "d": "7",
+        "n": "3"
+      },
       "required_work": "1000000000",
       "started": true,
       "status": "RUNNING",

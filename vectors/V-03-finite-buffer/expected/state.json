@@ -189,6 +189,10 @@
       "priority": "1",
       "process": "join-flow",
       "process_hash": "f951b85abe9ec9e9d453277d13487519b090e7bcd91261eb6c6e61c2efd736cf",
+      "rate": {
+        "d": "120000000",
+        "n": "1"
+      },
       "required_work": "1000000000",
       "started": true,
       "status": "RUNNING",
@@ -206,6 +210,10 @@
       "priority": "0",
       "process": "split-flow",
       "process_hash": "915d76007e7bd831eb592a0170d1684390003322f03f75092fcb1cefa11f10f3",
+      "rate": {
+        "d": "180000000",
+        "n": "1"
+      },
       "required_work": "1000000000",
       "started": true,
       "status": "RUNNING",

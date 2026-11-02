@@ -1581,6 +1581,9 @@ pub enum Instruction {
         dir: InstructionDir,
         heat_sink: Id,
         mode: InstructionMode,
+        #[doc = "PER_WORK DRAW only: power against load while the job runs (LD-PEC-004 A3-4). Points of (load, power) as fractions: load is the job's rate over its blueprint's rated_work, power the draw over this op's draw at rated_work. Linear between points and extended beyond the first and last. Loads strictly increase within [0, 1]; power never decreases and is never below load. The difference from the plain per-work draw is heat in this op's heat_sink at once. Without it, power is proportional to load."]
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        part_load: ::std::vec::Vec<InstructionPartLoadItem>,
         unit: Id,
     },
     #[doc = "OpRequire"]
@@ -1698,6 +1701,13 @@ impl ::std::convert::TryFrom<::std::string::String> for InstructionMode {
     ) -> ::std::result::Result<Self, self::error::ConversionError> {
         value.parse()
     }
+}
+#[doc = "`InstructionPartLoadItem`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct InstructionPartLoadItem {
+    pub load: Rational,
+    pub power: Rational,
 }
 #[doc = "`InstructionPer`"]
 #[derive(
@@ -1868,6 +1878,8 @@ pub struct JobInstance {
     pub priority: Int,
     pub process: Id,
     pub process_hash: Hash,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub rate: ::std::option::Option<Rational>,
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]
     pub reason: ::std::option::Option<Reason>,
     pub required_work: Uint,
@@ -2814,7 +2826,7 @@ pub struct Rational {
     pub d: PositiveInt,
     pub n: Int,
 }
-#[doc = "Deterministic explanation of why a job is not running, tagged by \"code\"."]
+#[doc = "Deterministic explanation of a job's status, tagged by \"code\": why a started job is not running, or how a running one is limited (DWELLING, FED, FEED_UNSETTLED)."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(tag = "code", deny_unknown_fields)]
 pub enum Reason {
@@ -2839,6 +2851,12 @@ pub enum Reason {
     #[doc = "ReasonFailed"]
     #[serde(rename = "FAILED")]
     Failed { event_id: Id },
+    #[doc = "ReasonFed"]
+    #[serde(rename = "FED")]
+    Fed { ports: ::std::vec::Vec<Id> },
+    #[doc = "ReasonFeedUnsettled"]
+    #[serde(rename = "FEED_UNSETTLED")]
+    FeedUnsettled { ports: ::std::vec::Vec<Id> },
 }
 #[doc = "Any I-1 request, tagged by \"method\"."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]

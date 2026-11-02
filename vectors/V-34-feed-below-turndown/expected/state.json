@@ -1,0 +1,228 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "product-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "product-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "56705f78eb61159da60281fc9f61294ebb4dc9f5a6aa6b4436e7eeb39e39b36b",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-h2",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h2-in",
+      "delay_us": "0",
+      "from_port": "h2-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.h2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2-in",
+      "delay_us": "0",
+      "from_port": "o2-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.o2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-out",
+      "delay_us": "0",
+      "from_port": "joiner-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "product-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-1.water"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "16"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "39999",
+      "completed_work": "39999",
+      "created_at_us": "0",
+      "current_stage": "join",
+      "held_lot_ids": [],
+      "job_id": "job-join",
+      "last_advanced_us": "39999500",
+      "machine_id": "joiner-1",
+      "priority": "0",
+      "process": "join-flow",
+      "process_hash": "b426f9361b8430fce30c597f42b0079a56e8b4f9ad029d4cf00858e2f396ad70",
+      "reason": {
+        "code": "BELOW_RESTART_THRESHOLD",
+        "port": "o2"
+      },
+      "required_work": "50000",
+      "started": true,
+      "status": "STARVED",
+      "target_extent": "50000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2-g": "20002"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "inventory",
+      "lot_id": "kits",
+      "products": {
+        "tank-kit": "1"
+      },
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "10001"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "79998"
+      },
+      "location": "product-tank",
+      "lot_id": "product-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [],
+      "blueprint": "joiner",
+      "location": "pad-a",
+      "machine_id": "joiner-1",
+      "mode": "STARVED",
+      "rate_setpoint": {
+        "d": "500",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "IDLE",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "60000000"
+}

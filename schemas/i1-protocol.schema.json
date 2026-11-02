@@ -879,7 +879,7 @@
       "additionalProperties": false
     },
     "Reason": {
-      "description": "Deterministic explanation of why a job is not running, tagged by \"code\".",
+      "description": "Deterministic explanation of a job's status, tagged by \"code\": why a started job is not running, or how a running one is limited (DWELLING, FED, FEED_UNSETTLED).",
       "oneOf": [
         {
           "$ref": "#/$defs/ReasonStarvedInput"
@@ -904,6 +904,12 @@
         },
         {
           "$ref": "#/$defs/ReasonFailed"
+        },
+        {
+          "$ref": "#/$defs/ReasonFed"
+        },
+        {
+          "$ref": "#/$defs/ReasonFeedUnsettled"
         }
       ]
     },
@@ -937,7 +943,7 @@
         },
         "unpowered": {
           "type": "boolean",
-          "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 §8.3)."
+          "description": "Present and true when the machine's idle draw is not being met (LD-PEC-005 \u00a78.3)."
         },
         "core": {
           "$ref": "common.schema.json#/$defs/SpeciesAmounts",
@@ -985,7 +991,7 @@
         },
         "energy_held": {
           "$ref": "common.schema.json#/$defs/Rational",
-          "description": "Energy drawn (or, if negative, produced) for work whose units have not completed yet, in the bus unit. It settles into heat and chemical energy when the units complete (LD-PEC-006 §3.2.1)."
+          "description": "Energy drawn (or, if negative, produced) for work whose units have not completed yet, in the bus unit. It settles into heat and chemical energy when the units complete (LD-PEC-006 \u00a73.2.1)."
         },
         "rate": {
           "$ref": "common.schema.json#/$defs/Rational",
@@ -1177,7 +1183,7 @@
           }
         },
         "deposits": {
-          "description": "Deposits on the claim, with what remains and what has been extracted. Each has a face port, <deposit_id>.face, that a FEED can draw from (LD-PEC-005 §3.3).",
+          "description": "Deposits on the claim, with what remains and what has been extracted. Each has a face port, <deposit_id>.face, that a FEED can draw from (LD-PEC-005 \u00a73.3).",
           "type": "array",
           "items": {
             "$ref": "i3-state.schema.json#/$defs/Deposit"
@@ -2054,6 +2060,48 @@
           "$ref": "#/$defs/ErrorResponse"
         }
       ]
+    },
+    "ReasonFed": {
+      "type": "object",
+      "description": "A running FLOW job held to the rate its fed inputs arrive at: inputs it alone draws from, drawn as they arrive rather than from reserved stock (LD-PEC-004 A3-1). `ports` lists them in process order.",
+      "properties": {
+        "code": {
+          "const": "FED"
+        },
+        "ports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "ports"
+      ],
+      "additionalProperties": false
+    },
+    "ReasonFeedUnsettled": {
+      "type": "object",
+      "description": "A running FLOW job held below the rate its fed inputs arrive at: it is in a loop whose fixed point did not settle within the pass limit, so it runs at the last pass of an iteration from below, which every job in the loop can sustain (LD-PEC-004 A3-3). `ports` lists its fed inputs in process order.",
+      "properties": {
+        "code": {
+          "const": "FEED_UNSETTLED"
+        },
+        "ports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "ports"
+      ],
+      "additionalProperties": false
     }
   }
 }

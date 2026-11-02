@@ -1,0 +1,13 @@
+{
+  "id": "V-31",
+  "title": "A consumer runs at its producer's rate through a buffer it alone draws from",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A3-1",
+    "LD-PEC-004 A3-2",
+    "LD-PEC-004 A3-5"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

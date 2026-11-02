@@ -164,7 +164,8 @@
         "current_stage": { "$ref": "common.schema.json#/$defs/Id" },
         "held_lot_ids": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Id" } },
         "created_at_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
-        "last_advanced_us": { "$ref": "common.schema.json#/$defs/TimeUs" }
+        "last_advanced_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "rate": { "$ref": "common.schema.json#/$defs/Rational", "description": "A running job's work rate as dispatch allocated it, before load following (LD-PEC-004 A3-5). Present exactly when the job is RUNNING." }
       },
       "required": ["job_id", "process", "process_hash", "machine_id", "status", "started", "priority", "target_extent", "completed_extent", "required_work", "completed_work", "current_stage", "held_lot_ids", "created_at_us", "last_advanced_us"],
       "additionalProperties": false

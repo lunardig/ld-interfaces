@@ -1,0 +1,12 @@
+{
+  "id": "V-35",
+  "title": "A process's power follows its part-load curve; the loss is heat",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A3-4",
+    "LD-PEC-006 \u00a72.5"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -142,7 +142,7 @@ export type MachineMode = "IDLE" | "STARTING" | "RUNNING" | "STARVED" | "BLOCKED
  */
 export type JobStatus = "QUEUED" | "RUNNING" | "STARVED" | "BLOCKED" | "PAUSED" | "COMPLETED" | "CANCELLED" | "FAILED";
 /**
- * Deterministic explanation of why a job is not running, tagged by "code".
+ * Deterministic explanation of a job's status, tagged by "code": why a started job is not running, or how a running one is limited (DWELLING, FED, FEED_UNSETTLED).
  *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "Reason".
@@ -155,7 +155,9 @@ export type Reason =
   | ReasonDwelling
   | ReasonBelowRestartThreshold
   | ReasonMaintenance
-  | ReasonFailed;
+  | ReasonFailed
+  | ReasonFed
+  | ReasonFeedUnsettled;
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "LotState".
@@ -615,6 +617,25 @@ export interface OpEnergy {
   amount: Rational;
   unit: Id;
   heat_sink: Id;
+  /**
+   * PER_WORK DRAW only: power against load while the job runs (LD-PEC-004 A3-4). Points of (load, power) as fractions: load is the job's rate over its blueprint's rated_work, power the draw over this op's draw at rated_work. Linear between points and extended beyond the first and last. Loads strictly increase within [0, 1]; power never decreases and is never below load. The difference from the plain per-work draw is heat in this op's heat_sink at once. Without it, power is proportional to load.
+   *
+   * @minItems 2
+   */
+  part_load?: [
+    {
+      load: Rational;
+      power: Rational;
+    },
+    {
+      load: Rational;
+      power: Rational;
+    },
+    ...{
+      load: Rational;
+      power: Rational;
+    }[]
+  ];
 }
 export interface OpRequire {
   op: "REQUIRE";
@@ -861,6 +882,20 @@ export interface ReasonMaintenance {
 export interface ReasonFailed {
   code: "FAILED";
   event_id: Id;
+}
+export interface ReasonFed {
+  code: "FED";
+  /**
+   * @minItems 1
+   */
+  ports: [Id, ...Id[]];
+}
+export interface ReasonFeedUnsettled {
+  code: "FEED_UNSETTLED";
+  /**
+   * @minItems 1
+   */
+  ports: [Id, ...Id[]];
 }
 /**
  * Bus power in the unit given, per microsecond.
@@ -1344,6 +1379,7 @@ export interface JobInstance {
   held_lot_ids: Id[];
   created_at_us: TimeUs;
   last_advanced_us: TimeUs;
+  rate?: Rational;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

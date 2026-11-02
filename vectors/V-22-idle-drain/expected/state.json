@@ -86,6 +86,10 @@
       "priority": "100",
       "process": "generate-solar",
       "process_hash": "1a5e37995ce447ef139864cabe852acd23f9af258b1a15e4ed8d261b9c40296f",
+      "rate": {
+        "d": "1000000",
+        "n": "1"
+      },
       "required_work": "1000000000",
       "started": true,
       "status": "RUNNING",

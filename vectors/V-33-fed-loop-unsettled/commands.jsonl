@@ -1,0 +1,27 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "splitter-kit", "location": "pad-a", "as_id": "splitter-1"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "joiner-kit", "location": "pad-a", "as_id": "joiner-1"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "water-tank"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "h2-tank"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "o2-tank"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "product-tank"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "ice-tank"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "CONNECT", "args": {"connection_id": "c-water", "template": "pipe", "from_port": "water-tank.io", "to_port": "splitter-1.water"}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "CONNECT", "args": {"connection_id": "c-h2", "template": "pipe", "from_port": "splitter-1.h2", "to_port": "h2-tank.io"}}
+{"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "CONNECT", "args": {"connection_id": "c-o2", "template": "pipe", "from_port": "splitter-1.o2", "to_port": "o2-tank.io"}}
+{"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "CONNECT", "args": {"connection_id": "c-h2-in", "template": "pipe", "from_port": "h2-tank.io", "to_port": "joiner-1.h2"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "CONNECT", "args": {"connection_id": "c-o2-in", "template": "pipe", "from_port": "o2-tank.io", "to_port": "joiner-1.o2"}}
+{"command_id": "cmd-0013", "effective_us": "0", "seq": "13", "op": "CONNECT", "args": {"connection_id": "c-out", "template": "pipe", "from_port": "joiner-1.water", "to_port": "water-tank.io"}}
+{"command_id": "cmd-0014", "effective_us": "0", "seq": "14", "op": "CONNECT", "args": {"connection_id": "c-ice", "template": "pipe", "from_port": "splitter-1.ice", "to_port": "ice-tank.io"}}
+{"command_id": "cmd-0015", "effective_us": "0", "seq": "15", "op": "INSTALL", "args": {"lot_id": "kits", "product": "splitter-kit", "location": "pad-a", "as_id": "splitter-2"}}
+{"command_id": "cmd-0016", "effective_us": "0", "seq": "16", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "feed-tank"}}
+{"command_id": "cmd-0017", "effective_us": "0", "seq": "17", "op": "CONNECT", "args": {"connection_id": "c-feed", "template": "pipe", "from_port": "feed-tank.io", "to_port": "splitter-2.water"}}
+{"command_id": "cmd-0018", "effective_us": "0", "seq": "18", "op": "CONNECT", "args": {"connection_id": "c-h2-2", "template": "pipe", "from_port": "splitter-2.h2", "to_port": "h2-tank.io"}}
+{"command_id": "cmd-0019", "effective_us": "0", "seq": "19", "op": "CONNECT", "args": {"connection_id": "c-o2-2", "template": "pipe", "from_port": "splitter-2.o2", "to_port": "o2-tank.io"}}
+{"command_id": "cmd-0020", "effective_us": "0", "seq": "20", "op": "CONNECT", "args": {"connection_id": "c-ice-2", "template": "pipe", "from_port": "splitter-2.ice", "to_port": "ice-tank.io"}}
+{"command_id": "cmd-0021", "effective_us": "0", "seq": "21", "op": "SET_OPERATING_POLICY", "args": {"machine_id": "splitter-2", "rate_setpoint": {"n": "1", "d": "1000"}}}
+{"command_id": "cmd-0022", "effective_us": "0", "seq": "22", "op": "CREATE_JOB", "args": {"job_id": "job-feed", "process": "split-flow", "machine_id": "splitter-2", "target_extent": "1000000", "priority": "0"}}
+{"command_id": "cmd-0023", "effective_us": "0", "seq": "23", "op": "START", "args": {"job_id": "job-feed"}}
+{"command_id": "cmd-0024", "effective_us": "0", "seq": "24", "op": "CREATE_JOB", "args": {"job_id": "job-join", "process": "join-flow", "machine_id": "joiner-1", "target_extent": "1000000", "priority": "0"}}
+{"command_id": "cmd-0025", "effective_us": "0", "seq": "25", "op": "START", "args": {"job_id": "job-join"}}
+{"command_id": "cmd-0026", "effective_us": "0", "seq": "26", "op": "CREATE_JOB", "args": {"job_id": "job-split", "process": "split-flow", "machine_id": "splitter-1", "target_extent": "1000000", "priority": "0"}}
+{"command_id": "cmd-0027", "effective_us": "0", "seq": "27", "op": "START", "args": {"job_id": "job-split"}}

@@ -1,0 +1,66 @@
+{
+  "blueprint_id": "battery",
+  "capabilities": [],
+  "processes": [],
+  "rated_work": {
+    "n": "1",
+    "d": "1000000"
+  },
+  "lanes": "1",
+  "min_stable_rate": {
+    "n": "1",
+    "d": "1000000000000"
+  },
+  "idle_power": {
+    "amount": {
+      "n": "0",
+      "d": "1"
+    },
+    "unit": "w"
+  },
+  "ports": [
+    {
+      "port": "power",
+      "type": "ELECTRICAL",
+      "direction": "IN"
+    }
+  ],
+  "condition_table": [
+    {
+      "wear_at": "0",
+      "capacity_factor": {
+        "n": "1",
+        "d": "1"
+      }
+    }
+  ],
+  "embodied": {},
+  "energy_store": {
+    "capacity": {
+      "amount": {
+        "n": "100000",
+        "d": "1"
+      },
+      "unit": "j"
+    },
+    "max_charge": {
+      "amount": {
+        "n": "5000",
+        "d": "1"
+      },
+      "unit": "w"
+    },
+    "max_discharge": {
+      "amount": {
+        "n": "3000",
+        "d": "1"
+      },
+      "unit": "w"
+    },
+    "charge_efficiency": {
+      "n": "9",
+      "d": "10"
+    },
+    "heat_sink": "battery-heat"
+  }
+}

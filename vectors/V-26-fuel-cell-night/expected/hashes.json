@@ -1,32 +1,32 @@
 [
   {
     "step": "0",
-    "state_hash": "4a090d867c2fee3acb1a277f4b6fdaced4fb3f8ed6c157be6a24c22d6b183696",
-    "history_head": "f52e001306eac53c317421a5a3595fab446a2e937ff8bf637d870c573931b6a7"
+    "state_hash": "1b7fb5b99b61299a548bb173260bfe4fe60007cd1e9f611a6132ad14a46efc5c",
+    "history_head": "7be201893eecf4323d19ef654575e16300d90a1d8d485b73b469fa33c1ec013e"
   },
   {
     "step": "1",
-    "state_hash": "91201ef4bb5388b52ac33dd1492c2483620305f251b037ca4028fec5d3f7b477",
-    "history_head": "f3f08fb888dfa955a1a9f85b0e8701f5d5c54502cd50e4cc1ac07a1e12971709"
+    "state_hash": "7befaa7fd301f363565722e88ee40b1a269d829aa5d337d65778d086ce7b1eb6",
+    "history_head": "e58fcab5b1f0a8f5b99a33a711a01d68d82aaadb6cf052046d5454559e3e8d97"
   },
   {
     "step": "2",
-    "state_hash": "75ded5a91daa2496d5c62e51fed3e45201978105aae73a192bc51f8f5b6aff17",
-    "history_head": "f3f08fb888dfa955a1a9f85b0e8701f5d5c54502cd50e4cc1ac07a1e12971709"
+    "state_hash": "8e9461b7b90c3bfb24199742c6309011defd6ec19c5be6e9b7ec142ea3eba5c1",
+    "history_head": "e58fcab5b1f0a8f5b99a33a711a01d68d82aaadb6cf052046d5454559e3e8d97"
   },
   {
     "step": "3",
-    "state_hash": "756896e03ff6fb4d6faa05bfb82d122474ae469f350b89598a85d9118db688e6",
-    "history_head": "f3f08fb888dfa955a1a9f85b0e8701f5d5c54502cd50e4cc1ac07a1e12971709"
+    "state_hash": "de53fed3349bd6a1e729ccc9b6e24ac1a200cdda15576276efb35b400a4545be",
+    "history_head": "e58fcab5b1f0a8f5b99a33a711a01d68d82aaadb6cf052046d5454559e3e8d97"
   },
   {
     "step": "4",
-    "state_hash": "6d0f2b3082a4d1c271094ddf41f373dc6fd8ea4ae1c4279be13e11b8436993e3",
-    "history_head": "f3f08fb888dfa955a1a9f85b0e8701f5d5c54502cd50e4cc1ac07a1e12971709"
+    "state_hash": "1f1500e1f7f50c3361bc50dab42605ff7c5951042ebd1a7b1f95f32aacd1600e",
+    "history_head": "e58fcab5b1f0a8f5b99a33a711a01d68d82aaadb6cf052046d5454559e3e8d97"
   },
   {
     "step": "5",
-    "state_hash": "17a080ac4d822d2ca39bf208fcb6ba901bd4ef38126e6615e954c84efa6b420d",
-    "history_head": "7eebd7aa696d18a74c1bd5eff698f2020bd4a335e4c1380c7b2342832511b517"
+    "state_hash": "04fc7d95326ab7ea6946d8dfd2c7603b05d301e66ed0a8fcc1bd508f86a79b4f",
+    "history_head": "566749746a64570689249f8e7ffed52a464e79ca40eb4ec3d9e653000540a15c"
   }
 ]

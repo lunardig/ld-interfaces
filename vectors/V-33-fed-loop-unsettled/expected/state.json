@@ -1,0 +1,472 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "feed-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "feed-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "120009",
+          "job_id": "job-feed",
+          "kind": "STOCK",
+          "species": "h2o-l"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "h2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "h2-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "80006",
+          "job_id": "job-feed",
+          "kind": "SPACE",
+          "species": "h2-g"
+        },
+        {
+          "amount": "153766",
+          "job_id": "job-split",
+          "kind": "SPACE",
+          "species": "h2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "ice-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "ice-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "40003",
+          "job_id": "job-feed",
+          "kind": "SPACE",
+          "species": "h2o-s"
+        },
+        {
+          "amount": "76883",
+          "job_id": "job-split",
+          "kind": "SPACE",
+          "species": "h2o-s"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "o2-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "o2-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "40003",
+          "job_id": "job-feed",
+          "kind": "SPACE",
+          "species": "o2-g"
+        },
+        {
+          "amount": "76883",
+          "job_id": "job-split",
+          "kind": "SPACE",
+          "species": "o2-g"
+        }
+      ],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "product-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "product-tank.stock"
+      ],
+      "reservations": [],
+      "template": "tank"
+    },
+    {
+      "buffer_id": "water-tank",
+      "location": "pad-a",
+      "lot_ids": [
+        "water-tank.stock"
+      ],
+      "reservations": [
+        {
+          "amount": "230646",
+          "job_id": "job-join",
+          "kind": "SPACE",
+          "species": "h2o-l"
+        }
+      ],
+      "template": "tank"
+    }
+  ],
+  "catalog_hash": "56b22598b093a7995d2f6c0454d121b8bc2f077c5d1b738374265d4f67358bb7",
+  "claim_id": "claim-v",
+  "connections": [
+    {
+      "active": true,
+      "connection_id": "c-feed",
+      "delay_us": "0",
+      "from_port": "feed-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-2.water"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h2",
+      "delay_us": "0",
+      "from_port": "splitter-1.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h2-2",
+      "delay_us": "0",
+      "from_port": "splitter-2.h2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "h2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-h2-in",
+      "delay_us": "0",
+      "from_port": "h2-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.h2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ice",
+      "delay_us": "0",
+      "from_port": "splitter-1.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "ice-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-ice-2",
+      "delay_us": "0",
+      "from_port": "splitter-2.ice",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "ice-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2",
+      "delay_us": "0",
+      "from_port": "splitter-1.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2-2",
+      "delay_us": "0",
+      "from_port": "splitter-2.o2",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "o2-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-o2-in",
+      "delay_us": "0",
+      "from_port": "o2-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "joiner-1.o2"
+    },
+    {
+      "active": true,
+      "connection_id": "c-out",
+      "delay_us": "0",
+      "from_port": "joiner-1.water",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "water-tank.io"
+    },
+    {
+      "active": true,
+      "connection_id": "c-water",
+      "delay_us": "0",
+      "from_port": "water-tank.io",
+      "kind": "FEED",
+      "template": "pipe",
+      "throughput": {
+        "d": "1",
+        "n": "1000"
+      },
+      "to_port": "splitter-1.water"
+    }
+  ],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "27"
+  },
+  "in_transit": [],
+  "jobs": [
+    {
+      "completed_extent": "20000",
+      "completed_work": "20000",
+      "created_at_us": "0",
+      "current_stage": "split",
+      "held_lot_ids": [],
+      "job_id": "job-feed",
+      "last_advanced_us": "20000000",
+      "machine_id": "splitter-2",
+      "priority": "0",
+      "process": "split-flow",
+      "process_hash": "ce7b9b63517008d14706a4b42472e9d8f7c8363a3f1100bc427293d6f744f842",
+      "rate": {
+        "d": "1000",
+        "n": "1"
+      },
+      "required_work": "1000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000"
+    },
+    {
+      "completed_extent": "57648",
+      "completed_work": "57648",
+      "created_at_us": "0",
+      "current_stage": "join",
+      "held_lot_ids": [],
+      "job_id": "job-join",
+      "last_advanced_us": "20000000",
+      "machine_id": "joiner-1",
+      "priority": "0",
+      "process": "join-flow",
+      "process_hash": "b426f9361b8430fce30c597f42b0079a56e8b4f9ad029d4cf00858e2f396ad70",
+      "rate": {
+        "d": "128000",
+        "n": "369"
+      },
+      "reason": {
+        "code": "FEED_UNSETTLED",
+        "ports": [
+          "h2",
+          "o2"
+        ]
+      },
+      "required_work": "1000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000"
+    },
+    {
+      "completed_extent": "38431",
+      "completed_work": "38431",
+      "created_at_us": "0",
+      "current_stage": "split",
+      "held_lot_ids": [],
+      "job_id": "job-split",
+      "last_advanced_us": "20000000",
+      "machine_id": "splitter-1",
+      "priority": "0",
+      "process": "split-flow",
+      "process_hash": "ce7b9b63517008d14706a4b42472e9d8f7c8363a3f1100bc427293d6f744f842",
+      "rate": {
+        "d": "64000",
+        "n": "123"
+      },
+      "reason": {
+        "code": "FEED_UNSETTLED",
+        "ports": [
+          "water"
+        ]
+      },
+      "required_work": "1000000",
+      "started": true,
+      "status": "RUNNING",
+      "target_extent": "1000000"
+    }
+  ],
+  "lots": [
+    {
+      "composition": {
+        "h2o-l": "940000"
+      },
+      "location": "feed-tank",
+      "lot_id": "feed-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2-g": "1566"
+      },
+      "location": "h2-tank",
+      "lot_id": "h2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-s": "58431"
+      },
+      "location": "ice-tank",
+      "lot_id": "ice-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "inventory",
+      "lot_id": "kits",
+      "products": {
+        "tank-kit": "1"
+      },
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "o2-g": "783"
+      },
+      "location": "o2-tank",
+      "lot_id": "o2-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "product-tank",
+      "lot_id": "product-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {
+        "h2o-l": "3"
+      },
+      "location": "water-tank",
+      "lot_id": "water-tank.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [
+    {
+      "assigned_job_ids": [
+        "job-join"
+      ],
+      "blueprint": "joiner",
+      "location": "pad-a",
+      "machine_id": "joiner-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "125",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-split"
+      ],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-1",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "250",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    },
+    {
+      "assigned_job_ids": [
+        "job-feed"
+      ],
+      "blueprint": "splitter",
+      "location": "pad-a",
+      "machine_id": "splitter-2",
+      "mode": "RUNNING",
+      "rate_setpoint": {
+        "d": "1000",
+        "n": "1"
+      },
+      "wear_accumulator": "0"
+    }
+  ],
+  "pending_events": [],
+  "residuals": [
+    {
+      "accumulator": "work",
+      "owner": "job-join",
+      "value": {
+        "d": "128000",
+        "n": "84259"
+      }
+    },
+    {
+      "accumulator": "work",
+      "owner": "job-split",
+      "value": {
+        "d": "8192000",
+        "n": "6325217"
+      }
+    }
+  ],
+  "schema": "ld.physical-state.v0",
+  "sinks": [],
+  "time_us": "20000000"
+}

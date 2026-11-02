@@ -1,0 +1,13 @@
+{
+  "template_id": "tank",
+  "accepts": [
+    "h2o-l",
+    "h2-g",
+    "o2-g",
+    "h2o-s"
+  ],
+  "capacity": {
+    "amount": "1000000000",
+    "unit": "mmol"
+  }
+}

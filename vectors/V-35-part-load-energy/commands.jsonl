@@ -1,0 +1,13 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "solar-kit", "location": "pad-a", "as_id": "solar-1"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "melter-kit", "location": "pad-a", "as_id": "melter-1"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "INSTALL", "args": {"lot_id": "kits", "product": "battery-kit", "location": "pad-a", "as_id": "battery-1"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "ice-tank"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "INSTALL", "args": {"lot_id": "kits", "product": "tank-kit", "location": "pad-a", "as_id": "water-tank"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "CONNECT", "args": {"connection_id": "c-ice", "template": "pipe", "from_port": "ice-tank.io", "to_port": "melter-1.ice"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "CONNECT", "args": {"connection_id": "c-water", "template": "pipe", "from_port": "melter-1.water", "to_port": "water-tank.io"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "CREATE_JOB", "args": {"job_id": "job-sun", "process": "generate-solar", "machine_id": "solar-1", "target_extent": "1000000000", "priority": "100"}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "START", "args": {"job_id": "job-sun"}}
+{"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "CREATE_JOB", "args": {"job_id": "job-melt", "process": "melt-ice", "machine_id": "melter-1", "target_extent": "100000000", "priority": "10"}}
+{"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "START", "args": {"job_id": "job-melt"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "SET_OPERATING_POLICY", "args": {"machine_id": "melter-1", "rate_setpoint": {"n": "1", "d": "4000"}}}
+{"command_id": "cmd-0013", "effective_us": "30000000", "seq": "13", "op": "SET_OPERATING_POLICY", "args": {"machine_id": "melter-1", "rate_setpoint": {"n": "1", "d": "2000"}}}

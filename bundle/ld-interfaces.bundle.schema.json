@@ -2225,6 +2225,27 @@
             },
             "heat_sink": {
               "$ref": "#/$defs/Id"
+            },
+            "part_load": {
+              "description": "PER_WORK DRAW only: power against load while the job runs (LD-PEC-004 A3-4). Points of (load, power) as fractions: load is the job's rate over its blueprint's rated_work, power the draw over this op's draw at rated_work. Linear between points and extended beyond the first and last. Loads strictly increase within [0, 1]; power never decreases and is never below load. The difference from the plain per-work draw is heat in this op's heat_sink at once. Without it, power is proportional to load.",
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "load": {
+                    "$ref": "#/$defs/Rational"
+                  },
+                  "power": {
+                    "$ref": "#/$defs/Rational"
+                  }
+                },
+                "required": [
+                  "load",
+                  "power"
+                ],
+                "additionalProperties": false
+              }
             }
           },
           "required": [
@@ -2340,6 +2361,9 @@
         },
         "last_advanced_us": {
           "$ref": "#/$defs/TimeUs"
+        },
+        "rate": {
+          "$ref": "#/$defs/Rational"
         }
       },
       "required": [
@@ -3264,7 +3288,7 @@
       "additionalProperties": false
     },
     "Reason": {
-      "description": "Deterministic explanation of why a job is not running, tagged by \"code\".",
+      "description": "Deterministic explanation of a job's status, tagged by \"code\": why a started job is not running, or how a running one is limited (DWELLING, FED, FEED_UNSETTLED).",
       "oneOf": [
         {
           "title": "ReasonStarvedInput",
@@ -3387,6 +3411,48 @@
           "required": [
             "code",
             "event_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "ReasonFed",
+          "type": "object",
+          "properties": {
+            "code": {
+              "const": "FED"
+            },
+            "ports": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/Id"
+              }
+            }
+          },
+          "required": [
+            "code",
+            "ports"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "ReasonFeedUnsettled",
+          "type": "object",
+          "properties": {
+            "code": {
+              "const": "FEED_UNSETTLED"
+            },
+            "ports": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/Id"
+              }
+            }
+          },
+          "required": [
+            "code",
+            "ports"
           ],
           "additionalProperties": false
         }

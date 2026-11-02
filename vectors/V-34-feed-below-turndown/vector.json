@@ -1,0 +1,12 @@
+{
+  "id": "V-34",
+  "title": "A feed slower than the consumer's minimum stable rate leaves it cycling",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A3-1",
+    "LD-PEC-006 \u00a73.6.3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

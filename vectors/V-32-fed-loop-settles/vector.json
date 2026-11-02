@@ -1,0 +1,12 @@
+{
+  "id": "V-32",
+  "title": "Two jobs feeding each other settle on a common rate",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A3-2",
+    "LD-PEC-004 A3-3"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

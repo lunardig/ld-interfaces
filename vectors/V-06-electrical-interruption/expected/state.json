@@ -100,6 +100,10 @@
       "priority": "10",
       "process": "melt-ice",
       "process_hash": "b6d746d0cbf4af1956416bb4220bbe33ca1c412dc6ef42900eb907b2ebedc5b8",
+      "rate": {
+        "d": "2000",
+        "n": "1"
+      },
       "required_work": "100000000",
       "started": true,
       "status": "RUNNING",
@@ -117,6 +121,10 @@
       "priority": "100",
       "process": "generate-solar",
       "process_hash": "1a5e37995ce447ef139864cabe852acd23f9af258b1a15e4ed8d261b9c40296f",
+      "rate": {
+        "d": "1000000",
+        "n": "1"
+      },
       "required_work": "1000000000",
       "started": true,
       "status": "RUNNING",

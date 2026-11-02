@@ -1,0 +1,7 @@
+{"step": "advance_to", "t_us": "10000000"}
+{"step": "snapshot", "name": "running"}
+{"step": "advance_to", "t_us": "20000000"}
+{"step": "restore", "name": "running"}
+{"step": "advance_to", "t_us": "20000000"}
+{"step": "advance_to", "t_us": "41000000"}
+{"step": "advance_to", "t_us": "60000000"}
