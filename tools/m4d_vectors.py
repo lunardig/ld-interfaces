@@ -14,14 +14,15 @@ from m1_vectors import (JOINER_PORTS, R, S, SPLITTER_PORTS, Vector, base_entries
 
 # The splitter's gas outputs on a level switch: restart when 60 % of the tank is free
 # (40 % full), stop when only 20 % is free (80 % full). Headroom is what an output measures.
-GAS_BAND = {port: {"restart_fraction": R(3, 5), "stop_fraction": R(1, 5)} for port in ("h2", "o2")}
+def gas_band() -> dict:
+    return {port: {"restart_fraction": R(3, 5), "stop_fraction": R(1, 5)} for port in ("h2", "o2")}
 
 
 def band_entries(gas_tank: int) -> dict:
     """A splitter at 1 wu/ms filling gas tanks of `gas_tank` mmol, which a joiner at
     0.5 wu/ms drains. Water and product tanks are large."""
     e = base_entries()
-    split = split_process("split-flow", "FLOW", thresholds=GAS_BAND)
+    split = split_process("split-flow", "FLOW", thresholds=gas_band())
     join = combine_process("join-flow")
     e["processes"] = [split, join]
     e["machines"] = [machine("splitter", ["split-flow"], R(1, 1000), SPLITTER_PORTS),

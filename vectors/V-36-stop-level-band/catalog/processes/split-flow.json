@@ -104,11 +104,6 @@
         "n": "1",
         "d": "5"
       }
-    },
-    "water": {
-      "restart_at": "60000",
-      "stop_at": "30000",
-      "unit": "mmol"
     }
   },
   "constants": {}

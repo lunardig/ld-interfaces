@@ -77,7 +77,7 @@
       "template": "tank"
     }
   ],
-  "catalog_hash": "b6cc57b04f5da99553f0398cfb361cd751ee622210783ef9c6021b46db3d999b",
+  "catalog_hash": "0e9688581882537c548dd80985acad30afdd177b2b4e090c187211ad3ca354c1",
   "claim_id": "claim-v",
   "connections": [
     {
@@ -199,7 +199,7 @@
       "machine_id": "splitter-1",
       "priority": "0",
       "process": "split-flow",
-      "process_hash": "f52246a2e371a3d90f1d30a6d69e21d4f491bf207be8751ae6b4dbc0671b6d65",
+      "process_hash": "db37a5e6b8b22ff0a68f9e9fa1866e7e61bd5683c524ec95042624018e6a0456",
       "rate": {
         "d": "1000",
         "n": "1"

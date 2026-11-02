@@ -1,32 +1,32 @@
 [
   {
     "step": "0",
-    "state_hash": "d2646d0fc5f99469cba45422bade62f0ff3a3d7233ca6c75ac92fb10bca1f71f",
-    "history_head": "8d42adce2be66b4feddade5d7edb2aa0d4aaeecef605ca11858be93ebf3cfd35"
+    "state_hash": "e2ba13f3ac49ccadc2c0d9f5fb07eda9a6854d127e98dfb6d60a2523351bfdb9",
+    "history_head": "17948ab6493128676ae2a10a0164f2a43bc369c5af7f180dc76bb6f0baea4035"
   },
   {
     "step": "1",
-    "state_hash": "d2646d0fc5f99469cba45422bade62f0ff3a3d7233ca6c75ac92fb10bca1f71f",
-    "history_head": "8d42adce2be66b4feddade5d7edb2aa0d4aaeecef605ca11858be93ebf3cfd35"
+    "state_hash": "e2ba13f3ac49ccadc2c0d9f5fb07eda9a6854d127e98dfb6d60a2523351bfdb9",
+    "history_head": "17948ab6493128676ae2a10a0164f2a43bc369c5af7f180dc76bb6f0baea4035"
   },
   {
     "step": "2",
-    "state_hash": "17551ef255ab055e6d25e056d372b4419231e1b1ba7fecbac7eaf0a6a0dafdfd",
-    "history_head": "3441955f4656a1fa7940841450fe33c883c81e2f5cbfb67080ee4b4aebe133a5"
+    "state_hash": "4d49e00b397f2ba930dad4fd94cac1fc681ae33d071d7634b3d79b8075df6373",
+    "history_head": "7fae525f5093cd5ffd0b2243fa6ccf215d24608affa5553c2ab559df9c434ebd"
   },
   {
     "step": "3",
-    "state_hash": "d2646d0fc5f99469cba45422bade62f0ff3a3d7233ca6c75ac92fb10bca1f71f",
-    "history_head": "8d42adce2be66b4feddade5d7edb2aa0d4aaeecef605ca11858be93ebf3cfd35"
+    "state_hash": "e2ba13f3ac49ccadc2c0d9f5fb07eda9a6854d127e98dfb6d60a2523351bfdb9",
+    "history_head": "17948ab6493128676ae2a10a0164f2a43bc369c5af7f180dc76bb6f0baea4035"
   },
   {
     "step": "4",
-    "state_hash": "17551ef255ab055e6d25e056d372b4419231e1b1ba7fecbac7eaf0a6a0dafdfd",
-    "history_head": "3441955f4656a1fa7940841450fe33c883c81e2f5cbfb67080ee4b4aebe133a5"
+    "state_hash": "4d49e00b397f2ba930dad4fd94cac1fc681ae33d071d7634b3d79b8075df6373",
+    "history_head": "7fae525f5093cd5ffd0b2243fa6ccf215d24608affa5553c2ab559df9c434ebd"
   },
   {
     "step": "5",
-    "state_hash": "34d03e9a4f41ac06b8a6df2e0f1f6a4c396056efcdf7b8f22667709eb4da3ebd",
-    "history_head": "e259f59a16e6aae17a534d9e076a5febc6b5ff49ffe72db766e63cc6a27e1a80"
+    "state_hash": "f2688cbb45d4f3c6edfb3c5fd0e2d179e0e453e5438501c27df57e1b1b2b36fa",
+    "history_head": "43a8f26b8b731e8daf1589218070baf88e4f3b43aba01c447466502b5e1f1ce4"
   }
 ]
