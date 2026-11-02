@@ -1581,7 +1581,7 @@ pub enum Instruction {
         dir: InstructionDir,
         heat_sink: Id,
         mode: InstructionMode,
-        #[doc = "PER_WORK DRAW only: power against load while the job runs (LD-PEC-004 A3-4). Points of (load, power) as fractions: load is the job's rate over its blueprint's rated_work, power the draw over this op's draw at rated_work. Linear between points and extended beyond the first and last. Loads strictly increase within [0, 1]; power never decreases and is never below load. The difference from the plain per-work draw is heat in this op's heat_sink at once. Without it, power is proportional to load."]
+        #[doc = "PER_WORK DRAW only: power against load while the job runs (LD-PEC-004 A3-4). Points of (load, power) as fractions: load is the job's rate over its blueprint's rated_work, power the draw over this op's draw at rated_work. Linear between points and extended beyond the first and last. Loads strictly increase within [0, 1]; power never decreases and is never below load. The difference from the plain per-work draw is heat at once, in the process's heat sink (LD-PEC-004 A3-4). Without it, power is proportional to load."]
         #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
         part_load: ::std::vec::Vec<InstructionPartLoadItem>,
         unit: Id,
