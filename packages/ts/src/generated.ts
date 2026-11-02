@@ -1103,6 +1103,18 @@ export interface CmdInstall {
   seq: Uint;
   op: "INSTALL";
   args: CmdInstallArgs;
+  issued_by?: IssuedBy;
+}
+/**
+ * Which application issued a command (LD-PEC-004 A5, LD-PEC-009 §7). Recorded with the command in its history record, so the hash chain commits to it; it plays no part in physics. The claim host fills it: origin from the browser-verified origin of the sending page, or "host" for the host's own interface. app_name is the application's own description of itself.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "IssuedBy".
+ */
+export interface IssuedBy {
+  origin: string;
+  session?: Id;
+  app_name?: string;
 }
 export interface CmdRemove {
   command_id: Id;
@@ -1110,6 +1122,7 @@ export interface CmdRemove {
   seq: Uint;
   op: "REMOVE";
   args: CmdRemoveArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdConnect {
   command_id: Id;
@@ -1117,6 +1130,7 @@ export interface CmdConnect {
   seq: Uint;
   op: "CONNECT";
   args: CmdConnectArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdDisconnect {
   command_id: Id;
@@ -1124,6 +1138,7 @@ export interface CmdDisconnect {
   seq: Uint;
   op: "DISCONNECT";
   args: CmdDisconnectArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdCreateJob {
   command_id: Id;
@@ -1131,6 +1146,7 @@ export interface CmdCreateJob {
   seq: Uint;
   op: "CREATE_JOB";
   args: CmdCreateJobArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdSetPriority {
   command_id: Id;
@@ -1138,6 +1154,7 @@ export interface CmdSetPriority {
   seq: Uint;
   op: "SET_PRIORITY";
   args: CmdSetPriorityArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdStart {
   command_id: Id;
@@ -1145,6 +1162,7 @@ export interface CmdStart {
   seq: Uint;
   op: "START";
   args: CmdStartArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdPause {
   command_id: Id;
@@ -1152,6 +1170,7 @@ export interface CmdPause {
   seq: Uint;
   op: "PAUSE";
   args: CmdPauseArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdResume {
   command_id: Id;
@@ -1159,6 +1178,7 @@ export interface CmdResume {
   seq: Uint;
   op: "RESUME";
   args: CmdResumeArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdCancel {
   command_id: Id;
@@ -1166,6 +1186,7 @@ export interface CmdCancel {
   seq: Uint;
   op: "CANCEL";
   args: CmdCancelArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdTransferLocal {
   command_id: Id;
@@ -1173,6 +1194,7 @@ export interface CmdTransferLocal {
   seq: Uint;
   op: "TRANSFER_LOCAL";
   args: CmdTransferLocalArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdSetOperatingPolicy {
   command_id: Id;
@@ -1180,6 +1202,7 @@ export interface CmdSetOperatingPolicy {
   seq: Uint;
   op: "SET_OPERATING_POLICY";
   args: CmdSetOperatingPolicyArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdScheduleMaintenance {
   command_id: Id;
@@ -1187,6 +1210,7 @@ export interface CmdScheduleMaintenance {
   seq: Uint;
   op: "SCHEDULE_MAINTENANCE";
   args: CmdScheduleMaintenanceArgs;
+  issued_by?: IssuedBy;
 }
 export interface CmdCheckpoint {
   command_id: Id;
@@ -1194,6 +1218,7 @@ export interface CmdCheckpoint {
   seq: Uint;
   op: "CHECKPOINT";
   args: CmdCheckpointArgs;
+  issued_by?: IssuedBy;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1299,6 +1324,7 @@ export interface EventCommand {
   kind: "COMMAND";
   command_id: Id;
   status: AdmissionStatus;
+  issued_by?: IssuedBy;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

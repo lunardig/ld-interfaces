@@ -1,0 +1,12 @@
+{
+  "id": "V-38",
+  "title": "Commands carry the application that issued them into the history",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A5",
+    "LD-PEC-009 \u00a77"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

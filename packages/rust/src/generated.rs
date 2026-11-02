@@ -432,6 +432,8 @@ pub enum Command {
         args: CmdInstallArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdRemove"]
@@ -440,6 +442,8 @@ pub enum Command {
         args: CmdRemoveArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdConnect"]
@@ -448,6 +452,8 @@ pub enum Command {
         args: CmdConnectArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdDisconnect"]
@@ -456,6 +462,8 @@ pub enum Command {
         args: CmdDisconnectArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdCreateJob"]
@@ -464,6 +472,8 @@ pub enum Command {
         args: CmdCreateJobArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdSetPriority"]
@@ -472,6 +482,8 @@ pub enum Command {
         args: CmdSetPriorityArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdStart"]
@@ -480,6 +492,8 @@ pub enum Command {
         args: CmdStartArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdPause"]
@@ -488,6 +502,8 @@ pub enum Command {
         args: CmdPauseArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdResume"]
@@ -496,6 +512,8 @@ pub enum Command {
         args: CmdResumeArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdCancel"]
@@ -504,6 +522,8 @@ pub enum Command {
         args: CmdCancelArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdTransferLocal"]
@@ -512,6 +532,8 @@ pub enum Command {
         args: CmdTransferLocalArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdSetOperatingPolicy"]
@@ -520,6 +542,8 @@ pub enum Command {
         args: CmdSetOperatingPolicyArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdScheduleMaintenance"]
@@ -528,6 +552,8 @@ pub enum Command {
         args: CmdScheduleMaintenanceArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
     #[doc = "CmdCheckpoint"]
@@ -536,6 +562,8 @@ pub enum Command {
         args: CmdCheckpointArgs,
         command_id: Id,
         effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
     },
 }
@@ -1095,6 +1123,8 @@ pub enum Event {
     #[serde(rename = "COMMAND")]
     Command {
         command_id: Id,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
         seq: Uint,
         status: AdmissionStatus,
         time_us: TimeUs,
@@ -1852,6 +1882,119 @@ impl ::std::convert::TryFrom<::std::string::String> for Int {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for Int {
+    fn deserialize<D>(deserializer: D) -> ::std::result::Result<Self, D::Error>
+    where
+        D: ::serde::Deserializer<'de>,
+    {
+        ::std::string::String::deserialize(deserializer)?
+            .parse()
+            .map_err(|e: self::error::ConversionError| {
+                <D::Error as ::serde::de::Error>::custom(e.to_string())
+            })
+    }
+}
+#[doc = "Which application issued a command (LD-PEC-004 A5, LD-PEC-009 §7). Recorded with the command in its history record, so the hash chain commits to it; it plays no part in physics. The claim host fills it: origin from the browser-verified origin of the sending page, or \"host\" for the host's own interface. app_name is the application's own description of itself."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct IssuedBy {
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub app_name: ::std::option::Option<IssuedByAppName>,
+    pub origin: IssuedByOrigin,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub session: ::std::option::Option<Id>,
+}
+#[doc = "`IssuedByAppName`"]
+#[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[serde(transparent)]
+pub struct IssuedByAppName(::std::string::String);
+impl ::std::ops::Deref for IssuedByAppName {
+    type Target = ::std::string::String;
+    fn deref(&self) -> &::std::string::String {
+        &self.0
+    }
+}
+impl ::std::convert::From<IssuedByAppName> for ::std::string::String {
+    fn from(value: IssuedByAppName) -> Self {
+        value.0
+    }
+}
+impl ::std::str::FromStr for IssuedByAppName {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        if value.chars().count() > 200usize {
+            return Err("longer than 200 characters".into());
+        }
+        Ok(Self(value.to_string()))
+    }
+}
+impl ::std::convert::TryFrom<&str> for IssuedByAppName {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for IssuedByAppName {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl<'de> ::serde::Deserialize<'de> for IssuedByAppName {
+    fn deserialize<D>(deserializer: D) -> ::std::result::Result<Self, D::Error>
+    where
+        D: ::serde::Deserializer<'de>,
+    {
+        ::std::string::String::deserialize(deserializer)?
+            .parse()
+            .map_err(|e: self::error::ConversionError| {
+                <D::Error as ::serde::de::Error>::custom(e.to_string())
+            })
+    }
+}
+#[doc = "`IssuedByOrigin`"]
+#[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[serde(transparent)]
+pub struct IssuedByOrigin(::std::string::String);
+impl ::std::ops::Deref for IssuedByOrigin {
+    type Target = ::std::string::String;
+    fn deref(&self) -> &::std::string::String {
+        &self.0
+    }
+}
+impl ::std::convert::From<IssuedByOrigin> for ::std::string::String {
+    fn from(value: IssuedByOrigin) -> Self {
+        value.0
+    }
+}
+impl ::std::str::FromStr for IssuedByOrigin {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        if value.chars().count() > 512usize {
+            return Err("longer than 512 characters".into());
+        }
+        if value.chars().count() < 1usize {
+            return Err("shorter than 1 characters".into());
+        }
+        Ok(Self(value.to_string()))
+    }
+}
+impl ::std::convert::TryFrom<&str> for IssuedByOrigin {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for IssuedByOrigin {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl<'de> ::serde::Deserialize<'de> for IssuedByOrigin {
     fn deserialize<D>(deserializer: D) -> ::std::result::Result<Self, D::Error>
     where
         D: ::serde::Deserializer<'de>,

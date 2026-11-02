@@ -45,6 +45,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdInstallArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -86,6 +89,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdRemoveArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -142,6 +148,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdConnectArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -183,6 +192,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdDisconnectArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -240,6 +252,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdCreateJobArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -285,6 +300,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdSetPriorityArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -326,6 +344,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdStartArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -367,6 +388,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdPauseArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -408,6 +432,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdResumeArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -449,6 +476,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdCancelArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -498,6 +528,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdTransferLocalArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -543,6 +576,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdSetOperatingPolicyArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -588,6 +624,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdScheduleMaintenanceArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -630,6 +669,9 @@
         },
         "args": {
           "$ref": "#/$defs/CmdCheckpointArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -1373,6 +1415,9 @@
         },
         "status": {
           "$ref": "#/$defs/AdmissionStatus"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
         }
       },
       "required": [
@@ -2120,6 +2165,28 @@
       "required": [
         "code",
         "port"
+      ],
+      "additionalProperties": false
+    },
+    "IssuedBy": {
+      "type": "object",
+      "description": "Which application issued a command (LD-PEC-004 A5, LD-PEC-009 \u00a77). Recorded with the command in its history record, so the hash chain commits to it; it plays no part in physics. The claim host fills it: origin from the browser-verified origin of the sending page, or \"host\" for the host's own interface. app_name is the application's own description of itself.",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "session": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "app_name": {
+          "type": "string",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "origin"
       ],
       "additionalProperties": false
     }
