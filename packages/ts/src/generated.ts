@@ -184,7 +184,10 @@ export type Command =
   | CmdTransferLocal
   | CmdSetOperatingPolicy
   | CmdScheduleMaintenance
-  | CmdCheckpoint;
+  | CmdCheckpoint
+  | CmdMoveLot
+  | CmdExport
+  | CmdAcceptImport;
 /**
  * Append-only event log entry, tagged by "kind".
  *
@@ -192,7 +195,15 @@ export type Command =
  * via the `definition` "Event".
  */
 export type Event =
-  EventJobStatus | EventStageCompleted | EventArrival | EventThreshold | EventEnvironment | EventCommand;
+  | EventJobStatus
+  | EventStageCompleted
+  | EventArrival
+  | EventThreshold
+  | EventEnvironment
+  | EventCommand
+  | EventShipmentDeparted
+  | EventShipmentDelivered
+  | EventImportAccepted;
 /**
  * expected/hashes.json: state hash and history head after each script step, by step index.
  *
@@ -336,10 +347,14 @@ export interface Reservation {
 export interface BufferTemplate {
   template_id: Id;
   /**
-   * @minItems 1
+   * Species the buffer accepts. Non-empty for a STORE buffer (checked at load); ignored for a LANDING pad.
    */
-  accepts: [Id, ...Id[]];
+  accepts: Id[];
   capacity: Quantity;
+  /**
+   * STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored.
+   */
+  kind?: "STORE" | "LANDING";
 }
 /**
  * An amount in a catalog-declared unit.
@@ -370,6 +385,17 @@ export interface BufferView {
  */
 export interface SpeciesAmounts {
   [k: string]: Uint;
+}
+/**
+ * The carrier of a shipment: its product, its charge after the trip, and its wear if any.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "CarrierRecord".
+ */
+export interface CarrierRecord {
+  product: Id;
+  charge: Rational;
+  wear?: Rational;
 }
 /**
  * Transport form of a whole catalog: the manifest plus every entry inline. Used by I-1 create and restore.
@@ -748,6 +774,12 @@ export interface ProductBlueprint {
     kind: "MACHINE" | "BUFFER";
     template: Id;
   };
+  /**
+   * This product is a carrier (LD-PEC-004 A6-3): it installs as a machine with an energy store, and a kit lot of it carries goods between claims. Its machine blueprint may not declare a core.
+   */
+  carrier?: {
+    payload: Quantity;
+  };
 }
 /**
  * How a connection behaves (LD-PEC-002 §3). FEED couples a machine material port to a buffer's io port; the transfer is part of the machine's own operation, so it has no transit delay. CONVEYOR links two buffers; material moves only as TRANSFER_LOCAL shipments, which take time at the throughput and then the transit delay.
@@ -785,6 +817,59 @@ export interface EnvironmentFunction {
       value: Rational;
     }[]
   ];
+}
+/**
+ * What an export proves about itself (LD-PEC-004 A6-5). Its hash, H("ld.trade.certificate.v0", certificate), is the import identity.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Certificate".
+ */
+export interface Certificate {
+  schema: "ld.trade.certificate.v0";
+  world: Id;
+  epoch_us: TimeUs;
+  origin_claim: Id;
+  catalog_hash: Hash;
+  export_id: Id;
+  n: PositiveInt;
+  spend_id: Hash;
+  peer_claim: Id;
+  route_id: Id;
+  depart_us: TimeUs;
+  arrive_us: TimeUs;
+  manifest: Manifest;
+  carrier: CarrierRecord;
+  prev_state_hash: Hash;
+  /**
+   * Reserved for a published snapshot hash; null in Amendment 6.
+   */
+  checkpoint: null;
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Manifest".
+ */
+export interface Manifest {
+  contents: SpeciesAmounts;
+  lots: ManifestLot[];
+}
+/**
+ * One lot in a shipment, by content (A6-5). Optional fields are omitted exactly when the lot omits them.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "ManifestLot".
+ */
+export interface ManifestLot {
+  /**
+   * Discrete products in this lot: product id to count.
+   */
+  products: {
+    [k: string]: Uint;
+  };
+  composition?: SpeciesAmounts;
+  wear?: Rational;
+  charge?: Rational;
+  core?: SpeciesAmounts;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -826,6 +911,11 @@ export interface ClaimView {
    * Material and heat sinks: cumulative losses, tailings and waste heat.
    */
   sinks?: SinkRecord[];
+  /**
+   * Outbound shipments in transit. Present only in a trade world.
+   */
+  shipments?: Shipment[];
+  trade?: TradeState;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -985,6 +1075,70 @@ export interface SinkRecord {
   energy: Uint;
 }
 /**
+ * An outbound shipment in transit (A6-7). It holds its manifest and carrier inline; no lot is located at it.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Shipment".
+ */
+export interface Shipment {
+  shipment_id: Id;
+  export_id: Id;
+  peer_claim: Id;
+  route_id: Id;
+  depart_us: TimeUs;
+  arrive_us: TimeUs;
+  manifest: Manifest;
+  carrier: CarrierRecord;
+  certificate_hash: Hash;
+}
+/**
+ * A trade world claim's exports and imports (A6-7).
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "TradeState".
+ */
+export interface TradeState {
+  exports: Uint;
+  imports: Uint;
+  /**
+   * Every export_id this claim has exported; sorted.
+   */
+  export_ids: Id[];
+  /**
+   * The certificate hash of every accepted import; sorted.
+   */
+  accepted: Hash[];
+  exported: TradeLedger;
+  imported: TradeLedger;
+}
+/**
+ * Material and stored energy that left or entered the claim by shipment: element amounts in mol, and charge in the bus energy unit.
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "TradeLedger".
+ */
+export interface TradeLedger {
+  elements: {
+    [k: string]: Rational;
+  };
+  charge: Rational;
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "CmdAcceptImportArgs".
+ */
+export interface CmdAcceptImportArgs {
+  certificate: Certificate;
+  landing: Id;
+  /**
+   * What the receiver checked before accepting; recorded, not interpreted.
+   */
+  policy: {
+    policy_id: Id;
+    evidence_hash: Hash;
+  };
+}
+/**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "CmdCancelArgs".
  */
@@ -1028,6 +1182,21 @@ export interface CmdDisconnectArgs {
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "CmdExportArgs".
+ */
+export interface CmdExportArgs {
+  export_id: Id;
+  landing: Id;
+  contents?: {
+    [k: string]: PositiveInt;
+  };
+  lots?: Id[];
+  carrier_lot: Id;
+  peer_claim: Id;
+  route_id: Id;
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "CmdInstallArgs".
  */
 export interface CmdInstallArgs {
@@ -1035,6 +1204,20 @@ export interface CmdInstallArgs {
   product: Id;
   location: Id;
   as_id: Id;
+}
+/**
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "CmdMoveLotArgs".
+ */
+export interface CmdMoveLotArgs {
+  lot_id: Id;
+  to: Id;
+  /**
+   * Split these counts off into a new lot; omit to move the whole lot.
+   */
+  products?: {
+    [k: string]: PositiveInt;
+  };
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1220,6 +1403,30 @@ export interface CmdCheckpoint {
   args: CmdCheckpointArgs;
   issued_by?: IssuedBy;
 }
+export interface CmdMoveLot {
+  command_id: Id;
+  effective_us: TimeUs;
+  seq: Uint;
+  op: "MOVE_LOT";
+  args: CmdMoveLotArgs;
+  issued_by?: IssuedBy;
+}
+export interface CmdExport {
+  command_id: Id;
+  effective_us: TimeUs;
+  seq: Uint;
+  op: "EXPORT";
+  args: CmdExportArgs;
+  issued_by?: IssuedBy;
+}
+export interface CmdAcceptImport {
+  command_id: Id;
+  effective_us: TimeUs;
+  seq: Uint;
+  op: "ACCEPT_IMPORT";
+  args: CmdAcceptImportArgs;
+  issued_by?: IssuedBy;
+}
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "ConnectionInstance".
@@ -1258,6 +1465,26 @@ export interface Genesis {
    * Environment function ids active on this claim.
    */
   environment: Id[];
+  /**
+   * Present for a claim in a trade world (LD-PEC-004 A6-1).
+   */
+  trade?: {
+    epoch_us: TimeUs;
+    routes: Route[];
+  };
+}
+/**
+ * A directed route between two claims of a trade world (LD-PEC-004 A6-1).
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Route".
+ */
+export interface Route {
+  route_id: Id;
+  from_claim: Id;
+  to_claim: Id;
+  transit_us: PositiveInt;
+  energy_per_kg: Rational;
 }
 /**
  * An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge).
@@ -1325,6 +1552,40 @@ export interface EventCommand {
   command_id: Id;
   status: AdmissionStatus;
   issued_by?: IssuedBy;
+}
+export interface EventShipmentDeparted {
+  seq: Uint;
+  time_us: TimeUs;
+  kind: "SHIPMENT_DEPARTED";
+  shipment_id: Id;
+  export_id: Id;
+  n: PositiveInt;
+  spend_id: Hash;
+  certificate: Certificate;
+}
+export interface EventShipmentDelivered {
+  seq: Uint;
+  time_us: TimeUs;
+  kind: "SHIPMENT_DELIVERED";
+  shipment_id: Id;
+  export_id: Id;
+  peer_claim: Id;
+}
+export interface EventImportAccepted {
+  seq: Uint;
+  time_us: TimeUs;
+  kind: "IMPORT_ACCEPTED";
+  import_id: Hash;
+  origin_claim: Id;
+  export_id: Id;
+  spend_id: Hash;
+  /**
+   * What the receiver checked before accepting; recorded, not interpreted.
+   */
+  policy: {
+    policy_id: Id;
+    evidence_hash: Hash;
+  };
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
@@ -1489,6 +1750,11 @@ export interface PhysicalState {
   id_counters: {
     [k: string]: Uint;
   };
+  /**
+   * Outbound shipments in transit, sorted by id. Present only in a trade world.
+   */
+  shipments?: Shipment[];
+  trade?: TradeState;
 }
 /**
  * This interface was referenced by `LdInterfaces`'s JSON-Schema

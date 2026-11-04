@@ -1134,6 +1134,20 @@
             "template"
           ],
           "additionalProperties": false
+        },
+        "carrier": {
+          "type": "object",
+          "description": "This product is a carrier (LD-PEC-004 A6-3): it installs as a machine with an energy store, and a kit lot of it carries goods between claims. Its machine blueprint may not declare a core.",
+          "properties": {
+            "payload": {
+              "$ref": "common.schema.json#/$defs/Quantity",
+              "description": "Most cargo mass it carries; a quantity of dimension mass."
+            }
+          },
+          "required": [
+            "payload"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -1153,10 +1167,19 @@
           "items": {
             "$ref": "common.schema.json#/$defs/Id"
           },
-          "minItems": 1
+          "description": "Species the buffer accepts. Non-empty for a STORE buffer (checked at load); ignored for a LANDING pad."
         },
         "capacity": {
           "$ref": "common.schema.json#/$defs/Quantity"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "STORE",
+            "LANDING"
+          ],
+          "default": "STORE",
+          "description": "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."
         }
       },
       "required": [

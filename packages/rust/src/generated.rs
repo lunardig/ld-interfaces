@@ -194,9 +194,69 @@ pub struct BufferInstance {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct BufferTemplate {
+    #[doc = "Species the buffer accepts. Non-empty for a STORE buffer (checked at load); ignored for a LANDING pad."]
     pub accepts: ::std::vec::Vec<Id>,
     pub capacity: Quantity,
+    #[doc = "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
+    #[serde(default = "defaults::buffer_template_kind")]
+    pub kind: BufferTemplateKind,
     pub template_id: Id,
+}
+#[doc = "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum BufferTemplateKind {
+    #[serde(rename = "STORE")]
+    Store,
+    #[serde(rename = "LANDING")]
+    Landing,
+}
+impl ::std::fmt::Display for BufferTemplateKind {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::Store => f.write_str("STORE"),
+            Self::Landing => f.write_str("LANDING"),
+        }
+    }
+}
+impl ::std::str::FromStr for BufferTemplateKind {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "STORE" => Ok(Self::Store),
+            "LANDING" => Ok(Self::Landing),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for BufferTemplateKind {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for BufferTemplateKind {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::default::Default for BufferTemplateKind {
+    fn default() -> Self {
+        BufferTemplateKind::Store
+    }
 }
 #[doc = "`BufferView`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -208,6 +268,15 @@ pub struct BufferView {
     pub reserved: SpeciesAmounts,
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]
     pub template: ::std::option::Option<Id>,
+}
+#[doc = "The carrier of a shipment: its product, its charge after the trip, and its wear if any."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct CarrierRecord {
+    pub charge: Rational,
+    pub product: Id,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub wear: ::std::option::Option<Rational>,
 }
 #[doc = "Transport form of a whole catalog: the manifest plus every entry inline. Used by I-1 create and restore."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -242,6 +311,28 @@ pub struct CatalogManifestEntriesItem {
     pub id: Id,
     pub kind: EntryKind,
 }
+#[doc = "What an export proves about itself (LD-PEC-004 A6-5). Its hash, H(\"ld.trade.certificate.v0\", certificate), is the import identity."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct Certificate {
+    pub arrive_us: TimeUs,
+    pub carrier: CarrierRecord,
+    pub catalog_hash: Hash,
+    #[doc = "Reserved for a published snapshot hash; null in Amendment 6."]
+    pub checkpoint: (),
+    pub depart_us: TimeUs,
+    pub epoch_us: TimeUs,
+    pub export_id: Id,
+    pub manifest: Manifest,
+    pub n: PositiveInt,
+    pub origin_claim: Id,
+    pub peer_claim: Id,
+    pub prev_state_hash: Hash,
+    pub route_id: Id,
+    pub schema: ::serde_json::Value,
+    pub spend_id: Hash,
+    pub world: Id,
+}
 #[doc = "`ClaimEnvelope`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
@@ -267,11 +358,31 @@ pub struct ClaimView {
     #[doc = "Every lot on the claim: inventory (products, kits, raw material) and buffer contents. Lots inside a buffer also appear in its BufferView totals."]
     pub lots: ::std::vec::Vec<Lot>,
     pub machines: ::std::vec::Vec<MachineView>,
+    #[doc = "Outbound shipments in transit. Present only in a trade world."]
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub shipments: ::std::vec::Vec<Shipment>,
     #[doc = "Material and heat sinks: cumulative losses, tailings and waste heat."]
     #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
     pub sinks: ::std::vec::Vec<SinkRecord>,
     pub state_hash: Hash,
     pub time_us: TimeUs,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub trade: ::std::option::Option<TradeState>,
+}
+#[doc = "`CmdAcceptImportArgs`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct CmdAcceptImportArgs {
+    pub certificate: Certificate,
+    pub landing: Id,
+    pub policy: CmdAcceptImportArgsPolicy,
+}
+#[doc = "What the receiver checked before accepting; recorded, not interpreted."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct CmdAcceptImportArgsPolicy {
+    pub evidence_hash: Hash,
+    pub policy_id: Id,
 }
 #[doc = "`CmdCancelArgs`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -360,6 +471,23 @@ pub struct CmdCreateJobArgs {
 pub struct CmdDisconnectArgs {
     pub connection_id: Id,
 }
+#[doc = "`CmdExportArgs`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct CmdExportArgs {
+    pub carrier_lot: Id,
+    #[serde(
+        default,
+        skip_serializing_if = ":: std :: collections :: BTreeMap::is_empty"
+    )]
+    pub contents: ::std::collections::BTreeMap<Id, PositiveInt>,
+    pub export_id: Id,
+    pub landing: Id,
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub lots: ::std::vec::Vec<Id>,
+    pub peer_claim: Id,
+    pub route_id: Id,
+}
 #[doc = "`CmdInstallArgs`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
@@ -368,6 +496,19 @@ pub struct CmdInstallArgs {
     pub location: Id,
     pub lot_id: Id,
     pub product: Id,
+}
+#[doc = "`CmdMoveLotArgs`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct CmdMoveLotArgs {
+    pub lot_id: Id,
+    #[doc = "Split these counts off into a new lot; omit to move the whole lot."]
+    #[serde(
+        default,
+        skip_serializing_if = ":: std :: collections :: BTreeMap::is_empty"
+    )]
+    pub products: ::std::collections::BTreeMap<Id, PositiveInt>,
+    pub to: Id,
 }
 #[doc = "`CmdPauseArgs`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -560,6 +701,36 @@ pub enum Command {
     #[serde(rename = "CHECKPOINT")]
     Checkpoint {
         args: CmdCheckpointArgs,
+        command_id: Id,
+        effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
+        seq: Uint,
+    },
+    #[doc = "CmdMoveLot"]
+    #[serde(rename = "MOVE_LOT")]
+    MoveLot {
+        args: CmdMoveLotArgs,
+        command_id: Id,
+        effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
+        seq: Uint,
+    },
+    #[doc = "CmdExport"]
+    #[serde(rename = "EXPORT")]
+    Export {
+        args: CmdExportArgs,
+        command_id: Id,
+        effective_us: TimeUs,
+        #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+        issued_by: ::std::option::Option<IssuedBy>,
+        seq: Uint,
+    },
+    #[doc = "CmdAcceptImport"]
+    #[serde(rename = "ACCEPT_IMPORT")]
+    AcceptImport {
+        args: CmdAcceptImportArgs,
         command_id: Id,
         effective_us: TimeUs,
         #[serde(skip_serializing_if = "::std::option::Option::is_none")]
@@ -1129,6 +1300,37 @@ pub enum Event {
         status: AdmissionStatus,
         time_us: TimeUs,
     },
+    #[doc = "EventShipmentDeparted"]
+    #[serde(rename = "SHIPMENT_DEPARTED")]
+    ShipmentDeparted {
+        certificate: Certificate,
+        export_id: Id,
+        n: PositiveInt,
+        seq: Uint,
+        shipment_id: Id,
+        spend_id: Hash,
+        time_us: TimeUs,
+    },
+    #[doc = "EventShipmentDelivered"]
+    #[serde(rename = "SHIPMENT_DELIVERED")]
+    ShipmentDelivered {
+        export_id: Id,
+        peer_claim: Id,
+        seq: Uint,
+        shipment_id: Id,
+        time_us: TimeUs,
+    },
+    #[doc = "EventImportAccepted"]
+    #[serde(rename = "IMPORT_ACCEPTED")]
+    ImportAccepted {
+        export_id: Id,
+        import_id: Hash,
+        origin_claim: Id,
+        policy: EventPolicy,
+        seq: Uint,
+        spend_id: Hash,
+        time_us: TimeUs,
+    },
 }
 #[doc = "`EventPage`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -1136,6 +1338,13 @@ pub enum Event {
 pub struct EventPage {
     pub events: ::std::vec::Vec<Event>,
     pub next_cursor: Uint,
+}
+#[doc = "What the receiver checked before accepting; recorded, not interpreted."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct EventPolicy {
+    pub evidence_hash: Hash,
+    pub policy_id: Id,
 }
 #[doc = "`EventsSinceParams`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -1397,7 +1606,16 @@ pub struct Genesis {
     pub schema: ::serde_json::Value,
     pub start_us: TimeUs,
     pub starting_lots: ::std::vec::Vec<Lot>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub trade: ::std::option::Option<GenesisTrade>,
     pub world_id: Id,
+}
+#[doc = "Present for a claim in a trade world (LD-PEC-004 A6-1)."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct GenesisTrade {
+    pub epoch_us: TimeUs,
+    pub routes: ::std::vec::Vec<Route>,
 }
 #[doc = "SHA-256 digest, lowercase hex (LD-PEC-001 §2.4)."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -2506,6 +2724,28 @@ pub struct MachineView {
     pub unpowered: ::std::option::Option<bool>,
     pub wear_accumulator: Uint,
 }
+#[doc = "`Manifest`"]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct Manifest {
+    pub contents: SpeciesAmounts,
+    pub lots: ::std::vec::Vec<ManifestLot>,
+}
+#[doc = "One lot in a shipment, by content (A6-5). Optional fields are omitted exactly when the lot omits them."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct ManifestLot {
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub charge: ::std::option::Option<Rational>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub composition: ::std::option::Option<SpeciesAmounts>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub core: ::std::option::Option<SpeciesAmounts>,
+    #[doc = "Discrete products in this lot: product id to count."]
+    pub products: ::std::collections::BTreeMap<Id, Uint>,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub wear: ::std::option::Option<Rational>,
+}
 #[doc = "t_us is absent when no event is scheduled."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, Default)]
 #[serde(deny_unknown_fields)]
@@ -2612,8 +2852,13 @@ pub struct PhysicalState {
     pub pending_events: ::std::vec::Vec<PendingEvent>,
     pub residuals: ::std::vec::Vec<Residual>,
     pub schema: ::serde_json::Value,
+    #[doc = "Outbound shipments in transit, sorted by id. Present only in a trade world."]
+    #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+    pub shipments: ::std::vec::Vec<Shipment>,
     pub sinks: ::std::vec::Vec<SinkRecord>,
     pub time_us: TimeUs,
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub trade: ::std::option::Option<TradeState>,
 }
 #[doc = "A port or stage endpoint inside a process: \"port:<id>\", \"stage:<id>\" (the stage's pool), or \"stage:<id>.<stream>\" (a named stream the stage makes, LD-PEC-005 §3.2)."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -2901,10 +3146,18 @@ pub struct ProcessRestartThresholdsValue {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct ProductBlueprint {
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub carrier: ::std::option::Option<ProductBlueprintCarrier>,
     pub embodied: SpeciesAmounts,
     #[serde(skip_serializing_if = "::std::option::Option::is_none")]
     pub installs_as: ::std::option::Option<ProductBlueprintInstallsAs>,
     pub product_id: Id,
+}
+#[doc = "This product is a carrier (LD-PEC-004 A6-3): it installs as a machine with an energy store, and a kit lot of it carries goods between claims. Its machine blueprint may not declare a core."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct ProductBlueprintCarrier {
+    pub payload: Quantity,
 }
 #[doc = "`ProductBlueprintInstallsAs`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -3164,6 +3417,16 @@ pub struct RestoreParams {
     pub catalog: CatalogBundle,
     pub snapshot: Snapshot,
 }
+#[doc = "A directed route between two claims of a trade world (LD-PEC-004 A6-1)."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct Route {
+    pub energy_per_kg: Rational,
+    pub from_claim: Id,
+    pub route_id: Id,
+    pub to_claim: Id,
+    pub transit_us: PositiveInt,
+}
 #[doc = "One line of script.jsonl, tagged by \"step\"."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(tag = "step", deny_unknown_fields)]
@@ -3177,6 +3440,20 @@ pub enum ScriptStep {
     #[doc = "RestoreStep"]
     #[serde(rename = "restore")]
     Restore { name: Id },
+}
+#[doc = "An outbound shipment in transit (A6-7). It holds its manifest and carrier inline; no lot is located at it."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct Shipment {
+    pub arrive_us: TimeUs,
+    pub carrier: CarrierRecord,
+    pub certificate_hash: Hash,
+    pub depart_us: TimeUs,
+    pub export_id: Id,
+    pub manifest: Manifest,
+    pub peer_claim: Id,
+    pub route_id: Id,
+    pub shipment_id: Id,
 }
 #[doc = "`SinkRecord`"]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
@@ -3415,6 +3692,26 @@ impl<'de> ::serde::Deserialize<'de> for TimeUs {
                 <D::Error as ::serde::de::Error>::custom(e.to_string())
             })
     }
+}
+#[doc = "Material and stored energy that left or entered the claim by shipment: element amounts in mol, and charge in the bus energy unit."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct TradeLedger {
+    pub charge: Rational,
+    pub elements: ::std::collections::BTreeMap<Id, Rational>,
+}
+#[doc = "A trade world claim's exports and imports (A6-7)."]
+#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+#[serde(deny_unknown_fields)]
+pub struct TradeState {
+    #[doc = "The certificate hash of every accepted import; sorted."]
+    pub accepted: ::std::vec::Vec<Hash>,
+    #[doc = "Every export_id this claim has exported; sorted."]
+    pub export_ids: ::std::vec::Vec<Id>,
+    pub exported: TradeLedger,
+    pub exports: Uint,
+    pub imported: TradeLedger,
+    pub imports: Uint,
 }
 #[doc = "Unsigned integer as a canonical decimal string: \"0\" or a nonzero digit followed by digits."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -3693,6 +3990,12 @@ impl<'de> ::serde::Deserialize<'de> for VectorManifestTitle {
             .map_err(|e: self::error::ConversionError| {
                 <D::Error as ::serde::de::Error>::custom(e.to_string())
             })
+    }
+}
+#[doc = " Generation of default values for serde."]
+pub mod defaults {
+    pub(super) fn buffer_template_kind() -> super::BufferTemplateKind {
+        super::BufferTemplateKind::Store
     }
 }
 #[doc = " Error types."]

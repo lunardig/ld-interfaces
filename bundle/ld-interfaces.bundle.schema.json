@@ -142,10 +142,19 @@
           "items": {
             "$ref": "#/$defs/Id"
           },
-          "minItems": 1
+          "description": "Species the buffer accepts. Non-empty for a STORE buffer (checked at load); ignored for a LANDING pad."
         },
         "capacity": {
           "$ref": "#/$defs/Quantity"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "STORE",
+            "LANDING"
+          ],
+          "default": "STORE",
+          "description": "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."
         }
       },
       "required": [
@@ -180,6 +189,26 @@
         "contents",
         "capacity",
         "reserved"
+      ],
+      "additionalProperties": false
+    },
+    "CarrierRecord": {
+      "type": "object",
+      "description": "The carrier of a shipment: its product, its charge after the trip, and its wear if any.",
+      "properties": {
+        "product": {
+          "$ref": "#/$defs/Id"
+        },
+        "charge": {
+          "$ref": "#/$defs/Rational"
+        },
+        "wear": {
+          "$ref": "#/$defs/Rational"
+        }
+      },
+      "required": [
+        "product",
+        "charge"
       ],
       "additionalProperties": false
     },
@@ -305,6 +334,80 @@
       ],
       "additionalProperties": false
     },
+    "Certificate": {
+      "type": "object",
+      "description": "What an export proves about itself (LD-PEC-004 A6-5). Its hash, H(\"ld.trade.certificate.v0\", certificate), is the import identity.",
+      "properties": {
+        "schema": {
+          "const": "ld.trade.certificate.v0"
+        },
+        "world": {
+          "$ref": "#/$defs/Id"
+        },
+        "epoch_us": {
+          "$ref": "#/$defs/TimeUs"
+        },
+        "origin_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "catalog_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "export_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "n": {
+          "$ref": "#/$defs/PositiveInt"
+        },
+        "spend_id": {
+          "$ref": "#/$defs/Hash"
+        },
+        "peer_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "route_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "depart_us": {
+          "$ref": "#/$defs/TimeUs"
+        },
+        "arrive_us": {
+          "$ref": "#/$defs/TimeUs"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Manifest"
+        },
+        "carrier": {
+          "$ref": "#/$defs/CarrierRecord"
+        },
+        "prev_state_hash": {
+          "$ref": "#/$defs/Hash"
+        },
+        "checkpoint": {
+          "type": "null",
+          "description": "Reserved for a published snapshot hash; null in Amendment 6."
+        }
+      },
+      "required": [
+        "schema",
+        "world",
+        "epoch_us",
+        "origin_claim",
+        "catalog_hash",
+        "export_id",
+        "n",
+        "spend_id",
+        "peer_claim",
+        "route_id",
+        "depart_us",
+        "arrive_us",
+        "manifest",
+        "carrier",
+        "prev_state_hash",
+        "checkpoint"
+      ],
+      "additionalProperties": false
+    },
     "ClaimEnvelope": {
       "type": "object",
       "properties": {
@@ -399,6 +502,16 @@
           "items": {
             "$ref": "#/$defs/SinkRecord"
           }
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Shipment"
+          },
+          "description": "Outbound shipments in transit. Present only in a trade world."
+        },
+        "trade": {
+          "$ref": "#/$defs/TradeState"
         }
       },
       "required": [
@@ -411,6 +524,40 @@
         "energy",
         "connections",
         "lots"
+      ],
+      "additionalProperties": false
+    },
+    "CmdAcceptImportArgs": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "$ref": "#/$defs/Certificate"
+        },
+        "landing": {
+          "$ref": "#/$defs/Id"
+        },
+        "policy": {
+          "type": "object",
+          "description": "What the receiver checked before accepting; recorded, not interpreted.",
+          "properties": {
+            "policy_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "evidence_hash": {
+              "$ref": "#/$defs/Hash"
+            }
+          },
+          "required": [
+            "policy_id",
+            "evidence_hash"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "certificate",
+        "landing",
+        "policy"
       ],
       "additionalProperties": false
     },
@@ -503,6 +650,49 @@
       ],
       "additionalProperties": false
     },
+    "CmdExportArgs": {
+      "type": "object",
+      "properties": {
+        "export_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "landing": {
+          "$ref": "#/$defs/Id"
+        },
+        "contents": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/PositiveInt"
+          }
+        },
+        "lots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "carrier_lot": {
+          "$ref": "#/$defs/Id"
+        },
+        "peer_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "route_id": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "export_id",
+        "landing",
+        "carrier_lot",
+        "peer_claim",
+        "route_id"
+      ],
+      "additionalProperties": false
+    },
     "CmdInstallArgs": {
       "type": "object",
       "properties": {
@@ -524,6 +714,32 @@
         "product",
         "location",
         "as_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdMoveLotArgs": {
+      "type": "object",
+      "properties": {
+        "lot_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "to": {
+          "$ref": "#/$defs/Id"
+        },
+        "products": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/PositiveInt"
+          },
+          "description": "Split these counts off into a new lot; omit to move the whole lot."
+        }
+      },
+      "required": [
+        "lot_id",
+        "to"
       ],
       "additionalProperties": false
     },
@@ -1080,6 +1296,102 @@
             },
             "args": {
               "$ref": "#/$defs/CmdCheckpointArgs"
+            },
+            "issued_by": {
+              "$ref": "#/$defs/IssuedBy"
+            }
+          },
+          "required": [
+            "command_id",
+            "effective_us",
+            "seq",
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "CmdMoveLot",
+          "type": "object",
+          "properties": {
+            "command_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "effective_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "op": {
+              "const": "MOVE_LOT"
+            },
+            "args": {
+              "$ref": "#/$defs/CmdMoveLotArgs"
+            },
+            "issued_by": {
+              "$ref": "#/$defs/IssuedBy"
+            }
+          },
+          "required": [
+            "command_id",
+            "effective_us",
+            "seq",
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "CmdExport",
+          "type": "object",
+          "properties": {
+            "command_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "effective_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "op": {
+              "const": "EXPORT"
+            },
+            "args": {
+              "$ref": "#/$defs/CmdExportArgs"
+            },
+            "issued_by": {
+              "$ref": "#/$defs/IssuedBy"
+            }
+          },
+          "required": [
+            "command_id",
+            "effective_us",
+            "seq",
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "CmdAcceptImport",
+          "type": "object",
+          "properties": {
+            "command_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "effective_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "op": {
+              "const": "ACCEPT_IMPORT"
+            },
+            "args": {
+              "$ref": "#/$defs/CmdAcceptImportArgs"
             },
             "issued_by": {
               "$ref": "#/$defs/IssuedBy"
@@ -1686,6 +1998,135 @@
             "status"
           ],
           "additionalProperties": false
+        },
+        {
+          "title": "EventShipmentDeparted",
+          "type": "object",
+          "properties": {
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "time_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "kind": {
+              "const": "SHIPMENT_DEPARTED"
+            },
+            "shipment_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "export_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "n": {
+              "$ref": "#/$defs/PositiveInt"
+            },
+            "spend_id": {
+              "$ref": "#/$defs/Hash"
+            },
+            "certificate": {
+              "$ref": "#/$defs/Certificate"
+            }
+          },
+          "required": [
+            "seq",
+            "time_us",
+            "kind",
+            "shipment_id",
+            "export_id",
+            "n",
+            "spend_id",
+            "certificate"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "EventShipmentDelivered",
+          "type": "object",
+          "properties": {
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "time_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "kind": {
+              "const": "SHIPMENT_DELIVERED"
+            },
+            "shipment_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "export_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "peer_claim": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "seq",
+            "time_us",
+            "kind",
+            "shipment_id",
+            "export_id",
+            "peer_claim"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "EventImportAccepted",
+          "type": "object",
+          "properties": {
+            "seq": {
+              "$ref": "#/$defs/Uint"
+            },
+            "time_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "kind": {
+              "const": "IMPORT_ACCEPTED"
+            },
+            "import_id": {
+              "$ref": "#/$defs/Hash"
+            },
+            "origin_claim": {
+              "$ref": "#/$defs/Id"
+            },
+            "export_id": {
+              "$ref": "#/$defs/Id"
+            },
+            "spend_id": {
+              "$ref": "#/$defs/Hash"
+            },
+            "policy": {
+              "type": "object",
+              "description": "What the receiver checked before accepting; recorded, not interpreted.",
+              "properties": {
+                "policy_id": {
+                  "$ref": "#/$defs/Id"
+                },
+                "evidence_hash": {
+                  "$ref": "#/$defs/Hash"
+                }
+              },
+              "required": [
+                "policy_id",
+                "evidence_hash"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "seq",
+            "time_us",
+            "kind",
+            "import_id",
+            "origin_claim",
+            "export_id",
+            "spend_id",
+            "policy"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -1899,6 +2340,26 @@
           "items": {
             "$ref": "#/$defs/Id"
           }
+        },
+        "trade": {
+          "type": "object",
+          "description": "Present for a claim in a trade world (LD-PEC-004 A6-1).",
+          "properties": {
+            "epoch_us": {
+              "$ref": "#/$defs/TimeUs"
+            },
+            "routes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Route"
+              }
+            }
+          },
+          "required": [
+            "epoch_us",
+            "routes"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -2863,6 +3324,57 @@
       ],
       "additionalProperties": false
     },
+    "Manifest": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "$ref": "#/$defs/SpeciesAmounts"
+        },
+        "lots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ManifestLot"
+          }
+        }
+      },
+      "required": [
+        "contents",
+        "lots"
+      ],
+      "additionalProperties": false
+    },
+    "ManifestLot": {
+      "type": "object",
+      "description": "One lot in a shipment, by content (A6-5). Optional fields are omitted exactly when the lot omits them.",
+      "properties": {
+        "products": {
+          "description": "Discrete products in this lot: product id to count.",
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/Uint"
+          }
+        },
+        "composition": {
+          "$ref": "#/$defs/SpeciesAmounts"
+        },
+        "wear": {
+          "$ref": "#/$defs/Rational"
+        },
+        "charge": {
+          "$ref": "#/$defs/Rational"
+        },
+        "core": {
+          "$ref": "#/$defs/SpeciesAmounts"
+        }
+      },
+      "required": [
+        "products"
+      ],
+      "additionalProperties": false
+    },
     "NextEventTime": {
       "description": "t_us is absent when no event is scheduled.",
       "type": "object",
@@ -3037,6 +3549,16 @@
           "additionalProperties": {
             "$ref": "#/$defs/Uint"
           }
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Shipment"
+          },
+          "description": "Outbound shipments in transit, sorted by id. Present only in a trade world."
+        },
+        "trade": {
+          "$ref": "#/$defs/TradeState"
         }
       },
       "required": [
@@ -3316,6 +3838,19 @@
           "required": [
             "kind",
             "template"
+          ],
+          "additionalProperties": false
+        },
+        "carrier": {
+          "type": "object",
+          "description": "This product is a carrier (LD-PEC-004 A6-3): it installs as a machine with an energy store, and a kit lot of it carries goods between claims. Its machine blueprint may not declare a core.",
+          "properties": {
+            "payload": {
+              "$ref": "#/$defs/Quantity"
+            }
+          },
+          "required": [
+            "payload"
           ],
           "additionalProperties": false
         }
@@ -4064,6 +4599,35 @@
       ],
       "additionalProperties": false
     },
+    "Route": {
+      "type": "object",
+      "description": "A directed route between two claims of a trade world (LD-PEC-004 A6-1).",
+      "properties": {
+        "route_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "from_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "to_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "transit_us": {
+          "$ref": "#/$defs/PositiveInt"
+        },
+        "energy_per_kg": {
+          "$ref": "#/$defs/Rational"
+        }
+      },
+      "required": [
+        "route_id",
+        "from_claim",
+        "to_claim",
+        "transit_us",
+        "energy_per_kg"
+      ],
+      "additionalProperties": false
+    },
     "ScriptStep": {
       "description": "One line of script.jsonl, tagged by \"step\".",
       "oneOf": [
@@ -4119,6 +4683,51 @@
           "additionalProperties": false
         }
       ]
+    },
+    "Shipment": {
+      "type": "object",
+      "description": "An outbound shipment in transit (A6-7). It holds its manifest and carrier inline; no lot is located at it.",
+      "properties": {
+        "shipment_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "export_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "peer_claim": {
+          "$ref": "#/$defs/Id"
+        },
+        "route_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "depart_us": {
+          "$ref": "#/$defs/TimeUs"
+        },
+        "arrive_us": {
+          "$ref": "#/$defs/TimeUs"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Manifest"
+        },
+        "carrier": {
+          "$ref": "#/$defs/CarrierRecord"
+        },
+        "certificate_hash": {
+          "$ref": "#/$defs/Hash"
+        }
+      },
+      "required": [
+        "shipment_id",
+        "export_id",
+        "peer_claim",
+        "route_id",
+        "depart_us",
+        "arrive_us",
+        "manifest",
+        "carrier",
+        "certificate_hash"
+      ],
+      "additionalProperties": false
     },
     "SinkRecord": {
       "type": "object",
@@ -4288,6 +4897,70 @@
       "description": "Signed 64-bit microseconds since world genesis, as a decimal string.",
       "type": "string",
       "pattern": "^(0|-?[1-9][0-9]*)$"
+    },
+    "TradeLedger": {
+      "type": "object",
+      "description": "Material and stored energy that left or entered the claim by shipment: element amounts in mol, and charge in the bus energy unit.",
+      "properties": {
+        "elements": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/Rational"
+          }
+        },
+        "charge": {
+          "$ref": "#/$defs/Rational"
+        }
+      },
+      "required": [
+        "elements",
+        "charge"
+      ],
+      "additionalProperties": false
+    },
+    "TradeState": {
+      "type": "object",
+      "description": "A trade world claim's exports and imports (A6-7).",
+      "properties": {
+        "exports": {
+          "$ref": "#/$defs/Uint"
+        },
+        "imports": {
+          "$ref": "#/$defs/Uint"
+        },
+        "export_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "description": "Every export_id this claim has exported; sorted."
+        },
+        "accepted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Hash"
+          },
+          "description": "The certificate hash of every accepted import; sorted."
+        },
+        "exported": {
+          "$ref": "#/$defs/TradeLedger"
+        },
+        "imported": {
+          "$ref": "#/$defs/TradeLedger"
+        }
+      },
+      "required": [
+        "exports",
+        "imports",
+        "export_ids",
+        "accepted",
+        "exported",
+        "imported"
+      ],
+      "additionalProperties": false
     },
     "Uint": {
       "description": "Unsigned integer as a canonical decimal string: \"0\" or a nonzero digit followed by digits.",

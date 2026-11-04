@@ -727,6 +727,15 @@
         },
         {
           "$ref": "#/$defs/CmdCheckpoint"
+        },
+        {
+          "$ref": "#/$defs/CmdMoveLot"
+        },
+        {
+          "$ref": "#/$defs/CmdExport"
+        },
+        {
+          "$ref": "#/$defs/CmdAcceptImport"
         }
       ]
     },
@@ -1240,6 +1249,17 @@
           "items": {
             "$ref": "i3-state.schema.json#/$defs/SinkRecord"
           }
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "$ref": "i3-state.schema.json#/$defs/Shipment"
+          },
+          "description": "Outbound shipments in transit. Present only in a trade world."
+        },
+        "trade": {
+          "$ref": "i3-state.schema.json#/$defs/TradeState",
+          "description": "Exports and imports. Present only in a trade world."
         }
       },
       "required": [
@@ -1449,6 +1469,15 @@
         },
         {
           "$ref": "#/$defs/EventCommand"
+        },
+        {
+          "$ref": "#/$defs/EventShipmentDeparted"
+        },
+        {
+          "$ref": "#/$defs/EventShipmentDelivered"
+        },
+        {
+          "$ref": "#/$defs/EventImportAccepted"
         }
       ]
     },
@@ -2187,6 +2216,334 @@
       },
       "required": [
         "origin"
+      ],
+      "additionalProperties": false
+    },
+    "CmdMoveLotArgs": {
+      "type": "object",
+      "properties": {
+        "lot_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "products": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/PositiveInt"
+          },
+          "description": "Split these counts off into a new lot; omit to move the whole lot."
+        }
+      },
+      "required": [
+        "lot_id",
+        "to"
+      ],
+      "additionalProperties": false
+    },
+    "CmdMoveLot": {
+      "description": "Move a lot between the cargo hold and a landing pad (LD-PEC-004 A6-2).",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "MOVE_LOT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdMoveLotArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdExportArgs": {
+      "type": "object",
+      "properties": {
+        "export_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "landing": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "contents": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/Id"
+          },
+          "additionalProperties": {
+            "$ref": "common.schema.json#/$defs/PositiveInt"
+          }
+        },
+        "lots": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Id"
+          }
+        },
+        "carrier_lot": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "peer_claim": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "route_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "export_id",
+        "landing",
+        "carrier_lot",
+        "peer_claim",
+        "route_id"
+      ],
+      "additionalProperties": false
+    },
+    "CmdExport": {
+      "description": "Ship goods from a landing pad to another claim of the trade world (LD-PEC-004 A6-4).",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "EXPORT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdExportArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "CmdAcceptImportArgs": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "$ref": "i3-state.schema.json#/$defs/Certificate"
+        },
+        "landing": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "policy": {
+          "type": "object",
+          "description": "What the receiver checked before accepting; recorded, not interpreted.",
+          "properties": {
+            "policy_id": {
+              "$ref": "common.schema.json#/$defs/Id"
+            },
+            "evidence_hash": {
+              "$ref": "common.schema.json#/$defs/Hash"
+            }
+          },
+          "required": [
+            "policy_id",
+            "evidence_hash"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "certificate",
+        "landing",
+        "policy"
+      ],
+      "additionalProperties": false
+    },
+    "CmdAcceptImport": {
+      "description": "Accept a delivered shipment onto a landing pad (LD-PEC-004 A6-6).",
+      "type": "object",
+      "properties": {
+        "command_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "effective_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "op": {
+          "const": "ACCEPT_IMPORT"
+        },
+        "args": {
+          "$ref": "#/$defs/CmdAcceptImportArgs"
+        },
+        "issued_by": {
+          "$ref": "#/$defs/IssuedBy"
+        }
+      },
+      "required": [
+        "command_id",
+        "effective_us",
+        "seq",
+        "op",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    "EventShipmentDeparted": {
+      "type": "object",
+      "description": "An export left; the certificate is in the record's transition (A6-4).",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "SHIPMENT_DEPARTED"
+        },
+        "shipment_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "export_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "n": {
+          "$ref": "common.schema.json#/$defs/PositiveInt"
+        },
+        "spend_id": {
+          "$ref": "common.schema.json#/$defs/Hash"
+        },
+        "certificate": {
+          "$ref": "i3-state.schema.json#/$defs/Certificate"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "shipment_id",
+        "export_id",
+        "n",
+        "spend_id",
+        "certificate"
+      ],
+      "additionalProperties": false
+    },
+    "EventShipmentDelivered": {
+      "type": "object",
+      "description": "An outbound shipment reached its destination and left this claim (A6-7).",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "SHIPMENT_DELIVERED"
+        },
+        "shipment_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "export_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "peer_claim": {
+          "$ref": "common.schema.json#/$defs/Id"
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "shipment_id",
+        "export_id",
+        "peer_claim"
+      ],
+      "additionalProperties": false
+    },
+    "EventImportAccepted": {
+      "type": "object",
+      "description": "An import was accepted onto a landing pad (A6-6).",
+      "properties": {
+        "seq": {
+          "$ref": "common.schema.json#/$defs/Uint"
+        },
+        "time_us": {
+          "$ref": "common.schema.json#/$defs/TimeUs"
+        },
+        "kind": {
+          "const": "IMPORT_ACCEPTED"
+        },
+        "import_id": {
+          "$ref": "common.schema.json#/$defs/Hash"
+        },
+        "origin_claim": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "export_id": {
+          "$ref": "common.schema.json#/$defs/Id"
+        },
+        "spend_id": {
+          "$ref": "common.schema.json#/$defs/Hash"
+        },
+        "policy": {
+          "type": "object",
+          "description": "What the receiver checked before accepting; recorded, not interpreted.",
+          "properties": {
+            "policy_id": {
+              "$ref": "common.schema.json#/$defs/Id"
+            },
+            "evidence_hash": {
+              "$ref": "common.schema.json#/$defs/Hash"
+            }
+          },
+          "required": [
+            "policy_id",
+            "evidence_hash"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "seq",
+        "time_us",
+        "kind",
+        "import_id",
+        "origin_claim",
+        "export_id",
+        "spend_id",
+        "policy"
       ],
       "additionalProperties": false
     }

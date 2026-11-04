@@ -17,6 +17,19 @@
           "description": "Environment function ids active on this claim.",
           "type": "array",
           "items": { "$ref": "common.schema.json#/$defs/Id" }
+        },
+        "trade": {
+          "type": "object",
+          "description": "Present for a claim in a trade world (LD-PEC-004 A6-1).",
+          "properties": {
+            "epoch_us": {
+              "$ref": "common.schema.json#/$defs/TimeUs",
+              "description": "The world's epoch on this claim's time axis; start_us may not be earlier."
+            },
+            "routes": { "type": "array", "items": { "$ref": "#/$defs/Route" } }
+          },
+          "required": ["epoch_us", "routes"],
+          "additionalProperties": false
         }
       },
       "required": ["schema", "world_id", "claim_id", "catalog_hash", "start_us", "deposits", "starting_lots", "environment"],
@@ -215,6 +228,140 @@
       "additionalProperties": false
     },
 
+    "Route": {
+      "type": "object",
+      "description": "A directed route between two claims of a trade world (LD-PEC-004 A6-1).",
+      "properties": {
+        "route_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "from_claim": { "$ref": "common.schema.json#/$defs/Id" },
+        "to_claim": { "$ref": "common.schema.json#/$defs/Id" },
+        "transit_us": { "$ref": "common.schema.json#/$defs/PositiveInt" },
+        "energy_per_kg": {
+          "$ref": "common.schema.json#/$defs/Rational",
+          "description": "Trip energy per kilogram of carrier and cargo, in the bus energy unit."
+        }
+      },
+      "required": ["route_id", "from_claim", "to_claim", "transit_us", "energy_per_kg"],
+      "additionalProperties": false
+    },
+    "ManifestLot": {
+      "type": "object",
+      "description": "One lot in a shipment, by content (A6-5). Optional fields are omitted exactly when the lot omits them.",
+      "properties": {
+        "products": {
+          "description": "Discrete products in this lot: product id to count.",
+          "type": "object",
+          "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/Uint" }
+        },
+        "composition": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "wear": { "$ref": "common.schema.json#/$defs/Rational" },
+        "charge": { "$ref": "common.schema.json#/$defs/Rational" },
+        "core": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" }
+      },
+      "required": ["products"],
+      "additionalProperties": false
+    },
+    "Manifest": {
+      "type": "object",
+      "properties": {
+        "contents": { "$ref": "common.schema.json#/$defs/SpeciesAmounts" },
+        "lots": { "type": "array", "items": { "$ref": "#/$defs/ManifestLot" } }
+      },
+      "required": ["contents", "lots"],
+      "additionalProperties": false
+    },
+    "CarrierRecord": {
+      "type": "object",
+      "description": "The carrier of a shipment: its product, its charge after the trip, and its wear if any.",
+      "properties": {
+        "product": { "$ref": "common.schema.json#/$defs/Id" },
+        "charge": { "$ref": "common.schema.json#/$defs/Rational" },
+        "wear": { "$ref": "common.schema.json#/$defs/Rational" }
+      },
+      "required": ["product", "charge"],
+      "additionalProperties": false
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "What an export proves about itself (LD-PEC-004 A6-5). Its hash, H(\"ld.trade.certificate.v0\", certificate), is the import identity.",
+      "properties": {
+        "schema": { "const": "ld.trade.certificate.v0" },
+        "world": { "$ref": "common.schema.json#/$defs/Id" },
+        "epoch_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "origin_claim": { "$ref": "common.schema.json#/$defs/Id" },
+        "catalog_hash": { "$ref": "common.schema.json#/$defs/Hash" },
+        "export_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "n": { "$ref": "common.schema.json#/$defs/PositiveInt" },
+        "spend_id": { "$ref": "common.schema.json#/$defs/Hash" },
+        "peer_claim": { "$ref": "common.schema.json#/$defs/Id" },
+        "route_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "depart_us": { "$ref": "common.schema.json#/$defs/TimeUs", "description": "Below 2^63." },
+        "arrive_us": { "$ref": "common.schema.json#/$defs/TimeUs", "description": "Below 2^63." },
+        "manifest": { "$ref": "#/$defs/Manifest" },
+        "carrier": { "$ref": "#/$defs/CarrierRecord" },
+        "prev_state_hash": {
+          "$ref": "common.schema.json#/$defs/Hash",
+          "description": "The origin's physical state hash just before the export."
+        },
+        "checkpoint": { "type": "null", "description": "Reserved for a published snapshot hash; null in Amendment 6." }
+      },
+      "required": ["schema", "world", "epoch_us", "origin_claim", "catalog_hash", "export_id", "n", "spend_id", "peer_claim", "route_id", "depart_us", "arrive_us", "manifest", "carrier", "prev_state_hash", "checkpoint"],
+      "additionalProperties": false
+    },
+    "Shipment": {
+      "type": "object",
+      "description": "An outbound shipment in transit (A6-7). It holds its manifest and carrier inline; no lot is located at it.",
+      "properties": {
+        "shipment_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "export_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "peer_claim": { "$ref": "common.schema.json#/$defs/Id" },
+        "route_id": { "$ref": "common.schema.json#/$defs/Id" },
+        "depart_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "arrive_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "manifest": { "$ref": "#/$defs/Manifest" },
+        "carrier": { "$ref": "#/$defs/CarrierRecord" },
+        "certificate_hash": { "$ref": "common.schema.json#/$defs/Hash" }
+      },
+      "required": ["shipment_id", "export_id", "peer_claim", "route_id", "depart_us", "arrive_us", "manifest", "carrier", "certificate_hash"],
+      "additionalProperties": false
+    },
+    "TradeLedger": {
+      "type": "object",
+      "description": "Material and stored energy that left or entered the claim by shipment: element amounts in mol, and charge in the bus energy unit.",
+      "properties": {
+        "elements": {
+          "type": "object",
+          "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/Rational" }
+        },
+        "charge": { "$ref": "common.schema.json#/$defs/Rational" }
+      },
+      "required": ["elements", "charge"],
+      "additionalProperties": false
+    },
+    "TradeState": {
+      "type": "object",
+      "description": "A trade world claim's exports and imports (A6-7).",
+      "properties": {
+        "exports": { "$ref": "common.schema.json#/$defs/Uint" },
+        "imports": { "$ref": "common.schema.json#/$defs/Uint" },
+        "export_ids": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/Id" },
+          "description": "Every export_id this claim has exported; sorted."
+        },
+        "accepted": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/Hash" },
+          "description": "The certificate hash of every accepted import; sorted."
+        },
+        "exported": { "$ref": "#/$defs/TradeLedger" },
+        "imported": { "$ref": "#/$defs/TradeLedger" }
+      },
+      "required": ["exports", "imports", "export_ids", "accepted", "exported", "imported"],
+      "additionalProperties": false
+    },
     "PhysicalState": {
       "description": "Canonical state; hashed in domain ld.pec.physical-state.v1. Every array is sorted by its first id field.",
       "type": "object",
@@ -243,7 +390,13 @@
           "type": "object",
           "propertyNames": { "$ref": "common.schema.json#/$defs/Id" },
           "additionalProperties": { "$ref": "common.schema.json#/$defs/Uint" }
-        }
+        },
+        "shipments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Shipment" },
+          "description": "Outbound shipments in transit, sorted by id. Present only in a trade world."
+        },
+        "trade": { "$ref": "#/$defs/TradeState", "description": "Present only in a trade world." }
       },
       "required": ["schema", "claim_id", "time_us", "catalog_hash", "environment", "deposits", "lots", "buffers", "machines", "connections", "energy_stores", "jobs", "in_transit", "sinks", "pending_events", "residuals", "id_counters"],
       "additionalProperties": false
