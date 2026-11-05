@@ -1,0 +1,9 @@
+{
+  "template_id": "pad",
+  "kind": "LANDING",
+  "accepts": [],
+  "capacity": {
+    "amount": "1000",
+    "unit": "kg"
+  }
+}

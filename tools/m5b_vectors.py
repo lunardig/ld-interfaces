@@ -568,6 +568,23 @@ def v51b(cert: dict) -> list[TradeVector]:
     return [v]
 
 
+def v41b(cert: dict) -> list[TradeVector]:
+    """A re-send of an accepted certificate with an unreduced rational is refused, not
+    imported under a new hash (Review — ld-reference A6, R-01). The other non-canonical
+    spellings (an unknown key, a leading zero, -0) fail I-1's schema before admission."""
+    t = arrive(cert)
+    unreduced = copy.deepcopy(cert)
+    c = unreduced["carrier"]["charge"]
+    unreduced["carrier"]["charge"] = {"n": str(int(c["n"]) * 2), "d": str(int(c["d"]) * 2)}
+    v = importer("V-41b", "non-canonical-resend", "An accepted certificate re-sent with an unreduced rational: REJECTED_SCHEMA, imported once",
+                 ["V-40", "Review — ld-reference A6 R-01"])
+    v.pad()
+    v.accept(t, cert)
+    v.accept(t, unreduced)
+    v.advance(t + S)
+    return [v]
+
+
 def main() -> int:
     global ENGINE
     p = argparse.ArgumentParser()
@@ -577,7 +594,7 @@ def main() -> int:
     first = v39_v40_v41_v42()
     cert = certificates(first[0])[0]
     out += first
-    out += v43() + v44() + v45() + v46(cert) + v47() + v48() + v49() + v50(cert) + v51(cert) + v52() + v53(cert) + v54(cert) + v55() + v43b() + v46b(cert) + v51b(cert)
+    out += v43() + v44() + v45() + v46(cert) + v47() + v48() + v49() + v50(cert) + v51(cert) + v52() + v53(cert) + v54(cert) + v55() + v43b() + v46b(cert) + v51b(cert) + v41b(cert)
     for v in out:
         v.save()
     return 0
