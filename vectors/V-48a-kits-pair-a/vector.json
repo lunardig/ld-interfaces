@@ -1,0 +1,11 @@
+{
+  "id": "V-48a",
+  "title": "Pair: A ships a reactor kit with its core and a worn hopper kit",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

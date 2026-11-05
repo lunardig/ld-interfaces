@@ -1,0 +1,11 @@
+{
+  "id": "V-43",
+  "title": "EXPORT refusals: insufficient charge, overweight, no route, unstaged lot, insufficient contents, empty shipment",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

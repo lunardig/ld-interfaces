@@ -1,0 +1,5 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","status":"ACCEPTED"}
+{"command_id":"cmd-0004","detail":{"code":"not-a-trade-world","message":"this claim's genesis has no trade"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0005","detail":{"code":"not-a-trade-world","message":"this claim's genesis has no trade"},"status":"REJECTED_STATE"}

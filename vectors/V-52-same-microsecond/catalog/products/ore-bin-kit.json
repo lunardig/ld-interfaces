@@ -1,0 +1,8 @@
+{
+  "product_id": "ore-bin-kit",
+  "embodied": {},
+  "installs_as": {
+    "kind": "BUFFER",
+    "template": "ore-bin"
+  }
+}

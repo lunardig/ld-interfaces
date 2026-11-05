@@ -1,0 +1,16 @@
+{
+  "substance_id": "o2-g",
+  "formula": {
+    "o": "2"
+  },
+  "phase": "gas",
+  "quantity_unit": "mmol",
+  "enthalpy": {
+    "n": "0",
+    "d": "1"
+  },
+  "gibbs": {
+    "n": "0",
+    "d": "1"
+  }
+}

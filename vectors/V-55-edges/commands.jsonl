@@ -1,0 +1,9 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "pad-kit", "location": "pad-a", "as_id": "pad-1"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "MOVE_LOT", "args": {"lot_id": "iron", "to": "pad-1"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "MOVE_LOT", "args": {"lot_id": "iron-2", "to": "pad-1"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "MOVE_LOT", "args": {"lot_id": "spare", "to": "pad-1"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "MOVE_LOT", "args": {"lot_id": "exact", "to": "pad-1"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "MOVE_LOT", "args": {"lot_id": "free", "to": "pad-1"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "MOVE_LOT", "args": {"lot_id": "spare", "to": "inventory"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "EXPORT", "args": {"export_id": "x-1", "landing": "pad-1", "carrier_lot": "exact", "peer_claim": "claim-b", "route_id": "a-to-b", "lots": ["iron"]}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "EXPORT", "args": {"export_id": "x-2", "landing": "pad-1", "carrier_lot": "free", "peer_claim": "claim-b", "route_id": "a-to-b-free", "lots": ["iron-2"]}}

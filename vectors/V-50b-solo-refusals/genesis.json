@@ -1,0 +1,42 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "trade-world",
+  "claim_id": "claim-a",
+  "catalog_hash": "6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "pad-kit": "1"
+      }
+    },
+    {
+      "lot_id": "iron",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {
+        "fe-s": "100"
+      },
+      "products": {}
+    },
+    {
+      "lot_id": "rover",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "rover-kit": "1"
+      },
+      "charge": {
+        "n": "500000000",
+        "d": "1"
+      }
+    }
+  ],
+  "environment": []
+}

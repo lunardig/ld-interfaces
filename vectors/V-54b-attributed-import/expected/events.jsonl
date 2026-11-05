@@ -1,0 +1,3 @@
+{"command_id":"cmd-0001","issued_by":{"origin":"host"},"kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"export_id":"x-1","import_id":"04aa464ab65c628c2ffdf865852b34d7594bfc6c5f279f2ee0aebfcfed45144d","kind":"IMPORT_ACCEPTED","origin_claim":"claim-a","policy":{"evidence_hash":"b9b769f05f83e1838b40edd5767fd9a2325aefa18944a2453d793a98c01e6ee0","policy_id":"accept-all-v0"},"seq":"1","spend_id":"3d085b92183054e5aaa837477fd22b22b6cb5c7fdee1f83f8a8d271a24567284","time_us":"172800000000"}
+{"command_id":"cmd-0002","issued_by":{"origin":"host"},"kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"172800000000"}

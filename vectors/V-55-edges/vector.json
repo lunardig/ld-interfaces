@@ -1,0 +1,11 @@
+{
+  "id": "V-55",
+  "title": "Charge exactly E; a zero-energy route; MOVE_LOT back to the hold",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

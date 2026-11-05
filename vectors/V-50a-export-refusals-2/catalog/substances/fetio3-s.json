@@ -1,0 +1,18 @@
+{
+  "substance_id": "fetio3-s",
+  "formula": {
+    "fe": "1",
+    "ti": "1",
+    "o": "3"
+  },
+  "phase": "solid",
+  "quantity_unit": "mmol",
+  "enthalpy": {
+    "n": "-1232",
+    "d": "1"
+  },
+  "gibbs": {
+    "n": "-2311",
+    "d": "2"
+  }
+}

@@ -1,0 +1,5 @@
+{"step": "advance_to", "t_us": "86400000000"}
+{"step": "snapshot", "name": "transit"}
+{"step": "advance_to", "t_us": "259200000000"}
+{"step": "restore", "name": "transit"}
+{"step": "advance_to", "t_us": "259200000000"}

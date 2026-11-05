@@ -1,0 +1,11 @@
+{
+  "id": "V-48b",
+  "title": "Pair: B accepts the kits and installs the reactor with its core",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

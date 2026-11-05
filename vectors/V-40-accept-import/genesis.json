@@ -1,0 +1,65 @@
+{
+  "schema": "ld.genesis.v0",
+  "world_id": "trade-world",
+  "claim_id": "claim-b",
+  "catalog_hash": "6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011",
+  "start_us": "0",
+  "deposits": [],
+  "starting_lots": [
+    {
+      "lot_id": "kits",
+      "location": "inventory",
+      "state": "AVAILABLE",
+      "composition": {},
+      "products": {
+        "pad-kit": "1"
+      }
+    }
+  ],
+  "environment": [],
+  "trade": {
+    "epoch_us": "0",
+    "routes": [
+      {
+        "route_id": "a-to-b",
+        "from_claim": "claim-a",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000",
+        "energy_per_kg": {
+          "n": "1000",
+          "d": "1"
+        }
+      },
+      {
+        "route_id": "a-to-b-fine",
+        "from_claim": "claim-a",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000",
+        "energy_per_kg": {
+          "n": "1000000",
+          "d": "1"
+        }
+      },
+      {
+        "route_id": "a-to-b-free",
+        "from_claim": "claim-a",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000",
+        "energy_per_kg": {
+          "n": "0",
+          "d": "1"
+        }
+      },
+      {
+        "route_id": "b-to-a",
+        "from_claim": "claim-b",
+        "to_claim": "claim-a",
+        "transit_us": "172800000000",
+        "energy_per_kg": {
+          "n": "1000",
+          "d": "1"
+        }
+      }
+    ]
+  }
+}

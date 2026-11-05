@@ -1,0 +1,10 @@
+{
+  "template_id": "cart",
+  "kind": "CONVEYOR",
+  "throughput": {
+    "n": "1",
+    "d": "1000"
+  },
+  "unit": "kg",
+  "delay_us": "2000000"
+}

@@ -1,0 +1,10 @@
+{
+  "template_id": "ore-bin",
+  "accepts": [
+    "fe-s"
+  ],
+  "capacity": {
+    "amount": "100000",
+    "unit": "kg"
+  }
+}

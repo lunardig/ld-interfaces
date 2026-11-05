@@ -1,0 +1,12 @@
+{
+  "id": "V-53",
+  "title": "After restore: duplicate-import still refused, the next export is n = 2, a reused export_id is refused",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6",
+    "V-40"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

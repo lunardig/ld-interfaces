@@ -1,0 +1,154 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "pad-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "pad-1.stock"
+      ],
+      "reservations": [],
+      "template": "pad"
+    }
+  ],
+  "catalog_hash": "6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011",
+  "claim_id": "claim-a",
+  "connections": [],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "5",
+    "export-shipment": "1"
+  },
+  "in_transit": [],
+  "jobs": [],
+  "lots": [
+    {
+      "composition": {
+        "h2o-l": "1000000"
+      },
+      "location": "pad-1",
+      "lot_id": "imp-1-1",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "charge": {
+        "d": "1",
+        "n": "499481985"
+      },
+      "composition": {},
+      "location": "pad-1",
+      "lot_id": "imp-1-carrier",
+      "products": {
+        "rover-kit": "1"
+      },
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "pad-1",
+      "lot_id": "pad-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "sinks": [
+    {
+      "energy": "300000",
+      "kind": "HEAT",
+      "sink_id": "trade-a-to-b",
+      "totals": {}
+    }
+  ],
+  "time_us": "345601000000",
+  "trade": {
+    "accepted": [
+      "159e4837ce085e0a380cf5941ee67b8ec2dbe6bc9bf5355555920efb83cfe41e"
+    ],
+    "epoch_us": "0",
+    "export_ids": [
+      "x-1"
+    ],
+    "exported": {
+      "charge": {
+        "d": "1",
+        "n": "499700000"
+      },
+      "elements": {
+        "fe": {
+          "d": "3723",
+          "n": "20000000"
+        }
+      }
+    },
+    "exports": "1",
+    "imported": {
+      "charge": {
+        "d": "1",
+        "n": "499481985"
+      },
+      "elements": {
+        "fe": {
+          "d": "11169",
+          "n": "40000000"
+        },
+        "h": {
+          "d": "1",
+          "n": "2000"
+        },
+        "o": {
+          "d": "1",
+          "n": "1000"
+        }
+      }
+    },
+    "imports": "1",
+    "routes": [
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000000"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b-fine",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "0"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b-free",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000"
+        },
+        "from_claim": "claim-b",
+        "route_id": "b-to-a",
+        "to_claim": "claim-a",
+        "transit_us": "172800000000"
+      }
+    ]
+  }
+}

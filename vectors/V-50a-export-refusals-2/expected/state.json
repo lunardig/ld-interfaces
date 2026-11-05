@@ -1,0 +1,176 @@
+{
+  "buffers": [
+    {
+      "buffer_id": "pad-1",
+      "location": "pad-a",
+      "lot_ids": [
+        "pad-1.stock"
+      ],
+      "reservations": [],
+      "template": "pad"
+    }
+  ],
+  "catalog_hash": "6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011",
+  "claim_id": "claim-a",
+  "connections": [],
+  "deposits": [],
+  "energy_stores": [],
+  "environment": [],
+  "id_counters": {
+    "command-seq": "16",
+    "export-shipment": "2"
+  },
+  "in_transit": [],
+  "jobs": [],
+  "lots": [
+    {
+      "composition": {
+        "fe-s": "10"
+      },
+      "location": "pad-1",
+      "lot_id": "dirty",
+      "products": {
+        "rover-kit": "1"
+      },
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "pad-1",
+      "lot_id": "hopper",
+      "products": {
+        "hopper-kit": "1"
+      },
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "pad-1",
+      "lot_id": "pad-1.stock",
+      "products": {},
+      "state": "AVAILABLE"
+    },
+    {
+      "composition": {},
+      "location": "pad-1",
+      "lot_id": "twins",
+      "products": {
+        "rover-kit": "2"
+      },
+      "state": "AVAILABLE"
+    }
+  ],
+  "machines": [],
+  "pending_events": [],
+  "residuals": [],
+  "schema": "ld.physical-state.v0",
+  "shipments": [
+    {
+      "arrive_us": "345601000000",
+      "carrier": {
+        "charge": {
+          "d": "1",
+          "n": "499750000"
+        },
+        "product": "rover-kit"
+      },
+      "certificate_hash": "d9f31f2df3375163bb51b5a358a0ce9e573290f82d06b780e25496e794f955d5",
+      "depart_us": "172801000000",
+      "export_id": "x-2",
+      "manifest": {
+        "contents": {},
+        "lots": [
+          {
+            "composition": {
+              "fe-s": "50"
+            },
+            "products": {}
+          }
+        ]
+      },
+      "peer_claim": "claim-b",
+      "route_id": "a-to-b",
+      "shipment_id": "xship-2"
+    }
+  ],
+  "sinks": [
+    {
+      "energy": "550000",
+      "kind": "HEAT",
+      "sink_id": "trade-a-to-b",
+      "totals": {}
+    }
+  ],
+  "time_us": "172802000000",
+  "trade": {
+    "accepted": [],
+    "epoch_us": "0",
+    "export_ids": [
+      "x-1",
+      "x-2"
+    ],
+    "exported": {
+      "charge": {
+        "d": "1",
+        "n": "499700000"
+      },
+      "elements": {
+        "fe": {
+          "d": "3723",
+          "n": "20000000"
+        }
+      }
+    },
+    "exports": "2",
+    "imported": {
+      "charge": {
+        "d": "1",
+        "n": "0"
+      },
+      "elements": {}
+    },
+    "imports": "0",
+    "routes": [
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000000"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b-fine",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "0"
+        },
+        "from_claim": "claim-a",
+        "route_id": "a-to-b-free",
+        "to_claim": "claim-b",
+        "transit_us": "172800000000"
+      },
+      {
+        "energy_per_kg": {
+          "d": "1",
+          "n": "1000"
+        },
+        "from_claim": "claim-b",
+        "route_id": "b-to-a",
+        "to_claim": "claim-a",
+        "transit_us": "172800000000"
+      }
+    ]
+  }
+}

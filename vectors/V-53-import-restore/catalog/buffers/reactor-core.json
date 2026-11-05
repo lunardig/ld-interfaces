@@ -1,0 +1,11 @@
+{
+  "template_id": "reactor-core",
+  "accepts": [
+    "fuel-fresh",
+    "fuel-spent"
+  ],
+  "capacity": {
+    "amount": "10000",
+    "unit": "mmol"
+  }
+}

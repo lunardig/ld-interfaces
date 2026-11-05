@@ -1,0 +1,17 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0006","kind":"COMMAND","seq":"5","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0007","kind":"COMMAND","seq":"6","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0008","kind":"COMMAND","seq":"7","status":"REJECTED_CAPACITY","time_us":"0"}
+{"command_id":"cmd-0009","kind":"COMMAND","seq":"8","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0010","kind":"COMMAND","seq":"9","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0011","kind":"COMMAND","seq":"10","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0012","kind":"COMMAND","seq":"11","status":"REJECTED_STATE","time_us":"0"}
+{"connection_id":"cart-1","kind":"ARRIVAL","lot_id":"lot-1","seq":"12","time_us":"2100000"}
+{"command_id":"cmd-0013","kind":"COMMAND","seq":"13","status":"ACCEPTED","time_us":"3000000"}
+{"certificate":{"arrive_us":"172803000000","carrier":{"charge":{"d":"1","n":"499700000"},"product":"rover-kit"},"catalog_hash":"6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011","checkpoint":null,"depart_us":"3000000","epoch_us":"0","export_id":"x-1","manifest":{"contents":{"fe-s":"100"},"lots":[]},"n":"1","origin_claim":"claim-a","peer_claim":"claim-b","prev_state_hash":"84f89dda64ca6bb2c62674fca0b27992c4a183d64de786c233c3f85a019a51b9","route_id":"a-to-b","schema":"ld.trade.certificate.v0","spend_id":"3d085b92183054e5aaa837477fd22b22b6cb5c7fdee1f83f8a8d271a24567284","world":"trade-world"},"export_id":"x-1","kind":"SHIPMENT_DEPARTED","n":"1","seq":"14","shipment_id":"xship-1","spend_id":"3d085b92183054e5aaa837477fd22b22b6cb5c7fdee1f83f8a8d271a24567284","time_us":"3000000"}
+{"command_id":"cmd-0014","kind":"COMMAND","seq":"15","status":"ACCEPTED","time_us":"3000000"}
+{"export_id":"x-1","kind":"SHIPMENT_DELIVERED","peer_claim":"claim-b","seq":"16","shipment_id":"xship-1","time_us":"172803000000"}

@@ -1,0 +1,10 @@
+{
+  "template_id": "widget-bin",
+  "accepts": [
+    "widget"
+  ],
+  "capacity": {
+    "amount": "1000",
+    "unit": "pcs"
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "schema": "ld.catalog.v0",
+  "catalog_id": "vector-trade-world",
+  "pset_version": "0",
+  "entries": [
+    {
+      "kind": "buffer",
+      "id": "ore-bin",
+      "hash": "4f04d294f3c58249b4c2b7536e3dfd993e082705fb8281f0bbe9a21e4383dc1b"
+    },
+    {
+      "kind": "buffer",
+      "id": "pad",
+      "hash": "4d1d08168e59c820dcbd9eab6484ccea66375a0554dc4470024178f840e5345f"
+    },
+    {
+      "kind": "buffer",
+      "id": "reactor-core",
+      "hash": "1e1329013dcd712cfb25497b449533140fa7ac089d8dc595811558875c7916ed"
+    },
+    {
+      "kind": "buffer",
+      "id": "tank",
+      "hash": "cc63a04c7f7d58e760a1e9684d0991cc0829fd57152fc8aabb8ef9083619f481"
+    },
+    {
+      "kind": "buffer",
+      "id": "widget-bin",
+      "hash": "2b3d8bf65e6b3e619a8c2a242a3b3ca3f3dd81284bb56f22118a3221bd0f3ffc"
+    },
+    {
+      "kind": "connection",
+      "id": "cart",
+      "hash": "3dda78907c364f12810946617a1874392e46fdc4e2240440354a8206f2ca4aef"
+    },
+    {
+      "kind": "connection",
+      "id": "core-link",
+      "hash": "40f3268b480a459bc8120a408a6d4f7ae7a7615b5e02592b8e191aeeaa58e4da"
+    },
+    {
+      "kind": "connection",
+      "id": "crate-belt",
+      "hash": "e6023f8f4d2ae2f067fc12a7d58ff0b7339ebaccde950acd1781f0dcd5a89451"
+    },
+    {
+      "kind": "connection",
+      "id": "pipe",
+      "hash": "a464683ae430e63b2dabffdc7f973fa8bfe1a950519842fc248d5e190567a6e1"
+    },
+    {
+      "kind": "element",
+      "id": "fe",
+      "hash": "2615afa84e274ad9574b9c1aa35bb7bd0fc6f5bba9eff63c328d60bb406f993b"
+    },
+    {
+      "kind": "element",
+      "id": "h",
+      "hash": "88a7ad999caa2d53b4298f0e58c9649a0de69ecf84262bd42172cec053210f09"
+    },
+    {
+      "kind": "element",
+      "id": "o",
+      "hash": "e8eb01d27733e7190dd28cf9025633868bc93dad49ee6e99201cbf36965f24d2"
+    },
+    {
+      "kind": "element",
+      "id": "si",
+      "hash": "55a06a2fbd46bdeb69ffa991e30e40d8a10a3964fb35359c30d2a32a03f3dd5a"
+    },
+    {
+      "kind": "element",
+      "id": "ti",
+      "hash": "61c140e20fbb438183f779cbd7cc77841fc5f4820f50c270cd89e543daa5e62a"
+    },
+    {
+      "kind": "element",
+      "id": "u",
+      "hash": "42d8741a05c0abad0aabf359eddd431bd922974e391e920c221d02e106528444"
+    },
+    {
+      "kind": "environment",
+      "id": "irradiance",
+      "hash": "f26bf1fa33017fae6f47e3dd26519f155b959285ebfedc759c925650f12c342b"
+    },
+    {
+      "kind": "machine",
+      "id": "hopper",
+      "hash": "e713dc737e034ed427d3e4f756234f57f3338d7c357cd106b756fd790337f1a3"
+    },
+    {
+      "kind": "machine",
+      "id": "melter",
+      "hash": "89d07830e6bcd66dabb1a610aad8d1ef49af32d18e136ceee58812881a43d967"
+    },
+    {
+      "kind": "machine",
+      "id": "reactor",
+      "hash": "64aed7b71e4f6b0b084848b4f7afc00e99ea385662f7bc7726b9bde7e5bd219c"
+    },
+    {
+      "kind": "machine",
+      "id": "rover",
+      "hash": "b5779bee92702fa7b0cf404918df6851aa4cad0558476ce606f9be2f584c3bb9"
+    },
+    {
+      "kind": "machine",
+      "id": "solar-array",
+      "hash": "02fc6c0a3d5e7c0da00302d75b7c6ced31c2a8c7b8faf5fb6496cab7ffd8a5ed"
+    },
+    {
+      "kind": "process",
+      "id": "fission",
+      "hash": "728a69d379fc609fec09ef909b3bdc21a4fa5c7659f1cc37543f705d0d91c270"
+    },
+    {
+      "kind": "process",
+      "id": "generate-solar",
+      "hash": "1a5e37995ce447ef139864cabe852acd23f9af258b1a15e4ed8d261b9c40296f"
+    },
+    {
+      "kind": "process",
+      "id": "melt-ice",
+      "hash": "b6d746d0cbf4af1956416bb4220bbe33ca1c412dc6ef42900eb907b2ebedc5b8"
+    },
+    {
+      "kind": "product",
+      "id": "hopper-kit",
+      "hash": "0a242ff1faf5ac379fc4f400cdff6d2f2629ca24e24d104083482ecf3dcc4a47"
+    },
+    {
+      "kind": "product",
+      "id": "melter-kit",
+      "hash": "d439dbdf0629ffe1a523470b6db151719ede4edd5f8efd80d3756fb1b3de37f1"
+    },
+    {
+      "kind": "product",
+      "id": "ore-bin-kit",
+      "hash": "864012614556e859e64d7e6cc166bf3c7a0fe760166a7b3509dd28c528d1969d"
+    },
+    {
+      "kind": "product",
+      "id": "pad-kit",
+      "hash": "fd557d0c89393333bcb25f50c940cb56b7cadd411f61444ccf8c3433c998ad5a"
+    },
+    {
+      "kind": "product",
+      "id": "reactor-kit",
+      "hash": "bdaea5beee271916a8f770270c18cbc9a464600eb19312ed6b74467baf804a29"
+    },
+    {
+      "kind": "product",
+      "id": "rover-kit",
+      "hash": "3a817d2a528b3e602e7d9f9ecb43afc15d46ae5637b7f3f380988a2ac63cfcc9"
+    },
+    {
+      "kind": "product",
+      "id": "solar-kit",
+      "hash": "536fb301a9f64b42a5610c3826309cdb9e9329641d6ff986b9b27a7ca1c6d1cb"
+    },
+    {
+      "kind": "product",
+      "id": "tank-kit",
+      "hash": "bb8b2bb61347eaf0578ecba1bd6e6df6e6404f0aa57606ffdef66a5d8a73055b"
+    },
+    {
+      "kind": "product",
+      "id": "widget-bin-kit",
+      "hash": "54ed4bfd9098c057577365f0098b92e65ca50f9256ee2a91ebe584a63af2f711"
+    },
+    {
+      "kind": "substance",
+      "id": "fe-s",
+      "hash": "7cb577fc4f318a0a4be2780cfa2177d4494ff5fe45b60d2a07ffb64381a3cf33"
+    },
+    {
+      "kind": "substance",
+      "id": "fetio3-s",
+      "hash": "ad800aebd48bd4a2c12df7605164e531442b5690304770697f81f454f78ff60b"
+    },
+    {
+      "kind": "substance",
+      "id": "fuel-fresh",
+      "hash": "aed46b17cc439a01c5e6a9879f3e3543bddaddeb298a780ffacf31bfb1b20738"
+    },
+    {
+      "kind": "substance",
+      "id": "fuel-spent",
+      "hash": "f95aef383e8c205e9b935600e953d68bf38d46159239bc5843bb124ac47e2852"
+    },
+    {
+      "kind": "substance",
+      "id": "h2-g",
+      "hash": "5ac8c0f07f6892a74a14d092d3342ea93e2c50dfdaa5ef7e358bbfefc5bcfd61"
+    },
+    {
+      "kind": "substance",
+      "id": "h2o-l",
+      "hash": "c977b4b549019eda9c2ee55fd36f87e981cd3d4afd1fc2b56ec5c980444b3773"
+    },
+    {
+      "kind": "substance",
+      "id": "h2o-s",
+      "hash": "82fa2c9faea2e8a2250eecf5738483fb15c6e505dbd74b0864a3e294776332a5"
+    },
+    {
+      "kind": "substance",
+      "id": "o2-g",
+      "hash": "0b4adb4f34dd9a207ae19322948c01ba018d244d95b446fd44dc38d52130f94e"
+    },
+    {
+      "kind": "substance",
+      "id": "regolith",
+      "hash": "d2dadc6cac3f8c132fc6ae3b231ae7f42b0d739d2bccaf1e3d78dac3ba72c12c"
+    },
+    {
+      "kind": "substance",
+      "id": "regolith-bank",
+      "hash": "bdcd02aab7296b2db51887ba0d1b8bf3bd2c1a45fa904ef7afdff36b42d5c863"
+    },
+    {
+      "kind": "substance",
+      "id": "sio2-s",
+      "hash": "04b310ebbd7b2882bce0fe16b76177fde28267308da8afb60be22ab9568804f6"
+    },
+    {
+      "kind": "substance",
+      "id": "widget",
+      "hash": "30969dc547cd0655d382b1d7555dfef915ceb4feba387d72c5d406d7e0b57652"
+    },
+    {
+      "kind": "unit",
+      "id": "j",
+      "hash": "93a96cf3830bfe856239ac85d0081861e5e84c0926f69abfbdfdecddde453eda"
+    },
+    {
+      "kind": "unit",
+      "id": "kg",
+      "hash": "8c829fa46109456feb5b6cbce2dbc7367c89dbd51c60cccee007f4dc5842142a"
+    },
+    {
+      "kind": "unit",
+      "id": "kg-reg",
+      "hash": "7d4798b14897105366a7f70bd9d67dbb17d01f978dd2b613970c1092749ada35"
+    },
+    {
+      "kind": "unit",
+      "id": "mmol",
+      "hash": "84de9ada851402ee9e0c3661ba67440f3344252e678be4f8758eee96e46da91d"
+    },
+    {
+      "kind": "unit",
+      "id": "pcs",
+      "hash": "63b134e59b99b686b5191dcd82803785c2bb0fa8efea5b9f3b6244b00f5425af"
+    },
+    {
+      "kind": "unit",
+      "id": "rxn-mmol",
+      "hash": "4e6def10483605f5a4f1befdcf561bfb680321debb7dbc20e9df06db1c197c5c"
+    },
+    {
+      "kind": "unit",
+      "id": "s",
+      "hash": "be7d5ca3600299d3edc2bbedc1c3eed4b1b97206c41608781f43f16ce64447e1"
+    },
+    {
+      "kind": "unit",
+      "id": "w",
+      "hash": "1994936379b54d484b03d941155b1f877c8b3bcb23d325dba3cb333b5eb9a0d3"
+    },
+    {
+      "kind": "unit",
+      "id": "w-m2",
+      "hash": "0e7f896fa353a870b1a7122477410d5d0c4224cdb15c95f433455a5f8809b12b"
+    },
+    {
+      "kind": "unit",
+      "id": "wu",
+      "hash": "efea4af8af165dbfed770c2abeb79bf1cfe1b6f3922af05d640d18378a821c22"
+    }
+  ]
+}

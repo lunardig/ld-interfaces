@@ -1,0 +1,14 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","status":"ACCEPTED"}
+{"command_id":"cmd-0004","status":"ACCEPTED"}
+{"command_id":"cmd-0005","status":"ACCEPTED"}
+{"command_id":"cmd-0006","status":"ACCEPTED"}
+{"command_id":"cmd-0007","status":"ACCEPTED"}
+{"command_id":"cmd-0008","detail":{"code":"no-room","message":"pad-1 has no room for lot slag"},"status":"REJECTED_CAPACITY"}
+{"command_id":"cmd-0009","status":"ACCEPTED"}
+{"command_id":"cmd-0010","status":"ACCEPTED"}
+{"command_id":"cmd-0011","detail":{"code":"unshippable-unit","message":"widget can't be weighed, so it can't go on a landing pad"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0012","detail":{"code":"landing-feed","message":"a landing pad connects by CONVEYOR only"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0013","status":"ACCEPTED"}
+{"command_id":"cmd-0014","status":"ACCEPTED"}

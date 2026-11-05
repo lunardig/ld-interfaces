@@ -1,0 +1,12 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","detail":{"code":"wrong-world","message":"certificate is for world other-world"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0003","detail":{"code":"wrong-epoch","message":"certificate epoch is 1"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0004","detail":{"code":"wrong-destination","message":"certificate is for claim-c"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0005","detail":{"code":"catalog-mismatch","message":"certificate was made under another catalog"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0006","detail":{"code":"route-mismatch","message":"route a-to-b does not match"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0007","detail":{"code":"route-mismatch","message":"route b-to-a does not match"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0008","detail":{"code":"bad-spend-id","message":"spend_id does not match world, origin and n"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0009","status":"ACCEPTED"}
+{"command_id":"cmd-0010","detail":{"code":"no-room","message":"pad-1 has no room for the shipment"},"status":"REJECTED_CAPACITY"}
+{"command_id":"cmd-0011","status":"ACCEPTED"}
+{"command_id":"cmd-0012","status":"ACCEPTED"}

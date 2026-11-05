@@ -1,0 +1,8 @@
+{
+  "unit_id": "kg",
+  "dimension": "mass",
+  "scale": {
+    "n": "1",
+    "d": "1"
+  }
+}

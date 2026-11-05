@@ -1,0 +1,11 @@
+{
+  "id": "V-50a",
+  "title": "EXPORT refusals: duplicate-export after delivery, duplicate-lot, not-a-carrier",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

@@ -1,0 +1,13 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","status":"ACCEPTED"}
+{"command_id":"cmd-0004","status":"ACCEPTED"}
+{"command_id":"cmd-0005","status":"ACCEPTED"}
+{"command_id":"cmd-0006","detail":{"code":"insufficient-charge","message":"the trip takes 250000/1; the carrier holds 1000/1"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0007","detail":{"code":"overweight","message":"501/1 kg exceeds the carrier's payload of 500/1 kg"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0008","detail":{"code":"no-route","message":"no route b-to-a from claim-a to claim-b"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0009","detail":{"code":"no-route","message":"no route a-to-b from claim-a to claim-c"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0010","detail":{"code":"lot-not-staged","message":"lot held-back is not available at pad-1"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0011","detail":{"code":"insufficient","message":"pad-1 has 0 unreserved fe-s"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0012","detail":{"code":"empty-shipment","message":"name contents or lots to ship"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0013","status":"ACCEPTED"}

@@ -1,0 +1,15 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0006","kind":"COMMAND","seq":"5","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0007","kind":"COMMAND","seq":"6","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0008","kind":"COMMAND","seq":"7","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0009","kind":"COMMAND","seq":"8","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0010","kind":"COMMAND","seq":"9","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0011","kind":"COMMAND","seq":"10","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0012","kind":"COMMAND","seq":"11","status":"REJECTED_CAPACITY","time_us":"0"}
+{"command_id":"cmd-0013","kind":"COMMAND","seq":"12","status":"ACCEPTED","time_us":"0"}
+{"connection_id":"cart-1","kind":"ARRIVAL","lot_id":"lot-1","seq":"13","time_us":"2100000"}
+{"command_id":"cmd-0014","kind":"COMMAND","seq":"14","status":"REJECTED_CAPACITY","time_us":"3000000"}

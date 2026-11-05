@@ -1,0 +1,11 @@
+{
+  "id": "V-47",
+  "title": "MOVE_LOT: splits, whole moves, and its refusals",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

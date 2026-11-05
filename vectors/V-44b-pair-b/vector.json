@@ -1,0 +1,11 @@
+{
+  "id": "V-44b",
+  "title": "Pair: B accepts the iron and ships the rover back with water",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

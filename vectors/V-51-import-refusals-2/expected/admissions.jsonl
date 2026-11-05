@@ -1,0 +1,6 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","detail":{"code":"bad-manifest","message":"unobtainium is unknown or can't be weighed"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0003","detail":{"code":"bad-manifest","message":"the carrier's charge exceeds rover-kit's capacity"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0004","detail":{"code":"bad-manifest","message":"a lot carrying wear, charge or core holds one unit of one product"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0005","detail":{"code":"bad-certificate","message":"times are below 2^63"},"status":"REJECTED_SCHEMA"}
+{"command_id":"cmd-0006","status":"ACCEPTED"}

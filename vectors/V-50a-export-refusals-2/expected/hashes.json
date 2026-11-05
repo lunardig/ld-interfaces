@@ -1,0 +1,12 @@
+[
+  {
+    "step": "0",
+    "state_hash": "d59b9493612ee0aa6f2a4bb391a4a73652466b755e794bfbe084a5c867eac442",
+    "history_head": "e58d68adf06fc707a7b11d7a9287a1f0c94b92b69723d9396a0a080efa8b6ecb"
+  },
+  {
+    "step": "1",
+    "state_hash": "11b63c553852676af231002ce7eb5cbfd4fd341c9bbe2d8aa21e9e13b3b5b4bb",
+    "history_head": "e58d68adf06fc707a7b11d7a9287a1f0c94b92b69723d9396a0a080efa8b6ecb"
+  }
+]

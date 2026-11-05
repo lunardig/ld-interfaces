@@ -1,0 +1,11 @@
+{
+  "id": "V-39",
+  "title": "EXPORT debits the pad once, sinks the trip energy and delivers at arrive_us",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

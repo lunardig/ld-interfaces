@@ -1,0 +1,5 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"REJECTED_STATE","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"REJECTED_STATE","time_us":"0"}

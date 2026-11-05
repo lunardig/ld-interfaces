@@ -1,0 +1,3 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","detail":{"code":"duplicate-import","message":"04aa464ab65c628c2ffdf865852b34d7594bfc6c5f279f2ee0aebfcfed45144d"},"status":"REJECTED_STATE"}

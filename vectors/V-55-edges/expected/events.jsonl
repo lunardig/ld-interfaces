@@ -1,0 +1,13 @@
+{"command_id":"cmd-0001","kind":"COMMAND","seq":"0","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0002","kind":"COMMAND","seq":"1","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0003","kind":"COMMAND","seq":"2","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0004","kind":"COMMAND","seq":"3","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0005","kind":"COMMAND","seq":"4","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0006","kind":"COMMAND","seq":"5","status":"ACCEPTED","time_us":"0"}
+{"command_id":"cmd-0007","kind":"COMMAND","seq":"6","status":"ACCEPTED","time_us":"0"}
+{"certificate":{"arrive_us":"172800000000","carrier":{"charge":{"d":"1","n":"0"},"product":"rover-kit"},"catalog_hash":"6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011","checkpoint":null,"depart_us":"0","epoch_us":"0","export_id":"x-1","manifest":{"contents":{},"lots":[{"composition":{"fe-s":"100"},"products":{}}]},"n":"1","origin_claim":"claim-a","peer_claim":"claim-b","prev_state_hash":"2e8f15c13b200fdb9a1d5323af7880868fbac621fe0a9e9890096dd515cdd32a","route_id":"a-to-b","schema":"ld.trade.certificate.v0","spend_id":"3d085b92183054e5aaa837477fd22b22b6cb5c7fdee1f83f8a8d271a24567284","world":"trade-world"},"export_id":"x-1","kind":"SHIPMENT_DEPARTED","n":"1","seq":"7","shipment_id":"xship-1","spend_id":"3d085b92183054e5aaa837477fd22b22b6cb5c7fdee1f83f8a8d271a24567284","time_us":"0"}
+{"command_id":"cmd-0008","kind":"COMMAND","seq":"8","status":"ACCEPTED","time_us":"0"}
+{"certificate":{"arrive_us":"172800000000","carrier":{"charge":{"d":"1","n":"1000"},"product":"rover-kit"},"catalog_hash":"6afe532f40036c3f0ac7ff8dc1459a12fa88b001a717b4206abd0a2c6c170011","checkpoint":null,"depart_us":"0","epoch_us":"0","export_id":"x-2","manifest":{"contents":{},"lots":[{"composition":{"fe-s":"100"},"products":{}}]},"n":"2","origin_claim":"claim-a","peer_claim":"claim-b","prev_state_hash":"eec86f763c9d979be76be576edcb4eec7677ebb2fb83c0181ac670d5cfd6ae1f","route_id":"a-to-b-free","schema":"ld.trade.certificate.v0","spend_id":"6f64ad2580224dba62c79a4b7d2fca859cf7fff51d73c75a258dd81226f82b6a","world":"trade-world"},"export_id":"x-2","kind":"SHIPMENT_DEPARTED","n":"2","seq":"9","shipment_id":"xship-2","spend_id":"6f64ad2580224dba62c79a4b7d2fca859cf7fff51d73c75a258dd81226f82b6a","time_us":"0"}
+{"command_id":"cmd-0009","kind":"COMMAND","seq":"10","status":"ACCEPTED","time_us":"0"}
+{"export_id":"x-1","kind":"SHIPMENT_DELIVERED","peer_claim":"claim-b","seq":"11","shipment_id":"xship-1","time_us":"172800000000"}
+{"export_id":"x-2","kind":"SHIPMENT_DELIVERED","peer_claim":"claim-b","seq":"12","shipment_id":"xship-2","time_us":"172800000000"}

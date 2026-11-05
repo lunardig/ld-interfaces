@@ -1,0 +1,12 @@
+{
+  "id": "V-51",
+  "title": "ACCEPT_IMPORT refusals: bad-manifest three ways; arrive_us at 2^63",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6",
+    "V-39"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

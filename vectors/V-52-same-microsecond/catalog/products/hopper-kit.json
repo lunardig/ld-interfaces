@@ -1,0 +1,10 @@
+{
+  "product_id": "hopper-kit",
+  "embodied": {
+    "fe-s": "50"
+  },
+  "installs_as": {
+    "kind": "MACHINE",
+    "template": "hopper"
+  }
+}

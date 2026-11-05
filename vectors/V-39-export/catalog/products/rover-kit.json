@@ -1,0 +1,16 @@
+{
+  "product_id": "rover-kit",
+  "embodied": {
+    "fe-s": "200"
+  },
+  "installs_as": {
+    "kind": "MACHINE",
+    "template": "rover"
+  },
+  "carrier": {
+    "payload": {
+      "amount": "500",
+      "unit": "kg"
+    }
+  }
+}

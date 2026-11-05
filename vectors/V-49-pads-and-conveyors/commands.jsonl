@@ -1,0 +1,14 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "pad-kit", "location": "pad-a", "as_id": "pad-1"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "INSTALL", "args": {"lot_id": "kits", "product": "ore-bin-kit", "location": "pad-a", "as_id": "ore-bin-1"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "INSTALL", "args": {"lot_id": "kits", "product": "widget-bin-kit", "location": "pad-a", "as_id": "widget-bin-1"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "INSTALL", "args": {"lot_id": "kits", "product": "hopper-kit", "location": "pad-a", "as_id": "hopper-1"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "CONNECT", "args": {"connection_id": "cart-1", "template": "cart", "from_port": "ore-bin-1.io", "to_port": "pad-1.io"}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "CONNECT", "args": {"connection_id": "crate-1", "template": "crate-belt", "from_port": "widget-bin-1.io", "to_port": "pad-1.io"}}
+{"command_id": "cmd-0007", "effective_us": "0", "seq": "7", "op": "TRANSFER_LOCAL", "args": {"connection_id": "cart-1", "species": "fe-s", "amount": "100"}}
+{"command_id": "cmd-0008", "effective_us": "0", "seq": "8", "op": "MOVE_LOT", "args": {"lot_id": "slag", "to": "pad-1"}}
+{"command_id": "cmd-0009", "effective_us": "0", "seq": "9", "op": "MOVE_LOT", "args": {"lot_id": "ballast", "to": "pad-1"}}
+{"command_id": "cmd-0010", "effective_us": "0", "seq": "10", "op": "MOVE_LOT", "args": {"lot_id": "ballast", "to": "inventory"}}
+{"command_id": "cmd-0011", "effective_us": "0", "seq": "11", "op": "TRANSFER_LOCAL", "args": {"connection_id": "crate-1", "species": "widget", "amount": "1"}}
+{"command_id": "cmd-0012", "effective_us": "0", "seq": "12", "op": "CONNECT", "args": {"connection_id": "pipe-1", "template": "pipe", "from_port": "hopper-1.io", "to_port": "pad-1.io"}}
+{"command_id": "cmd-0013", "effective_us": "3000000", "seq": "13", "op": "MOVE_LOT", "args": {"lot_id": "rover", "to": "pad-1"}}
+{"command_id": "cmd-0014", "effective_us": "3000000", "seq": "14", "op": "EXPORT", "args": {"export_id": "x-1", "landing": "pad-1", "carrier_lot": "rover", "peer_claim": "claim-b", "route_id": "a-to-b", "contents": {"fe-s": "100"}}}

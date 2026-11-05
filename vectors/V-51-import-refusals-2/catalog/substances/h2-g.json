@@ -1,0 +1,16 @@
+{
+  "substance_id": "h2-g",
+  "formula": {
+    "h": "2"
+  },
+  "phase": "gas",
+  "quantity_unit": "mmol",
+  "enthalpy": {
+    "n": "0",
+    "d": "1"
+  },
+  "gibbs": {
+    "n": "0",
+    "d": "1"
+  }
+}

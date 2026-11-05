@@ -1,0 +1,13 @@
+{
+  "id": "V-54a",
+  "title": "V-39 with issued_by: the same physical states",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6",
+    "LD-PEC-004 A5",
+    "V-39"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

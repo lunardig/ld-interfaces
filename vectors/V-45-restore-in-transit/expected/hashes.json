@@ -1,0 +1,27 @@
+[
+  {
+    "step": "0",
+    "state_hash": "e9c0750347d87c93c41287a6c4987af3e80d404bf09a9a56de905f836729d681",
+    "history_head": "1f7c260d0432e18259a114dd1d221aade2d7696bab2edd925e4a640a4c3a928a"
+  },
+  {
+    "step": "1",
+    "state_hash": "e9c0750347d87c93c41287a6c4987af3e80d404bf09a9a56de905f836729d681",
+    "history_head": "1f7c260d0432e18259a114dd1d221aade2d7696bab2edd925e4a640a4c3a928a"
+  },
+  {
+    "step": "2",
+    "state_hash": "1b10984c2086682a2c75a9b7c8da443aad1b3e088c8934bb759a9a2d6a9f61da",
+    "history_head": "153ba0665e0a443154f51b636d33d61522591c0d4564117d6ce0d9a5d69436a2"
+  },
+  {
+    "step": "3",
+    "state_hash": "e9c0750347d87c93c41287a6c4987af3e80d404bf09a9a56de905f836729d681",
+    "history_head": "1f7c260d0432e18259a114dd1d221aade2d7696bab2edd925e4a640a4c3a928a"
+  },
+  {
+    "step": "4",
+    "state_hash": "1b10984c2086682a2c75a9b7c8da443aad1b3e088c8934bb759a9a2d6a9f61da",
+    "history_head": "153ba0665e0a443154f51b636d33d61522591c0d4564117d6ce0d9a5d69436a2"
+  }
+]
