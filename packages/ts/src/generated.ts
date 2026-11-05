@@ -1092,12 +1092,17 @@ export interface Shipment {
   certificate_hash: Hash;
 }
 /**
- * A trade world claim's exports and imports (A6-7).
+ * A trade world claim's exports and imports (A6-7). epoch_us and routes are copied from genesis, so a restored claim has them.
  *
  * This interface was referenced by `LdInterfaces`'s JSON-Schema
  * via the `definition` "TradeState".
  */
 export interface TradeState {
+  epoch_us: TimeUs;
+  /**
+   * The genesis routes, sorted by id.
+   */
+  routes: Route[];
   exports: Uint;
   imports: Uint;
   /**
@@ -1110,6 +1115,19 @@ export interface TradeState {
   accepted: Hash[];
   exported: TradeLedger;
   imported: TradeLedger;
+}
+/**
+ * A directed route between two claims of a trade world (LD-PEC-004 A6-1).
+ *
+ * This interface was referenced by `LdInterfaces`'s JSON-Schema
+ * via the `definition` "Route".
+ */
+export interface Route {
+  route_id: Id;
+  from_claim: Id;
+  to_claim: Id;
+  transit_us: PositiveInt;
+  energy_per_kg: Rational;
 }
 /**
  * Material and stored energy that left or entered the claim by shipment: element amounts in mol, and charge in the bus energy unit.
@@ -1472,19 +1490,6 @@ export interface Genesis {
     epoch_us: TimeUs;
     routes: Route[];
   };
-}
-/**
- * A directed route between two claims of a trade world (LD-PEC-004 A6-1).
- *
- * This interface was referenced by `LdInterfaces`'s JSON-Schema
- * via the `definition` "Route".
- */
-export interface Route {
-  route_id: Id;
-  from_claim: Id;
-  to_claim: Id;
-  transit_us: PositiveInt;
-  energy_per_kg: Rational;
 }
 /**
  * An installed energy store; store_id is its machine. Charge and capacity are in the bus energy unit; the fraction of charge is the residual (store_id, charge).

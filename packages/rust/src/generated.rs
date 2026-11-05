@@ -3700,18 +3700,21 @@ pub struct TradeLedger {
     pub charge: Rational,
     pub elements: ::std::collections::BTreeMap<Id, Rational>,
 }
-#[doc = "A trade world claim's exports and imports (A6-7)."]
+#[doc = "A trade world claim's exports and imports (A6-7). epoch_us and routes are copied from genesis, so a restored claim has them."]
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct TradeState {
     #[doc = "The certificate hash of every accepted import; sorted."]
     pub accepted: ::std::vec::Vec<Hash>,
+    pub epoch_us: TimeUs,
     #[doc = "Every export_id this claim has exported; sorted."]
     pub export_ids: ::std::vec::Vec<Id>,
     pub exported: TradeLedger,
     pub exports: Uint,
     pub imported: TradeLedger,
     pub imports: Uint,
+    #[doc = "The genesis routes, sorted by id."]
+    pub routes: ::std::vec::Vec<Route>,
 }
 #[doc = "Unsigned integer as a canonical decimal string: \"0\" or a nonzero digit followed by digits."]
 #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]

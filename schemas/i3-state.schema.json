@@ -342,8 +342,10 @@
     },
     "TradeState": {
       "type": "object",
-      "description": "A trade world claim's exports and imports (A6-7).",
+      "description": "A trade world claim's exports and imports (A6-7). epoch_us and routes are copied from genesis, so a restored claim has them.",
       "properties": {
+        "epoch_us": { "$ref": "common.schema.json#/$defs/TimeUs" },
+        "routes": { "type": "array", "items": { "$ref": "#/$defs/Route" }, "description": "The genesis routes, sorted by id." },
         "exports": { "$ref": "common.schema.json#/$defs/Uint" },
         "imports": { "$ref": "common.schema.json#/$defs/Uint" },
         "export_ids": {
@@ -359,7 +361,7 @@
         "exported": { "$ref": "#/$defs/TradeLedger" },
         "imported": { "$ref": "#/$defs/TradeLedger" }
       },
-      "required": ["exports", "imports", "export_ids", "accepted", "exported", "imported"],
+      "required": ["epoch_us", "routes", "exports", "imports", "export_ids", "accepted", "exported", "imported"],
       "additionalProperties": false
     },
     "PhysicalState": {
