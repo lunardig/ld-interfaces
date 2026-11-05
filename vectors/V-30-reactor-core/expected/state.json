@@ -198,8 +198,8 @@
     },
     {
       "composition": {
-        "fuel-fresh": "999",
-        "fuel-spent": "1"
+        "fuel-fresh": "998",
+        "fuel-spent": "2"
       },
       "location": "reactor-2-core",
       "lot_id": "reactor-2-core.stock",
@@ -274,7 +274,7 @@
   "schema": "ld.physical-state.v0",
   "sinks": [
     {
-      "energy": "750000",
+      "energy": "1600000",
       "kind": "HEAT",
       "sink_id": "reactor-heat",
       "totals": {}
