@@ -352,7 +352,7 @@ export interface BufferTemplate {
   accepts: Id[];
   capacity: Quantity;
   /**
-   * STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored.
+   * Absent means STORE, a buffer holding the species it accepts; omit it for a STORE buffer so existing entries keep their hashes. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored.
    */
   kind?: "STORE" | "LANDING";
 }

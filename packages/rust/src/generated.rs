@@ -197,12 +197,12 @@ pub struct BufferTemplate {
     #[doc = "Species the buffer accepts. Non-empty for a STORE buffer (checked at load); ignored for a LANDING pad."]
     pub accepts: ::std::vec::Vec<Id>,
     pub capacity: Quantity,
-    #[doc = "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
-    #[serde(default = "defaults::buffer_template_kind")]
-    pub kind: BufferTemplateKind,
+    #[doc = "Absent means STORE, a buffer holding the species it accepts; omit it for a STORE buffer so existing entries keep their hashes. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
+    #[serde(skip_serializing_if = "::std::option::Option::is_none")]
+    pub kind: ::std::option::Option<BufferTemplateKind>,
     pub template_id: Id,
 }
-#[doc = "STORE (the default) holds the species it accepts. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
+#[doc = "Absent means STORE, a buffer holding the species it accepts; omit it for a STORE buffer so existing entries keep their hashes. LANDING is a landing pad (LD-PEC-004 A6-2): it holds any species that can be weighed and lots located at it, up to a capacity by mass; its accepts list may be empty and is ignored."]
 #[derive(
     :: serde :: Deserialize,
     :: serde :: Serialize,
@@ -251,11 +251,6 @@ impl ::std::convert::TryFrom<::std::string::String> for BufferTemplateKind {
         value: ::std::string::String,
     ) -> ::std::result::Result<Self, self::error::ConversionError> {
         value.parse()
-    }
-}
-impl ::std::default::Default for BufferTemplateKind {
-    fn default() -> Self {
-        BufferTemplateKind::Store
     }
 }
 #[doc = "`BufferView`"]
@@ -3993,12 +3988,6 @@ impl<'de> ::serde::Deserialize<'de> for VectorManifestTitle {
             .map_err(|e: self::error::ConversionError| {
                 <D::Error as ::serde::de::Error>::custom(e.to_string())
             })
-    }
-}
-#[doc = " Generation of default values for serde."]
-pub mod defaults {
-    pub(super) fn buffer_template_kind() -> super::BufferTemplateKind {
-        super::BufferTemplateKind::Store
     }
 }
 #[doc = " Error types."]
