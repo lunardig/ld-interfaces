@@ -1,0 +1,6 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","status":"ACCEPTED"}
+{"command_id":"cmd-0003","status":"ACCEPTED"}
+{"command_id":"cmd-0004","status":"ACCEPTED"}
+{"command_id":"cmd-0005","detail":{"code":"overweight","message":"501/1 kg exceeds the carrier's payload of 500/1 kg"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0006","detail":{"code":"lot-not-staged","message":"lot no-such-lot is not available at pad-1"},"status":"REJECTED_STATE"}

@@ -1,0 +1,13 @@
+{
+  "id": "V-51b",
+  "title": "ACCEPT_IMPORT: kit charge and wear checked against the product; counts and numbers below 2^63",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6",
+    "V-39",
+    "Review \u2014 M5b build M5B-01 to M5B-03"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

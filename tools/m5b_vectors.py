@@ -503,6 +503,71 @@ def v55() -> list[TradeVector]:
     return [v]
 
 
+# ---------------------------------------------------------------- after the M5b build review
+def v43b() -> list[TradeVector]:
+    """Refusal order (M5B-05): a shipment that fails two EXPORT checks names the first."""
+    v = TradeVector("V-43b", "export-refusal-order", "EXPORT names the first failing check: overweight before insufficient-charge; lot-not-staged before not-a-carrier",
+                    ["Review — M5b build M5B-05"], [tlot("kits", products={"pad-kit": "1"}), tlot("heavy", composition={"fe-s": "501"}),
+                                                    tlot("hopper", products={"hopper-kit": "1"}), rover("weak", 1000)])
+    v.pad()
+    for k in ("heavy", "hopper", "weak"):
+        v.move(0, k)
+    v.export(0, "x-1", "weak", lots=["heavy"])          # overweight and under-charged: overweight
+    v.export(0, "x-1", "hopper", lots=["no-such-lot"])   # unstaged lot and not a carrier: lot-not-staged
+    v.advance(S)
+    return [v]
+
+
+def v46b(cert: dict) -> list[TradeVector]:
+    """Refusal order (M5B-05): one certificate wrong in eight ways, corrected one field at a
+    time, names each check in A6-6's order."""
+    t = arrive(cert)
+    bad = copy.deepcopy(cert)
+    bad.update(world="other-world", epoch_us="1", peer_claim="claim-c", catalog_hash="0" * 64, arrive_us=str(t + 1), n="2")
+    bad["manifest"]["contents"] = {"unobtainium": "1"}
+    steps = [bad]
+    for field in ("world", "epoch_us", "peer_claim", "catalog_hash", "manifest", "arrive_us", "n"):
+        nxt = copy.deepcopy(steps[-1])
+        nxt[field] = copy.deepcopy(cert[field])
+        steps.append(nxt)
+    v = importer("V-46b", "import-refusal-order", "ACCEPT_IMPORT names the first failing check, in A6-6's order",
+                 ["V-39", "Review — M5b build M5B-05"])
+    v.pad()
+    # wrong-world, wrong-epoch, wrong-destination, catalog-mismatch, bad-manifest,
+    # route-mismatch, bad-spend-id, then not-arrived one microsecond early.
+    for c in steps:
+        v.accept(t - 1, c)
+    v.accept(t, cert)                                  # accepted
+    v.accept(t, cert, landing="kits")                  # duplicate-import before not-a-landing
+    v.advance(t + S)
+    return [v]
+
+
+def v51b(cert: dict) -> list[TradeVector]:
+    """Kits carry only what their product can hold, and numbers are bounded (M5B-01 to
+    M5B-03): each is refused, none faults the engine."""
+    t = arrive(cert)
+
+    def with_lots(lots: list[dict]) -> dict:
+        c = copy.deepcopy(cert)
+        c["manifest"]["lots"] = lots
+        return c
+    huge_charge = copy.deepcopy(cert)
+    huge_charge["carrier"]["charge"] = {"n": "9" * 30, "d": "1"}
+    v = importer("V-51b", "import-refusals-3", "ACCEPT_IMPORT: kit charge and wear checked against the product; counts and numbers below 2^63",
+                 ["V-39", "Review — M5b build M5B-01 to M5B-03"])
+    v.pad()
+    v.accept(t, with_lots([{"products": {"rover-kit": "1"}, "charge": R(10**15)}]))   # bad-manifest: above the store's capacity
+    v.accept(t, with_lots([{"products": {"hopper-kit": "1"}, "charge": R(12345)}]))   # bad-manifest: no store
+    v.accept(t, with_lots([{"products": {"pad-kit": "1"}, "wear": R(5)}]))            # bad-manifest: not a machine
+    v.accept(t, with_lots([{"products": {"hopper-kit": str(2**64)}}]))                # REJECTED_SCHEMA: count at 2^64
+    v.accept(t, with_lots([{"products": {"hopper-kit": "1" * 46}}]))                  # REJECTED_SCHEMA: 46 digits
+    v.accept(t, huge_charge)                                                          # REJECTED_SCHEMA: 30-digit charge
+    v.accept(t, with_lots([{"products": {"rover-kit": "1"}, "charge": R(1000)}]))     # accepted: a charged rover kit as cargo
+    v.advance(t + S)
+    return [v]
+
+
 def main() -> int:
     global ENGINE
     p = argparse.ArgumentParser()
@@ -512,7 +577,7 @@ def main() -> int:
     first = v39_v40_v41_v42()
     cert = certificates(first[0])[0]
     out += first
-    out += v43() + v44() + v45() + v46(cert) + v47() + v48() + v49() + v50(cert) + v51(cert) + v52() + v53(cert) + v54(cert) + v55()
+    out += v43() + v44() + v45() + v46(cert) + v47() + v48() + v49() + v50(cert) + v51(cert) + v52() + v53(cert) + v54(cert) + v55() + v43b() + v46b(cert) + v51b(cert)
     for v in out:
         v.save()
     return 0

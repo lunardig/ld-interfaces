@@ -1,0 +1,8 @@
+{"command_id":"cmd-0001","status":"ACCEPTED"}
+{"command_id":"cmd-0002","detail":{"code":"bad-manifest","message":"a kit's charge exceeds its store's capacity"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0003","detail":{"code":"bad-manifest","message":"charge on a kit without an energy store"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0004","detail":{"code":"bad-manifest","message":"wear on a kit that doesn't install as a machine"},"status":"REJECTED_STATE"}
+{"command_id":"cmd-0005","detail":{"code":"bad-certificate","message":"times, counts, amounts and rational parts are non-negative and below 2^63"},"status":"REJECTED_SCHEMA"}
+{"command_id":"cmd-0006","detail":{"code":"bad-certificate","message":"times, counts, amounts and rational parts are non-negative and below 2^63"},"status":"REJECTED_SCHEMA"}
+{"command_id":"cmd-0007","detail":{"code":"bad-certificate","message":"times, counts, amounts and rational parts are non-negative and below 2^63"},"status":"REJECTED_SCHEMA"}
+{"command_id":"cmd-0008","status":"ACCEPTED"}

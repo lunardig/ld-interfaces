@@ -1,0 +1,12 @@
+{
+  "id": "V-43b",
+  "title": "EXPORT names the first failing check: overweight before insufficient-charge; lot-not-staged before not-a-carrier",
+  "kind": "EXECUTION",
+  "spec_refs": [
+    "LD-PEC-004 A6",
+    "Review \u2014 M5b build M5B-05"
+  ],
+  "pset_version": "0",
+  "numeric_profile": "provisional-u64-i128",
+  "status": "DRAFT"
+}

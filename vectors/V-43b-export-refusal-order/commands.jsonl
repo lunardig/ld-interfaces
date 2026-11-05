@@ -1,0 +1,6 @@
+{"command_id": "cmd-0001", "effective_us": "0", "seq": "1", "op": "INSTALL", "args": {"lot_id": "kits", "product": "pad-kit", "location": "pad-a", "as_id": "pad-1"}}
+{"command_id": "cmd-0002", "effective_us": "0", "seq": "2", "op": "MOVE_LOT", "args": {"lot_id": "heavy", "to": "pad-1"}}
+{"command_id": "cmd-0003", "effective_us": "0", "seq": "3", "op": "MOVE_LOT", "args": {"lot_id": "hopper", "to": "pad-1"}}
+{"command_id": "cmd-0004", "effective_us": "0", "seq": "4", "op": "MOVE_LOT", "args": {"lot_id": "weak", "to": "pad-1"}}
+{"command_id": "cmd-0005", "effective_us": "0", "seq": "5", "op": "EXPORT", "args": {"export_id": "x-1", "landing": "pad-1", "carrier_lot": "weak", "peer_claim": "claim-b", "route_id": "a-to-b", "lots": ["heavy"]}}
+{"command_id": "cmd-0006", "effective_us": "0", "seq": "6", "op": "EXPORT", "args": {"export_id": "x-1", "landing": "pad-1", "carrier_lot": "hopper", "peer_claim": "claim-b", "route_id": "a-to-b", "lots": ["no-such-lot"]}}
